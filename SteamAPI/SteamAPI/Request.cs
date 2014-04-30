@@ -5,6 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SteamAPI {
-    class Request {
+public     class Request {
+        public abstract class Request : IRequest {
+            public string ApiKey { get; set; }
+
+            internal virtual string GetServiceUrl(ServiceConfiguration configuration) {
+                throw new NotSupportedException();
+            }
+        }
+
+        public abstract class Reqest<T> : Request {
+        }
+
     }
 }
