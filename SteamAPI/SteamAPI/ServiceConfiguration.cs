@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamAPI.Player {
-    public class GetPlayerSummaryRequest {
+namespace SteamAPI {
+    class ServiceConfiguration {
     }
 }
