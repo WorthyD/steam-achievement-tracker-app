@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace SteamAPI {
     public class ServiceConfiguration {
-        public class ServiceConfiguration {
             public string WebServiceBaseURL { get; set; }
 
             public string ApiKey { get; set; }
@@ -18,6 +17,5 @@ namespace SteamAPI {
             }
 
 
-        }
     }
 }

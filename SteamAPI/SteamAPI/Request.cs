@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SteamAPI {
-public     class Request {
         public abstract class Request : IRequest {
             public string ApiKey { get; set; }
 
@@ -17,5 +16,4 @@ public     class Request {
         public abstract class Reqest<T> : Request {
         }
 
-    }
 }

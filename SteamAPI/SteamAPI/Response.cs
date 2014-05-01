@@ -5,6 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SteamAPI {
-    class Response {
+    public abstract class Response<T> where T : new() {
+
+        public T Request { get; set; }
+
+        public Response() {
+            Request = new T();
+        }
+
+        public Response(T request) {
+            Request = request;
+        }
+
     }
 }
