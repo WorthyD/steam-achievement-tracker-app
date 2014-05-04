@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SteamAPI.Player {
-    public class GetPlayerProfileResponse : Response<PlayerProfileRequest> {
+    public class PlayerProfileResponse : Response<PlayerProfileRequest> {
 
-        public GetPlayerProfileResponse() { }
-        public GetPlayerProfileResponse(PlayerProfileRequest request) : base(request) { }
+        public PlayerProfileResponse() { }
+        public PlayerProfileResponse(PlayerProfileRequest request) : base(request) { }
     }
 }

@@ -2,33 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
+using System.Text;
+using Microsoft;
+using System.Threading.Tasks;
+using System.IO;
+using System.Net.Http;
 namespace SteamAPI.Helpers {
     public class WebRequestHelper {
+        public static async Task<string> ExecuteGetRequest(string url, int timeout = 30) {
 
-        public string ExecuteGetRequest(string url, int timeout = 30) {
-            //HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);
-                         
-            // // IF YOU DON'T INIT THE COOKIE CONTAINER, YOU DON'T GET COOKIES IN THE RESPONSE            
-            // //req.CookieContainer = _cachedCookies;
- 
-            // req.Method = "GET";
-            // //req.Timeout = timeout * 1000;
- 
-            // //using (HttpWebResponse resp = ((HttpWebResponse)req.BeginGetResponse)))
-            // //{
-                
-             
-            // //    return resp.ConvertToString();
-            // //}
+            HttpClient client = new HttpClient();
+            string result = await client.GetStringAsync(url);
 
-            //HttpClient client = new 
-            var req = WebRequest.Create("");
-            //await req.GetRequestStreamAsync();
-            return "";
+            return result;
         }
 
     }
