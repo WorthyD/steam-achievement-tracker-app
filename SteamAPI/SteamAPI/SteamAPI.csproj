@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\Xml.cs" />
+    <Compile Include="Helpers\SteamProfileURLBuilder.cs" />
     <Compile Include="Helpers\WebRequestHelper.cs" />
     <Compile Include="IRequest.cs" />
     <Compile Include="Models\Profile.cs" />

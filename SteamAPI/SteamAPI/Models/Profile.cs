@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SteamAPI.Models {
     public class Profile {
+
+        public profile PlayerProfile { get; set; }
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
