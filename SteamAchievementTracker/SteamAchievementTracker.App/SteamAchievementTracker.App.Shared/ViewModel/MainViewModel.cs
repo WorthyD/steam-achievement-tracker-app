@@ -16,21 +16,39 @@ namespace SteamAchievementTracker.App.ViewModel {
         [PreferredConstructor]
         public MainViewModel()
             : base() {
-            HelloWorld = IsInDesignMode
-               ? "Runs in design mode"
-               : "Runs in runtime mode";
+            _profile = new DataModel.PlayerProfile();
+
+            _title = "Steam Achievement Tracker";
+
+            if (IsInDesignMode) {
+                _profile.PopulateDesignData();
+                return;
+            }
+
+
 
         }
 
-        private string _helloWorld;
+        private string _title;
+        public string Title {
+            get { return _title; }
+            set {
+                Set(() => Title, ref _title, value);
+            }
+        }
 
-        public string HelloWorld {
+        private DataModel.PlayerProfile _profile;
+
+        public DataModel.PlayerProfile Profile {
             get {
-                return _helloWorld;
+                return _profile;
             }
             set {
-                Set(() => HelloWorld, ref _helloWorld, value);
+                Set(() => Profile, ref _profile, value);
             }
         }
+
+
+
     }
 }
