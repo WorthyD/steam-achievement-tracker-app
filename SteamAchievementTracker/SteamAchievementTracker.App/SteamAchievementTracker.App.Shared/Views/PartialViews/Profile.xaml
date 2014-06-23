@@ -8,8 +8,11 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-    
+
     <Grid DataContext="{Binding Main.Profile, Source={StaticResource Locator}}">
-    	<TextBlock Text="{Binding Name}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <StackPanel Orientation="Horizontal">
+            <Image Source="{Binding ThumbURL}" Height="100" Width="100" VerticalAlignment="Top"></Image>
+            <TextBlock Text="{Binding Name}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </StackPanel>
     </Grid>
 </UserControl>
