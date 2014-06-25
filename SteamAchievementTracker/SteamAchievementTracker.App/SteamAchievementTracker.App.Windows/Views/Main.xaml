@@ -26,15 +26,21 @@
         <ScrollViewer Grid.Row="1" HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" ZoomMode="Disabled"  >
             <StackPanel  Orientation="Horizontal" Height="627" Margin="116,0,40,46">
                 <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Hidden" Margin="20" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Enabled">
-                    <!--<StackPanel>-->
-                        
-                            <Partials:Profile DataContext="{Binding Profile}" />
-                        
-                        <!--<TextBlock Text="{Binding Profile.Name}" HorizontalAlignment="Left" VerticalAlignment="Top"/>-->
-                    <!--</StackPanel>-->
+                    <StackPanel>
+                        <Partials:Profile DataContext="{Binding Main.Profile}" />
+                        <Grid DataContext="{Binding Source={StaticResource Locator}}">
+                            <GridView  ItemsSource="{Binding Main.Profile.RecentGames}" IsSwipeEnabled="False" SelectionMode="Single" >
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Partials:GameListItem ></Partials:GameListItem>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </Grid>
+                    </StackPanel>
                 </ScrollViewer>
             </StackPanel>
         </ScrollViewer>
-        
+
     </Grid>
 </common:LayoutAwarePage>

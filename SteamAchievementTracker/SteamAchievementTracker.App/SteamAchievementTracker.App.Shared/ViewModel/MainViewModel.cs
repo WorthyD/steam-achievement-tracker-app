@@ -20,10 +20,10 @@ namespace SteamAchievementTracker.App.ViewModel {
 
             _title = "Steam Achievement Tracker";
 
-            if (IsInDesignMode) {
+            //if (IsInDesignMode) {
                 _profile.PopulateDesignData();
-                return;
-            }
+            //    return;
+            //}
 
 
 
