@@ -17,11 +17,13 @@ namespace SteamAchievementTracker.App.ViewModel {
         public MainViewModel()
             : base() {
             _profile = new DataModel.PlayerProfile();
+            _library = new DataModel.PlayerLibrary();
 
             _title = "Steam Achievement Tracker";
 
             //if (IsInDesignMode) {
-                _profile.PopulateDesignData();
+            _profile.PopulateDesignData();
+            _library.PopulateDesignData();
             //    return;
             //}
 
@@ -48,6 +50,13 @@ namespace SteamAchievementTracker.App.ViewModel {
             }
         }
 
+        private DataModel.PlayerLibrary _library;
+        public DataModel.PlayerLibrary Library {
+            get { return _library; }
+            set {
+                Set(() => Library, ref _library, value);
+            }
+        }
 
 
     }

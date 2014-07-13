@@ -17,8 +17,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\LayoutAwarePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\Design\Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModel\Design\PlayerLibrary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\Design\PlayerProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\Game.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModel\PlayerLibrary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\PlayerProfile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseViewModel.cs" />
