@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.ViewModel {
     public class MainViewModel : BaseViewModel {
@@ -16,19 +17,30 @@ namespace SteamAchievementTracker.App.ViewModel {
         [PreferredConstructor]
         public MainViewModel()
             : base() {
-            _profile = new DataModel.PlayerProfile();
-            _library = new DataModel.PlayerLibrary();
+            _profile = new DataAccess.Model.Profile();
+            _library = new DataAccess.Model.PlayerLibrary();
 
             _title = "Steam Achievement Tracker";
 
-            //if (IsInDesignMode) {
-            _profile.PopulateDesignData();
-            _library.PopulateDesignData();
-            //    return;
-            //}
+            if (IsInDesignMode) {
+                _profile.PopulateDesignData();
+                _library.PopulateDesignData();
+                return;
+            }
 
 
 
+
+            LoadRealData();
+        }
+
+        public async void LoadRealData() {
+            DataAccess.Repository.PlayerProfileRepository _playerRepo = new DataAccess.Repository.PlayerProfileRepository();
+            DataAccess.Repository.PlayerLibraryRepository _libraryRepo = new DataAccess.Repository.PlayerLibraryRepository();
+
+
+            Profile = await _playerRepo.GetPlayerDetails("WorthyD");
+            //_library = await _libraryRepo.GetPlayerLibrary("WorthyD");
         }
 
         private string _title;
@@ -39,9 +51,9 @@ namespace SteamAchievementTracker.App.ViewModel {
             }
         }
 
-        private DataModel.PlayerProfile _profile;
+        private DataAccess.Model.Profile _profile;
 
-        public DataModel.PlayerProfile Profile {
+        public DataAccess.Model.Profile Profile {
             get {
                 return _profile;
             }
@@ -50,8 +62,8 @@ namespace SteamAchievementTracker.App.ViewModel {
             }
         }
 
-        private DataModel.PlayerLibrary _library;
-        public DataModel.PlayerLibrary Library {
+        private DataAccess.Model.PlayerLibrary _library;
+        public DataAccess.Model.PlayerLibrary Library {
             get { return _library; }
             set {
                 Set(() => Library, ref _library, value);

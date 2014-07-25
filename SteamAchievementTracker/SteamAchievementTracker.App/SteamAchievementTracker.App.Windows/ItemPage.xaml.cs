@@ -1,5 +1,4 @@
-﻿using SteamAchievementTracker.App.Data;
-using SteamAchievementTracker.App.Common;
+﻿using SteamAchievementTracker.App.Common;
 
 using System;
 using System.Collections.Generic;
