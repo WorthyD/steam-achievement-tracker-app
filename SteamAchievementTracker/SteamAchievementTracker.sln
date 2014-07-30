@@ -21,6 +21,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamAchievementTracker.App
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B666D2B4-82E7-4F33-A4F6-A1C1A8C1183A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA2F921F-32F3-41C7-9B65-DC86E4865C11}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SteamAchievementTracker.App\SteamAchievementTracker.App.Shared\SteamAchievementTracker.App.Shared.projitems*{29f9eb75-b397-4399-be10-1accbfc819bd}*SharedItemsImports = 13

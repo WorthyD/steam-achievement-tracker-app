@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using SteamAchievementTracker.App.Common;
+using SQLitePCL;
+using SteamAchievementTracker.App.DataAccess.Data;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -40,6 +42,27 @@ namespace SteamAchievementTracker.App
             this.Suspending += this.OnSuspending;
         }
 
+
+        public static SQLiteConnection conn;
+
+        // Code to execute when the application is launching (eg, from Start)
+        // This code will not execute when the application is reactivated
+        //private void Application_Launching(object sender, LaunchingEventArgs e) {
+        //    // Get a reference to the SQLite database
+        //    conn = new SQLiteConnection("sqlitepcldemo.db");
+        //    CreateDatabase.LoadDatabase(conn);
+        //}
+
+        //// Code to execute when the application is activated (brought to foreground)
+        //// This code will not execute when the application is first launched
+        //private void Application_Activated(object sender, ActivatedEventArgs e) {
+        //    // Get a reference to the SQLite database
+        //    conn = new SQLiteConnection("sqlitepcldemo.db");
+        //    CreateDatabase.LoadDatabase(conn);
+        //}
+
+       
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used when the application is launched to open a specific file, to display
@@ -54,6 +77,10 @@ namespace SteamAchievementTracker.App
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+
+
+                conn = new SQLiteConnection("sqlitepcldemo.db");
+                CreateDatabase.LoadDatabase(conn);
 
             Frame rootFrame = Window.Current.Content as Frame;
 
