@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Model {
     public partial class Profile {
-        public ulong ID64 { get; set; }
+        public long ID64 { get; set; }
         public string ID { get; set; }
 
         public string Name { get; set; }
@@ -38,8 +38,14 @@ namespace SteamAchievementTracker.App.DataAccess.Model {
                     HoursPlayed = game.hoursOnRecord
                 });
             }
+        }
+        public Profile(long id64, string id, string name, string thumbnailurl) {
+            this.ID64 = id64;
+            this.ID = id;
+            this.Name = name;
+            this.ThumbURL = thumbnailurl;
 
-
+            this.RecentGames = new List<Game>();
         }
     }
 }

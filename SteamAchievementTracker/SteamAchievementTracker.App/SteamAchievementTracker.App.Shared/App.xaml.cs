@@ -43,7 +43,7 @@ namespace SteamAchievementTracker.App
         }
 
 
-        public static SQLiteConnection conn;
+        //public static SQLiteConnection conn;
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
@@ -79,8 +79,8 @@ namespace SteamAchievementTracker.App
 #endif
 
 
-                conn = new SQLiteConnection("sqlitepcldemo.db");
-                CreateDatabase.LoadDatabase(conn);
+                //conn = new SQLiteConnection("SteamAchievementTracker.db");
+                //CreateDatabase.LoadDatabase(conn);
 
             Frame rootFrame = Window.Current.Content as Frame;
 

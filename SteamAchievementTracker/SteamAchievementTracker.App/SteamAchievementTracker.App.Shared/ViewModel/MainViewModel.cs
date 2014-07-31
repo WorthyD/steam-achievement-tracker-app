@@ -39,7 +39,8 @@ namespace SteamAchievementTracker.App.ViewModel {
             DataAccess.Repository.PlayerLibraryRepository _libraryRepo = new DataAccess.Repository.PlayerLibraryRepository();
 
 
-            Profile = await _playerRepo.GetPlayerDetails("WorthyD");
+            //Profile = await _playerRepo.GetPlayerDetails("WorthyD");
+            Profile = await _playerRepo.GetProfileCached(76561198025095151,"WorthyD");
             //_library = await _libraryRepo.GetPlayerLibrary("WorthyD");
         }
 

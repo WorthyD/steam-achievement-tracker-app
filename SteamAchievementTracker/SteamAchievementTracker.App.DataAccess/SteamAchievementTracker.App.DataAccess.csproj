@@ -37,6 +37,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Data\CreateDatabase.cs" />
+    <Compile Include="Data\PlayerProfile.cs" />
+    <Compile Include="Data\TableModelBase.cs" />
     <Compile Include="Model\Design\Game.cs" />
     <Compile Include="Model\Design\PlayerLibrary.cs" />
     <Compile Include="Model\Design\PlayerProfile.cs" />

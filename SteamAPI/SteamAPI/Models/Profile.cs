@@ -14,7 +14,7 @@ namespace SteamAPI.Models {
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
         public partial class profile {
 
-            private ulong steamID64Field;
+            private long steamID64Field;
 
             private string steamIDField;
 
@@ -59,7 +59,7 @@ namespace SteamAPI.Models {
             private profileGroup[] groupsField;
 
             /// <remarks/>
-            public ulong steamID64 {
+            public long steamID64 {
                 get {
                     return this.steamID64Field;
                 }
