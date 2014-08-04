@@ -70,5 +70,14 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
         protected override Model.Profile GetEmpty() {
             return null;
         }
+
+        protected override string CreateTable() {
+            return @"CREATE TABLE IF NOT EXISTS  [PlayerProfile] (
+                    [ID64] INTEGER  NOT NULL PRIMARY KEY,
+                    [ID] VARCHAR(250)  NULL,
+                    [Name] VARCHAR(250)  NULL,
+                    [Thumbnail] VARCHAR(250)  NULL
+                );";
+        }
     }
 }

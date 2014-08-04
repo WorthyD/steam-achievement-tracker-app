@@ -13,6 +13,8 @@ namespace SteamAchievementTracker.App.DataAccess.Model {
         public string Logo { get; set; }
         public decimal HoursPlayed { get; set; }
         public decimal HoursOnRecord { get; set; }
+        public DateTime LastUpdated { get; set; }
+        public DateTime PurchaseDate { get; set; }
 
         public int AchievementsEarned { get; set; }
         public int TotalAchievements { get; set; }

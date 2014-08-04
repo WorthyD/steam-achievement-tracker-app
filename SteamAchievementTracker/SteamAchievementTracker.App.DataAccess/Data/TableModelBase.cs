@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Data {
     public abstract class TableModelBase<TItemType, TKeyType> {
+        protected abstract string CreateTable();
+
         protected abstract string GetSelectAllSql();
         protected abstract void FillSelectAllStatement(ISQLiteStatement statement);
 
@@ -40,6 +43,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                 if (conn == null) {
                     conn = new SQLiteConnection("SteamAchievementTracker.db");
                     CreateDatabase.LoadDatabase(conn);
+                    //SQLitePCL.
                 }
                 return conn;
             }
@@ -72,7 +76,6 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             }
 
             return GetEmpty();
-            //throw new ArgumentOutOfRangeException("key not found");
         }
 
         public void InsertItem(TItemType item) {
