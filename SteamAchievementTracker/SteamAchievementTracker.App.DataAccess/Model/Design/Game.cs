@@ -12,7 +12,7 @@ namespace SteamAchievementTracker.App.DataAccess.Model {
             int ticks = rnd.Next(0, 100);
             this.Name = name;
             this.Logo = GetRandomImage();
-            this.HoursOnRecord = ticks;
+            this.RecentHours = ticks;
 
             this.AchievementsEarned = ticks;
             this.TotalAchievements = 100;

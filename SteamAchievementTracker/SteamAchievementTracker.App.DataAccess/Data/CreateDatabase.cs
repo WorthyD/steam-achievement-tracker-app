@@ -19,7 +19,13 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             using (var statement = db.Prepare(sql)) {
                 statement.Step();
             }
+            var g = new Game();
+            sql = g.CreateTable();
 
+            using (var statement = db.Prepare(sql)) {
+                statement.Step();
+            }
+ 
             // Turn on Foreign Key constraints
             sql = @"PRAGMA foreign_keys = ON";
             using (var statement = db.Prepare(sql)) {

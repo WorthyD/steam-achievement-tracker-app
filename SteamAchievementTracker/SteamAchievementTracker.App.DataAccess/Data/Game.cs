@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Data {
-    public class Game : TableModelBase<Model.Game, KeyValuePair<long, long>> {
-        protected override string CreateTable() {
-            return @"CREATE TABLE [Game] (
+    public class Game : TableModelBase<Model.Game, KeyValuePair<ulong, ulong>> {
+        public override string CreateTable() {
+            return @"CREATE TABLE IF NOT EXISTS [Game] (
                 [SteamID] INTEGER  NOT NULL,
                 [GameID] INTEGER  NOT NULL,
                 [Name] varCHAR(100)  NULL,
@@ -30,10 +30,10 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
 	                    SteamID, GameID, Name, StatsLink, GameLink, SmallLogo,
                     	HoursPlayed, AchievementsEarned, AchievementCount, PurchaseDate, LastUpdated
                     FROM
-                    	Game
-                    Where
-                    	SteamID = @SteamID AND
-    	                GameID = @GameID";
+                    	Game";
+                    //Where
+                    //    SteamID = @SteamID AND
+                    //    GameID = @GameID";
         }
 
         protected override void FillSelectAllStatement(SQLitePCL.ISQLiteStatement statement) {
@@ -43,9 +43,10 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
         protected override Model.Game CreateItem(SQLitePCL.ISQLiteStatement statement) {
             var g = new Model.Game() {
                 AchievementsEarned = (int)statement["AchievementsEarned"],
+                SteamUserID =  (ulong)statement["SteamID"],
                 AppID = (uint)statement["GameID"],
                 GameLink = (string)statement["GameLink"],
-                HoursOnRecord = (decimal)statement["RecentHours"],
+                RecentHours = (decimal)statement["RecentHours"],
                 HoursPlayed = (decimal)statement["HoursPlayed"],
                 Logo = (string)statement["SmallLogo"],
                 Name = (string)statement["Name"],
@@ -68,7 +69,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
     	                GameID = @GameID";
         }
 
-        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key) {
+        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<ulong, ulong> key) {
             statement.Bind("@SteamID", key.Key);
             statement.Bind("@GameID", key.Value);
         }
@@ -77,7 +78,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             throw new NotImplementedException();
         }
 
-        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, ulong key) {
+        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<ulong, ulong> key) {
             throw new NotImplementedException();
         }
 
@@ -99,29 +100,58 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
         }
 
         protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, Model.Game item) {
-            //statement.Bind("@SteamID", item.);
+            statement.Bind("@SteamID", item.SteamUserID);
             statement.Bind("@GameID", item.AppID);
             statement.Bind("@Name", item.Name);
             statement.Bind("@StatsLink", item.StatsLink);
             statement.Bind("@GameLink", item.GameLink);
-            statement.Bind("", item);
-            statement.Bind("", item);
-            statement.Bind("", item);
-            statement.Bind("", item);
-            statement.Bind("", item);
-            statement.Bind("", item);
+            statement.Bind("@SmallLogo", item.Logo);
+            statement.Bind("@RecentHours", item.RecentHours);
+            statement.Bind("@HoursPlayed", item.HoursPlayed);
+            statement.Bind("@AchievementsEarned", item.AchievementsEarned);
+            statement.Bind("@AchievementCount", item.TotalAchievements);
+            statement.Bind("@PurchaseDate", DateTimeSQLite(item.PurchaseDate));
+            statement.Bind("@LastUpdated", DateTimeSQLite(item.LastUpdated));
+        }
+        private string DateTimeSQLite(DateTime datetime) {
+            string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
+            return string.Format(dateTimeFormat, datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, datetime.Second, datetime.Millisecond);
         }
 
         protected override string GetUpdateItemSql() {
-            throw new NotImplementedException();
+            return @"Update Game
+	            set Name = @Name,
+            	StatsLink = @StatsLink,
+            	GameLink = @GameLink,
+            	SmallLogo = @SmallLogo,
+            	HoursPlayed = @HoursPlayed,
+            	PurchaseDate = @PurchaseDate,
+            	LastUpdated =@LastUpdated
+            Where
+            	SteamID = @SteamID AND
+            	GameID = @GameID";
         }
 
-        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, ulong key, Model.Game item) {
-            throw new NotImplementedException();
+        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<ulong, ulong> key, Model.Game item) {
+            statement.Bind("@GameID", item.AppID);
+            statement.Bind("@Name", item.Name);
+            statement.Bind("@StatsLink", item.StatsLink);
+            statement.Bind("@GameLink", item.GameLink);
+            statement.Bind("@SmallLogo", item.Logo);
+            statement.Bind("@RecentHours", item.RecentHours);
+            statement.Bind("@HoursPlayed", item.HoursPlayed);
+            statement.Bind("@AchievementsEarned", item.AchievementsEarned);
+            statement.Bind("@AchievementCount", item.TotalAchievements);
+            statement.Bind("@PurchaseDate", item.PurchaseDate);
+            statement.Bind("@LastUpdated", item.LastUpdated);
         }
 
         protected override Model.Game GetEmpty() {
-            throw new NotImplementedException();
+            return null;
         }
+
+        //protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key) {
+        //    throw new NotImplementedException();
+        //}
     }
 }

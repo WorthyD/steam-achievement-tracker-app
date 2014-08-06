@@ -34,7 +34,7 @@ namespace SteamAchievementTracker.App.DataAccess.Model {
                     GameLink = game.gameLink,
                     Name = game.gameName,
                     Logo = game.gameLogoSmall,
-                    HoursOnRecord = game.hoursOnRecord,
+                     RecentHours = game.hoursOnRecord,
                     HoursPlayed = game.hoursOnRecord
                 });
             }
