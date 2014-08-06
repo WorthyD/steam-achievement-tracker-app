@@ -15,6 +15,7 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
         }
 
         public async Task<List<Model.GameAchievement>> GetGameAchievementsCached(string statURL) {
+            return null;
         }
     }
 }
