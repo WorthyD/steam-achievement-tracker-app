@@ -226,7 +226,7 @@ namespace SteamAPI.Models {
 
         private bool unlockTimestampFieldSpecified;
 
-        private byte closedField;
+        private bool closedField;
 
         /// <remarks/>
         public string iconClosed {
@@ -301,7 +301,7 @@ namespace SteamAPI.Models {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public byte closed {
+        public bool closed {
             get {
                 return this.closedField;
             }

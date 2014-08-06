@@ -33,7 +33,7 @@ namespace SteamAPI.Tests {
             SteamAPI.Player.PlayerGameStatsRequest request = new SteamAPI.Player.PlayerGameStatsRequest();
             request.GameUrl = "http://steamcommunity.com/id/WorthyD/stats/Borderlands";
             var resposne = await request.GetResponse();
-            Assert.IsTrue(resposne.PlayerStats.achievements.Where(x => x.closed == 1).Count() > 0);
+            Assert.IsTrue(resposne.PlayerStats.achievements.Where(x => x.closed == true).Count() > 0);
         }
 
 
