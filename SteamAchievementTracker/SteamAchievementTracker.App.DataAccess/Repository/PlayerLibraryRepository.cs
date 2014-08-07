@@ -22,6 +22,7 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
 
         public async Task<List<Model.Game>> GetPlayerLibraryCached(ulong steamID64, string steamID) {
             //TODO: make this prettier
+            //validate cache
             var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();
             var steamGameList = await GetPlayerLibrary(steamID);
 

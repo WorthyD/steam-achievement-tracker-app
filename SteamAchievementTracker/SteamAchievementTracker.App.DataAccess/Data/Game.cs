@@ -19,7 +19,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                 [RecentHours] FLOAT  NULL,
                 [AchievementsEarned] INTEGER  NULL,
                 [AchievementCount] INTEGER  NULL,
-                [PurchaseDate] TIMESTAMP  NULL,
+                [AchievementRefresh] TIMESTAMP  NULL,
                 [LastUpdated] TIMESTAMP  NULL,
                 PRIMARY KEY ([SteamID],[GameID])
             )";
@@ -28,7 +28,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
         protected override string GetSelectAllSql() {
             return @"Select
 	                    SteamID, GameID, Name, StatsLink, GameLink, SmallLogo,
-                    	HoursPlayed, AchievementsEarned, AchievementCount, PurchaseDate, LastUpdated
+                    	HoursPlayed, AchievementsEarned, AchievementCount, AchievementRefresh, LastUpdated
                     FROM
                     	Game";
                     //Where
@@ -53,7 +53,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                 StatsLink = (string)statement["StatsLink"],
                 TotalAchievements = (int)statement["AchievementCount"],
                 LastUpdated = (DateTime)statement["LastUpdated"],
-                PurchaseDate = (DateTime)statement["PurchaseDate"]
+                AchievementRefresh = (DateTime)statement["AchievementRefresh"]
             };
             return g;
         }
@@ -61,7 +61,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
         protected override string GetSelectItemSql() {
             return @"Select
 	                    SteamID, GameID, Name, StatsLink, GameLink, SmallLogo,RecentHours,
-                    	HoursPlayed, AchievementsEarned, AchievementCount, PurchaseDate, LastUpdated
+                    	HoursPlayed, AchievementsEarned, AchievementCount, AchievementRefresh, LastUpdated
                     FROM
                     	Game
                     Where
@@ -88,14 +88,14 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
 				Name, StatsLink,
 				GameLink, SmallLogo,RecentHours,
 				HoursPlayed, AchievementsEarned,
-				AchievementCount, PurchaseDate,
+				AchievementCount, AchievementRefresh,
 				LastUpdated)
 			VALUES
 				(@SteamID, @GameID,
 				@Name, @StatsLink,
 				@GameLink, @SmallLogo, @RecentHours,
 				@HoursPlayed, @AchievementsEarned,
-				@AchievementCount, @PurchaseDate,
+				@AchievementCount, @AchievementRefresh,
 				@LastUpdated);";
         }
 
@@ -110,7 +110,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             statement.Bind("@HoursPlayed", item.HoursPlayed);
             statement.Bind("@AchievementsEarned", item.AchievementsEarned);
             statement.Bind("@AchievementCount", item.TotalAchievements);
-            statement.Bind("@PurchaseDate", DateTimeSQLite(item.PurchaseDate));
+            statement.Bind("@AchievementRefresh", DateTimeSQLite(item.AchievementRefresh));
             statement.Bind("@LastUpdated", DateTimeSQLite(item.LastUpdated));
         }
         private string DateTimeSQLite(DateTime datetime) {
@@ -125,7 +125,6 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             	GameLink = @GameLink,
             	SmallLogo = @SmallLogo,
             	HoursPlayed = @HoursPlayed,
-            	PurchaseDate = @PurchaseDate,
             	LastUpdated =@LastUpdated
             Where
             	SteamID = @SteamID AND
@@ -142,7 +141,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             statement.Bind("@HoursPlayed", item.HoursPlayed);
             statement.Bind("@AchievementsEarned", item.AchievementsEarned);
             statement.Bind("@AchievementCount", item.TotalAchievements);
-            statement.Bind("@PurchaseDate", item.PurchaseDate);
+            //statement.Bind("@PurchaseDate", item.PurchaseDate);
             statement.Bind("@LastUpdated", item.LastUpdated);
         }
 

@@ -34,6 +34,24 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Repositories {
             Assert.IsTrue(gl.Count() > 0);
         }
 
+        [TestMethod]
+        public async Task GetPlayerGameStatsDB() {
+            DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository();
+            DataAccess.Repository.PlayerLibraryRepository _glRepo = new Repository.PlayerLibraryRepository();
+            DataAccess.Repository.PlayerStatsRepository _psRepo = new Repository.PlayerStatsRepository();
+            var p = await _repo.GetProfileCached(0, "WorthyD");
+
+            var gl = await _glRepo.GetPlayerLibraryCached((ulong)p.ID64, p.ID.ToString());
+
+            string statsUrl = gl.FirstOrDefault().StatsLink;
+             var boo  = await _psRepo.RefreshData(statsUrl);
+            var sl = _psRepo.GetGameAchievementsCached(statsUrl);
+
+
+         
+            Assert.IsTrue(gl.Count() > 0);
+        }
+
 
     }
 }

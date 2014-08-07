@@ -16,7 +16,7 @@ namespace SteamAchievementTracker.App.DataAccess.Model {
         public decimal HoursPlayed { get; set; }
         public decimal RecentHours{ get; set; }
         public DateTime LastUpdated { get; set; }
-        public DateTime PurchaseDate { get; set; }
+        public DateTime AchievementRefresh { get; set; }
 
         public int AchievementsEarned { get; set; }
         public int TotalAchievements { get; set; }
@@ -42,10 +42,12 @@ namespace SteamAchievementTracker.App.DataAccess.Model {
             this.HoursPlayed = 0;
             this.RecentHours = 0;
             this.LastUpdated = DateTime.Now;
-            this.PurchaseDate = new DateTime(1900, 1, 1);
+            this.AchievementRefresh= new DateTime(1900, 1, 1);
             this.AchievementsEarned = 0;
             this.TotalAchievements = 0;
         }
+
+        //This is for updating
         public Game(gamesListGame g, ulong steamID64) {
             this.SteamUserID = steamID64;
             this.AppID = g.appID;
@@ -56,7 +58,7 @@ namespace SteamAchievementTracker.App.DataAccess.Model {
             this.HoursPlayed = g.hoursOnRecord;
             this.RecentHours = g.hoursLast2Weeks;
             this.LastUpdated = DateTime.Now;
-            this.PurchaseDate = new DateTime(1900, 1, 1);
+            //this.AchievementRefresh = new DateTime(1900, 1, 1);
             this.AchievementsEarned = 0;
             this.TotalAchievements = 0;
         }

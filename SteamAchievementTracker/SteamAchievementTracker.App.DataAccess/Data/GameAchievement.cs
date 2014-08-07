@@ -9,7 +9,19 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
     public class GameAchievement : TableModelBase<Model.GameAchievement, KeyValuePair<string, string>> {
 
         public override string CreateTable() {
-            throw new NotImplementedException();
+            return @"CREATE TABLE IF NOT EXISTS  [GameAchievement] (
+	[StatsURL] nvARCHAR(150)  NULL,
+	[AchievementID] nvARCHAR(50)  NULL,
+	[AchievementIcon] nvARCHAR(150)  NULL,
+	[IsUnlocked] BOOLEAN  NULL,
+	[Name] nvARCHAR(150)  NULL,
+	[Description] NVARCHAR(250)  NULL,
+	[UnLockTimestamp] NVARCHAR(25)  NULL,
+	PRIMARY KEY ([StatsURL],[AchievementID])
+)";
+
+
+
         }
 
         protected override string GetSelectAllSql() {
@@ -44,7 +56,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
 FROM
 	GameAchievement
 WHERE
-	[StatsURL] = @StatsURL";
+	[StatsURL] = @StatsURL AND
+	[AchievementID]  = @AchievementID";
         }
 
         protected override string GetDeleteItemSql() {
@@ -61,6 +74,7 @@ WHERE
             statement.Bind("@StatsURL", item.StatsURL);
             statement.Bind("@AchievementID", item.AchievementID);
             statement.Bind("@AchievementIcon", item.AchievementIcon);
+            //SQLitePCL Express bit
             statement.Bind("@IsUnlocked", item.IsUnlocked);
             statement.Bind("@Name", item.Name);
             statement.Bind("@Description", item.Description);
@@ -72,7 +86,7 @@ WHERE
         }
 
         protected override Model.GameAchievement GetEmpty() {
-            throw new NotImplementedException();
+            return null;
         }
 
         protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<string, string> key) {
