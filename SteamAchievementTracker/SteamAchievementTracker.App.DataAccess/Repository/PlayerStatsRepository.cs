@@ -19,11 +19,25 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
             return response.PlayerStats;
         }
 
-        public async Task<List<Model.GameAchievement>> GetGameAchievementsCached(string statURL) {
+        public List<Model.GameAchievement> GetGameAchievementsCached(string statURL) {
             var stats = _db.GetAllItems().Where(x => x.StatsURL == statURL).ToList();
 
             return stats;
         }
+
+        public Model.GameAchievement GetGameAchievementCached(string statURL, string apiName) {
+            return _db.GetItem(new KeyValuePair<string,string>(statURL, apiName));
+        }
+
+
+        public void InstertGame(Model.GameAchievement ga) {
+            _db.InsertItem(ga);
+        }
+
+        public void UpdateGame(Model.GameAchievement ga, string statURL, string apiName) {
+            _db.UpdateItem(new KeyValuePair<string, string>(statURL, apiName), ga);
+        }
+
 
         public async Task<bool> RefreshData(string statURL) {
             var stats = await GetPlayerStats(statURL);

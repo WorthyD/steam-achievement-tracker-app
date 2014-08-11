@@ -6,33 +6,61 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.AchievementRefresh {
     public class AchievementRefreshTask {
-        public async void Run(ulong steamID64) {
-            App.DataAccess.Repository.PlayerProfileRepository _playerRepo = new App.DataAccess.Repository.PlayerProfileRepository();
+        public int RefreshCount { get; set; }
+        public int HourRefresh { get; set; }
 
-            var player = await _playerRepo.GetProfileFromDB(steamID64);
+
+        public async void Run(ulong steamID64, string steamID, IProgress<string> progress) {
+            //App.DataAccess.Repository.PlayerProfileRepository _playerRepo = new App.DataAccess.Repository.PlayerProfileRepository();
+
+            //var player = await _playerRepo.GetProfileCached(steamID64, steamID);
 
             App.DataAccess.Repository.PlayerLibraryRepository _libraryRepo = new App.DataAccess.Repository.PlayerLibraryRepository();
-            var playerLibrary = await _libraryRepo.GetPlayerLibrary(player.ID);
+            var playerLibrary = await _libraryRepo.GetPlayerLibraryCached(steamID64, steamID);
 
             App.DataAccess.Repository.PlayerStatsRepository _statRepo = new App.DataAccess.Repository.PlayerStatsRepository();
 
-            foreach (var game in playerLibrary.games) {
-                var stats = await _statRepo.GetPlayerStats(game.statsLink);
+            //Exit loop if player has no library
+            if (playerLibrary == null || playerLibrary.Count() == 0) return;
 
-                App.DataAccess.Model.GameAchievement tgame;
-                foreach (var stat in stats.achievements) {
-                    var tempStat = _db.GetItem(new KeyValuePair<string, string>(statURL, stat.apiname));
+            var gameList = playerLibrary.OrderByDescending(x => x.RecentHours).ToList();
 
-                    tgame = new Model.GameAchievement(stat, statURL);
-                    if (tempStat == null) {
-                        _db.InsertItem(game);
-                    } else {
-                        _db.UpdateItem(new KeyValuePair<string, string>(statURL, stat.apiname), game);
+            if (this.RefreshCount > 0) {
+                gameList = gameList.Take(this.RefreshCount).ToList();
+            }
+
+            foreach (var game in gameList) {
+                if (!string.IsNullOrEmpty(game.StatsLink)) {
+                    var stats = await _statRepo.GetPlayerStats(game.StatsLink);
+                    //Determine if we want to update
+
+                    if (DoRefresh(game)) {
+                        await _statRepo.RefreshData(game.StatsLink);
+                    }
+
+                    //Thread.Sleep
+                    Thread.Sleep(200);
+
+                    
+
+                    if (progress != null) {
+                        progress.Report(string.Format(""));
                     }
                 }
-
             }
             
+        }
+
+
+        private bool DoRefresh(SteamAchievementTracker.App.DataAccess.Model.Game game) {
+            DateTime refreshDate = DateTime.Now.AddHours(-this.HourRefresh);
+
+            if (game.LastUpdated < refreshDate) {
+                return true;
+            }
+
+
+            return false;
         }
     }
 }
