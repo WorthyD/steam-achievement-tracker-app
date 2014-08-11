@@ -9,11 +9,12 @@ namespace SteamAchievementTracker.AchievementRefresh {
         public int RefreshCount { get; set; }
         public int HourRefresh { get; set; }
 
+        public AchievementRefreshTask(int rc, int hr) {
+            this.RefreshCount = rc;
+            this.HourRefresh = hr;
+        }
 
-        public async void Run(ulong steamID64, string steamID, IProgress<string> progress) {
-            //App.DataAccess.Repository.PlayerProfileRepository _playerRepo = new App.DataAccess.Repository.PlayerProfileRepository();
-
-            //var player = await _playerRepo.GetProfileCached(steamID64, steamID);
+        public async Task Run(ulong steamID64, string steamID, IProgress<string> progress) {
 
             App.DataAccess.Repository.PlayerLibraryRepository _libraryRepo = new App.DataAccess.Repository.PlayerLibraryRepository();
             var playerLibrary = await _libraryRepo.GetPlayerLibraryCached(steamID64, steamID);
@@ -29,6 +30,9 @@ namespace SteamAchievementTracker.AchievementRefresh {
                 gameList = gameList.Take(this.RefreshCount).ToList();
             }
 
+            int listCount = gameList.Count();
+            int counter = 0;
+
             foreach (var game in gameList) {
                 if (!string.IsNullOrEmpty(game.StatsLink)) {
                     var stats = await _statRepo.GetPlayerStats(game.StatsLink);
@@ -36,26 +40,38 @@ namespace SteamAchievementTracker.AchievementRefresh {
 
                     if (DoRefresh(game)) {
                         await _statRepo.RefreshData(game.StatsLink);
+                        await Task.Delay(1000);
                     }
 
-                    //Thread.Sleep
-                    Thread.Sleep(200);
-
-                    
-
-                    if (progress != null) {
-                        progress.Report(string.Format(""));
-                    }
                 }
+                counter++;
+                if (progress != null) {
+                    progress.Report(string.Format("Updating: {0} out of {1}", counter, listCount));
+                }
+
             }
-            
+
         }
 
 
         private bool DoRefresh(SteamAchievementTracker.App.DataAccess.Model.Game game) {
             DateTime refreshDate = DateTime.Now.AddHours(-this.HourRefresh);
+            DateTime refreshDateExtended = DateTime.Now.AddHours(-this.HourRefresh * 3);
 
-            if (game.LastUpdated < refreshDate) {
+            //Game hasn't been updated before
+            if (game.LastUpdated == DateTime.MinValue) {
+                return true;
+            }
+
+
+            //Recently played game force update
+            if (game.RecentHours > 0 && game.LastUpdated < refreshDate) {
+                return true;
+            }
+
+
+            //Game has been played, but not recently
+            if (game.HoursPlayed > 0 && game.LastUpdated < refreshDateExtended) {
                 return true;
             }
 

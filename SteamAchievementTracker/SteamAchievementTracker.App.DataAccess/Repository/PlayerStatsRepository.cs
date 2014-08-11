@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 namespace SteamAchievementTracker.App.DataAccess.Repository {
     public class PlayerStatsRepository {
         public Data.GameAchievement _db;
+        public Data.Game _gDB;
         public  PlayerStatsRepository() {
             _db = new Data.GameAchievement();
+            _gDB = new Data.Game();
         }
 
         public async Task<SteamAPI.Models.playerstats> GetPlayerStats(string statURL) {
@@ -43,18 +45,23 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
             var stats = await GetPlayerStats(statURL);
 
             Model.GameAchievement game;
-            foreach (var stat in stats.achievements) {
-                var tempStat = _db.GetItem(new KeyValuePair<string, string>(statURL, stat.apiname));
+            if (stats.achievements != null) {
+                foreach (var stat in stats.achievements) {
+                    var tempStat = _db.GetItem(new KeyValuePair<string, string>(statURL, stat.apiname));
 
-                game = new Model.GameAchievement(stat, statURL);
-                if (tempStat == null) {
-                    _db.InsertItem(game);
-                } else {
-                    _db.UpdateItem(new KeyValuePair<string, string>(statURL, stat.apiname), game);
+                    game = new Model.GameAchievement(stat, statURL);
+                    if (tempStat == null) {
+                        _db.InsertItem(game);
+                    } else {
+                        _db.UpdateItem(new KeyValuePair<string, string>(statURL, stat.apiname), game);
+                    }
                 }
+
+                //Update DB Flags for game library
+
+                _gDB.UpdateGameStats(statURL, stats.achievements.ToList().Where(x => x.closed == false).Count(), stats.achievements.Count());
             }
 
-            //Update DB Flags for game library
 
             return true;
         }

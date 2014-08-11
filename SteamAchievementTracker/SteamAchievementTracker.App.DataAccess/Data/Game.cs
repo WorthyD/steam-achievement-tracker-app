@@ -149,6 +149,15 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             return null;
         }
 
+        public void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements) {
+         throw new NotImplementedException();
+         //using (var statement = sqlConnection.Prepare(GetUpdateItemSql())) {
+         //    FillUpdateStatement(statement, key, item);
+         //    statement.Step();
+         //}
+         //Timestamp = DateTime.Now;
+        }
+
         //protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key) {
         //    throw new NotImplementedException();
         //}

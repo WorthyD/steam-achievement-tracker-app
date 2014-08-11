@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Repositories\PlayerLibraryRepository.cs" />
+    <Compile Include="Tasks\TaskTester.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -149,6 +150,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SteamAchievementTracker.AchievementRefresh\SteamAchievementTracker.AchievementRefresh.csproj">
+      <Project>{091da6cf-7264-4c08-8f07-5f380ef0263e}</Project>
+      <Name>SteamAchievementTracker.AchievementRefresh</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SteamAchievementTracker.App.DataAccess\SteamAchievementTracker.App.DataAccess.csproj">
       <Project>{8b0ee2e7-8f48-4820-9a5f-a7da7ed72b3e}</Project>
       <Name>SteamAchievementTracker.App.DataAccess</Name>

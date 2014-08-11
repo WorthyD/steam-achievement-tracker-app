@@ -54,5 +54,8 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
 
         }
 
+        public void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements) {
+            _db.UpdateGameStats(statsUrl, achievementsEarned, totalAchievements);
+        }
     }
 }
