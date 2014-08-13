@@ -59,19 +59,21 @@ namespace SteamAchievementTracker.AchievementRefresh {
             DateTime refreshDateExtended = DateTime.Now.AddHours(-this.HourRefresh * 3);
 
             //Game hasn't been updated before
-            if (game.LastUpdated == DateTime.MinValue) {
+            if (game.AchievementRefresh == DateTime.MinValue) {
                 return true;
             }
 
 
             //Recently played game force update
-            if (game.RecentHours > 0 && game.LastUpdated < refreshDate) {
+            if (game.RecentHours > 0 && game.AchievementRefresh < refreshDate)
+            {
                 return true;
             }
 
 
             //Game has been played, but not recently
-            if (game.HoursPlayed > 0 && game.LastUpdated < refreshDateExtended) {
+            if (game.HoursPlayed > 0 && game.AchievementRefresh < refreshDateExtended)
+            {
                 return true;
             }
 

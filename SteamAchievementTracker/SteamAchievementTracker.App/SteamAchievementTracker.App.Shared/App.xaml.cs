@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using SteamAchievementTracker.App.Common;
 using SQLitePCL;
 using SteamAchievementTracker.App.DataAccess.Data;
+using System.Diagnostics;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -40,6 +41,9 @@ namespace SteamAchievementTracker.App
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            var result = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+
+            Debug.WriteLine(result);
         }
 
 

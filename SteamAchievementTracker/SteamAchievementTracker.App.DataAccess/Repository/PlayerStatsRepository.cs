@@ -59,7 +59,7 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
 
                 //Update DB Flags for game library
 
-                _gDB.UpdateGameStats(statURL, stats.achievements.ToList().Where(x => x.closed == false).Count(), stats.achievements.Count());
+                _gDB.UpdateGameStats(statURL, stats.achievements.ToList().Where(x => x.closed == true).Count(), stats.achievements.Count());
             }
 
 

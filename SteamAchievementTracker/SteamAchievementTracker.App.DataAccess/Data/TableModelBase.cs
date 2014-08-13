@@ -38,7 +38,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
 
         public static SQLiteConnection conn;
 
-        private ISQLiteConnection sqlConnection {
+        public ISQLiteConnection sqlConnection {
             get {
                 if (conn == null) {
                     conn = new SQLiteConnection("SteamAchievementTracker.db");
@@ -101,6 +101,20 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                 statement.Step();
             }
             Timestamp = DateTime.Now;
+        }
+
+
+    }
+    public static class ExtMethods
+    {
+        public static int BoolToBit(this bool value)
+        {
+            return (value) ? 1 : 0;
+        }
+        public static string DateTimeSQLite(this DateTime datetime)
+        {
+            string dateTimeFormat = "{0}-{1}-{2} {3}:{4}:{5}.{6}";
+            return string.Format(dateTimeFormat, datetime.Year, datetime.Month, datetime.Day, datetime.Hour, datetime.Minute, datetime.Second, datetime.Millisecond);
         }
     }
 }

@@ -12,10 +12,10 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             return @"CREATE TABLE IF NOT EXISTS  [GameAchievement] (
 	[StatsURL] nvARCHAR(150)  NULL,
 	[AchievementID] nvARCHAR(50)  NULL,
-	[AchievementIcon] nvARCHAR(150)  NULL,
+	[AchievementIcon] nvARCHAR(200)  NULL,
 	[IsUnlocked] BOOLEAN  NULL,
-	[Name] nvARCHAR(150)  NULL,
-	[Description] NVARCHAR(250)  NULL,
+	[Name] nvARCHAR(100)  NULL,
+	[Description] NVARCHAR(150)  NULL,
 	[UnLockTimestamp] NVARCHAR(25)  NULL,
 	PRIMARY KEY ([StatsURL],[AchievementID])
 )";
@@ -75,7 +75,7 @@ WHERE
             statement.Bind("@AchievementID", item.AchievementID);
             statement.Bind("@AchievementIcon", item.AchievementIcon);
             //SQLitePCL Express bit
-            statement.Bind("@IsUnlocked", item.IsUnlocked);
+            statement.Bind("@IsUnlocked",  item.IsUnlocked.BoolToBit());
             statement.Bind("@Name", item.Name);
             statement.Bind("@Description", item.Description);
             statement.Bind("@UnLockTimestamp", item.UnlockTimestamp);
