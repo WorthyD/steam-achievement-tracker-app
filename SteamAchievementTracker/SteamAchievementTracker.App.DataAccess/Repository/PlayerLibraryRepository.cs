@@ -8,8 +8,8 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
     public class PlayerLibraryRepository {
         public Data.Game _db;
 
-        public PlayerLibraryRepository() {
-            _db = new Data.Game();
+        public PlayerLibraryRepository(string connection) {
+            _db = new Data.Game(connection);
         }
 
         public async Task<SteamAPI.Models.gamesList> GetPlayerLibrary(string steamID) {
@@ -20,7 +20,14 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
             return response.GamesList;
         }
 
-        public async Task<List<Model.Game>> GetPlayerLibraryCached(ulong steamID64, string steamID) {
+        public async Task<List<Model.Game>> GetPlayerLibraryCached(ulong steamID64, string steamID)
+        {
+            var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();
+            return gl;
+        }
+
+
+        public async Task<List<Model.Game>> GetPlayerLibraryRefresh(ulong steamID64, string steamID) {
             //TODO: make this prettier
             //validate cache
             var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();

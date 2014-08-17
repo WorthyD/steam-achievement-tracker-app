@@ -10,7 +10,7 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
         public Data.Game _gDB;
         public  PlayerStatsRepository() {
             _db = new Data.GameAchievement();
-            _gDB = new Data.Game();
+            _gDB = new Data.Game("");
         }
 
         public async Task<SteamAPI.Models.playerstats> GetPlayerStats(string statURL) {

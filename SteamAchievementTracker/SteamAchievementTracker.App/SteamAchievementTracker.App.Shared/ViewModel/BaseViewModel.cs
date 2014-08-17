@@ -10,8 +10,10 @@ namespace SteamAchievementTracker.App.ViewModel {
         //public BaseViewModel(Common.NavigationHelper navHelper) {
         //    this._navigationHelper = navHelper;
         //}
+        public string ConnectionString { get; set; }
 
         public BaseViewModel() {
+            this.ConnectionString = "SteamAchievementTracker.db";
         }
     }
 }

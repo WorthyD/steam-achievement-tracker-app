@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Data {
     public class PlayerProfile : TableModelBase<Model.Profile, ulong> {
+
+        public PlayerProfile(string connection)
+        {
+            
+            this.connectionString = connection;
+        }
+
         protected override string GetSelectAllSql() {
             return "select [ID64], [ID], [Name], [Thumbnail] from PlayerProfile";
         }
@@ -78,6 +85,12 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                     [Name] VARCHAR(250)  NULL,
                     [Thumbnail] VARCHAR(250)  NULL
                 );";
+        }
+
+        public override string connectionString
+        {
+            get;
+            set;
         }
     }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace SteamAchievementTracker.App.DataAccess.Repository {
     public class PlayerProfileRepository {
         public Data.PlayerProfile _db;
-        public PlayerProfileRepository() {
-            _db = new Data.PlayerProfile(); 
+        public PlayerProfileRepository(string connection) {
+            _db = new Data.PlayerProfile(connection); 
         }
 
         public async Task<Model.Profile> GetPlayerDetails(string SteamID) {

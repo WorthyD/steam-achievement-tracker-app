@@ -8,6 +8,10 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 {
     public class Game : TableModelBase<Model.Game, KeyValuePair<ulong, ulong>>
     {
+        public Game(string connection)
+        {
+            this.connectionString = connection;
+        }
         public override string CreateTable()
         {
             return @"CREATE TABLE IF NOT EXISTS [Game] (

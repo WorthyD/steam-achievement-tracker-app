@@ -11,9 +11,10 @@ using System.IO;
 namespace SteamAchievementTracker.App.DataAccess.Tests.Repositories {
     [TestClass]
     public class PlayerLibraryRepository {
+        private string connectionString = "SteamAchievementTracker.db";
         [TestMethod]
         public async Task GetPlayerProfile() {
-            DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository();
+            DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository(connectionString);
             var p = await _repo.GetProfileCached(0, "WorthyD");
 
             var result = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "\\localstate\\SteamAchievementTracker.db");
@@ -24,20 +25,37 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Repositories {
 
         [TestMethod]
         public async Task GetPlayerLibrary() {
-            DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository();
-            DataAccess.Repository.PlayerLibraryRepository _glRepo = new Repository.PlayerLibraryRepository();
+            DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository(connectionString);
+            DataAccess.Repository.PlayerLibraryRepository _glRepo = new Repository.PlayerLibraryRepository(connectionString);
             var p = await _repo.GetProfileCached(0, "WorthyD");
 
-            var gl = await _glRepo.GetPlayerLibraryCached((ulong)p.ID64, p.ID.ToString());
+            var gl = await _glRepo.GetPlayerLibraryRefresh((ulong)p.ID64, p.ID.ToString());
 
          
             Assert.IsTrue(gl.Count() > 0);
         }
 
         [TestMethod]
+        public async Task GetPlayerLibraryFromCache() {
+            DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository(connectionString);
+            DataAccess.Repository.PlayerLibraryRepository _glRepo = new Repository.PlayerLibraryRepository(connectionString);
+            var p = await _repo.GetProfileCached(0, "WorthyD");
+            //Poulate DB
+            var gl = await _glRepo.GetPlayerLibraryRefresh((ulong)p.ID64, p.ID.ToString());
+            //Retreive again
+            var gl2 = await _glRepo.GetPlayerLibraryCached((ulong)p.ID64, p.ID.ToString());
+
+         
+            Assert.IsTrue(gl2.Count() > 0);
+        }
+
+
+
+
+        [TestMethod]
         public async Task GetPlayerGameStatsDB() {
-            DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository();
-            DataAccess.Repository.PlayerLibraryRepository _glRepo = new Repository.PlayerLibraryRepository();
+            DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository(connectionString);
+            DataAccess.Repository.PlayerLibraryRepository _glRepo = new Repository.PlayerLibraryRepository(connectionString);
             DataAccess.Repository.PlayerStatsRepository _psRepo = new Repository.PlayerStatsRepository();
             var p = await _repo.GetProfileCached(0, "WorthyD");
 

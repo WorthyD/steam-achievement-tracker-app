@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Data {
     public abstract class TableModelBase<TItemType, TKeyType> {
+
+        public virtual string connectionString { get; set; }
+
         public abstract string CreateTable();
 
         protected abstract string GetSelectAllSql();
@@ -41,7 +44,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
         public ISQLiteConnection sqlConnection {
             get {
                 if (conn == null) {
-                    conn = new SQLiteConnection("SteamAchievementTracker.db");
+                    conn = new SQLiteConnection(connectionString);
                     //conn = new SQLiteConnection("c:\\dev\\SteamAchievementTracker.db");
                     CreateDatabase.LoadDatabase(conn);
                     //SQLitePCL.
