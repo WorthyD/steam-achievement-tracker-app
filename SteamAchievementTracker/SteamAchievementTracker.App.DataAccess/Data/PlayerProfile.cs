@@ -56,6 +56,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
 
         protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, Model.Profile item) {
             //  throw new NotImplementedException();
+            //statement.Bind("@id64", item.ID64);
             statement.Bind("@id64", item.ID64);
             statement.Bind("@id", item.ID);
             statement.Bind("@name", item.Name);

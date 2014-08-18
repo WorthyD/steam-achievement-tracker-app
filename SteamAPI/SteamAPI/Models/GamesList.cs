@@ -53,7 +53,7 @@ namespace SteamAPI.Models {
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
     public partial class gamesListGame {
 
-        private uint appIDField;
+        private int appIDField;
 
         private string nameField;
 
@@ -74,7 +74,7 @@ namespace SteamAPI.Models {
         private string globalStatsLinkField;
 
         /// <remarks/>
-        public uint appID {
+        public int appID {
             get {
                 return this.appIDField;
             }

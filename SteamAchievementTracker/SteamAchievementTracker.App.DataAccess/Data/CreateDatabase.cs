@@ -10,7 +10,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
         public static void LoadDatabase(SQLiteConnection db) {
 
             string sql = @"CREATE TABLE IF NOT EXISTS  [PlayerProfile] (
-                    [ID64] INTEGER  NOT NULL PRIMARY KEY,
+                    [ID64] BIGINT  NOT NULL PRIMARY KEY,
                     [ID] VARCHAR(250)  NULL,
                     [Name] VARCHAR(250)  NULL,
                     [Thumbnail] VARCHAR(150)  NULL

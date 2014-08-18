@@ -20,14 +20,14 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
             return response.GamesList;
         }
 
-        public async Task<List<Model.Game>> GetPlayerLibraryCached(ulong steamID64, string steamID)
+        public async Task<List<Model.Game>> GetPlayerLibraryCached(long steamID64, string steamID)
         {
             var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();
             return gl;
         }
 
 
-        public async Task<List<Model.Game>> GetPlayerLibraryRefresh(ulong steamID64, string steamID) {
+        public async Task<List<Model.Game>> GetPlayerLibraryRefresh(long steamID64, string steamID) {
             //TODO: make this prettier
             //validate cache
             var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();
@@ -41,13 +41,13 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
 
 
                 foreach (var g in steamGameList.games) {
-                    var tGame = _db.GetItem(new KeyValuePair<ulong, ulong>(steamID64, g.appID));
+                    var tGame = _db.GetItem(new KeyValuePair<long, long>(steamID64, g.appID));
 
                     if (tGame == null) {
                         tGame = new Model.Game(g, steamID64);
                         _db.InsertItem(tGame);
                     } else {
-                        _db.UpdateItem(new KeyValuePair<ulong, ulong>(steamID64, tGame.AppID), new Model.Game(g, steamID64));
+                        _db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), new Model.Game(g, steamID64));
                     }
 
                     gl.Add(tGame);

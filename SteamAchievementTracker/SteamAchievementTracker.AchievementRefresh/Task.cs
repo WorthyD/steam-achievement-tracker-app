@@ -14,7 +14,7 @@ namespace SteamAchievementTracker.AchievementRefresh {
             this.HourRefresh = hr;
         }
 
-        public async Task Run(ulong steamID64, string steamID, IProgress<string> progress) {
+        public async Task Run(long steamID64, string steamID, IProgress<string> progress) {
 
             App.DataAccess.Repository.PlayerLibraryRepository _libraryRepo = new App.DataAccess.Repository.PlayerLibraryRepository("SteamApp.db");
             var playerLibrary = await _libraryRepo.GetPlayerLibraryCached(steamID64, steamID);

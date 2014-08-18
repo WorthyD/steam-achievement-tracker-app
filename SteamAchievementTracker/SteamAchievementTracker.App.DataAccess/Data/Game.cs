@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Data
 {
-    public class Game : TableModelBase<Model.Game, KeyValuePair<ulong, ulong>>
+    public class Game : TableModelBase<Model.Game, KeyValuePair<long, long>>
     {
         public Game(string connection)
         {
@@ -15,7 +15,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         public override string CreateTable()
         {
             return @"CREATE TABLE IF NOT EXISTS [Game] (
-                [SteamID] INTEGER  NOT NULL,
+                [SteamID] BIGINT  NOT NULL,
                 [GameID] INTEGER  NOT NULL,
                 [Name] varCHAR(100)  NULL,
                 [StatsLink] vARCHAR(150)  NULL,
@@ -35,8 +35,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         protected override string GetSelectAllSql()
         {
             return @"Select
-	                    SteamID, GameID, Name, StatsLink, GameLink, SmallLogo,
-                    	HoursPlayed, AchievementsEarned, AchievementCount, AchievementRefresh, LastUpdated
+	                    [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo],
+                    	[HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated]
                     FROM
                     	Game";
             //Where
@@ -51,21 +51,29 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 
         protected override Model.Game CreateItem(SQLitePCL.ISQLiteStatement statement)
         {
-            var g = new Model.Game()
-            {
-                AchievementsEarned = (int)statement["AchievementsEarned"],
-                SteamUserID = (ulong)statement["SteamID"],
-                AppID = (uint)statement["GameID"],
-                GameLink = (string)statement["GameLink"],
-                RecentHours = (decimal)statement["RecentHours"],
-                HoursPlayed = (decimal)statement["HoursPlayed"],
-                Logo = (string)statement["SmallLogo"],
-                Name = (string)statement["Name"],
-                StatsLink = (string)statement["StatsLink"],
-                TotalAchievements = (int)statement["AchievementCount"],
-                LastUpdated = (DateTime)statement["LastUpdated"],
-                AchievementRefresh = (DateTime)statement["AchievementRefresh"]
-            };
+            var g = new Model.Game();
+
+            int achEarned = 0;
+            int.TryParse(statement["AchievementsEarned"].ToString(), out achEarned);
+            g.AchievementsEarned = achEarned;
+
+            g.SteamUserID = Int64.Parse(statement["SteamID"].ToString());
+
+            //Write a base item converter
+
+            int appId = 0;
+            int.TryParse(statement["GameID"].ToString(), out appId);
+           g.AppID = appId;
+
+            g.GameLink = (string)statement["GameLink"];
+            //RecentHours = (decimal)statement["RecentHours"];
+            //g.HoursPlayed = (decimal)statement["HoursPlayed"];
+            g.Logo = (string)statement["SmallLogo"];
+            g.StatsLink = (string)statement["StatsLink"];
+            //TotalAchievements = (int)statement["AchievementCount"],
+            //LastUpdated = (DateTime)statement["LastUpdated"],
+            //AchievementRefresh = (DateTime)statement["AchievementRefresh"],
+            g.Name = (string)statement["Name"];
             return g;
         }
 
@@ -81,7 +89,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
     	                GameID = @GameID";
         }
 
-        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<ulong, ulong> key)
+        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key)
         {
             statement.Bind("@SteamID", key.Key);
             statement.Bind("@GameID", key.Value);
@@ -92,7 +100,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             throw new NotImplementedException();
         }
 
-        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<ulong, ulong> key)
+        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key)
         {
             throw new NotImplementedException();
         }
@@ -146,7 +154,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             	GameID = @GameID";
         }
 
-        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<ulong, ulong> key, Model.Game item)
+        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key, Model.Game item)
         {
             statement.Bind("@GameID", item.AppID);
             statement.Bind("@Name", item.Name);

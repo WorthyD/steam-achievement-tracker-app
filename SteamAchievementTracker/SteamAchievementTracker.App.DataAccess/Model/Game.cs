@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Model {
     public partial class Game {
-        public ulong SteamUserID { get; set; }
-        public uint AppID { get; set; }
+        public long SteamUserID { get; set; }
+        public int AppID { get; set; }
         public string Name { get; set; }
         public string StatsLink { get; set; }
         public string GameLink { get; set; }
@@ -48,7 +48,7 @@ namespace SteamAchievementTracker.App.DataAccess.Model {
         }
 
         //This is for updating
-        public Game(gamesListGame g, ulong steamID64) {
+        public Game(gamesListGame g, long steamID64) {
             this.SteamUserID = steamID64;
             this.AppID = g.appID;
             this.Name =g.name;
