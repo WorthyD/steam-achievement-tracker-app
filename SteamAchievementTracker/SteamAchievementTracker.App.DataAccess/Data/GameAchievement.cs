@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SQLitePCL;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +9,11 @@ using System.Threading.Tasks;
 namespace SteamAchievementTracker.App.DataAccess.Data {
     //http://www.textfixer.com/tools/remove-line-breaks.php
     public class GameAchievement : TableModelBase<Model.GameAchievement, KeyValuePair<string, string>> {
+        public GameAchievement(string connection)
+        {
+            this.connectionString = connection;
+        }
+
 
         public override string CreateTable() {
             return @"CREATE TABLE IF NOT EXISTS  [GameAchievement] (
@@ -34,13 +41,13 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
 
         protected override Model.GameAchievement CreateItem(SQLitePCL.ISQLiteStatement statement) {
             Model.GameAchievement ga = new Model.GameAchievement() {
-                AchievementIcon = (string)statement["AchievementIcon"],
-                AchievementID = (string)statement["AchievementID"],
-                Description = (string)statement["Description"],
-                IsUnlocked = (bool)statement["IsUnlocked"],
-                Name = (string)statement["Name"],
-                StatsURL = (string)statement["StatsURL"],
-                UnlockTimestamp = (string)statement["UnlockTimestamp"]
+                AchievementIcon = statement["AchievementIcon"].ToSafeString(),
+                AchievementID = statement["AchievementID"].ToSafeString(),
+                Description = statement["Description"].ToSafeString(),
+                IsUnlocked = statement["IsUnlocked"].ToBool(),
+                Name = statement["Name"].ToSafeString(),
+                StatsURL = statement["StatsURL"].ToSafeString(),
+                UnlockTimestamp = statement["UnLockTimestamp"].ToSafeString()
             };
             return ga;
         }
@@ -106,6 +113,23 @@ WHERE
             statement.Bind("@Name", item.Name);
             statement.Bind("@Description", item.Description);
             statement.Bind("@UnLockTimestamp", item.UnlockTimestamp);
+        }
+
+
+        public List<Model.GameAchievement> GetByStatsUrl(string statsUrl) {
+            var items = new ObservableCollection<Model.GameAchievement>();
+            string sqlStatement = "SELECT [StatsURL], [AchievementID], [AchievementIcon], [IsUnlocked], [Name], [Description], [UnLockTimestamp] FROM GameAchievement WHERE [StatsURL] = @StatsURL ";
+            using (var statement = base.sqlConnection.Prepare(sqlStatement))
+            {
+                statement.Bind("@StatsURL", statsUrl);
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    var item = CreateItem(statement);
+                    items.Add(item);
+                }
+            }
+            Timestamp = DateTime.Now;
+            return items.ToList();
         }
     }
 }

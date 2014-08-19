@@ -110,6 +110,66 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
     }
     public static class ExtMethods
     {
+        public static long ToLong(this object obj)
+        {
+            if (obj == null)
+            {
+                return 0;
+            }
+
+            long num = 0;
+            long.TryParse(obj.ToString(), out num);
+            return num;
+        }
+
+        public static int ToInt(this object obj)
+        {
+            if (obj == null)
+            {
+                return 0;
+            }
+
+            int num = 0;
+            int.TryParse(obj.ToString(), out num);
+            return num;
+        }
+
+        public static decimal ToDecimal(this object obj)
+        {
+            if (obj == null)
+            {
+                return 0;
+            }
+
+            decimal num = 0;
+            decimal.TryParse(obj.ToString(), out num);
+            return num;
+        }
+
+        public static string ToSafeString(this object obj)
+        {
+            if (obj != null)
+            {
+                return obj.ToString();
+            }
+            return string.Empty;
+        }
+        public static bool ToBool(this object obj)
+        {
+            if (obj == null) return false;
+            bool tBool = false;
+            bool.TryParse(obj.ToString(), out tBool);
+            return tBool;
+        }
+
+        public static DateTime ToDate(this object obj)
+        {
+            if (obj == null) return DateTime.MinValue;
+            DateTime d = DateTime.MinValue;
+            DateTime.TryParse(obj.ToString(), out d);
+            return d;
+        }
+
         public static int BoolToBit(this bool value)
         {
             return (value) ? 1 : 0;

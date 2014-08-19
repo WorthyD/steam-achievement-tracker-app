@@ -26,7 +26,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                 statement.Step();
             }
 
-            var sl = new GameAchievement();
+            var sl = new GameAchievement("");
             sql = sl.CreateTable();
 
              using (var statement = db.Prepare(sql)) {

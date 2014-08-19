@@ -24,6 +24,16 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Repositories {
         }
 
         [TestMethod]
+        public async Task GetPlayerProfileFromCache() {
+            DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository(connectionString);
+            var p = await _repo.GetProfileCached(0, "WorthyD");
+
+            var d = await _repo.GetProfileFromDB(p.ID64);
+         
+            Assert.IsTrue(d.ID == "WorthyD");
+        }
+
+        [TestMethod]
         public async Task GetPlayerLibrary() {
             DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository(connectionString);
             DataAccess.Repository.PlayerLibraryRepository _glRepo = new Repository.PlayerLibraryRepository(connectionString);
@@ -56,10 +66,10 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Repositories {
         public async Task GetPlayerGameStatsDB() {
             DataAccess.Repository.PlayerProfileRepository _repo = new Repository.PlayerProfileRepository(connectionString);
             DataAccess.Repository.PlayerLibraryRepository _glRepo = new Repository.PlayerLibraryRepository(connectionString);
-            DataAccess.Repository.PlayerStatsRepository _psRepo = new Repository.PlayerStatsRepository();
+            DataAccess.Repository.PlayerStatsRepository _psRepo = new Repository.PlayerStatsRepository(connectionString);
             var p = await _repo.GetProfileCached(0, "WorthyD");
 
-            var gl = await _glRepo.GetPlayerLibraryCached((long)p.ID64, p.ID.ToString());
+            var gl = await _glRepo.GetPlayerLibraryRefresh((long)p.ID64, p.ID.ToString());
 
             string statsUrl = gl.FirstOrDefault().StatsLink;
              var boo  = await _psRepo.RefreshData(statsUrl);

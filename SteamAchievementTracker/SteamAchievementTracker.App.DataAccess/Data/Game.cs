@@ -35,7 +35,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         protected override string GetSelectAllSql()
         {
             return @"Select
-	                    [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo],
+	                    [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours],
                     	[HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated]
                     FROM
                     	Game";
@@ -53,27 +53,20 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         {
             var g = new Model.Game();
 
-            int achEarned = 0;
-            int.TryParse(statement["AchievementsEarned"].ToString(), out achEarned);
-            g.AchievementsEarned = achEarned;
+            g.AchievementsEarned = statement["AchievementsEarned"].ToInt();
 
-            g.SteamUserID = Int64.Parse(statement["SteamID"].ToString());
+            g.SteamUserID = statement["SteamID"].ToLong();
+            g.AppID = statement["GameID"].ToInt();
 
-            //Write a base item converter
-
-            int appId = 0;
-            int.TryParse(statement["GameID"].ToString(), out appId);
-           g.AppID = appId;
-
-            g.GameLink = (string)statement["GameLink"];
-            //RecentHours = (decimal)statement["RecentHours"];
-            //g.HoursPlayed = (decimal)statement["HoursPlayed"];
-            g.Logo = (string)statement["SmallLogo"];
-            g.StatsLink = (string)statement["StatsLink"];
-            //TotalAchievements = (int)statement["AchievementCount"],
-            //LastUpdated = (DateTime)statement["LastUpdated"],
-            //AchievementRefresh = (DateTime)statement["AchievementRefresh"],
-            g.Name = (string)statement["Name"];
+            g.GameLink = statement["GameLink"].ToSafeString();
+            g.RecentHours = statement["RecentHours"].ToDecimal();
+            g.HoursPlayed = statement["HoursPlayed"].ToDecimal();
+            g.Logo = statement["SmallLogo"].ToSafeString();
+            g.StatsLink = statement["StatsLink"].ToSafeString();
+            g.TotalAchievements = statement["AchievementCount"].ToInt();
+            g.LastUpdated = statement["LastUpdated"].ToDate();
+            g.AchievementRefresh = statement["AchievementRefresh"].ToDate();
+            g.Name = statement["Name"].ToSafeString();
             return g;
         }
 

@@ -20,12 +20,12 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
         }
 
 
-        public async Task<Model.Profile> GetProfileFromDB(ulong steam64ID) {
+        public async Task<Model.Profile> GetProfileFromDB(long steam64ID) {
             var player = _db.GetItem(steam64ID);
             return player;
         }
 
-        public async Task<Model.Profile> GetProfileCached(ulong steam64ID,string steamID) {
+        public async Task<Model.Profile> GetProfileCached(long steam64ID,string steamID) {
             var player = _db.GetItem(steam64ID);
 
             if (player == null) {

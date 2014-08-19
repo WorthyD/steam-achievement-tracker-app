@@ -19,7 +19,7 @@ namespace SteamAchievementTracker.AchievementRefresh {
             App.DataAccess.Repository.PlayerLibraryRepository _libraryRepo = new App.DataAccess.Repository.PlayerLibraryRepository("SteamApp.db");
             var playerLibrary = await _libraryRepo.GetPlayerLibraryCached(steamID64, steamID);
 
-            App.DataAccess.Repository.PlayerStatsRepository _statRepo = new App.DataAccess.Repository.PlayerStatsRepository();
+            App.DataAccess.Repository.PlayerStatsRepository _statRepo = new App.DataAccess.Repository.PlayerStatsRepository("SteamApp.db");
 
             //Exit loop if player has no library
             if (playerLibrary == null || playerLibrary.Count() == 0) return;

@@ -71,6 +71,7 @@
   <ItemGroup>
     <Content Include="Data\Queries\Game.UpdateStat.sql" />
     <Content Include="Data\Queries\GameAchievement.Create.sql" />
+    <Content Include="Data\Queries\GameAchievement.GetByStatsURL.sql" />
     <Content Include="Data\Queries\GameAchievement.Insert.sql" />
     <Content Include="Data\Queries\GameAchievement.SelectID.sql" />
     <Content Include="Data\Queries\GameAchievement.Update.sql" />

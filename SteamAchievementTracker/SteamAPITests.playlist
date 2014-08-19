@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="SteamAPI.Tests.Player.GetPlayerProfile" /><Add Test="SteamAPI.Tests.Player.GetPlayerGames" /><Add Test="SteamAPI.Tests.Player.GetPlayerGameStats" /></Playlist>

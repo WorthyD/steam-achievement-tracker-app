@@ -8,9 +8,9 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
     public class PlayerStatsRepository {
         public Data.GameAchievement _db;
         public Data.Game _gDB;
-        public  PlayerStatsRepository() {
-            _db = new Data.GameAchievement();
-            _gDB = new Data.Game("");
+        public  PlayerStatsRepository(string connection) {
+            _db = new Data.GameAchievement(connection);
+            _gDB = new Data.Game(connection);
         }
 
         public async Task<SteamAPI.Models.playerstats> GetPlayerStats(string statURL) {
@@ -22,7 +22,8 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
         }
 
         public List<Model.GameAchievement> GetGameAchievementsCached(string statURL) {
-            var stats = _db.GetAllItems().Where(x => x.StatsURL == statURL).ToList();
+            //var stats = _db.GetAllItems().Where(x => x.StatsURL == statURL).ToList();
+            var stats = _db.GetByStatsUrl(statURL).ToList();
 
             return stats;
         }

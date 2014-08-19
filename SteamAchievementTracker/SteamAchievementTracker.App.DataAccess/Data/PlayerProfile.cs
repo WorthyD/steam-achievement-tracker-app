@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Data {
-    public class PlayerProfile : TableModelBase<Model.Profile, ulong> {
+    public class PlayerProfile : TableModelBase<Model.Profile, long> {
 
         public PlayerProfile(string connection)
         {
@@ -37,7 +37,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             return "select [ID64], [ID], [Name], [Thumbnail] from PlayerProfile WHERE ID64 = ?";
         }
 
-        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, ulong key) {
+        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, long key) {
             statement.Bind(1, key);
         }
 
@@ -45,7 +45,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             throw new NotImplementedException();
         }
 
-        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, ulong key) {
+        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, long key) {
             throw new NotImplementedException();
         }
 
@@ -67,7 +67,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             return "UPDATE PlayerProfile set ID = ?, Name = ?, Thumbnail = ? where ID64 = ?";
         }
 
-        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, ulong key, Model.Profile item) {
+        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, long key, Model.Profile item) {
             //throw new NotImplementedException();
             statement.Bind(1, item.ID);
             statement.Bind(2, item.Name);
