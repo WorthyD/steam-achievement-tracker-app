@@ -53,7 +53,7 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Repositories {
             //Poulate DB
             var gl = await _glRepo.GetPlayerLibraryRefresh((long)p.ID64, p.ID.ToString());
             //Retreive again
-            var gl2 = await _glRepo.GetPlayerLibraryCached((long)p.ID64, p.ID.ToString());
+            var gl2 = await _glRepo.GetPlayerLibraryCached((long)p.ID64);
 
          
             Assert.IsTrue(gl2.Count() > 0);

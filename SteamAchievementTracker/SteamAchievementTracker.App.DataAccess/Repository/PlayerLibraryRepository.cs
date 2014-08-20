@@ -20,9 +20,10 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
             return response.GamesList;
         }
 
-        public async Task<List<Model.Game>> GetPlayerLibraryCached(long steamID64, string steamID)
+        public async Task<List<Model.Game>> GetPlayerLibraryCached(long steamID64)
         {
-            var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();
+            //var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();
+            var gl = _db.GetGamesBySteamID(steamID64);
             return gl;
         }
 

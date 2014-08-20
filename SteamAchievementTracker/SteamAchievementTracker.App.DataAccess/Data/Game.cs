@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SQLitePCL;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -181,6 +183,22 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             Timestamp = DateTime.Now;
         }
 
+        public List<Model.Game> GetGamesBySteamID(long id64)
+        {
+            var items = new ObservableCollection<Model.Game>();
+            string sqlStatement = "Select [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours], [HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated] FROM Game Where SteamID = @SteamID";
+            using (var statement = base.sqlConnection.Prepare(sqlStatement))
+            {
+                statement.Bind("@SteamID", id64);
+                while (statement.Step() == SQLiteResult.ROW)
+                {
+                    var item = CreateItem(statement);
+                    items.Add(item);
+                }
+            }
+            Timestamp = DateTime.Now;
+            return items.ToList();
+        }
         //protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key) {
         //    throw new NotImplementedException();
         //}
