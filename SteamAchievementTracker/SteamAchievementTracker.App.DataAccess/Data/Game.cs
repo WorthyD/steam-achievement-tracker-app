@@ -142,6 +142,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             	StatsLink = @StatsLink,
             	GameLink = @GameLink,
             	SmallLogo = @SmallLogo,
+                RecentHours = @RecentHours,
             	HoursPlayed = @HoursPlayed,
             	LastUpdated =@LastUpdated
             Where
@@ -158,10 +159,10 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             statement.Bind("@SmallLogo", item.Logo);
             statement.Bind("@RecentHours", item.RecentHours);
             statement.Bind("@HoursPlayed", item.HoursPlayed);
-            statement.Bind("@AchievementsEarned", item.AchievementsEarned);
-            statement.Bind("@AchievementCount", item.TotalAchievements);
+            //statement.Bind("@AchievementsEarned", item.AchievementsEarned);
+            //statement.Bind("@AchievementCount", item.TotalAchievements);
             //statement.Bind("@PurchaseDate", item.PurchaseDate);
-            statement.Bind("@LastUpdated", item.LastUpdated);
+            statement.Bind("@LastUpdated", item.LastUpdated.DateTimeSQLite());
         }
 
         protected override Model.Game GetEmpty()

@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
-namespace SteamAchievementTracker.App.ViewModel {
-    public class MainViewModel : BaseViewModel {
+namespace SteamAchievementTracker.App.ViewModel
+{
+    public class MainViewModel : BaseViewModel
+    {
         //public MainViewModel(Common.NavigationHelper navigationService)
         //    : base(navigationService) {
         //    HelloWorld = IsInDesignMode
@@ -13,62 +16,80 @@ namespace SteamAchievementTracker.App.ViewModel {
         //       : "Runs in runtime mode";
 
         //}
+        private DataAccess.Repository.PlayerProfileRepository _playerRepo;
+
+        private DataAccess.Repository.PlayerLibraryRepository _libraryRepo;
 
         [PreferredConstructor]
         public MainViewModel()
-            : base() {
+            : base()
+        {
+            _playerRepo = new DataAccess.Repository.PlayerProfileRepository(base.ConnectionString);
+            _libraryRepo = new DataAccess.Repository.PlayerLibraryRepository(base.ConnectionString);
+
+
             _profile = new DataAccess.Model.Profile();
             _library = new DataAccess.Model.PlayerLibrary();
 
             _title = "Steam Achievement Tracker";
 
-            if (IsInDesignMode) {
+            if (IsInDesignMode)
+            {
                 _profile.PopulateDesignData();
                 _library.PopulateDesignData();
                 return;
             }
 
-
-
+            if (base.UserID == 0)
+            {
+                //Return login
+                base.UserID = 76561198025095151;
+                base.UserName = "WorthyD";
+            }
 
             LoadRealData();
         }
+        public async void LoadRealData()
+        {
+            Profile = await _playerRepo.GetProfileCached(base.UserID, base.UserName);
+            List<DataAccess.Model.Game> gameList = await _libraryRepo.GetPlayerLibraryRefresh(base.UserID, base.UserName);
 
-        public async void LoadRealData() {
-            DataAccess.Repository.PlayerProfileRepository _playerRepo = new DataAccess.Repository.PlayerProfileRepository(base.ConnectionString);
-            DataAccess.Repository.PlayerLibraryRepository _libraryRepo = new DataAccess.Repository.PlayerLibraryRepository(base.ConnectionString);
-
-
-            //Profile = await _playerRepo.GetPlayerDetails("WorthyD");
-            Profile = await _playerRepo.GetProfileCached(76561198025095151,"WorthyD");
-            Library = new DataAccess.Model.PlayerLibrary();
-            Library.GameList = await _libraryRepo.GetPlayerLibraryCached(76561198025095151);
-            //_library = await _libraryRepo.GetPlayerLibrary("WorthyD");
+            Library = new DataAccess.Model.PlayerLibrary()
+            {
+                GameList = gameList.OrderByDescending(x => x.RecentHours).Take(50).ToList()
+            };
         }
 
         private string _title;
-        public string Title {
+        public string Title
+        {
             get { return _title; }
-            set {
+            set
+            {
                 Set(() => Title, ref _title, value);
             }
         }
 
         private DataAccess.Model.Profile _profile;
 
-        public DataAccess.Model.Profile Profile {
-            get {
+        public DataAccess.Model.Profile Profile
+        {
+            get
+            {
                 return _profile;
             }
-            set {
+            set
+            {
                 Set(() => Profile, ref _profile, value);
             }
         }
 
         private DataAccess.Model.PlayerLibrary _library;
-        public DataAccess.Model.PlayerLibrary Library {
+        public DataAccess.Model.PlayerLibrary Library
+        {
             get { return _library; }
-            set {
+            set
+            {
                 Set(() => Library, ref _library, value);
             }
         }
