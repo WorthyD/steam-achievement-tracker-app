@@ -20,6 +20,18 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
             return response.GamesList;
         }
 
+        public async Task<List<Model.Game>> GetPlayerRecentlyPlayedGames(long steamID64, string steamID)
+        {
+            var games = await GetPlayerLibraryCached(steamID64);
+            if (games == null || games.Count() == 0)
+            {
+                games = await GetPlayerLibraryRefresh(steamID64, steamID);
+            }
+
+            return games.Where(x => x.RecentHours > 0).ToList();
+        }
+
+
         public async Task<List<Model.Game>> GetPlayerLibraryCached(long steamID64)
         {
             //var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();
@@ -29,9 +41,8 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
 
 
         public async Task<List<Model.Game>> GetPlayerLibraryRefresh(long steamID64, string steamID) {
-            //TODO: make this prettier
             //validate cache
-            var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();
+            var gl = await GetPlayerLibraryCached(steamID64);
             var steamGameList = await GetPlayerLibrary(steamID);
 
 

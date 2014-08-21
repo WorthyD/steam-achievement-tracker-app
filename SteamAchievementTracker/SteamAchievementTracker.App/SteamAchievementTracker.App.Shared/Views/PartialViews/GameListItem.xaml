@@ -9,19 +9,13 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     <StackPanel>
-        <Grid Height="69" Width="480" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
             <!--<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">-->
-            <Image Source="{Binding Logo}" Height="69" Width="184" VerticalAlignment="Top"/>
+            <Image Source="{Binding Logo}" Height="69" Width="184" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <!--</Border>-->
-            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+            <!--<StackPanel Grid.Column="1" Margin="10,0,0,0">
                 <TextBlock Text="{Binding Name}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
-            </StackPanel>
-        </Grid>
-        <Grid Height="69" Width="480" >
+            </StackPanel>-->
+        <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -32,6 +26,5 @@
             </StackPanel>
             <!--- Progress Bar-->
         </Grid>
-
     </StackPanel>
 </UserControl>

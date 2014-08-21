@@ -8,7 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
     mc:Ignorable="d" DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}" >
-
+    <Page.Resources>
+        <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
+            <ItemsWrapGrid MaximumRowsOrColumns="4"/>
+        </ItemsPanelTemplate>
+    </Page.Resources>
     <Grid Style="{StaticResource LayoutRootStyle}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
@@ -19,68 +23,39 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <!--<Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>-->
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource PageHeaderTextStyle}" Margin="4,0,26,38"/>
 
         </Grid>
-        <!--<ScrollViewer Grid.Row="1" HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" ZoomMode="Disabled"  >-->
-        <StackPanel  Grid.Row="1"  Orientation="Vertical" Height="627" Margin="116,0,40,46">
-            <!--<StackPanel>-->
-            <!--<Partials:ProfileAndRecentGames DataContext="{Binding Main}" ></Partials:ProfileAndRecentGames>-->
-            <!--</StackPanel>-->
+        <ScrollViewer Grid.Row="1" HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" ZoomMode="Disabled"  >
+        <StackPanel  Grid.Row="1"  Orientation="Horizontal"  Margin="116,0,40,46">
+            <StackPanel>
+                <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
+            </StackPanel>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock  Text="Game Library" Style="{StaticResource TitleTextStyle}"/>
+                <TextBlock Grid.Row="0"  Text="Game Library" Style="{StaticResource TitleTextStyle}"/>
                 <!-- Game List -->
                 <!-- Search-->
-                <ScrollViewer   Margin="20"  >
-                    <Grid DataContext="{Binding Source={StaticResource Locator}}">
-                        <GridView   ItemsSource="{Binding Main.Library.GameList}" IsSwipeEnabled="False" SelectionMode="None" >
-                            <!--<GridView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapGrid Orientation="Horizontal"/>
-                                    
-                                </ItemsPanelTemplate>
-                            </GridView.ItemsPanel>-->
-                            <GridView.ItemTemplate>
-                                
-                                <DataTemplate >
-                                    <Partials:GameListItem ></Partials:GameListItem>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>
-                    </Grid>
-                </ScrollViewer>
+                <Grid Grid.Row="1" DataContext="{Binding Source={StaticResource Locator}}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <GridView  ItemsSource="{Binding Main.Library.GameList}"   ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
+                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      SelectionMode="None">
+                        <GridView.ItemTemplate>
+                            <DataTemplate >
+                                <Partials:GameListItem ></Partials:GameListItem>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
                 <!-- View All -->
             </Grid>
-            <!--<Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <ScrollViewer  HorizontalScrollBarVisibility="Hidden" Margin="20" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Enabled">
-                        <StackPanel>
-                            -->
-            <!-- Pinned Game List -->
-            <!-- View All -->
-            <!--
-                            <Grid DataContext="{Binding Source={StaticResource Locator}}">
-                                <GridView  ItemsSource="{Binding Main.Profile.RecentGames}" IsSwipeEnabled="False" SelectionMode="None" >
-                                    <GridView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Partials:GameListItem ></Partials:GameListItem>
-                                        </DataTemplate>
-                                    </GridView.ItemTemplate>
-                                </GridView>
-                            </Grid>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>-->
 
         </StackPanel>
-        <!--</ScrollViewer>-->
+        </ScrollViewer>
     </Grid>
 </common:LayoutAwarePage>

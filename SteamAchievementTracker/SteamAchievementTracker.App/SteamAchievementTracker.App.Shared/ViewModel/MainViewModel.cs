@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using Windows.UI.Xaml.Shapes;
+using System.Diagnostics;
 
 namespace SteamAchievementTracker.App.ViewModel
 {
@@ -32,6 +34,8 @@ namespace SteamAchievementTracker.App.ViewModel
             _library = new DataAccess.Model.PlayerLibrary();
 
             _title = "Steam Achievement Tracker";
+            var result = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+            Debug.WriteLine(result);
 
             if (IsInDesignMode)
             {
@@ -52,11 +56,11 @@ namespace SteamAchievementTracker.App.ViewModel
         public async void LoadRealData()
         {
             Profile = await _playerRepo.GetProfileCached(base.UserID, base.UserName);
-            List<DataAccess.Model.Game> gameList = await _libraryRepo.GetPlayerLibraryRefresh(base.UserID, base.UserName);
+            List<DataAccess.Model.Game> gameList = await _libraryRepo.GetPlayerRecentlyPlayedGames(base.UserID, base.UserName);
 
             Library = new DataAccess.Model.PlayerLibrary()
             {
-                GameList = gameList.OrderByDescending(x => x.RecentHours).Take(50).ToList()
+                GameList = gameList.OrderByDescending(x => x.RecentHours).ToList()
             };
         }
 
