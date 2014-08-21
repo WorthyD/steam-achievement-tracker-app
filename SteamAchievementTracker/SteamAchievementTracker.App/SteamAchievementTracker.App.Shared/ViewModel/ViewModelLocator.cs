@@ -13,9 +13,19 @@ namespace SteamAchievementTracker.App.ViewModel {
             }
         }
 
+        public GameDetailViewModel GameDetails
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GameDetailViewModel>();
+            }
+        }
+
         static ViewModelLocator() {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<GameDetailViewModel>();
+            SimpleIoc.Default.Register<Common.NavigationHelper>();
 
         }
     }

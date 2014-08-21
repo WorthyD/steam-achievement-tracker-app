@@ -23,8 +23,8 @@ namespace SteamAchievementTracker.App.ViewModel
         private DataAccess.Repository.PlayerLibraryRepository _libraryRepo;
 
         [PreferredConstructor]
-        public MainViewModel()
-            : base()
+        public MainViewModel(Common.NavigationHelper navHelper)
+            : base(navHelper)
         {
             _playerRepo = new DataAccess.Repository.PlayerProfileRepository(base.ConnectionString);
             _libraryRepo = new DataAccess.Repository.PlayerLibraryRepository(base.ConnectionString);
