@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using SteamAchievementTracker.App.Services;
 
 namespace SteamAchievementTracker.App.ViewModel {
     public class ViewModelLocator {
@@ -25,7 +26,8 @@ namespace SteamAchievementTracker.App.ViewModel {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GameDetailViewModel>();
-            SimpleIoc.Default.Register<Common.NavigationHelper>();
+            //SimpleIoc.Default.Register<Common.NavigationHelper>();
+            SimpleIoc.Default.Register<INavigationService, NavigationService>();
 
         }
     }

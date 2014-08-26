@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Partials:Profile DataContext="{Binding Main.Profile}" Grid.Row="0" />
+        <!--<Partials:Profile DataContext="{Binding Main.Profile}" Grid.Row="0" />-->
         <TextBlock Text="Recent Games" Grid.Row="1"/>
         <ScrollViewer  HorizontalScrollBarVisibility="Hidden" Margin="20" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Enabled"  Grid.Row="2">
             <Grid DataContext="{Binding Source={StaticResource Locator}}">

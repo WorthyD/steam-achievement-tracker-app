@@ -16,7 +16,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\LayoutAwarePage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Services\NavicationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\INavigationService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\NavigationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\GameDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainViewModel.cs" />

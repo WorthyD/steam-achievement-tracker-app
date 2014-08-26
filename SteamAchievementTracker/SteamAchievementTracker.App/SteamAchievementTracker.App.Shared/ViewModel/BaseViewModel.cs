@@ -5,21 +5,21 @@ using System.Text;
 using GalaSoft.MvvmLight;
 using System.Diagnostics;
 using Windows.UI.Xaml;
+using SteamAchievementTracker.App.Services;
 
 namespace SteamAchievementTracker.App.ViewModel
 {
     public class BaseViewModel : ViewModelBase
     {
-        private readonly Common.NavigationHelper _navigationHelper;
-        public BaseViewModel()
+        //private readonly Common.NavigationHelper _navigationHelper;
+
+        private readonly INavigationService _navigationService;
+        public BaseViewModel(INavigationService navigationService)
         {
-            this._navigationHelper = new Common.NavigationHelper(null);
+            this._navigationService = navigationService;
         }
-        public BaseViewModel(Common.NavigationHelper navHelper) {
-            this._navigationHelper = navHelper;
-            this.ConnectionString = "SteamAchievementTracker.db";
-        }
-        public string ConnectionString { get; set; }
+
+        public string ConnectionString { get { return "SteamAchievementTracker.db"; } }
 
         //public BaseViewModel()
         //{

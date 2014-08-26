@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Windows.UI.Xaml.Shapes;
 using System.Diagnostics;
+using SteamAchievementTracker.App.Services;
 
 namespace SteamAchievementTracker.App.ViewModel
 {
@@ -23,8 +24,8 @@ namespace SteamAchievementTracker.App.ViewModel
         private DataAccess.Repository.PlayerLibraryRepository _libraryRepo;
 
         [PreferredConstructor]
-        public MainViewModel(Common.NavigationHelper navHelper)
-            : base(navHelper)
+        public MainViewModel(INavigationService _navigationService)
+            : base(_navigationService)
         {
             _playerRepo = new DataAccess.Repository.PlayerProfileRepository(base.ConnectionString);
             _libraryRepo = new DataAccess.Repository.PlayerLibraryRepository(base.ConnectionString);
