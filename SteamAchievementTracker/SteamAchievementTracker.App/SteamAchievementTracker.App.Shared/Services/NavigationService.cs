@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace SteamAchievementTracker.App.Services
 {
-    public class NavigationService
+    public class NavigationService : INavigationService
     {
         public void GoBack()
         {
@@ -50,5 +50,11 @@ namespace SteamAchievementTracker.App.Services
             ((Frame)Window.Current.Content).Navigate(sourcePageType, parameter);
         }
 
+
+
+        public void OpenBrowser(string url)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

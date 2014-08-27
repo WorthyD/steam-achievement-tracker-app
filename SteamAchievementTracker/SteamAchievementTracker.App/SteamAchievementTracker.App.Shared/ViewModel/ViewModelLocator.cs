@@ -26,7 +26,6 @@ namespace SteamAchievementTracker.App.ViewModel {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GameDetailViewModel>();
-            //SimpleIoc.Default.Register<Common.NavigationHelper>();
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
 
         }
