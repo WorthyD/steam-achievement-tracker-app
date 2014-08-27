@@ -5,11 +5,22 @@
     xmlns:local="using:SteamAchievementTracker.App.Views.PartialViews"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
     <StackPanel>
-            <!--<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">-->
+    <!--xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"-->
+        
+        
+        
+        <!--<i:Interaction.Triggers>
+            <i:EventTrigger EventName="Tap">
+                <i:InvokeCommandAction Command="{Binding ShowDetailsCommand, Mode=OneWay, Source={StaticResource Main}}" CommandParameter="{Binding Mode=OneWay}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>-->
+
+        <!--<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">-->
             <Image Source="{Binding Logo}" Height="69" Width="184" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <!--</Border>-->
             <!--<StackPanel Grid.Column="1" Margin="10,0,0,0">

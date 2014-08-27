@@ -7,6 +7,8 @@ using System.Linq;
 using Windows.UI.Xaml.Shapes;
 using System.Diagnostics;
 using SteamAchievementTracker.App.Services;
+using GalaSoft.MvvmLight.Command;
+using SteamAchievementTracker.App.DataAccess.Model;
 
 namespace SteamAchievementTracker.App.ViewModel
 {
@@ -98,7 +100,18 @@ namespace SteamAchievementTracker.App.ViewModel
                 Set(() => Library, ref _library, value);
             }
         }
-
+        private RelayCommand<Game> _openGame;
+        
+        public RelayCommand<Game> OpenGame
+        {
+            get
+            {
+                return _openGame ?? (_openGame = new RelayCommand<Game>(game => { 
+                
+                
+                }));
+            }
+        }
 
     }
 }
