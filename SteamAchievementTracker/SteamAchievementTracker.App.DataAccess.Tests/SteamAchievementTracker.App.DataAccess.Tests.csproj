@@ -123,7 +123,6 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\PlayerLibraryRepository.cs" />
     <Compile Include="Tasks\TaskTester.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,6 +157,10 @@
       <Project>{8b0ee2e7-8f48-4820-9a5f-a7da7ed72b3e}</Project>
       <Name>SteamAchievementTracker.App.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SteamAchievementTracker.Contracts\SteamAchievementTracker.Contracts.csproj">
+      <Project>{2000d388-ae31-46f9-b811-70581e96c03c}</Project>
+      <Name>SteamAchievementTracker.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SQLitePCL, Version=3.8.5.0, Culture=neutral, PublicKeyToken=bddade01e9c850c5, processorArchitecture=MSIL">
@@ -165,6 +168,9 @@
       <HintPath>..\packages\SQLitePCL.3.8.5.0\lib\netcore451\SQLitePCL.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

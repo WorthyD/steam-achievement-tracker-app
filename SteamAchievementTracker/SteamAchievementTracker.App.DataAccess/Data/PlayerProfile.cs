@@ -1,12 +1,14 @@
-﻿using System;
+﻿using SteamAchievementTracker.Contracts.Model;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SteamAchievementTracker.App.DataAccess.Data {
-    public class PlayerProfile : TableModelBase<Model.Profile, long> {
+    public class PlayerProfile : TableModelBase<IProfile, long> {
 
         public PlayerProfile(string connection)
         {
@@ -22,7 +24,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             throw new NotImplementedException();
         }
 
-        protected override Model.Profile CreateItem(SQLitePCL.ISQLiteStatement statement) {
+        protected override IProfile CreateItem(SQLitePCL.ISQLiteStatement statement)
+        {
             var p = new Model.Profile(
                 (long)statement[0],
                 (string)statement[1],
@@ -54,7 +57,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             return "INSERT INTO PlayerProfile ([ID64], [ID], [Name], [Thumbnail]) VALUES (@id64, @id, @name, @thumbnail)";
         }
 
-        protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, Model.Profile item) {
+        protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, IProfile item)
+        {
             //  throw new NotImplementedException();
             //statement.Bind("@id64", item.ID64);
             statement.Bind("@id64", item.ID64);
@@ -67,7 +71,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             return "UPDATE PlayerProfile set ID = ?, Name = ?, Thumbnail = ? where ID64 = ?";
         }
 
-        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, long key, Model.Profile item) {
+        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, long key, IProfile item)
+        {
             //throw new NotImplementedException();
             statement.Bind(1, item.ID);
             statement.Bind(2, item.Name);
@@ -75,7 +80,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             statement.Bind(4, key);
         }
 
-        protected override Model.Profile GetEmpty() {
+        protected override IProfile GetEmpty()
+        {
             return null;
         }
 

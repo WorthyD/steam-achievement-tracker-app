@@ -1,17 +1,20 @@
 ﻿using SteamAchievementTracker.Contracts.Model;
+using SteamAchievementTracker.Contracts.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamAchievementTracker.App.DataAccess.Repository {
-    public class PlayerLibraryRepository {
-        public Data.Game _db;
+namespace SteamAchievementTracker.Services.Data
+{
+    public class PlayerLibraryService : IPlayerLibraryService
+    {
+        public SteamAchievementTracker.App.DataAccess.Data.Game _db;
 
-        public PlayerLibraryRepository(string connection) {
-            _db = new Data.Game(connection);
-        }
+        //public PlayerLibraryRepository(string connection) {
+        //    _db = new Data.Game(connection);
+        //}
 
         public async Task<SteamAPI.Models.gamesList> GetPlayerLibrary(string steamID) {
             SteamAPI.Player.PlayerGamesRequest request = new SteamAPI.Player.PlayerGamesRequest();
@@ -57,10 +60,11 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
                     var tGame = _db.GetItem(new KeyValuePair<long, long>(steamID64, g.appID));
 
                     if (tGame == null) {
-                        tGame = new Model.Game(g, steamID64);
+                        //tGame = new Model.Game(g, steamID64);
+                        //tGame = new Model.Game(g, steamID64);
                         _db.InsertItem(tGame);
                     } else {
-                        _db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), new Model.Game(g, steamID64));
+                        //_db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), new Model.Game(g, steamID64));
                     }
 
                     gl.Add(tGame);
@@ -77,5 +81,6 @@ namespace SteamAchievementTracker.App.DataAccess.Repository {
         public void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements) {
             _db.UpdateGameStats(statsUrl, achievementsEarned, totalAchievements);
         }
+    
     }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.Contracts.Services
 {
-   public  interface IPlayerLibraryService
+    public interface IPlayerLibraryService
     {
-      Task<List<IGame>> GetPlayerRecentlyPlayedGames(long steamID64, string steamID);
-       Task<List<IGame>> GetPlayerLibraryCached(long steamID64);
-       Task<List<IGame>> GetPlayerLibraryRefresh(long steamID64, string steamID);
-       void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements);
+        Task<List<IGame>> GetPlayerRecentlyPlayedGames(long steamID64, string steamID);
+        Task<List<IGame>> GetPlayerLibraryCached(long steamID64);
+        Task<List<IGame>> GetPlayerLibraryRefresh(long steamID64, string steamID);
+        void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SQLitePCL;
+using SteamAchievementTracker.Contracts.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Data {
     //http://www.textfixer.com/tools/remove-line-breaks.php
-    public class GameAchievement : TableModelBase<Model.GameAchievement, KeyValuePair<string, string>> {
+    public class GameAchievement : TableModelBase<IGameAchievement, KeyValuePair<string, string>>
+    {
         public GameAchievement(string connection)
         {
             this.connectionString = connection;
@@ -39,7 +41,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             throw new NotImplementedException();
         }
 
-        protected override Model.GameAchievement CreateItem(SQLitePCL.ISQLiteStatement statement) {
+        protected override IGameAchievement CreateItem(SQLitePCL.ISQLiteStatement statement)
+        {
             Model.GameAchievement ga = new Model.GameAchievement() {
                 AchievementIcon = statement["AchievementIcon"].ToSafeString(),
                 AchievementID = statement["AchievementID"].ToSafeString(),
@@ -49,7 +52,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                 StatsURL = statement["StatsURL"].ToSafeString(),
                 UnlockTimestamp = statement["UnLockTimestamp"].ToSafeString()
             };
-            return ga;
+            return ga as IGameAchievement;
         }
 
         protected override string GetSelectItemSql() {
@@ -77,7 +80,8 @@ WHERE
             return "INSERT INTO GameAchievement ([StatsURL] , [AchievementID] , [AchievementIcon], [IsUnlocked] , [Name] , [Description] , [UnLockTimestamp] ) VALUES (@StatsURL, @AchievementID, @AchievementIcon, @IsUnlocked, @Name, @Description, @UnLockTimestamp)";
         }
 
-        protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, Model.GameAchievement item) {
+        protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, IGameAchievement item)
+        {
             statement.Bind("@StatsURL", item.StatsURL);
             statement.Bind("@AchievementID", item.AchievementID);
             statement.Bind("@AchievementIcon", item.AchievementIcon);
@@ -92,7 +96,8 @@ WHERE
             return "Update Game set	StatsURL = @StatsURL,	AchievementID = @AchievementID,	AchievementIcon = @AchievementIcon,	IsUnlocked = @IsUnlocked,	[Name] = @Name,	[Description]  = @UnLockTimestampWHERE	StatsURL = @StatsURL AND	AchievementID = @AchievementID";
         }
 
-        protected override Model.GameAchievement GetEmpty() {
+        protected override IGameAchievement GetEmpty()
+        {
             return null;
         }
 
@@ -105,7 +110,7 @@ WHERE
             throw new NotImplementedException();
         }
 
-        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<string, string> key, Model.GameAchievement item) {
+        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<string, string> key, IGameAchievement item) {
             statement.Bind("@StatsURL", key.Key);
             statement.Bind("@AchievementID", key.Value);
             statement.Bind("@AchievementIcon", item.AchievementIcon);
@@ -116,8 +121,9 @@ WHERE
         }
 
 
-        public List<Model.GameAchievement> GetByStatsUrl(string statsUrl) {
-            var items = new ObservableCollection<Model.GameAchievement>();
+        public List<IGameAchievement> GetByStatsUrl(string statsUrl)
+        {
+            var items = new ObservableCollection<IGameAchievement>();
             string sqlStatement = "SELECT [StatsURL], [AchievementID], [AchievementIcon], [IsUnlocked], [Name], [Description], [UnLockTimestamp] FROM GameAchievement WHERE [StatsURL] = @StatsURL ";
             using (var statement = base.sqlConnection.Prepare(sqlStatement))
             {

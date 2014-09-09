@@ -5,10 +5,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SteamAchievementTracker.Contracts.Model;
 
 namespace SteamAchievementTracker.App.DataAccess.Data
 {
-    public class Game : TableModelBase<Model.Game, KeyValuePair<long, long>>
+    public class Game : TableModelBase<IGame, KeyValuePair<long, long>>
     {
         public Game(string connection)
         {
@@ -51,25 +52,27 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             //statement.Bind("@SteamID", 
         }
 
-        protected override Model.Game CreateItem(SQLitePCL.ISQLiteStatement statement)
+        protected override IGame CreateItem(SQLitePCL.ISQLiteStatement statement)
         {
-            var g = new Model.Game();
+            //var g = new object { };
 
-            g.AchievementsEarned = statement["AchievementsEarned"].ToInt();
 
-            g.SteamUserID = statement["SteamID"].ToLong();
-            g.AppID = statement["GameID"].ToInt();
+            //g.AchievementsEarned = statement["AchievementsEarned"].ToInt();
 
-            g.GameLink = statement["GameLink"].ToSafeString();
-            g.RecentHours = statement["RecentHours"].ToDecimal();
-            g.HoursPlayed = statement["HoursPlayed"].ToDecimal();
-            g.Logo = statement["SmallLogo"].ToSafeString();
-            g.StatsLink = statement["StatsLink"].ToSafeString();
-            g.TotalAchievements = statement["AchievementCount"].ToInt();
-            g.LastUpdated = statement["LastUpdated"].ToDate();
-            g.AchievementRefresh = statement["AchievementRefresh"].ToDate();
-            g.Name = statement["Name"].ToSafeString();
-            return g;
+            //g.SteamUserID = statement["SteamID"].ToLong();
+            //g.AppID = statement["GameID"].ToInt();
+
+            //g.GameLink = statement["GameLink"].ToSafeString();
+            //g.RecentHours = statement["RecentHours"].ToDecimal();
+            //g.HoursPlayed = statement["HoursPlayed"].ToDecimal();
+            //g.Logo = statement["SmallLogo"].ToSafeString();
+            //g.StatsLink = statement["StatsLink"].ToSafeString();
+            //g.TotalAchievements = statement["AchievementCount"].ToInt();
+            //g.LastUpdated = statement["LastUpdated"].ToDate();
+            //g.AchievementRefresh = statement["AchievementRefresh"].ToDate();
+            //g.Name = statement["Name"].ToSafeString();
+            //return g;
+            return null;
         }
 
         protected override string GetSelectItemSql()
@@ -118,7 +121,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 				@LastUpdated);";
         }
 
-        protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, Model.Game item)
+        protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, IGame item)
         {
             statement.Bind("@SteamID", item.SteamUserID);
             statement.Bind("@GameID", item.AppID);
@@ -150,7 +153,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             	GameID = @GameID";
         }
 
-        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key, Model.Game item)
+        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key, IGame item)
         {
             statement.Bind("@GameID", item.AppID);
             statement.Bind("@Name", item.Name);
@@ -165,7 +168,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             statement.Bind("@LastUpdated", item.LastUpdated.DateTimeSQLite());
         }
 
-        protected override Model.Game GetEmpty()
+        protected override IGame GetEmpty()
         {
             return null;
         }
@@ -184,9 +187,9 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             Timestamp = DateTime.Now;
         }
 
-        public List<Model.Game> GetGamesBySteamID(long id64)
+        public List<IGame> GetGamesBySteamID(long id64)
         {
-            var items = new ObservableCollection<Model.Game>();
+            var items = new ObservableCollection<IGame>();
             string sqlStatement = "Select [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours], [HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated] FROM Game Where SteamID = @SteamID";
             using (var statement = base.sqlConnection.Prepare(sqlStatement))
             {

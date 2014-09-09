@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamAchievementTracker.App.DataAccess.Repository {
-    public class PlayerProfileRepository {
-        public Data.PlayerProfile _db;
-        public PlayerProfileRepository(string connection) {
-            _db = new Data.PlayerProfile(connection); 
-        }
+namespace SteamAchievementTracker.Services.Data
+{
+    public class PlayerProfileService
+    {
+        public SteamAchievementTracker.App.DataAccess.Data.PlayerProfile _db;
+        //   public PlayerProfileService(string connection)
+        //   {
+        //    _db = new Data.PlayerProfile(connection); 
+        //}
 
         public async Task<Model.Profile> GetPlayerDetails(string SteamID) {
             SteamAPI.Player.PlayerProfileRequest request = new SteamAPI.Player.PlayerProfileRequest();

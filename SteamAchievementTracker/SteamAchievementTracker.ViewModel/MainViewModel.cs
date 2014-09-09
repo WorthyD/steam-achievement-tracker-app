@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.ViewModel
 {
-    public class MainViewModel : BaseViewModel, IViewModel
+    public class MainViewModel : BaseViewModel, IMainViewModel
     {
         //private DataAccess.Repository.PlayerProfileRepository _playerRepo;
 
@@ -33,7 +33,7 @@ namespace SteamAchievementTracker.ViewModel
         }
 
 
-       
+
 
         private string _title;
         public string Title
@@ -94,13 +94,6 @@ namespace SteamAchievementTracker.ViewModel
             var result = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
             Debug.WriteLine(result);
 
-            if (IsInDesignMode)
-            {
-                //_profile.PopulateDesignData();
-                //_library.PopulateDesignData();
-                return;
-            }
-
             if (base.UserID == 0)
             {
                 //Return login
@@ -109,13 +102,15 @@ namespace SteamAchievementTracker.ViewModel
             }
 
             Profile = await playerProfService.GetProfileCached(base.UserID, base.UserName);
-            List<IGame> gameList = await playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, base.UserName);
+            //Library = null;
+            //Library.GameList = await playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, base.UserName);
 
+            //Todo: udpate
             //Library = new IPlayerLibrary()
             //{
             //    GameList = gameList.OrderByDescending(x => x.RecentHours).ToList()
             //};
-            
+
         }
     }
 }

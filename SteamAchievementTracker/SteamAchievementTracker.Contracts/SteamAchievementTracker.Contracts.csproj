@@ -38,12 +38,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\IGame.cs" />
+    <Compile Include="Model\IGameAchievement.cs" />
     <Compile Include="Model\IPlayerLibrary.cs" />
     <Compile Include="Model\IProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\IPlayerLibraryService.cs" />
     <Compile Include="Services\IPlayerProfileService.cs" />
+    <Compile Include="ViewModels\IMainViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="View\IView.cs" />
   </ItemGroup>

@@ -1,18 +1,21 @@
-﻿using SteamAchievementTracker.Contracts.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using  SteamAchievementTracker.App.DataAccess;
+using SteamAchievementTracker.Contracts.Model;
 
-namespace SteamAchievementTracker.App.DataAccess.Repository {
-    public class PlayerStatsRepository {
-        public Data.GameAchievement _db;
-        public Data.Game _gDB;
-        public  PlayerStatsRepository(string connection) {
-            _db = new Data.GameAchievement(connection);
-            _gDB = new Data.Game(connection);
-        }
+namespace SteamAchievementTracker.Services.Data
+{
+   public  class PlayerStatsService
+    {
+          public  SteamAchievementTracker.App.DataAccess.Data.GameAchievement _db;
+        public  SteamAchievementTracker.App.DataAccess.Data.Game _gDB;
+        //public  PlayerStatsRepository(string connection) {
+        //    _db = new Data.GameAchievement(connection);
+        //    _gDB = new Data.Game(connection);
+        //}
 
         public async Task<SteamAPI.Models.playerstats> GetPlayerStats(string statURL) {
             SteamAPI.Player.PlayerGameStatsRequest request = new SteamAPI.Player.PlayerGameStatsRequest();
