@@ -15,18 +15,11 @@ namespace SteamAchievementTracker.App.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        //public MainViewModel(Common.NavigationHelper navigationService)
-        //    : base(navigationService) {
-        //    HelloWorld = IsInDesignMode
-        //       ? "Runs in design mode"
-        //       : "Runs in runtime mode";
-
-        //}
+      
         private DataAccess.Repository.PlayerProfileRepository _playerRepo;
 
         private DataAccess.Repository.PlayerLibraryRepository _libraryRepo;
 
-        //[PreferredConstructor]
         public MainViewModel(INavigationService _navigationService)
             : base(_navigationService)
         {
