@@ -1,16 +1,21 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using SteamAchievementTracker.Contracts.Services;
+using SteamAchievementTracker.Contracts.ViewModels;
+using System;
 using System.Collections.Generic;
-using System.Text;
-
-using GalaSoft.MvvmLight;
 using System.Diagnostics;
-using Windows.UI.Xaml;
-using SteamAchievementTracker.App.Services;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SteamAchievementTracker.App.ViewModel
+namespace SteamAchievementTracker.ViewModel
 {
-    public class BaseViewModel : ViewModelBase
+    public class BaseViewModel : ViewModelBase, IViewModel
     {
+        public void Initialize(object parameter)
+        {
+
+        }
 
         private readonly INavigationService _navigationService;
         public BaseViewModel(INavigationService navigationService)
@@ -42,6 +47,7 @@ namespace SteamAchievementTracker.App.ViewModel
                 Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID64"] = value;
             }
         }
+
         public string UserName
         {
             get
