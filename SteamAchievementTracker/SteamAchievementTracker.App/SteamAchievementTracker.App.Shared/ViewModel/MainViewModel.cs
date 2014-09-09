@@ -9,6 +9,7 @@ using System.Diagnostics;
 using SteamAchievementTracker.App.Services;
 using GalaSoft.MvvmLight.Command;
 using SteamAchievementTracker.App.DataAccess.Model;
+using Windows.Foundation;
 
 namespace SteamAchievementTracker.App.ViewModel
 {
@@ -39,6 +40,11 @@ namespace SteamAchievementTracker.App.ViewModel
             _title = "Steam Achievement Tracker";
             var result = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
             Debug.WriteLine(result);
+
+            //OpenGame = new RelayCommand(() =>
+            //    { 
+                
+            //    });
 
             if (IsInDesignMode)
             {
@@ -100,16 +106,50 @@ namespace SteamAchievementTracker.App.ViewModel
                 Set(() => Library, ref _library, value);
             }
         }
-        private RelayCommand<Game> _openGame;
-        
-        public RelayCommand<Game> OpenGame
+
+        private GameLibraryViewModel _gameList;
+        public GameLibraryViewModel GameList
+        {
+            get { return _gameList; }
+            set { 
+                Set(() => GameList, ref _gameList, value);
+            }
+
+        }
+
+
+        private RelayCommand _openGame;
+
+        public RelayCommand OpenGame
+        {
+            get;
+            private set;
+        }
+        private RelayCommand<Point> _showPositionCommand;
+        public const string LastPositionPropertyName = "LastPosition";
+        private string _lastPosition = "Click somewhere";
+
+        public string LastPosition
         {
             get
             {
-                return _openGame ?? (_openGame = new RelayCommand<Game>(game => { 
-                
-                
-                }));
+                return _lastPosition;
+            }
+            set
+            {
+                Set(() => LastPosition, ref _lastPosition, value);
+            }
+        }
+        public RelayCommand<Point> ShowPositionCommand
+        {
+            get
+            {
+                return _showPositionCommand
+                        ?? (_showPositionCommand = new RelayCommand<Point>(
+                            point =>
+                            {
+                                LastPosition = string.Format("{0:N1}, {1:N1}", point.X, point.Y);
+                            }));
             }
         }
 
