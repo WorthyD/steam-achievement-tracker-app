@@ -77,7 +77,7 @@
         <ScrollViewer Grid.Row="1" HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" ZoomMode="Disabled"  >
         <StackPanel  Grid.Row="1"  Orientation="Horizontal"  Margin="116,0,40,46">
             <StackPanel>
-                <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
+                <!--<Partials:Profile DataContext="{Binding Main}"></Partials:Profile>-->
             </StackPanel >
                 <Grid  x:Name="GameGrid" Tag="{Binding DataContext, ElementName='GameGrid'}">
                 <Grid.RowDefinitions>

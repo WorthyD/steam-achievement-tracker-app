@@ -1,8 +1,10 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using SteamAchievementTracker.Contracts.Model;
 using SteamAchievementTracker.Contracts.Services;
 using SteamAchievementTracker.Contracts.View;
 using SteamAchievementTracker.Contracts.ViewModels;
+using SteamAchievementTracker.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,24 +14,24 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.ViewModel
 {
-    public class MainViewModel : BaseViewModel, IMainViewModel
+    public class MainViewModel : ViewModelBase, IMainViewModel
     {
-        //private DataAccess.Repository.PlayerProfileRepository _playerRepo;
 
         private IPlayerProfileService playerProfService;
         private IPlayerLibraryService playerLibService;
         private INavigationService navigationService;
 
-        //private DataAccess.Repository.PlayerLibraryRepository _libraryRepo;
-
-        public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService)
-            : base(_navigationService)
+        public MainViewModel()
         {
 
 
-            this.navigationService = _navigationService;
-            this.playerLibService = _playerLibService;
+            //this.navigationService = _navigationService;
+            //this.playerLibService = _playerLibService;
+            //this.playerProfService = _playerProfService;
 
+            //if(base.IsInDesignMode){
+            //    this.Initialize(null);
+            //}
         }
 
 
@@ -68,7 +70,6 @@ namespace SteamAchievementTracker.ViewModel
                 Set(() => Library, ref _library, value);
             }
         }
-        //private RelayCommand<IGame> _openGame;
 
         public RelayCommand<IGame> OpenGame
         {
@@ -90,23 +91,20 @@ namespace SteamAchievementTracker.ViewModel
             //_profile = new IProfile();
             //_library = new DataAccess.Model.PlayerLibrary();
 
-            _title = "Steam Achievement Tracker";
-            var result = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
-            Debug.WriteLine(result);
+            //_title = "Steam Achievement Tracker";
+            //var result = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 
-            if (base.UserID == 0)
-            {
-                //Return login
-                base.UserID = 76561198025095151;
-                base.UserName = "WorthyD";
-            }
+            //if (base.UserID == 0)
+            //{
+            //    //Return login
+            //    base.UserID = 76561198025095151;
+            //    base.UserName = "WorthyD";
+            //}
 
-            Profile = await playerProfService.GetProfileCached(base.UserID, base.UserName);
-            //Library = null;
-            //Library.GameList = await playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, base.UserName);
-
-            //Todo: udpate
-            //Library = new IPlayerLibrary()
+            //Profile = await playerProfService.GetProfileCached(base.UserID, base.UserName);
+            //var gameList = await playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, base.UserName);
+            
+            //Library = new  PlayerLibrary()
             //{
             //    GameList = gameList.OrderByDescending(x => x.RecentHours).ToList()
             //};
