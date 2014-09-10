@@ -45,6 +45,7 @@
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\IPlayerLibraryService.cs" />
     <Compile Include="Services\IPlayerProfileService.cs" />
+    <Compile Include="Services\IPlayerStatsService.cs" />
     <Compile Include="ViewModels\IMainViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="View\IView.cs" />

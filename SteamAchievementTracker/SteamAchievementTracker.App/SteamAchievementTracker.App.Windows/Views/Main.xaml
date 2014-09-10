@@ -46,18 +46,18 @@
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>-->
 
-            <!--<Partials:GameListItem ></Partials:GameListItem>-->
-            <interactivity:Interaction.Behaviors>
+            <Partials:GameListItem ></Partials:GameListItem>
+            <!--<interactivity:Interaction.Behaviors>
                 <core:EventTriggerBehavior EventName="PointerPressed">
                     <core:InvokeCommandAction
                 Command="{Binding ShowPositionCommand, Mode=OneWay}"
                 InputConverter="{StaticResource MouseButtonEventArgsToPointConverter}"
                 InputConverterParameter="{Binding ElementName=LayoutRoot}" />
                 </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
-            <StackPanel>
+            </interactivity:Interaction.Behaviors>-->
+            <!--<StackPanel>
                 <TextBlock Text="hello world"></TextBlock>
-            </StackPanel>
+            </StackPanel>-->
         </DataTemplate>
     </Page.Resources>
     <Grid Style="{StaticResource LayoutRootStyle}" >
@@ -79,24 +79,30 @@
             <StackPanel>
                 <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
             </StackPanel >
-                <Grid  x:Name="GameGrid" Tag="{Binding DataContext, ElementName='GameGrid'}">
+                <Grid  x:Name="GameGrid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0"  Text="Game Library" Style="{StaticResource TitleTextStyle}"/>
                 <!-- Game List -->
                 <!-- Search-->
-                    <Grid Grid.Row="1"   HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <GridView   ItemsSource="{Binding Main.Library.GameList}"   ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
-
-                                ItemTemplate="{StaticResource   GridTemplate}"
+                <TextBlock Grid.Row="1"  Text="{Binding LibCount}" Style="{StaticResource TitleTextStyle}"/>
+                    <Grid Grid.Row="2"   HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <GridView   ItemsSource="{Binding Library.GameList}"   
+                                ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
+                                
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                      SelectionMode="None">
-                    	
-                       
-                    </GridView>
+                                      SelectionMode="None" >
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:GameListItem ></Partials:GameListItem>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+
+                        </GridView>
                 </Grid>
                 <!-- View All -->
             </Grid>

@@ -3,17 +3,21 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SteamAchievementTracker.App.Views.PartialViews"
+    xmlns:dMode="using:SteamAchievementTracker.DesignData.Model"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    d:DataContext="{d:DesignInstance Type=dMode:Game, IsDesignTimeCreatable=True}"
+
+    >
     <StackPanel>
-    <!--xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"-->
-        
-        
-        
+        <!--xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"-->
+
+
+
         <!--<i:Interaction.Triggers>
             <i:EventTrigger EventName="Tap">
                 <i:InvokeCommandAction Command="{Binding ShowDetailsCommand, Mode=OneWay, Source={StaticResource Main}}" CommandParameter="{Binding Mode=OneWay}"/>
@@ -21,11 +25,19 @@
         </i:Interaction.Triggers>-->
 
         <!--<Border Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">-->
-            <Image Source="{Binding Logo}" Height="69" Width="184" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <!--</Border>-->
-            <!--<StackPanel Grid.Column="1" Margin="10,0,0,0">
+        <Image Source="{Binding Logo}" Height="69" Width="184" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <!--</Border>-->
+        <!--<StackPanel Grid.Column="1" Margin="10,0,0,0">
                 <TextBlock Text="{Binding Name}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="NoWrap"/>
             </StackPanel>-->
+        <StackPanel>
+            <TextBlock>Hours:</TextBlock>
+            <TextBlock Text="{Binding HoursPlayed}"></TextBlock>
+        </StackPanel>
+        <StackPanel>
+            <TextBlock>Percent Complete:</TextBlock>
+            <TextBlock Text="{Binding PercentComplete}"></TextBlock>
+        </StackPanel>
         <Grid >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
