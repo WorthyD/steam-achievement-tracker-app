@@ -31,12 +31,14 @@ namespace SteamAchievementTracker.DesignData.Services
         }
         public List<IGame> GetGames()
         {
-            var count = 10;
+            var count = 15;
             var GameList = new List<IGame>();
+
+            var rnd = new Random();
             for (var i = 0; i < count; i++)
             {
                 Game g = new Game();
-                g.PopulateDesignData("Game" + i);
+                g.PopulateDesignData("Game" + i, rnd);
                 GameList.Add(g);
             }
             return GameList;

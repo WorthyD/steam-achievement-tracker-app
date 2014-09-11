@@ -36,7 +36,6 @@ namespace SteamAchievementTracker.App.ViewModel
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<GameDetailViewModel>();
 
             if (ViewModelBase.IsInDesignModeStatic)
             {
@@ -50,10 +49,10 @@ namespace SteamAchievementTracker.App.ViewModel
                 SimpleIoc.Default.Register<IPlayerProfileService, PlayerProfileService>();
                 SimpleIoc.Default.Register<IPlayerStatsService, PlayerStatsService>();
 
-                SimpleIoc.Default.Register<INavigationService, NavigationService>();
             }
+                SimpleIoc.Default.Register<INavigationService, NavigationService>();
 
-            SimpleIoc.Default.Register<IMainViewModel, MainViewModel>();
+            SimpleIoc.Default.Register< MainViewModel>();
         }
     }
 }

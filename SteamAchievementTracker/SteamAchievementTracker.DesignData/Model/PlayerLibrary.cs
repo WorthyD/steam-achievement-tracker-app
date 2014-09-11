@@ -14,10 +14,11 @@ namespace SteamAchievementTracker.DesignData.Model
         public PlayerLibrary() {
             var count = 10;
             this.GameList = new List<IGame>();
+            var rnd = new Random();
             for (var i = 0; i < count; i++)
             {
                 Game g = new Game();
-                g.PopulateDesignData("Game" + i);
+                g.PopulateDesignData("Game" + i, rnd);
                 this.GameList.Add(g);
             }
         }

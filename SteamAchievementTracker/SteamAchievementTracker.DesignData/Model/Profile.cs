@@ -45,10 +45,11 @@ namespace SteamAchievementTracker.DesignData.Model
             this.ThumbURL = "http://www.gravatar.com/avatar/67b727175a880f13e6240c856764670e.png?s=50";
             var count = 10;
             this.RecentGames = new List<IGame>();
+            var rnd = new Random();
             for (var i = 0; i < count; i++)
             {
                 Game g = new Game();
-                g.PopulateDesignData("Game" + i);
+                g.PopulateDesignData("Game" + i, rnd);
                 this.RecentGames.Add(g);
             }
         }

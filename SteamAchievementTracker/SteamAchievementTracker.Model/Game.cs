@@ -25,11 +25,12 @@ namespace SteamAchievementTracker.Model
 
         public int AchievementsEarned { get; set; }
         public int TotalAchievements { get; set; }
-        public decimal PercentComplete
+        public string PercentComplete
         {
             get
             {
-                return AchievementsEarned / TotalAchievements;
+                return (AchievementsEarned / TotalAchievements).ToString();
+                //return AchievementsEarned / TotalAchievements;
             }
         }
 

@@ -21,14 +21,6 @@ namespace SteamAchievementTracker.Contracts.Model
 
         int AchievementsEarned { get; set; }
         int TotalAchievements { get; set; }
-        decimal PercentComplete
-        {
-            get;
-        }
-
-         string ProgressText
-        {
-            get;
-        }
+       
     }
 }

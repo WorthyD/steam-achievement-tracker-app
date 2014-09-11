@@ -106,11 +106,12 @@ namespace SteamAchievementTracker.ViewModel
            set;
        }
 
-       public decimal PercentComplete
+       public string PercentComplete
        {
            get
            {
-               return AchievementsEarned / TotalAchievements;
+               return (AchievementsEarned / TotalAchievements).ToString();
+               //return AchievementsEarned / TotalAchievements;
            }
        }
 

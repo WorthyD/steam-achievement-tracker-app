@@ -12,54 +12,13 @@
     mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" 
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-    xmlns:helpers="using:SteamAchievementTracker.App.Helpers"
 
     >
     <Page.Resources>
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
-            <ItemsWrapGrid MaximumRowsOrColumns="4"/>
+            <ItemsWrapGrid MaximumRowsOrColumns="3"/>
         </ItemsPanelTemplate>
-        <helpers:MouseButtonEventArgsToPointConverter
-        x:Key="MouseButtonEventArgsToPointConverter" />
-
-
-        <DataTemplate x:Key="GridTemplate" >
-            <!--<interactivity:Interaction.Behaviors>
-                                        <core:EventTriggerBehavior EventName="Tapped">
-                                            <core:InvokeCommandAction 
-                                            
-                                                Command="{Binding OpenGame, Mode=OneWay}"
-                                                 />
-                                       </core:EventTriggerBehavior>
-                                    </interactivity:Interaction.Behaviors>-->
-            <!--<interactivity:Interaction.Behaviors>
-                                        <core:EventTriggerBehavior EventName="Tapped">
-                                            <core:InvokeCommandAction Command="{Binding Main.OpenGame, Mode=OneWay}"/>
-                                        </core:EventTriggerBehavior>
-                                    </interactivity:Interaction.Behaviors>-->
-            <!--InputConverter="{StaticResource KeyEventArgsToStringConverter}"
-                                            InputConverterParameter="This is a {0} test"-->
-
-            <!--<i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="Tap">
-                                            <i:InvokeCommandAction Command="{Binding ShowDetailsCommand, Mode=OneWay, Source={StaticResource Main}}" CommandParameter="{Binding Mode=OneWay}"/>
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>-->
-
-            <!--<Partials:GameListItem ></Partials:GameListItem>-->
-            <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="PointerPressed">
-                    <core:InvokeCommandAction
-                Command="{Binding ShowPositionCommand, Mode=OneWay}"
-                InputConverter="{StaticResource MouseButtonEventArgsToPointConverter}"
-                InputConverterParameter="{Binding ElementName=LayoutRoot}" />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
-            <StackPanel>
-                <TextBlock Text="hello world"></TextBlock>
-            </StackPanel>
-        </DataTemplate>
-    </Page.Resources>
+  </Page.Resources>
     <Grid Style="{StaticResource LayoutRootStyle}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
@@ -72,36 +31,40 @@
             </Grid.ColumnDefinitions>
             <!--<Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>-->
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource PageHeaderTextStyle}" Margin="4,0,26,38"/>
-
         </Grid>
         <ScrollViewer Grid.Row="1" HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" ZoomMode="Disabled"  >
-        <StackPanel  Grid.Row="1"  Orientation="Horizontal"  Margin="116,0,40,46">
-            <StackPanel>
-                <!--<Partials:Profile DataContext="{Binding Main}"></Partials:Profile>-->
-            </StackPanel >
-                <Grid  x:Name="GameGrid" Tag="{Binding DataContext, ElementName='GameGrid'}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0"  Text="Game Library" Style="{StaticResource TitleTextStyle}"/>
-                <!-- Game List -->
-                <!-- Search-->
+            <StackPanel  Grid.Row="1"  Orientation="Horizontal"  Margin="116,0,40,46">
+                <StackPanel>
+                    <TextBlock Grid.Row="0"  Text="Profile" Style="{StaticResource TitleTextStyle}"/>
+                    <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
+                </StackPanel >
+                <Grid  x:Name="GameGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"  Text="Game Library" Style="{StaticResource TitleTextStyle}"/>
+                    <!-- Game List -->
                     <Grid Grid.Row="1"   HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <GridView   ItemsSource="{Binding Main.Library.GameList}"   ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
-
-                                ItemTemplate="{StaticResource   GridTemplate}"
+                        <GridView   ItemsSource="{Binding Library.GameList}"   
+                                ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
+                                
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                      SelectionMode="None">
-                    	
-                       
-                    </GridView>
-                </Grid>
-                <!-- View All -->
-            </Grid>
+                                      SelectionMode="None" >
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:GameListItem ></Partials:GameListItem>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
 
-        </StackPanel>
+                        </GridView>
+                    </Grid>
+                    <!-- View All -->
+                </Grid>
+
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </common:LayoutAwarePage>
