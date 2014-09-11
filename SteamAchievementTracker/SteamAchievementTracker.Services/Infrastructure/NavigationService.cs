@@ -11,6 +11,7 @@ namespace SteamAchievementTracker.Services.Infrastructure
 {
     public class NavigationService : INavigationService
     {
+
         private Frame frame;
         public Frame Frame
         {
@@ -25,84 +26,56 @@ namespace SteamAchievementTracker.Services.Infrastructure
             }
         }
 
-        public NavigationService()
-        {
-
-        }
-
-        public void Navigate(Type type)
-        {
-            Frame.Navigate(type);
-        }
-
-        public void Navigate(Type type, object parameter)
-        {
-            Frame.Navigate(type, parameter);
-        }
-
-        public void Navigate(string type, object parameter)
-        {
-            //switch (type)
-            //{
-            //    case PageNames.PopularTravelView:
-            //        Navigate<IPopularTravelView>(parameter); break;
-            //    case PageNames.TravelDetailView:
-            //        Navigate<ITravelDetailView>(parameter); break;
-            //    case PageNames.ContinentDetailView:
-            //        Navigate<IContinentDetailView>(parameter); break;
-            //    case PageNames.InfiniteTravelView:
-            //        Navigate<IInfiniteTravelView>(parameter); break;
-            //}
-        }
-
-        //private void Navigate<T>(object parameter) where T : IView
-        //{
-        //    DisposePreviousView();
-        //    var viewType = InstanceFactory.Registrations.ContainsKey(typeof(T)) ? InstanceFactory.Registrations[typeof(T)] : typeof(T);
-        //    Frame.Navigate(viewType, parameter);
-        //}
-
-        public IView CurrentView
-        {
-            get { return frame.Content as IView; }
-        }
-
-        private void DisposePreviousView()
-        {
-            try
-            {
-                if (this.CurrentView != null && ((Page)this.CurrentView).NavigationCacheMode ==
-                    Windows.UI.Xaml.Navigation.NavigationCacheMode.Disabled)
-                {
-                    var currentView = this.CurrentView;
-                    var currentViewDisposable = currentView as IDisposable;
-
-                    // if(currentView is BasePage
-                    if (currentViewDisposable != null)
-                    {
-                        currentViewDisposable.Dispose();
-                        currentViewDisposable = null;
-                    } //view model is disposed in the view implementation
-                    currentView = null;
-                    GC.Collect();
-                }
-            }
-            catch { }
-        }
-
-        public void Navigate(string type)
-        {
-            Frame.Navigate(Type.GetType(type));
-        }
-
         public void GoBack()
         {
+            //var frame = ((Frame)Window.Current.Content);
+
             if (Frame.CanGoBack)
             {
                 Frame.GoBack();
             }
         }
 
+        public virtual void Navigate(string pageName)
+        {
+            //switch (pageName)
+            //{
+            //    case "Main":
+            //        var mainPageType = SimpleIoc.Default.GetInstance<Main>();
+            //        NavigateTo(mainPageType.GetType());
+            //        break;
+
+            //    case "Details":
+            //        //var editPageType = SimpleIoc.Default.GetInstance<DetailsPage>();
+            //        NavigateTo(typeof(GameDetails));
+            //        break;
+            //    default:
+            //        var defaultPageType = SimpleIoc.Default.GetInstance<Main>();
+            //        NavigateTo(defaultPageType.GetType());
+            //        break;
+            //}
+        }
+        public NavigationService()
+        {
+            //  ((Frame)Window.Current.Content).Navigated += OnFrameNavigated;
+        }
+
+        public virtual void Navigate(Type sourcePageType)
+        {
+            Frame.Navigate(sourcePageType);
+        }
+
+        public void Navigate(Type sourcePageType, object parameter)
+        {
+            Frame.Navigate(sourcePageType, parameter);
+        }
+
+
+
+        public void OpenBrowser(string url)
+        {
+            throw new NotImplementedException();
+        }
         private void OnFrameNavigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             var view = e.Content as IView;
@@ -123,6 +96,12 @@ namespace SteamAchievementTracker.Services.Infrastructure
                     viewModel.Initialize(e.Parameter);
                 }
             }
+        }
+
+
+        public void Navigate(string type, object parameter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -54,25 +54,25 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 
         protected override IGame CreateItem(SQLitePCL.ISQLiteStatement statement)
         {
-            //var g = new object { };
+            IGame g = new Model.Game();
 
 
-            //g.AchievementsEarned = statement["AchievementsEarned"].ToInt();
+            g.AchievementsEarned = statement["AchievementsEarned"].ToInt();
 
-            //g.SteamUserID = statement["SteamID"].ToLong();
-            //g.AppID = statement["GameID"].ToInt();
+            g.SteamUserID = statement["SteamID"].ToLong();
+            g.AppID = statement["GameID"].ToInt();
 
-            //g.GameLink = statement["GameLink"].ToSafeString();
-            //g.RecentHours = statement["RecentHours"].ToDecimal();
-            //g.HoursPlayed = statement["HoursPlayed"].ToDecimal();
-            //g.Logo = statement["SmallLogo"].ToSafeString();
-            //g.StatsLink = statement["StatsLink"].ToSafeString();
-            //g.TotalAchievements = statement["AchievementCount"].ToInt();
-            //g.LastUpdated = statement["LastUpdated"].ToDate();
-            //g.AchievementRefresh = statement["AchievementRefresh"].ToDate();
-            //g.Name = statement["Name"].ToSafeString();
-            //return g;
-            return null;
+            g.GameLink = statement["GameLink"].ToSafeString();
+            g.RecentHours = statement["RecentHours"].ToDecimal();
+            g.HoursPlayed = statement["HoursPlayed"].ToDecimal();
+            g.Logo = statement["SmallLogo"].ToSafeString();
+            g.StatsLink = statement["StatsLink"].ToSafeString();
+            g.TotalAchievements = statement["AchievementCount"].ToInt();
+            g.LastUpdated = statement["LastUpdated"].ToDate();
+            g.AchievementRefresh = statement["AchievementRefresh"].ToDate();
+            g.Name = statement["Name"].ToSafeString();
+            return g;
+            //return null;
         }
 
         protected override string GetSelectItemSql()

@@ -19,6 +19,9 @@ using SteamAchievementTracker.App.Common;
 using SQLitePCL;
 using SteamAchievementTracker.App.DataAccess.Data;
 using System.Diagnostics;
+using Microsoft.Practices.ServiceLocation;
+using SteamAchievementTracker.Services.Infrastructure;
+using SteamAchievementTracker.Contracts.Services;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -54,7 +57,7 @@ namespace SteamAchievementTracker.App
         /// search results, and so forth.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected async override void OnLaunched(LaunchActivatedEventArgs e)
+        protected  override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -77,7 +80,7 @@ namespace SteamAchievementTracker.App
                 rootFrame = new Frame();
 
                 //Associate the frame with a SuspensionManager key                                
-                SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+                //SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
 
                 // TODO: change this value to a cache size that is appropriate for your application
                 rootFrame.CacheSize = 1;
@@ -85,20 +88,24 @@ namespace SteamAchievementTracker.App
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     // Restore the saved session state only when appropriate
-                    try
-                    {
-                        await SuspensionManager.RestoreAsync();
-                    }
-                    catch (SuspensionManagerException)
-                    {
-                        // Something went wrong restoring state.
-                        // Assume there is no state and continue
-                    }
+                    //try
+                    //{
+                    //    await SuspensionManager.RestoreAsync();
+                    //}
+                    //catch (SuspensionManagerException)
+                    //{
+                    //    // Something went wrong restoring state.
+                    //    // Assume there is no state and continue
+                    //}
                 }
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
+
+            INavigationService nav = ServiceLocator.Current.GetInstance<INavigationService>();
+            //Services.NavigationService nav = new Services.NavigationService();
+            nav.Frame = rootFrame;
 
             if (rootFrame.Content == null)
             {
@@ -117,13 +124,16 @@ namespace SteamAchievementTracker.App
                 rootFrame.Navigated += this.RootFrame_FirstNavigated;
 #endif
 
+
+                nav.Navigate(typeof(Views.Main), e.Arguments);
+
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(Views.Main), e.Arguments))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
+                //if (!rootFrame.Navigate(typeof(Views.Main), e.Arguments))
+                //{
+                //    throw new Exception("Failed to create initial page");
+                //}
             }
 
             // Ensure the current window is active
@@ -149,10 +159,10 @@ namespace SteamAchievementTracker.App
         /// without knowing whether the application will be terminated or resumed with the contents
         /// of memory still intact.
         /// </summary>
-        private async void OnSuspending(object sender, SuspendingEventArgs e)
+        private  void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            await SuspensionManager.SaveAsync();
+            //await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
     }

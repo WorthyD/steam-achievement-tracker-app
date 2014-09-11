@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Data\BaseService.cs" />
     <Compile Include="Data\PlayerLibraryService.cs" />
     <Compile Include="Data\PlayerProfileService.cs" />
     <Compile Include="Data\PlayerStatsService.cs" />

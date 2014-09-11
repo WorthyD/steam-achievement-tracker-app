@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
 using SteamAchievementTracker.App.Views;
+using SteamAchievementTracker.Contracts.View;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,44 +11,63 @@ namespace SteamAchievementTracker.App.Services
 {
     public class NavigationService : INavigationService
     {
+
+        private Frame frame;
+        public Frame Frame
+        {
+            get
+            {
+                return frame;
+            }
+            set
+            {
+                frame = value;
+                frame.Navigated += OnFrameNavigated;
+            }
+        }
+
         public void GoBack()
         {
-            var frame = ((Frame)Window.Current.Content);
+            //var frame = ((Frame)Window.Current.Content);
 
-            if (frame.CanGoBack)
+            if (Frame.CanGoBack)
             {
-                frame.GoBack();
+                Frame.GoBack();
             }
         }
 
-        public virtual void NavigateTo(string pageName)
+        public virtual void Navigate(string pageName)
         {
-            switch (pageName)
-            {
-                case "Main":
-                    var mainPageType = SimpleIoc.Default.GetInstance<Main>();
-                    NavigateTo(mainPageType.GetType());
-                    break;
+            //switch (pageName)
+            //{
+            //    case "Main":
+            //        var mainPageType = SimpleIoc.Default.GetInstance<Main>();
+            //        NavigateTo(mainPageType.GetType());
+            //        break;
 
-                case "Details":
-                    //var editPageType = SimpleIoc.Default.GetInstance<DetailsPage>();
-                    NavigateTo(typeof(GameDetails));
-                    break;
-                default:
-                    var defaultPageType = SimpleIoc.Default.GetInstance<Main>();
-                    NavigateTo(defaultPageType.GetType());
-                    break;
-            }
+            //    case "Details":
+            //        //var editPageType = SimpleIoc.Default.GetInstance<DetailsPage>();
+            //        NavigateTo(typeof(GameDetails));
+            //        break;
+            //    default:
+            //        var defaultPageType = SimpleIoc.Default.GetInstance<Main>();
+            //        NavigateTo(defaultPageType.GetType());
+            //        break;
+            //}
+        }
+        public NavigationService()
+        {
+          //  ((Frame)Window.Current.Content).Navigated += OnFrameNavigated;
         }
 
-        public virtual void NavigateTo(Type sourcePageType)
+        public virtual void Navigate(Type sourcePageType)
         {
-            ((Frame)Window.Current.Content).Navigate(sourcePageType);
+            Frame.Navigate(sourcePageType);
         }
 
-        public void NavigateTo(Type sourcePageType, object parameter)
+        public void Navigate(Type sourcePageType, object parameter)
         {
-            ((Frame)Window.Current.Content).Navigate(sourcePageType, parameter);
+            Frame.Navigate(sourcePageType, parameter);
         }
 
 
@@ -55,6 +75,27 @@ namespace SteamAchievementTracker.App.Services
         public void OpenBrowser(string url)
         {
             throw new NotImplementedException();
+        }
+        private void OnFrameNavigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            var view = e.Content as IView;
+            if (view == null)
+                return;
+
+            var viewModel = view.ViewModel;
+            if (viewModel != null)
+            {
+                if (!(e.NavigationMode ==
+                    Windows.UI.Xaml.Navigation.NavigationMode.Back
+                    &&
+                    (((Page)e.Content).NavigationCacheMode ==
+                    Windows.UI.Xaml.Navigation.NavigationCacheMode.Enabled ||
+                    (((Page)e.Content).NavigationCacheMode ==
+                    Windows.UI.Xaml.Navigation.NavigationCacheMode.Required))))
+                {
+                    viewModel.Initialize(e.Parameter);
+                }
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SteamAchievementTracker.Contracts.Model;
+using SteamAchievementTracker.Contracts.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +8,18 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.Services.Data
 {
-    public class PlayerProfileService
+    public class PlayerProfileService:  IPlayerProfileService
     {
         public SteamAchievementTracker.App.DataAccess.Data.PlayerProfile _db;
-        //   public PlayerProfileService(string connection)
+        public string DBName = "SteamAchievementTracker.db";
+           public PlayerProfileService(){
         //   {
         //    _db = new Data.PlayerProfile(connection); 
-        //}
+               _db = new  SteamAchievementTracker.App.DataAccess.Data.PlayerProfile(DBName);
+        }
 
-        public async Task<Model.Profile> GetPlayerDetails(string SteamID) {
+        public async Task<IProfile> GetPlayerDetails(string SteamID)
+        {
             SteamAPI.Player.PlayerProfileRequest request = new SteamAPI.Player.PlayerProfileRequest();
             request.SteamID = SteamID;
             var response = await request.GetResponse();

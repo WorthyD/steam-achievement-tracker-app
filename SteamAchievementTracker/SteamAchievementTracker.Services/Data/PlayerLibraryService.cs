@@ -11,10 +11,12 @@ namespace SteamAchievementTracker.Services.Data
     public class PlayerLibraryService : IPlayerLibraryService
     {
         public SteamAchievementTracker.App.DataAccess.Data.Game _db;
+        public string DBName = "SteamAchievementTracker.db";
 
-        //public PlayerLibraryRepository(string connection) {
-        //    _db = new Data.Game(connection);
-        //}
+        public PlayerLibraryService()
+        {
+            _db = new  SteamAchievementTracker.App.DataAccess.Data.Game(DBName);
+        }
 
         public async Task<SteamAPI.Models.gamesList> GetPlayerLibrary(string steamID) {
             SteamAPI.Player.PlayerGamesRequest request = new SteamAPI.Player.PlayerGamesRequest();

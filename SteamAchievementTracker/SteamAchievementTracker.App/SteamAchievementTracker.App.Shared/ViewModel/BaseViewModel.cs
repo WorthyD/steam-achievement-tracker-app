@@ -5,7 +5,7 @@ using System.Text;
 using GalaSoft.MvvmLight;
 using System.Diagnostics;
 using Windows.UI.Xaml;
-using SteamAchievementTracker.App.Services;
+using SteamAchievementTracker.Contracts.Services;
 
 namespace SteamAchievementTracker.App.ViewModel
 {

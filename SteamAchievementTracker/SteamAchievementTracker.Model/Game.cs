@@ -29,7 +29,11 @@ namespace SteamAchievementTracker.Model
         {
             get
             {
-                return (AchievementsEarned / TotalAchievements).ToString();
+                if (TotalAchievements > 0)
+                {
+                    return (AchievementsEarned / TotalAchievements).ToString();
+                }
+                return string.Empty;
                 //return AchievementsEarned / TotalAchievements;
             }
         }

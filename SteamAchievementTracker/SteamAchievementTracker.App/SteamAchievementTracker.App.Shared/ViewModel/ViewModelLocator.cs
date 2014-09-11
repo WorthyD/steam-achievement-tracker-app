@@ -50,9 +50,8 @@ namespace SteamAchievementTracker.App.ViewModel
                 SimpleIoc.Default.Register<IPlayerStatsService, PlayerStatsService>();
 
             }
-                SimpleIoc.Default.Register<INavigationService, NavigationService>();
-
-            SimpleIoc.Default.Register< MainViewModel>();
+            SimpleIoc.Default.Register<INavigationService, NavigationService>();
+            SimpleIoc.Default.Register<MainViewModel>();
         }
     }
 }

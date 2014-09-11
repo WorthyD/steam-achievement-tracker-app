@@ -24,7 +24,7 @@ namespace SteamAchievementTracker.App.Views
     public sealed partial class BasicPage1 : Page
     {
 
-        private NavigationHelper navigationHelper;
+        //private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
         /// <summary>
@@ -39,18 +39,18 @@ namespace SteamAchievementTracker.App.Views
         /// NavigationHelper is used on each page to aid in navigation and 
         /// process lifetime management
         /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
+        //public NavigationHelper NavigationHelper
+        //{
+        //    get { return this.navigationHelper; }
+        //}
 
 
         public BasicPage1()
         {
             this.InitializeComponent();
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += navigationHelper_LoadState;
-            this.navigationHelper.SaveState += navigationHelper_SaveState;
+            //this.navigationHelper = new NavigationHelper(this);
+            //this.navigationHelper.LoadState += navigationHelper_LoadState;
+            //this.navigationHelper.SaveState += navigationHelper_SaveState;
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace SteamAchievementTracker.App.Views
         /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session. The state will be null the first time a page is visited.</param>
-        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-        }
+        //private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        //{
+        //}
 
         /// <summary>
         /// Preserves state associated with this page in case the application is suspended or the
@@ -75,10 +75,10 @@ namespace SteamAchievementTracker.App.Views
         /// </summary>
         /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
         /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
-        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-        }
+        ///// serializable state.</param>
+        //private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        //{
+        //}
 
         #region NavigationHelper registration
 
@@ -91,15 +91,15 @@ namespace SteamAchievementTracker.App.Views
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedTo(e);
-        }
+       //O protected override void OnNavigatedTo(NavigationEventArgs e)
+       // {
+       //     navigationHelper.OnNavigatedTo(e);
+       // }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            navigationHelper.OnNavigatedFrom(e);
-        }
+       // protected override void OnNavigatedFrom(NavigationEventArgs e)
+       // {
+       //     navigationHelper.nNavigatedFrom(e);
+       // }
 
         #endregion
     }
