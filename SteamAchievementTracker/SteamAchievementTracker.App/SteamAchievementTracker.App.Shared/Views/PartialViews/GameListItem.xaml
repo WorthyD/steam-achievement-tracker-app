@@ -14,25 +14,15 @@
     >
     <StackPanel>
         <Image Style="{StaticResource GameListLogo}" Source="{Binding Logo}" />
-      <Grid >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Style="{StaticResource DetailItemTitle}">Play Time:</TextBlock>
-            <TextBlock Grid.Row="0" Style="{StaticResource DetailItem}" Text="{Binding RecentHoursFormatted}"></TextBlock>
+        <Grid>
+            <TextBlock Style="{StaticResource DetailItemTitle}">Play Time:</TextBlock>
+            <TextBlock Style="{StaticResource DetailItem}" Text="{Binding RecentHoursFormatted}"></TextBlock>
+            </Grid>
             <TextBlock Grid.Row="1"  Style="{StaticResource DetailItemTitle}">Complete:</TextBlock>
             <TextBlock  Grid.Row="1"  Style="{StaticResource DetailItem}" Text="{Binding PercentCompleteFormatted}"></TextBlock>
              <TextBlock Grid.Row="2"  Style="{StaticResource DetailItemTitle}">Progress:</TextBlock>
             <TextBlock  Grid.Row="2"  Style="{StaticResource DetailItem}" Text="{Binding ProgressText}"></TextBlock>
-        </Grid>
         <ProgressBar Height="10" VerticalAlignment="Stretch" Value="{Binding PercentComplete}"/>
     </StackPanel>
 </UserControl>

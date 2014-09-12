@@ -16,11 +16,9 @@
     <Style x:Key="DetailItem" TargetType="TextBlock">
         <Setter Property="TextAlignment" Value="Right"></Setter>
         <Setter Property="Margin" Value="0,0,0,5"></Setter>
-        <Setter Property="Grid.Column" Value="1"></Setter>
     </Style>
     <Style x:Key="DetailItemTitle" TargetType="TextBlock">
         <Setter Property="TextAlignment" Value="Left"></Setter>
         <Setter Property="Margin" Value="0,0,0,5"></Setter>
-        <Setter Property="Grid.Column" Value="0"></Setter>
     </Style>
 </ResourceDictionary>

@@ -115,8 +115,8 @@ namespace SteamAchievementTracker.DesignData.Model
 
         public Game()
         {
-            //var rnd = new Random();
-            //this.PopulateDesignData("test", rnd);
+            var rnd = new Random();
+            this.PopulateDesignData("test", rnd);
         }
 
         public void PopulateDesignData(string name, Random rnd)
