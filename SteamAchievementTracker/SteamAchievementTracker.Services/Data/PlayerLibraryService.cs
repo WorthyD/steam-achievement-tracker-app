@@ -62,11 +62,11 @@ namespace SteamAchievementTracker.Services.Data
                     var tGame = _db.GetItem(new KeyValuePair<long, long>(steamID64, g.appID));
 
                     if (tGame == null) {
-                        //tGame = new Model.Game(g, steamID64);
+                        tGame = new Model.Game(g, steamID64);
                         //tGame = new Model.Game(g, steamID64);
                         _db.InsertItem(tGame);
                     } else {
-                        //_db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), new Model.Game(g, steamID64));
+                        _db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), new Model.Game(g, steamID64));
                     }
 
                     gl.Add(tGame);

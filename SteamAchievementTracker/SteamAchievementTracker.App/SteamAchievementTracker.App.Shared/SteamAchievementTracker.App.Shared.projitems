@@ -16,6 +16,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\LayoutAwarePage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\BooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\GameDetailViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\GameLibraryViewModel.cs" />

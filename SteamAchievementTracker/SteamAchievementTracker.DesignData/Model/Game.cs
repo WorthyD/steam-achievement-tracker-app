@@ -9,54 +9,19 @@ namespace SteamAchievementTracker.DesignData.Model
 {
     public class Game : IGame
     {
-        public long SteamUserID
-        {
-            get;
-            set;
+        public long SteamUserID { get; set; }
 
-        }
+        public int AppID { get; set; }
+        public string Name { get; set; }
+        public string StatsLink { get; set; }
 
-        public int AppID
-        {
-            get;
-            set;
-        }
+        public string GameLink { get; set; }
 
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Logo { get; set; }
 
-        public string StatsLink
-        {
-            get;
-            set;
-        }
+        public decimal HoursPlayed { get; set; }
 
-        public string GameLink
-        {
-            get;
-            set;
-        }
-
-        public string Logo
-        {
-            get;
-            set;
-        }
-
-        public decimal HoursPlayed
-        {
-            get;
-            set;
-        }
-
-        public decimal RecentHours
-        {
-            get;
-            set;
-        }
+        public decimal RecentHours { get; set; }
         public string RecentHoursFormatted
         {
             get
@@ -65,29 +30,13 @@ namespace SteamAchievementTracker.DesignData.Model
             }
         }
 
-        public DateTime LastUpdated
-        {
-            get;
-            set;
-        }
+        public DateTime LastUpdated { get; set; }
 
-        public DateTime AchievementRefresh
-        {
-            get;
-            set;
-        }
+        public DateTime AchievementRefresh { get; set; }
 
-        public int AchievementsEarned
-        {
-            get;
-            set;
-        }
+        public int AchievementsEarned { get; set; }
 
-        public int TotalAchievements
-        {
-            get;
-            set;
-        }
+        public int TotalAchievements { get; set; }
         public double PercentComplete
         {
             get
@@ -112,6 +61,8 @@ namespace SteamAchievementTracker.DesignData.Model
                 return string.Format("{0} of {1}", AchievementsEarned, TotalAchievements);
             }
         }
+        public bool HasAchievements { get { return !string.IsNullOrEmpty(this.StatsLink); } }
+        public bool BeenProcessed { get { return this.LastUpdated > new DateTime(1900, 2, 1); } }
 
         public Game()
         {
@@ -126,9 +77,17 @@ namespace SteamAchievementTracker.DesignData.Model
             this.Logo = GetRandomImage();
             this.RecentHours = ticks;
 
+
             this.AchievementsEarned = ticks;
             this.TotalAchievements = 100;
 
+            //ticks = 3;
+            //ticks = 4;
+            this.StatsLink = (ticks % 2 == 0) ? "stuff" : "";
+            //this.StatsLink = "blabhablhba";
+
+            //ticks = 3;
+            this.LastUpdated = (ticks % 3 == 0) ? DateTime.MinValue : DateTime.Now;
         }
 
         private string GetRandomImage()

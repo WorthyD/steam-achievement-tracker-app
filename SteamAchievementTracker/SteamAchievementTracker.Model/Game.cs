@@ -34,7 +34,6 @@ namespace SteamAchievementTracker.Model
                     return (AchievementsEarned / TotalAchievements).ToString();
                 }
                 return string.Empty;
-                //return AchievementsEarned / TotalAchievements;
             }
         }
 
@@ -45,6 +44,10 @@ namespace SteamAchievementTracker.Model
                 return string.Format("{0} of {1}", AchievementsEarned, TotalAchievements);
             }
         }
+
+     
+        public bool HasAchievements { get { return !string.IsNullOrEmpty(this.StatsLink); } }
+        public bool BeenProcessed { get { return this.LastUpdated > new DateTime(1900, 2, 1); } }
 
         public Game()
         {

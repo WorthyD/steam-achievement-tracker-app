@@ -3,15 +3,19 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SteamAchievementTracker.App"
+    xmlns:helpers="using:SteamAchievementTracker.App.Helpers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vm="using:SteamAchievementTracker.App.ViewModel"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
     <Application.Resources>
+
         
         
         <ResourceDictionary>
+            <helpers:BooleanToVisibilityConverter x:Key="TrueToVisibleConverter" />
+            <helpers:BooleanToVisibilityConverter x:Key="FalseToVisibleConverter" IsReversed="True" />
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True"    />
             <ResourceDictionary.MergedDictionaries>
 
