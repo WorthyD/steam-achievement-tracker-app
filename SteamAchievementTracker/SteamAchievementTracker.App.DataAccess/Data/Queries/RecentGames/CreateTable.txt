@@ -1,0 +1,34 @@
+﻿CREATE TABLE IF NOT EXISTS  [PlayerRecentGames] (
+	[ID64] INTEGER  NOT NULL ,
+	[GameLink] vARCHAR(150)  NOT NULL
+)
+
+
+
+--CREATE TABLE IF NOT EXISTS  [PlayerRecentGames] (	[ID64] INTEGER  NOT NULL ,	[GameLink] vARCHAR(150) NOT  NULL)
+
+
+SELECT ID64, GameLink 
+ FROM PlayerRecentGames;
+
+ SELECT ID64, GameLink 
+	FROM PlayerRecentGames;
+	WHERE ID65 = @ID64;
+
+
+INSERT INTO PlayerRecentGames
+ (ID64, GameLink) 
+VALUES 
+ ( @ID64, @GameLink ); 
+ 
+ 
+UPDATE PlayerRecentGames
+	SET ID64= ?,  GameLink=? 
+WHERE 
+	ID64 = ? 
+	AND GameLink = ?  ; 
+	
+	
+DELETE FROM PlayerRecentGames 
+WHERE 
+	ID64 = ? ;

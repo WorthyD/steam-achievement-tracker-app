@@ -43,6 +43,7 @@
     <Compile Include="PlayerLibrary.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecentGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

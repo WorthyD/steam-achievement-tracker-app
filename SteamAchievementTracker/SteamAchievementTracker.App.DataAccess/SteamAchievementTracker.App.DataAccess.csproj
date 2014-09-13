@@ -40,6 +40,7 @@
     <Compile Include="Data\Game.cs" />
     <Compile Include="Data\GameAchievement.cs" />
     <Compile Include="Data\PlayerProfile.cs" />
+    <Compile Include="Data\PlayerRecentGames.cs" />
     <Compile Include="Data\TableModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,6 +78,7 @@
     <Content Include="Data\Queries\GameAchievement.Insert.sql" />
     <Content Include="Data\Queries\GameAchievement.SelectID.sql" />
     <Content Include="Data\Queries\GameAchievement.Update.sql" />
+    <Content Include="Data\Queries\RecentGames\CreateTable.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
