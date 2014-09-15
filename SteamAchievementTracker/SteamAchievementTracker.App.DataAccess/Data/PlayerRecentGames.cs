@@ -1,5 +1,6 @@
 ﻿using SQLitePCL;
 using SteamAchievementTracker.Contracts.Model;
+using SteamAchievementTracker.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.App.DataAccess.Data
 {
-    public class PlayerRecentGames : TableModelBase<IRecentGame, string>
+    public class PlayerRecentGames : TableModelBase<IRecentGame, long>
     {
         public override string CreateTable()
         {
@@ -18,7 +19,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 
         protected override IRecentGame CreateItem(SQLitePCL.ISQLiteStatement statement)
         {
-            IRecentGame game = null;
+            IRecentGame game = new RecentGame();
 
             game.GameLink = statement["GameLink"].ToSafeString();
             game.ID64 = statement["ID64"].ToLong();
@@ -34,7 +35,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 
         protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, IRecentGame item)
         {
-            statement.Bind("@id64", item.ID64);
+            statement.Bind("@ID64", item.ID64);
             statement.Bind("@GameLink", item.GameLink);
         }
 
@@ -43,20 +44,20 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             return null;
         }
 
-        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, string key)
+        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, long key)
         {
             statement.Bind("@id64", key);
         }
 
         protected override string GetDeleteItemSql()
         {
-            return "DELETE FROM PlayerRecentGames WHERE ID64 = pid64 ;";
+            return "DELETE FROM PlayerRecentGames WHERE ID64 = @id64 ;";
         }
 
         public List<IRecentGame> GetByUserID(long key)
         {
             var items = new ObservableCollection<IRecentGame>();
-            string sqlStatement = "SELECT ID64, GameLink FROM PlayerRecentGames	WHERE ID65 = @ID64;";
+            string sqlStatement = "SELECT ID64, GameLink FROM PlayerRecentGames	WHERE ID64 = @ID64;";
             using (var statement = base.sqlConnection.Prepare(sqlStatement))
             {
                 statement.Bind("@ID64", key);
@@ -88,7 +89,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             throw new NotImplementedException();
         }
 
-        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, string key)
+        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, long key)
         {
             throw new NotImplementedException();
         }
@@ -98,7 +99,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         {
             throw new NotImplementedException();
         }
-        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, string key, IRecentGame item)
+        protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, long key, IRecentGame item)
         {
             throw new NotImplementedException();
         }

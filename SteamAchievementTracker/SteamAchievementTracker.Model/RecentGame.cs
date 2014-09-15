@@ -9,5 +9,17 @@ namespace SteamAchievementTracker.Model
 {
     public class RecentGame : IRecentGame
     {
+        public long ID64
+        {
+            get;
+            set;
+        }
+
+
+        public string GameLink
+        {
+            get;
+            set;
+        }
     }
 }

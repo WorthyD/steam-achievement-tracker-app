@@ -33,6 +33,14 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                 statement.Step();
             }
 
+            var sl2 = new  PlayerRecentGames();
+            sql = sl2.CreateTable();
+
+             using (var statement = db.Prepare(sql)) {
+                statement.Step();
+            }
+
+
 
             // Turn on Foreign Key constraints
             sql = @"PRAGMA foreign_keys = ON";
