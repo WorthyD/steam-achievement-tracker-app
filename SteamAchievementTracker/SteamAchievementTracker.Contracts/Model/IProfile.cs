@@ -13,7 +13,10 @@ namespace SteamAchievementTracker.Contracts.Model
 
         string Name { get; set; }
         string ThumbURL { get; set; }
+        DateTime LastUpdate { get; set; }
 
         List<IGame> RecentGames { get; set; }
+
+        List<string> RecentGameLinks { get; set; }
     }
 }

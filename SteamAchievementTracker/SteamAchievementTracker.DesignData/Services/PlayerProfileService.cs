@@ -10,12 +10,12 @@ namespace SteamAchievementTracker.DesignData.Services
 {
     public class PlayerProfileService : IPlayerProfileService
     {
-        public async Task<Contracts.Model.IProfile> GetPlayerDetails(string SteamID)
+        public async Task<Contracts.Model.IProfile> GetFreshPlayerDetails(string SteamID, bool update)
         {
             return new Model.Profile();
         }
 
-        public async Task<Contracts.Model.IProfile> GetProfileFromDB(long steam64ID)
+        public Contracts.Model.IProfile GetProfileFromDB(long steam64ID)
         {
 
             return new Model.Profile();

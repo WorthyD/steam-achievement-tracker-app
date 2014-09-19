@@ -44,9 +44,9 @@ namespace SteamAchievementTracker.App
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
-            //var result = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+            var result = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 
-            //Debug.WriteLine(result);
+            Debug.WriteLine(result);
         }
 
 

@@ -9,8 +9,8 @@ namespace SteamAchievementTracker.Contracts.Services
 {
     public interface IPlayerProfileService
     {
-        Task<IProfile> GetPlayerDetails(string SteamID);
-        Task<IProfile> GetProfileFromDB(long steam64ID);
+        Task<IProfile> GetFreshPlayerDetails(string SteamID, bool update);
+        IProfile GetProfileFromDB(long steam64ID);
         Task<IProfile> GetProfileCached(long steam64ID, string steamID);
     }
 }

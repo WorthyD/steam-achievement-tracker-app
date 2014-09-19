@@ -38,7 +38,8 @@ namespace SteamAchievementTracker.DesignData.Model
             get;
             set;
         }
-
+        public List<string> RecentGameLinks { get; set; }
+        public DateTime LastUpdate { get; set; }
         public Profile()
         {
             this.Name = "Daniel Worthy";
@@ -52,6 +53,8 @@ namespace SteamAchievementTracker.DesignData.Model
                 g.PopulateDesignData("Game" + i, rnd);
                 this.RecentGames.Add(g);
             }
+            this.RecentGameLinks = new List<string>();
+            
         }
     }
 }

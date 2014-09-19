@@ -13,7 +13,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                     [ID64] BIGINT  NOT NULL PRIMARY KEY,
                     [ID] VARCHAR(250)  NULL,
                     [Name] VARCHAR(250)  NULL,
-                    [Thumbnail] VARCHAR(150)  NULL
+                    [Thumbnail] VARCHAR(150)  NULL,
+                    [LastUpdate] TIMESTAMP NULL
                 );";
 
             using (var statement = db.Prepare(sql)) {

@@ -12,6 +12,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 {
     public class PlayerRecentGames : TableModelBase<IRecentGame, long>
     {
+
+
         public override string CreateTable()
         {
             return @"CREATE TABLE IF NOT EXISTS  [PlayerRecentGames] (	[ID64] INTEGER  NOT NULL ,	[GameLink] vARCHAR(150) NOT NULL)";
@@ -71,7 +73,14 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             return items.ToList();
         }
 
-
+        public void InsertAllForUser(long key, List<string> gameURLS)
+        {
+            this.DeleteItem(key);
+            foreach (var s in gameURLS)
+            {
+                this.InsertItem(new RecentGame() { GameLink = s, ID64 = key });
+            }
+        }
 
         /// <summary>
         /// /////////////////////////////////Not implemented

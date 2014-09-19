@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D53F2C6C-B499-4ACD-A116-1CFCA6D78EFB}</ProjectGuid>
+    <ProjectGuid>{6FFE85EC-CAB7-40DA-84AD-4B974F59CA94}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SteamAchievementTracker.Services</RootNamespace>
-    <AssemblyName>SteamAchievementTracker.Services</AssemblyName>
+    <RootNamespace>SteamAchievementTracker.Settings</RootNamespace>
+    <AssemblyName>SteamAchievementTracker.Settings</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,38 +35,13 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <ProjectReference Include="..\..\SteamAPI\SteamAPI\SteamAPI.csproj">
-      <Project>{be7cfeef-26b9-421d-9c27-269af6fc826f}</Project>
-      <Name>SteamAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SteamAchievementTracker.App.DataAccess\SteamAchievementTracker.App.DataAccess.csproj">
-      <Project>{8b0ee2e7-8f48-4820-9a5f-a7da7ed72b3e}</Project>
-      <Name>SteamAchievementTracker.App.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SteamAchievementTracker.Contracts\SteamAchievementTracker.Contracts.csproj">
-      <Project>{2000d388-ae31-46f9-b811-70581e96c03c}</Project>
-      <Name>SteamAchievementTracker.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SteamAchievementTracker.Model\SteamAchievementTracker.Model.csproj">
-      <Project>{f4a9e580-ee40-4dab-a097-20308e80c713}</Project>
-      <Name>SteamAchievementTracker.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SteamAchievementTracker.Settings\SteamAchievementTracker.Settings.csproj">
-      <Project>{6ffe85ec-cab7-40da-84ad-4b974f59ca94}</Project>
-      <Name>SteamAchievementTracker.Settings</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
     <TargetPlatform Include="Windows, Version=8.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Data\BaseService.cs" />
-    <Compile Include="Data\PlayerLibraryService.cs" />
-    <Compile Include="Data\PlayerProfileService.cs" />
-    <Compile Include="Data\PlayerStatsService.cs" />
-    <Compile Include="Infrastructure\NavigationService.cs" />
+    <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

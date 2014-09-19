@@ -17,7 +17,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
         }
 
         protected override string GetSelectAllSql() {
-            return "select [ID64], [ID], [Name], [Thumbnail] from PlayerProfile";
+            return "select [ID64], [ID], [Name], [Thumbnail], [LastUpdate] from PlayerProfile";
         }
 
         protected override void FillSelectAllStatement(SQLitePCL.ISQLiteStatement statement) {
@@ -30,14 +30,15 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                 (long)statement[0],
                 (string)statement[1],
                 (string)statement[2],
-                (string)statement[3]
+                (string)statement[3],
+                statement[4].ToDate()
                 );
             Debug.WriteLine(string.Format("Selecting user id: {0}", p.ID));
             return p;
         }
 
         protected override string GetSelectItemSql() {
-            return "select [ID64], [ID], [Name], [Thumbnail] from PlayerProfile WHERE ID64 = ?";
+            return "select [ID64], [ID], [Name], [Thumbnail], [LastUpdate] from PlayerProfile WHERE ID64 = ?";
         }
 
         protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, long key) {
@@ -54,7 +55,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
 
         protected override string GetInsertItemSql() {
             //throw new NotImplementedException();
-            return "INSERT INTO PlayerProfile ([ID64], [ID], [Name], [Thumbnail]) VALUES (@id64, @id, @name, @thumbnail)";
+            return "INSERT INTO PlayerProfile ([ID64], [ID], [Name], [Thumbnail], [LastUpdate]) VALUES (@id64, @id, @name, @thumbnail, @lastupdate)";
         }
 
         protected override void FillInsertStatement(SQLitePCL.ISQLiteStatement statement, IProfile item)
@@ -65,10 +66,11 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             statement.Bind("@id", item.ID);
             statement.Bind("@name", item.Name);
             statement.Bind("@thumbnail", item.ThumbURL);
+            statement.Bind("@lastupdate", DateTime.Now.DateTimeSQLite());
         }
 
         protected override string GetUpdateItemSql() {
-            return "UPDATE PlayerProfile set ID = ?, Name = ?, Thumbnail = ? where ID64 = ?";
+            return "UPDATE PlayerProfile set ID = ?, Name = ?, Thumbnail = ?, LastUpdate = ? where ID64 = ?";
         }
 
         protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, long key, IProfile item)
@@ -77,7 +79,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             statement.Bind(1, item.ID);
             statement.Bind(2, item.Name);
             statement.Bind(3, item.ThumbURL);
-            statement.Bind(4, key);
+            statement.Bind(4, DateTime.Now.DateTimeSQLite());
+            statement.Bind(5, key);
         }
 
         protected override IProfile GetEmpty()
@@ -90,7 +93,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
                     [ID64] INTEGER  NOT NULL PRIMARY KEY,
                     [ID] VARCHAR(250)  NULL,
                     [Name] VARCHAR(250)  NULL,
-                    [Thumbnail] VARCHAR(250)  NULL
+                    [Thumbnail] VARCHAR(250)  NULL,
+                    [LastUpdate] TIMESTAMP NULL
                 );";
         }
 

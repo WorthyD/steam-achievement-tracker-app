@@ -106,6 +106,7 @@ namespace SteamAchievementTracker.ViewModel
                 base.UserName = "WorthyD";
             }
 
+            //Profile = await playerProfService.GetProfileCached(base.UserID, base.UserName);
             Profile = await playerProfService.GetProfileCached(base.UserID, base.UserName);
             LibCount = "0";
             //var gameList = await playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, base.UserName);

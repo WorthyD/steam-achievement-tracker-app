@@ -16,7 +16,9 @@ namespace SteamAchievementTracker.Model
         public string ThumbURL { get; set; }
 
         public List<IGame> RecentGames { get; set; }
+        public List<string> RecentGameLinks { get; set; }
 
+        public DateTime LastUpdate { get; set; }
 
         public Profile()
         {
@@ -25,7 +27,10 @@ namespace SteamAchievementTracker.Model
             this.Name = string.Empty;
             this.ThumbURL = string.Empty;
             this.RecentGames = new List<IGame>();
+            this.RecentGameLinks = new List<string>();
+            this.LastUpdate = DateTime.MinValue;
         }
+
         public Profile(SteamAPI.Models.Profile.profile profile)
         {
             this.ID = profile.steamID;
@@ -45,8 +50,9 @@ namespace SteamAchievementTracker.Model
                     HoursPlayed = game.hoursOnRecord
                 });
             }
+            this.RecentGameLinks = profile.mostPlayedGames.Select(x => x.gameLink).ToList();
         }
-        public Profile(long id64, string id, string name, string thumbnailurl)
+        public Profile(long id64, string id, string name, string thumbnailurl, DateTime lastUpdate)
         {
             this.ID64 = id64;
             this.ID = id;
@@ -54,6 +60,8 @@ namespace SteamAchievementTracker.Model
             this.ThumbURL = thumbnailurl;
 
             this.RecentGames = new List<IGame>();
+            this.RecentGameLinks = new List<string>();
+            this.LastUpdate = lastUpdate;
         }
     }
 }
