@@ -203,6 +203,21 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             Timestamp = DateTime.Now;
             return items.ToList();
         }
+        public IGame GetGameBySteamIDAndUrl(long id64, string gameURL)
+        {
+            string sqlStatement = "Select [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours], [HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated] FROM Game Where SteamID = @SteamID and GameLink = @GameLink";
+            using (var statement = base.sqlConnection.Prepare(sqlStatement))
+            {
+                statement.Bind("@SteamID", id64);
+                statement.Bind("@GameLink", gameURL);
+                if (statement.Step() == SQLiteResult.ROW)
+                {
+                    var item = CreateItem(statement);
+                    return item;
+                }
+            }
+            return GetEmpty();
+        }
         //protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key) {
         //    throw new NotImplementedException();
         //}

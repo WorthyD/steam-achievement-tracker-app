@@ -109,13 +109,13 @@ namespace SteamAchievementTracker.ViewModel
             //Profile = await playerProfService.GetProfileCached(base.UserID, base.UserName);
             Profile = await playerProfService.GetProfileCached(base.UserID, base.UserName);
             LibCount = "0";
-            //var gameList = await playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, base.UserName);
-            List<IGame> gameList = await playerLibService.GetPlayerRecentlyPlayedGames(76561198025095151, "WorthyD");
+            var gameList =  playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
+            //List<IGame> gameList = playerLibService.GetPlayerRecentlyPlayedGames(76561198025095151, "WorthyD".ToList());
 
-            Library = new PlayerLibrary()
-            {
-                GameList = gameList.OrderByDescending(x => x.RecentHours).ToList()
-            };
+            //Library = new PlayerLibrary()
+            //{
+            //    GameList = gameList.OrderByDescending(x => x.RecentHours).ToList()
+            //};
 
             LibCount = Library.GameList.Count().ToString();
 

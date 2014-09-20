@@ -11,11 +11,11 @@ namespace SteamAchievementTracker.Services.Data
     public class PlayerLibraryService : IPlayerLibraryService
     {
         public SteamAchievementTracker.App.DataAccess.Data.Game _db;
-        public string DBName = "SteamAchievementTracker.db";
+        //public string DBName = "SteamAchievementTracker.db";
 
         public PlayerLibraryService()
         {
-            _db = new  SteamAchievementTracker.App.DataAccess.Data.Game(DBName);
+            _db = new  SteamAchievementTracker.App.DataAccess.Data.Game(Settings.Database.DataBaseName);
         }
 
         public async Task<SteamAPI.Models.gamesList> GetPlayerLibrary(string steamID) {
@@ -26,15 +26,15 @@ namespace SteamAchievementTracker.Services.Data
             return response.GamesList;
         }
 
-        public async Task<List<IGame>> GetPlayerRecentlyPlayedGames(long steamID64, string steamID)
+        public List<IGame> GetPlayerRecentlyPlayedGames(long steamID64, List<string> gameLinks)
         {
-            var games = await GetPlayerLibraryCached(steamID64);
-            if (games == null || games.Count() == 0)
-            {
-                games = await GetPlayerLibraryRefresh(steamID64, steamID);
-            }
+            List<IGame> g = new List<IGame>();
 
-            return games.Where(x => x.RecentHours > 0).ToList();
+            foreach (var gl in gameLinks)
+            {
+                g.Add(_db.GetGameBySteamIDAndUrl(steamID64, gl));
+            }
+            return g;
         }
 
 
@@ -83,6 +83,7 @@ namespace SteamAchievementTracker.Services.Data
         public void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements) {
             _db.UpdateGameStats(statsUrl, achievementsEarned, totalAchievements);
         }
-    
-    }
+
+
+            }
 }

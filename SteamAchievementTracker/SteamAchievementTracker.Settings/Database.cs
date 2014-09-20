@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.Settings
 {
-    public static class Profile
+    public static class Database
     {
-        public static int ProfileRefreshInterval
+        public static string DataBaseName
         {
             get
             {
-                return 0;
+                return "SteamAchievementTracker.db";
             }
         }
     }

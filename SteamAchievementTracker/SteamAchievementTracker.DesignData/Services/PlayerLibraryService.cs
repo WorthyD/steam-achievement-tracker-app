@@ -44,5 +44,10 @@ namespace SteamAchievementTracker.DesignData.Services
             return GameList;
 
         }
+
+        public List<IGame> GetPlayerRecentlyPlayedGames(long steamID64, List<string> gameLinks)
+        {
+            return GetGames();
+        }
     }
 }
