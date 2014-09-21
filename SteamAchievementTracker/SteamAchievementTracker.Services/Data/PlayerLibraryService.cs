@@ -15,10 +15,11 @@ namespace SteamAchievementTracker.Services.Data
 
         public PlayerLibraryService()
         {
-            _db = new  SteamAchievementTracker.App.DataAccess.Data.Game(Settings.Database.DataBaseName);
+            _db = new SteamAchievementTracker.App.DataAccess.Data.Game(Settings.Database.DataBaseName);
         }
 
-        public async Task<SteamAPI.Models.gamesList> GetPlayerLibrary(string steamID) {
+        public async Task<SteamAPI.Models.gamesList> GetPlayerLibrary(string steamID)
+        {
             SteamAPI.Player.PlayerGamesRequest request = new SteamAPI.Player.PlayerGamesRequest();
             request.SteamID = steamID;
             var response = await request.GetResponse();
@@ -46,44 +47,46 @@ namespace SteamAchievementTracker.Services.Data
         }
 
 
-        public async Task<List<IGame>> GetPlayerLibraryRefresh(long steamID64, string steamID) {
+        public async Task<List<IGame>> GetPlayerLibraryRefresh(long steamID64, string steamID)
+        {
             //validate cache
-            var gl = await GetPlayerLibraryCached(steamID64);
             var steamGameList = await GetPlayerLibrary(steamID);
 
 
-            if (gl == null || gl.Count() != steamGameList.games.Count()) {
-                //Games don't exist in DB or are out of sync
+            //Games don't exist in DB or are out of sync
 
-                gl = new List<IGame>();
+            var gl = new List<IGame>();
 
 
-                foreach (var g in steamGameList.games) {
-                    var tGame = _db.GetItem(new KeyValuePair<long, long>(steamID64, g.appID));
+            foreach (var g in steamGameList.games)
+            {
+                var tGame = _db.GetItem(new KeyValuePair<long, long>(steamID64, g.appID));
 
-                    if (tGame == null) {
-                        tGame = new Model.Game(g, steamID64);
-                        //tGame = new Model.Game(g, steamID64);
-                        _db.InsertItem(tGame);
-                    } else {
-                        _db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), new Model.Game(g, steamID64));
-                    }
-
-                    gl.Add(tGame);
-
+                if (tGame == null)
+                {
+                    tGame = new Model.Game(g, steamID64);
+                    _db.InsertItem(tGame);
+                }
+                else
+                {
+                    _db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), new Model.Game(g, steamID64));
                 }
 
+                gl.Add(tGame);
 
             }
+
+
 
             return gl;
 
         }
 
-        public void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements) {
+        public void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements)
+        {
             _db.UpdateGameStats(statsUrl, achievementsEarned, totalAchievements);
         }
 
 
-            }
+    }
 }

@@ -60,7 +60,6 @@ namespace SteamAchievementTracker.Services.Data
             
 
             if ((player == null) || player.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval)){
-            //if ((player == null) || player.LastUpdate < DateTime.Now.AddMinutes(0)){
                 player = await GetFreshPlayerDetails(steamID, (player != null));
             }
 

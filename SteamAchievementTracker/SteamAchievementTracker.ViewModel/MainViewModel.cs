@@ -106,18 +106,28 @@ namespace SteamAchievementTracker.ViewModel
                 base.UserName = "WorthyD";
             }
 
-            //Profile = await playerProfService.GetProfileCached(base.UserID, base.UserName);
-            Profile = await playerProfService.GetProfileCached(base.UserID, base.UserName);
-            LibCount = "0";
-            var gameList =  playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
-            //List<IGame> gameList = playerLibService.GetPlayerRecentlyPlayedGames(76561198025095151, "WorthyD".ToList());
+            Profile = playerProfService.GetProfileFromDB(base.UserID);
 
-            //Library = new PlayerLibrary()
-            //{
-            //    GameList = gameList.OrderByDescending(x => x.RecentHours).ToList()
-            //};
+            if ((Profile == null) || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval)){
+                Profile = await playerProfService.GetFreshPlayerDetails(base.UserName, (Profile != null));
+                //TODO: Update library
+                var tempGames = playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName); 
+            }
 
-            LibCount = Library.GameList.Count().ToString();
+
+
+            if (Profile.RecentGameLinks != null && Profile.RecentGameLinks.Count > 0)
+            {
+                var gameList = playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
+                Library = new PlayerLibrary()
+                {
+                    GameList = gameList.ToList()
+                };
+            }
+            
+
+            //TODO: Get Stats
+            ///LibCount = Library.GameList.Count().ToString();
 
         }
     }
