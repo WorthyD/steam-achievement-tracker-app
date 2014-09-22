@@ -25,17 +25,14 @@ namespace SteamAchievementTracker.Model
 
         public int AchievementsEarned { get; set; }
         public int TotalAchievements { get; set; }
-        public string PercentComplete
+        public double PercentComplete
         {
             get
             {
-                if (TotalAchievements > 0)
-                {
-                    return (AchievementsEarned / TotalAchievements).ToString();
-                }
-                return string.Empty;
+                return ((double)AchievementsEarned / (double)TotalAchievements * 100);
             }
         }
+
 
         public string ProgressText
         {
@@ -47,7 +44,36 @@ namespace SteamAchievementTracker.Model
 
      
         public bool HasAchievements { get { return !string.IsNullOrEmpty(this.StatsLink); } }
-        public bool BeenProcessed { get { return this.LastUpdated > new DateTime(1900, 2, 1); } }
+        public bool BeenProcessed { get { return this.AchievementRefresh > new DateTime(2001, 2, 1); } }
+
+        public string RecentHoursFormatted
+        {
+            get
+            {
+                return string.Format("{0} hrs", this.RecentHours);
+            }
+        }
+        public string TotalHoursFormatted
+        {
+            get
+            {
+                return string.Format("{0} hrs", this.HoursPlayed);
+            }
+        }
+
+
+
+        public string PercentCompleteFormatted
+        {
+            get
+            {
+                if (TotalAchievements > 0)
+                {
+                    return string.Format("{0}%", (((decimal)AchievementsEarned / (decimal)TotalAchievements) * 100));
+                }
+                return "0%";
+            }
+        }
 
         public Game()
         {

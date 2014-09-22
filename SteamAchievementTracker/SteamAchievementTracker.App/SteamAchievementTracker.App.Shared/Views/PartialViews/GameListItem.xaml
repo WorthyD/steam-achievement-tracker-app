@@ -15,7 +15,7 @@
         <Image Style="{StaticResource GameListLogo}" Source="{Binding Logo}" />
         <Grid>
             <TextBlock Style="{StaticResource DetailItemTitle}">Play Time:</TextBlock>
-            <TextBlock Style="{StaticResource DetailItem}" Text="{Binding RecentHoursFormatted}"></TextBlock>
+            <TextBlock Style="{StaticResource DetailItem}" Text="{Binding TotalHoursFormatted}"></TextBlock>
         </Grid>
         
         <StackPanel Visibility="{Binding HasAchievements, Converter={StaticResource FalseToVisibleConverter}}">
