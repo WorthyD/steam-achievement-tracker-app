@@ -17,6 +17,10 @@ namespace SteamAchievementTracker.DesignData.Model
        public string Description { get; set; }
        public string UnlockTimestamp { get; set; }
 
+       public GameStat()
+       {
+           this.PopulateDesignData("Test", new Random());
+       }
        public void PopulateDesignData(string name, Random rnd)
        {
            int ticks = rnd.Next(0, 100);

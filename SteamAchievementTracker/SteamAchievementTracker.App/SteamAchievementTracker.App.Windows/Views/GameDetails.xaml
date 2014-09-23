@@ -6,8 +6,13 @@
     xmlns:common="using:SteamAchievementTracker.App.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
     mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=GameDetails}" >
-
+    <Page.Resources>
+        <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
+            <ItemsWrapGrid MaximumRowsOrColumns="8"/>
+        </ItemsPanelTemplate>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Hub>
             <Hub.Header>
@@ -35,6 +40,39 @@
                     </StackPanel>
                 </DataTemplate>
             </HubSection>
+            <HubSection Header="Unlocked">
+                <DataTemplate >
+                    <GridView ItemsSource="{Binding UnlockedAchievements}"   
+                                ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
+                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      SelectionMode="None" >
+                        <GridView.ItemTemplate>
+                            <DataTemplate >
+                                <Partials:Achievement></Partials:Achievement>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                    </GridView>
+                </DataTemplate>
+            </HubSection>
+            <HubSection Header="Locked">
+                <DataTemplate >
+                    <GridView ItemsSource="{Binding LockedAchievements}"   
+                                ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
+                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      SelectionMode="None" >
+                        <GridView.ItemTemplate>
+                            <DataTemplate >
+                                <Partials:Achievement></Partials:Achievement>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                    </GridView>
+                </DataTemplate>
+            </HubSection>
+ 
         </Hub>
     </Grid>
 </common:LayoutAwarePage>
