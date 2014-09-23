@@ -49,5 +49,11 @@ namespace SteamAchievementTracker.DesignData.Services
         {
             return GetGames();
         }
+
+
+        public IGame GetGameByID(long appID, long userId)
+        {
+            return GetGames().FirstOrDefault();
+        }
     }
 }

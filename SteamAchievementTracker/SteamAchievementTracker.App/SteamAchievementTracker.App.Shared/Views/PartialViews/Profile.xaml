@@ -11,7 +11,7 @@
 
     <Grid DataContext="{Binding Main.Profile, Source={StaticResource Locator}}">
         <StackPanel Orientation="Vertical">
-            <Image Source="{Binding ThumbURL}" Height="100" Width="100" VerticalAlignment="Top"></Image>
+            <Image Source="{Binding ThumbURL}" Height="200" Width="200" VerticalAlignment="Top"></Image>
             <TextBlock Text="{Binding Name}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <Grid>
                 <Grid.RowDefinitions>

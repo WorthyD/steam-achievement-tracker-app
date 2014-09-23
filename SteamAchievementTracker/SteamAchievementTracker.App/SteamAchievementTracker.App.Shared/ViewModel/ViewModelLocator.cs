@@ -25,11 +25,11 @@ namespace SteamAchievementTracker.App.ViewModel
             }
         }
 
-        public GameDetailViewModel GameDetails
+        public GameDetailsViewModel GameDetails
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<GameDetailViewModel>();
+                return ServiceLocator.Current.GetInstance<GameDetailsViewModel>();
             }
         }
 
@@ -52,6 +52,7 @@ namespace SteamAchievementTracker.App.ViewModel
             }
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<GameDetailsViewModel>();
         }
     }
 }

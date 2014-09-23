@@ -43,17 +43,19 @@ namespace SteamAchievementTracker.DesignData.Model
         public Profile()
         {
             this.Name = "Daniel Worthy";
-            this.ThumbURL = "http://www.gravatar.com/avatar/67b727175a880f13e6240c856764670e.png?s=50";
+            this.ThumbURL = "http://cdn.akamai.steamstatic.com/steamcommunity/public/images/avatars/22/22053d6c2f15587db897d259035f7b395ead2155_full.jpg";
             var count = 10;
             this.RecentGames = new List<IGame>();
             var rnd = new Random();
+            this.RecentGameLinks = new List<string>();
             for (var i = 0; i < count; i++)
             {
                 Game g = new Game();
                 g.PopulateDesignData("Game" + i, rnd);
                 this.RecentGames.Add(g);
+                this.RecentGameLinks.Add(g.GameLink);
             }
-            this.RecentGameLinks = new List<string>();
+
             
         }
     }

@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\GameStat.cs" />
     <Compile Include="Model\PlayerLibrary.cs" />
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +56,10 @@
     <ProjectReference Include="..\SteamAchievementTracker.Model\SteamAchievementTracker.Model.csproj">
       <Project>{f4a9e580-ee40-4dab-a097-20308e80c713}</Project>
       <Name>SteamAchievementTracker.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SteamAchievementTracker.Settings\SteamAchievementTracker.Settings.csproj">
+      <Project>{6ffe85ec-cab7-40da-84ad-4b974f59ca94}</Project>
+      <Name>SteamAchievementTracker.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

@@ -128,6 +128,10 @@
       <Project>{d53f2c6c-b499-4acd-a116-1cfca6d78efb}</Project>
       <Name>SteamAchievementTracker.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SteamAchievementTracker.Settings\SteamAchievementTracker.Settings.csproj">
+      <Project>{6ffe85ec-cab7-40da-84ad-4b974f59ca94}</Project>
+      <Name>SteamAchievementTracker.Settings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SteamAchievementTracker.ViewModel\SteamAchievementTracker.ViewModel.csproj">
       <Project>{5f05558d-efca-44d5-be4a-c9e9be21fbd8}</Project>
       <Name>SteamAchievementTracker.ViewModel</Name>

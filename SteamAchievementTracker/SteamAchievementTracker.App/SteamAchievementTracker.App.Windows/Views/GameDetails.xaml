@@ -6,9 +6,35 @@
     xmlns:common="using:SteamAchievementTracker.App.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" DataContext="{Binding GameDetails, Mode=OneWay, Source={StaticResource Locator}}">
+    mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=GameDetails}" >
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Hub>
+            <Hub.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
+                    <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        Margin="0,0,39,0" 
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button"/>
+                    <TextBlock x:Name="pageTitle" x:Uid="Header" Text="Steam Achievement Tracker" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
+                </Grid>
+            </Hub.Header>
+            <HubSection  x:Uid="Section1Header" Header="Profile" >
+                <DataTemplate>
+                    <StackPanel>
+                        <Image Style="{StaticResource GameListLogo}" Source="{Binding Game.Logo}" />
+                        <TextBlock Text="{Binding Game.Name}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
     </Grid>
 </common:LayoutAwarePage>

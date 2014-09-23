@@ -18,9 +18,9 @@
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
             <ItemsWrapGrid MaximumRowsOrColumns="3"/>
         </ItemsPanelTemplate>
-  </Page.Resources>
+    </Page.Resources>
     <Grid Style="{StaticResource LayoutRootStyle}" >
-        <Grid.RowDefinitions>
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -29,7 +29,6 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--<Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>-->
             <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource PageHeaderTextStyle}" Margin="4,0,26,38"/>
         </Grid>
         <ScrollViewer Grid.Row="1" HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" ZoomMode="Disabled"  >
@@ -45,7 +44,6 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0"  Text="Game Library" Style="{StaticResource TitleTextStyle}"/>
-                    <!-- Game List -->
                     <Grid Grid.Row="1"   HorizontalAlignment="Left" VerticalAlignment="Top">
                         <GridView   ItemsSource="{Binding Library.GameList}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
@@ -61,10 +59,51 @@
 
                         </GridView>
                     </Grid>
-                    <!-- View All -->
                 </Grid>
 
             </StackPanel>
-        </ScrollViewer>
+        </ScrollViewer>-->
+        <Hub>
+            <Hub.Header>
+                <!-- Back button and page title -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
+                    <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        Margin="0,0,39,0" 
+                        VerticalAlignment="Top"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button"/>
+                    <TextBlock x:Name="pageTitle" x:Uid="Header" Text="Steam Achievement Tracker" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                        VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
+                </Grid>
+            </Hub.Header>
+            <HubSection  x:Uid="Section1Header" Header="Profile">
+                <DataTemplate>
+                        <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
+                </DataTemplate>
+            </HubSection>
+            <HubSection x:Uid="Section2Header" Header="Library">
+                <DataTemplate >
+                    <GridView ItemsSource="{Binding Library.GameList}"   
+                                ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
+                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      SelectionMode="None" >
+                        <GridView.ItemTemplate>
+                            <DataTemplate >
+                                <Partials:GameListItem ></Partials:GameListItem>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                    </GridView>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
     </Grid>
+
 </common:LayoutAwarePage>

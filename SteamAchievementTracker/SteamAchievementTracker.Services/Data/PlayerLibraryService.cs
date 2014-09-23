@@ -88,5 +88,11 @@ namespace SteamAchievementTracker.Services.Data
         }
 
 
+
+
+        public IGame GetGameByID(long appID, long userId)
+        {
+            return _db.GetItem(new KeyValuePair<long, long>(userId, appID));
+        }
     }
 }

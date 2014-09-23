@@ -17,9 +17,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\LayoutAwarePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\BooleanToVisibilityConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\BaseViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\GameDetailViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\GameLibraryViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\PartialViews\GameListItem.xaml.cs">
       <DependentUpon>GameListItem.xaml</DependentUpon>

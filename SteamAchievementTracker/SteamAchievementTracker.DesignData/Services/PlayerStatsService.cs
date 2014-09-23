@@ -9,5 +9,28 @@ namespace SteamAchievementTracker.DesignData.Services
 {
    public  class PlayerStatsService : IPlayerStatsService
     {
+        public List<Contracts.Model.IGameAchievement> GetGameAchievementsCached(string statURL)
+        {
+            return GetStats();
+        }
+
+        public Contracts.Model.IGameAchievement GetGameAchievementCached(string statURL, string apiName)
+        {
+            throw new NotImplementedException();
+        }
+        public List<Contracts.Model.IGameAchievement> GetStats()
+        {
+            int count = 40;
+
+            List<Contracts.Model.IGameAchievement> ga = new List<Contracts.Model.IGameAchievement>();
+            var rnd = new Random();
+            for (var i = 0; i < count; i++)
+            {
+                Model.GameStat g = new Model.GameStat();
+                g.PopulateDesignData("Game" + i, rnd);
+                ga.Add(g);
+            }
+            return ga;
+        }
     }
 }
