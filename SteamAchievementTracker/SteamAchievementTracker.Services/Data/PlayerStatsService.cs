@@ -73,5 +73,30 @@ namespace SteamAchievementTracker.Services.Data
 
             return true;
         }
+        public async Task<List<IGameAchievement>> GetFreshStats(string statURL)
+        {
+
+            var stats = await GetPlayerStats(statURL);
+            List<IGameAchievement> ach = new List<IGameAchievement>();
+            Model.GameAchievement game;
+            if (stats.achievements != null) {
+                foreach (var stat in stats.achievements) {
+                    var tempStat = _db.GetItem(new KeyValuePair<string, string>(statURL, stat.apiname));
+
+                    game = new Model.GameAchievement(stat, statURL);
+                    if (tempStat == null) {
+                        _db.InsertItem(game);
+                    } else {
+                        _db.UpdateItem(new KeyValuePair<string, string>(statURL, stat.apiname), game);
+                    }
+                    ach.Add(game);
+                }
+
+                //Update DB Flags for game library
+
+                _gDB.UpdateGameStats(statURL, stats.achievements.ToList().Where(x => x.closed == true).Count(), stats.achievements.Count());
+            }
+            return ach;
+        }
     }
 }
