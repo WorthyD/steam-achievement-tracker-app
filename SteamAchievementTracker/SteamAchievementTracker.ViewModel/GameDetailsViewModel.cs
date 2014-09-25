@@ -38,8 +38,9 @@ namespace SteamAchievementTracker.ViewModel
         private List<IGameAchievement> _UnlockedAchievements;
         public List<IGameAchievement> UnlockedAchievements
         {
-            get { return _UnlockedAchievements; } 
-            set {
+            get { return _UnlockedAchievements; }
+            set
+            {
                 Set(() => UnlockedAchievements, ref  _UnlockedAchievements, value);
             }
         }
@@ -47,8 +48,11 @@ namespace SteamAchievementTracker.ViewModel
 
         public int LockedCount { get { return LockedAchievements.Count(); } }
         private List<IGameAchievement> _LockedAchievements;
-        public List<IGameAchievement> LockedAchievements { get { return _LockedAchievements; } 
-            set {
+        public List<IGameAchievement> LockedAchievements
+        {
+            get { return _LockedAchievements; }
+            set
+            {
                 Set(() => LockedAchievements, ref _LockedAchievements, value);
             }
         }
@@ -61,14 +65,22 @@ namespace SteamAchievementTracker.ViewModel
             {
                 long.TryParse(parameter.ToString(), out gameId);
             }
-            
+
             this.Game = this.playerLibService.GetGameByID(gameId, base.UserID);
-
-            if (this.Game.AchievementRefresh < DateTime.Now.AddMinutes(Settings.))
+            List<IGameAchievement> Achievements = new List<IGameAchievement>();
+            if (!string.IsNullOrEmpty(this.Game.StatsLink))
             {
-            }
 
-            List<IGameAchievement> Achievements = this.statService.GetGameAchievementsCached(this.Game.StatsLink);
+                if (this.Game.AchievementRefresh < DateTime.Now.AddMinutes(Settings.GameAchievement.StatRefreshInterval) || this.Game.TotalAchievements == 0)
+                {
+                    Achievements = await this.statService.GetFreshStats(this.Game.StatsLink);
+                }
+                else
+                {
+                    Achievements = this.statService.GetGameAchievementsCached(this.Game.StatsLink);
+                }
+
+            }
 
             this.LockedAchievements = Achievements.Where(x => x.IsUnlocked == false).ToList();
             this.UnlockedAchievements = Achievements.Where(x => x.IsUnlocked == true).ToList();
