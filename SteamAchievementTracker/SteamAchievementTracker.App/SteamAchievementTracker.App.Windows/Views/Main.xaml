@@ -99,7 +99,6 @@
                                 <Partials:GameListItem ></Partials:GameListItem>
                             </DataTemplate>
                         </GridView.ItemTemplate>
-
                     </GridView>
                 </DataTemplate>
             </HubSection>
