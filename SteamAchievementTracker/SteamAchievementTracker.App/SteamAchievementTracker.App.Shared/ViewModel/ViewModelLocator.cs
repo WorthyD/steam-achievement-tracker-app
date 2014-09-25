@@ -10,6 +10,8 @@ using GalaSoft.MvvmLight;
 using SteamAchievementTracker.Contracts.Services;
 using SteamAchievementTracker.Services.Infrastructure;
 using SteamAchievementTracker.Services.Data;
+using SteamAchievementTracker.Contracts.View;
+using SteamAchievementTracker.App.Views;
 
 namespace SteamAchievementTracker.App.ViewModel
 {
@@ -50,6 +52,8 @@ namespace SteamAchievementTracker.App.ViewModel
                 SimpleIoc.Default.Register<IPlayerStatsService, PlayerStatsService>();
 
             }
+            SimpleIoc.Default.Register<IGameDetailsView, GameDetails>();
+            
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GameDetailsViewModel>();

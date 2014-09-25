@@ -18,8 +18,9 @@
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
             <ItemsWrapGrid MaximumRowsOrColumns="3"/>
         </ItemsPanelTemplate>
+         
     </Page.Resources>
-    <Grid Style="{StaticResource LayoutRootStyle}" >
+    <Grid Style="{StaticResource LayoutRootStyle}"  Name="LayoutRoot"  >
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
@@ -84,22 +85,31 @@
             </Hub.Header>
             <HubSection  x:Uid="Section1Header" Header="Profile">
                 <DataTemplate>
-                        <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
+                    <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
                 </DataTemplate>
             </HubSection>
             <HubSection x:Uid="Section2Header" Header="Library">
                 <DataTemplate >
-                    <GridView ItemsSource="{Binding Library.GameList}"   
+                    <GridView x:Name="GameGrid" ItemsSource="{Binding Library.GameList}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                      SelectionMode="None" >
+                                      SelectionMode="None"
+                              IsItemClickEnabled="True"
+                              >
+                        <interactivity:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="ItemClick">
+                                        <core:InvokeCommandAction 
+                                            Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
+                                            CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
+                                        />
+                                    </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
                         <GridView.ItemTemplate>
                             <DataTemplate >
                                 <Partials:GameListItem ></Partials:GameListItem>
-                            </DataTemplate>
+                </DataTemplate>
                         </GridView.ItemTemplate>
-
                     </GridView>
                 </DataTemplate>
             </HubSection>

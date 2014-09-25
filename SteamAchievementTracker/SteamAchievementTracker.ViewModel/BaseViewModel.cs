@@ -14,7 +14,7 @@ namespace SteamAchievementTracker.ViewModel
     {
         public void Initialize(object parameter)
         {
-
+            string.Format("");
         }
 
         private readonly INavigationService _navigationService;

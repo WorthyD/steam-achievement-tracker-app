@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.Contracts.ViewModels
 {
-    public interface IGameDetailsViewModel
+    public interface IGameDetailsViewModel : IViewModel
     {
         IGame Game { get; set; }
 

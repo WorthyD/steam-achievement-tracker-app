@@ -33,11 +33,9 @@ namespace SteamAchievementTracker.DesignData.Services
             }
             return ga;
         }
-
         public async Task<List<IGameAchievement>> GetFreshStats(string statURL)
         {
             return GetStats();
         }
-
     }
 }

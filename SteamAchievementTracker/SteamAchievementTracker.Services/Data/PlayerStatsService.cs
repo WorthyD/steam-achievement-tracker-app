@@ -5,17 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using  SteamAchievementTracker.App.DataAccess;
 using SteamAchievementTracker.Contracts.Model;
+using SteamAchievementTracker.Contracts.Services;
 
 namespace SteamAchievementTracker.Services.Data
 {
-   public  class PlayerStatsService
+   public  class PlayerStatsService : IPlayerStatsService
     {
           public  SteamAchievementTracker.App.DataAccess.Data.GameAchievement _db;
         public  SteamAchievementTracker.App.DataAccess.Data.Game _gDB;
-        //public  PlayerStatsRepository(string connection) {
-        //    _db = new Data.GameAchievement(connection);
-        //    _gDB = new Data.Game(connection);
-        //}
+        public PlayerStatsService()
+        {
+            _db = new SteamAchievementTracker.App.DataAccess.Data.GameAchievement( Settings.Database.DataBaseName);
+            
+            _gDB = new  SteamAchievementTracker.App.DataAccess.Data.Game(Settings.Database.DataBaseName);
+
+        }
 
         public async Task<SteamAPI.Models.playerstats> GetPlayerStats(string statURL) {
             SteamAPI.Player.PlayerGameStatsRequest request = new SteamAPI.Player.PlayerGameStatsRequest();

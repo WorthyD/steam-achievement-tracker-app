@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using SteamAchievementTracker.Contracts.Model;
 using SteamAchievementTracker.Contracts.Services;
 using SteamAchievementTracker.Contracts.View;
@@ -11,6 +12,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace SteamAchievementTracker.ViewModel
 {
@@ -21,7 +23,7 @@ namespace SteamAchievementTracker.ViewModel
         private IPlayerLibraryService playerLibService;
         private INavigationService navigationService;
         public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService)
-            :base(_navigationService)
+            : base(_navigationService)
         {
 
 
@@ -29,9 +31,11 @@ namespace SteamAchievementTracker.ViewModel
             this.playerLibService = _playerLibService;
             this.playerProfService = _playerProfService;
 
-            if(base.IsInDesignMode){
+            if (base.IsInDesignMode)
+            {
                 this.Initialize(null);
             }
+            this.InitializeCommands();
         }
 
 
@@ -71,7 +75,7 @@ namespace SteamAchievementTracker.ViewModel
             }
         }
         private string _libCount;
-        public string LibCount 
+        public string LibCount
         {
             get { return _libCount; }
             set
@@ -80,7 +84,8 @@ namespace SteamAchievementTracker.ViewModel
             }
         }
 
-        public RelayCommand<IGame> OpenGame
+        //public RelayCommand<IGame> OpenGame
+        public RelayCommand<ItemClickEventArgs> OpenGame
         {
             get;
             set;
@@ -88,10 +93,14 @@ namespace SteamAchievementTracker.ViewModel
 
         private void InitializeCommands()
         {
-            OpenGame = new RelayCommand<IGame>(game =>
+
+            Debug.WriteLine("Init Commands");
+            OpenGame = new RelayCommand<ItemClickEventArgs>(game =>
                     {
-
-
+                        var x = (IGame)game.ClickedItem;
+                        var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
+                       navigationService.Navigate(pageType.GetType(), x.AppID);
+                        Debug.WriteLine("Click - " + x.AppID);
                     });
         }
 
@@ -108,10 +117,11 @@ namespace SteamAchievementTracker.ViewModel
 
             Profile = playerProfService.GetProfileFromDB(base.UserID);
 
-            if ((Profile == null) || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval)){
+            if ((Profile == null) || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval))
+            {
                 Profile = await playerProfService.GetFreshPlayerDetails(base.UserName, (Profile != null));
                 //TODO: Update library
-                var tempGames = playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName); 
+                var tempGames = playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName);
             }
 
 
@@ -124,7 +134,7 @@ namespace SteamAchievementTracker.ViewModel
                     GameList = gameList.ToList()
                 };
             }
-            
+
 
             //TODO: Get Stats
             ///LibCount = Library.GameList.Count().ToString();
