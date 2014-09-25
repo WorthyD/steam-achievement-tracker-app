@@ -64,6 +64,8 @@ namespace SteamAchievementTracker.ViewModel
             
             this.Game = this.playerLibService.GetGameByID(gameId, base.UserID);
 
+
+
             List<IGameAchievement> Achievements = this.statService.GetGameAchievementsCached(this.Game.StatsLink);
 
             this.LockedAchievements = Achievements.Where(x => x.IsUnlocked == false).ToList();

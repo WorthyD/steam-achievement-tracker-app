@@ -1,4 +1,5 @@
-﻿using SteamAchievementTracker.Contracts.Services;
+﻿using SteamAchievementTracker.Contracts.Model;
+using SteamAchievementTracker.Contracts.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.DesignData.Services
 {
-   public  class PlayerStatsService : IPlayerStatsService
+    public class PlayerStatsService : IPlayerStatsService
     {
         public List<Contracts.Model.IGameAchievement> GetGameAchievementsCached(string statURL)
         {
@@ -32,5 +33,11 @@ namespace SteamAchievementTracker.DesignData.Services
             }
             return ga;
         }
+
+        public async Task<List<IGameAchievement>> GetFreshStats(string statURL)
+        {
+            return GetStats();
+        }
+
     }
 }
