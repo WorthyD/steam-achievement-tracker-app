@@ -175,7 +175,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 
         public void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements)
         {
-            string sqlStatement = "UPDATE Game SET AchievementCount = @AchievementCount, AchievementsEarned = @AchievementsEarned, AchievementRefresh = @AchievementRefresh WHERE StatsLink = @StatsLink";
+            string sqlStatement = @"UPDATE Game SET AchievementCount = @AchievementCount, AchievementsEarned = @AchievementsEarned, AchievementRefresh = @AchievementRefresh WHERE StatsLink = @StatsLink";
             using (var statement = base.sqlConnection.Prepare(sqlStatement))
             {
                 statement.Bind("@StatsLink", statsUrl);

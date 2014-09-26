@@ -13,7 +13,8 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Data
     public class RecentGames
     {
         public DataAccess.Data.PlayerRecentGames db = new DataAccess.Data.PlayerRecentGames();
-        public RecentGames(){
+        public RecentGames()
+        {
             db.connectionString = "SteamDB.db";
         }
 
@@ -38,7 +39,6 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Data
 
         }
 
-
         private void InsertData()
         {
             SteamAchievementTracker.Model.RecentGame rg = new Model.RecentGame();
@@ -53,8 +53,8 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Data
 
 
         }
-        
-        
+
+
 
     }
 }

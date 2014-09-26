@@ -27,7 +27,8 @@
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
-                        AutomationProperties.ItemType="Navigation Button"/>
+                        AutomationProperties.ItemType="Navigation Button"
+                             Command="{Binding GoBack}"/>
                     <TextBlock x:Name="pageTitle" x:Uid="Header" Text="Steam Achievement Tracker" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
                 </Grid>
@@ -72,7 +73,7 @@
                     </GridView>
                 </DataTemplate>
             </HubSection>
- 
+
         </Hub>
     </Grid>
 </common:LayoutAwarePage>

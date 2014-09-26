@@ -93,7 +93,7 @@ WHERE
         }
 
         protected override string GetUpdateItemSql() {
-            return "Update Game set	StatsURL = @StatsURL,	AchievementID = @AchievementID,	AchievementIcon = @AchievementIcon,	IsUnlocked = @IsUnlocked,	[Name] = @Name,	[Description]  = @UnLockTimestampWHERE	StatsURL = @StatsURL AND	AchievementID = @AchievementID";
+            return "Update GameAchievement set	StatsURL = @StatsURL,	AchievementID = @AchievementID,	AchievementIcon = @AchievementIcon,	IsUnlocked = @IsUnlocked,	[Name] = @Name,	[Description] = @Description, [UnLockTimestamp] = @UnLockTimestamp WHERE	StatsURL = @StatsURL AND	AchievementID = @AchievementID";
         }
 
         protected override IGameAchievement GetEmpty()

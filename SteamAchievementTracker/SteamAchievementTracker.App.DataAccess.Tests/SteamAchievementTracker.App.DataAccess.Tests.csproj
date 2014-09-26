@@ -123,6 +123,8 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Game.cs" />
+    <Compile Include="Data\GameStats.cs" />
     <Compile Include="Data\PlayerProfile.cs" />
     <Compile Include="Data\RecentGames.cs" />
     <Compile Include="Tasks\TaskTester.cs" />

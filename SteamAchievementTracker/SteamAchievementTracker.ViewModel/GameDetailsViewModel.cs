@@ -1,4 +1,5 @@
-﻿using SteamAchievementTracker.Contracts.Model;
+﻿using GalaSoft.MvvmLight.Command;
+using SteamAchievementTracker.Contracts.Model;
 using SteamAchievementTracker.Contracts.Services;
 using SteamAchievementTracker.Contracts.ViewModels;
 using System;
@@ -15,6 +16,8 @@ namespace SteamAchievementTracker.ViewModel
         private INavigationService navigationService;
         private IPlayerStatsService statService;
 
+        public RelayCommand GoBack { get; set; }
+
         public GameDetailsViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _statService)
             : base(_navigationService)
         {
@@ -23,6 +26,8 @@ namespace SteamAchievementTracker.ViewModel
             this.navigationService = _navigationService;
             this.playerLibService = _playerLibService;
             this.statService = _statService;
+
+            this.InitializeCommands();
 
             if (base.IsInDesignMode)
             {
@@ -55,6 +60,14 @@ namespace SteamAchievementTracker.ViewModel
             {
                 Set(() => LockedAchievements, ref _LockedAchievements, value);
             }
+        }
+        private void InitializeCommands()
+        {
+            GoBack = new RelayCommand(() =>
+            {
+                navigationService.GoBack();
+            });
+
         }
 
         public async void Initialize(object parameter)
