@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using SteamAchievementTracker.Contracts.Services;
 using SteamAchievementTracker.Contracts.ViewModels;
 using System;
@@ -12,18 +13,27 @@ namespace SteamAchievementTracker.ViewModel
 {
     public class BaseViewModel : ViewModelBase, IViewModel
     {
+        public RelayCommand GoBack { get; set; }
+
+
         public void Initialize(object parameter)
         {
-            string.Format("");
         }
 
         private readonly INavigationService _navigationService;
         public BaseViewModel(INavigationService navigationService)
         {
             this._navigationService = navigationService;
+            this.InitializeCommands();
         }
 
-        public string ConnectionString { get { return "SteamAchievementTracker.db"; } }
+        private void InitializeCommands() {
+            GoBack = new RelayCommand(() =>
+            {
+                _navigationService.GoBack();
+            });
+        }
+
 
 
         public long UserID

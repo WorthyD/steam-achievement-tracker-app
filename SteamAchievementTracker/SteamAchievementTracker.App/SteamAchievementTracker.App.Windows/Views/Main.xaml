@@ -9,6 +9,7 @@
     xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
     
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+
     mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" 
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -64,7 +65,7 @@
 
             </StackPanel>
         </ScrollViewer>-->
-        <Hub>
+        <Hub SectionHeaderClick="Hub_SectionHeaderClick">
             <Hub.Header>
                 <!-- Back button and page title -->
                 <Grid>
@@ -88,7 +89,7 @@
                     <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
                 </DataTemplate>
             </HubSection>
-            <HubSection x:Uid="Section2Header" Header="Library">
+            <HubSection  x:Uid="Section2Header" Header="Library" IsHeaderInteractive="True" >
                 <DataTemplate >
                     <GridView x:Name="GameGrid" ItemsSource="{Binding Library.GameList}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"

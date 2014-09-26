@@ -35,6 +35,15 @@ namespace SteamAchievementTracker.App.ViewModel
             }
         }
 
+        public GameLibraryViewModel GameLibrary
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GameLibraryViewModel>();
+            }
+        }
+
+
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -53,10 +62,12 @@ namespace SteamAchievementTracker.App.ViewModel
 
             }
             SimpleIoc.Default.Register<IGameDetailsView, GameDetails>();
+            SimpleIoc.Default.Register<IGameLibrary, GameLibrary>();
             
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GameDetailsViewModel>();
+            SimpleIoc.Default.Register<GameLibraryViewModel>();
         }
     }
 }

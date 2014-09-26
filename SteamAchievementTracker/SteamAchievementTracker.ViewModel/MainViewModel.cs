@@ -99,9 +99,14 @@ namespace SteamAchievementTracker.ViewModel
                     {
                         var x = (IGame)game.ClickedItem;
                         var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
-                       navigationService.Navigate(pageType.GetType(), x.AppID);
+                        navigationService.Navigate(pageType.GetType(), x.AppID);
                         Debug.WriteLine("Click - " + x.AppID);
                     });
+        }
+        public void OpenLibrary()
+        {
+            var pageType = SimpleIoc.Default.GetInstance<IGameLibrary>();
+            navigationService.Navigate(pageType.GetType(), null);
         }
 
         public async void Initialize(object parameter)

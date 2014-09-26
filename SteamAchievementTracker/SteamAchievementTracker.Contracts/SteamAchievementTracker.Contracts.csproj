@@ -48,9 +48,11 @@
     <Compile Include="Services\IPlayerProfileService.cs" />
     <Compile Include="Services\IPlayerStatsService.cs" />
     <Compile Include="ViewModels\IGameDetailsViewModel.cs" />
+    <Compile Include="ViewModels\IGameLibraryViewModel.cs" />
     <Compile Include="ViewModels\IMainViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="View\IGameDetailsView.cs" />
+    <Compile Include="View\IGameLibrary.cs" />
     <Compile Include="View\IView.cs" />
   </ItemGroup>
   <ItemGroup>
