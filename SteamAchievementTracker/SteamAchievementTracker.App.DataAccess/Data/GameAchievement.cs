@@ -114,7 +114,7 @@ WHERE
             statement.Bind("@StatsURL", key.Key);
             statement.Bind("@AchievementID", key.Value);
             statement.Bind("@AchievementIcon", item.AchievementIcon);
-            statement.Bind("@IsUnlocked", item.IsUnlocked);
+            statement.Bind("@IsUnlocked", item.IsUnlocked.BoolToBit());
             statement.Bind("@Name", item.Name);
             statement.Bind("@Description", item.Description);
             statement.Bind("@UnLockTimestamp", item.UnlockTimestamp);

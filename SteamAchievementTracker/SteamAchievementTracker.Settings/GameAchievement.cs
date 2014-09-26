@@ -12,7 +12,7 @@ namespace SteamAchievementTracker.Settings
         {
             get
             {
-                return 0;
+                return 5;
             }
         }
     }

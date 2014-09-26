@@ -2,6 +2,7 @@
 using SteamAchievementTracker.Contracts.Model;
 using SteamAchievementTracker.Contracts.Services;
 using SteamAchievementTracker.Contracts.ViewModels;
+using SteamAchievementTracker.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,11 @@ namespace SteamAchievementTracker.ViewModel
 
         public async void Initialize(object parameter)
         {
+            this.LockedAchievements = new List<IGameAchievement>();
+            this.UnlockedAchievements = new List<IGameAchievement>();
+            this.Game = new Game();
+
+
             long gameId = 0;
 
             if (parameter != null)
@@ -84,7 +90,7 @@ namespace SteamAchievementTracker.ViewModel
             if (!string.IsNullOrEmpty(this.Game.StatsLink))
             {
 
-                if (this.Game.AchievementRefresh < DateTime.Now.AddMinutes(Settings.GameAchievement.StatRefreshInterval) || this.Game.TotalAchievements == 0)
+                if (this.Game.AchievementRefresh < DateTime.Now.AddMinutes(-Settings.GameAchievement.StatRefreshInterval) || this.Game.TotalAchievements == 0)
                 {
                     Achievements = await this.statService.GetFreshStats(this.Game.StatsLink);
                 }

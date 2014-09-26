@@ -42,6 +42,7 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Data
             ga.Name = dummyString;
             ga.StatsURL = dummyString;
             ga.UnlockTimestamp = "1111111";
+            db.InsertItem(ga);
 
         }
     }
