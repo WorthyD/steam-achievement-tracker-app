@@ -17,7 +17,7 @@
     >
     <Page.Resources>
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
-            <ItemsWrapGrid MaximumRowsOrColumns="3"/>
+            <ItemsWrapGrid MaximumRowsOrColumns="5"/>
         </ItemsPanelTemplate>
 
     </Page.Resources>
@@ -29,6 +29,8 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="*"/>
+
+                        <ColumnDefinition Width="160"/>
                     </Grid.ColumnDefinitions>
                     <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
                     <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -38,13 +40,14 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-                    <TextBlock x:Name="pageTitle" x:Uid="Header" Text="Steam Achievement Tracker" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                    <TextBlock x:Name="libraryTitle" x:Uid="Header" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
+                    <ComboBox x:Name="comboBox1"   Grid.Column="2"  ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort}" />
                 </Grid>
             </Hub.Header>
             <HubSection>
                 <DataTemplate>
-                    <GridView x:Name="GameGrid" ItemsSource="{Binding Library.GameList}"   
+                    <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"

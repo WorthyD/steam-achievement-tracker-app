@@ -7,6 +7,7 @@ using SteamAchievementTracker.Contracts.ViewModels;
 using SteamAchievementTracker.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -30,21 +31,78 @@ namespace SteamAchievementTracker.ViewModel
             }
         }
 
-        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService)
-            : base(_navigationService){
-                this.navigationService = _navigationService;
-                this.playerLibService = _playerLibService;
+        private List<IGame> _gameList;
+        public List<IGame> GameList
+        {
+            get { return _gameList; }
+            set
+            {
+                Set(() => GameList, ref _gameList, value);
+            }
+        }
 
-                if (base.IsInDesignMode)
-                {
-                    this.Initialize(null);
-                }
-                this.InitializeCommands();
+        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService)
+            : base(_navigationService)
+        {
+            this.navigationService = _navigationService;
+            this.playerLibService = _playerLibService;
+
+            if (base.IsInDesignMode)
+            {
+                this.Initialize(null);
+            }
+            this.InitializeCommands();
         }
         public RelayCommand<ItemClickEventArgs> OpenGame
         {
             get;
             set;
+        }
+        public ObservableCollection<string> SortLib
+        {
+            get
+            {
+                return new ObservableCollection<string>() { 
+                "Title - Asc",
+                "Title - Desc",
+                "Playtime - Asc",
+                "Playtime - Desc",
+                "Progress - Asc",
+                "Progress - Desc", 
+                "Achievement Count - Asc",
+                "Achievement Count - Desc"
+            };
+            }
+        }
+
+        private string _mySelectedItem;
+        public string SelectedSort
+        {
+            get { return _mySelectedItem; }
+            set
+            {
+
+                Set(() => SelectedSort, ref _mySelectedItem, value);
+                Debug.WriteLine(value);
+                ApplySort();
+            }
+        }
+
+        private void ApplySort()
+        {
+
+            switch (SelectedSort)
+            {
+                case "Title - Asc":
+                    Debug.WriteLine("Sorting Asc");
+                    GameList = GameList.OrderBy(x => x.Name).ToList();
+                    break;
+                case "Title - Desc":
+                    Debug.WriteLine("Sorting Desc");
+                    GameList = GameList.OrderByDescending(x => x.Name).ToList(); 
+                    break;
+
+            }
         }
 
 
@@ -73,6 +131,7 @@ namespace SteamAchievementTracker.ViewModel
             {
                 GameList = gameList.ToList()
             };
+            GameList = gameList;
         }
     }
 

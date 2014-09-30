@@ -10,6 +10,7 @@ namespace SteamAchievementTracker.Contracts.ViewModels
     public interface IGameLibraryViewModel : IViewModel
     {
 
+        List<IGame> GameList { get; set; }
          IPlayerLibrary Library { get; set; }
     }
 }
