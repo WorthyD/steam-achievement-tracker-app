@@ -37,5 +37,11 @@ namespace SteamAchievementTracker.DesignData.Services
         {
             return GetStats();
         }
+
+
+        public Task UpdateStatsByList(List<string> statUrls, IProgress<string> progress)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

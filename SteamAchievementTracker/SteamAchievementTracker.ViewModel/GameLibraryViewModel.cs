@@ -7,6 +7,7 @@ using SteamAchievementTracker.Contracts.ViewModels;
 using SteamAchievementTracker.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -20,31 +21,136 @@ namespace SteamAchievementTracker.ViewModel
         private IPlayerLibraryService playerLibService;
         private INavigationService navigationService;
 
-        private IPlayerLibrary _library;
-        public IPlayerLibrary Library
+        private IPlayerStatsService playerStatsService;
+        //private IPlayerLibrary _library;
+        //public IPlayerLibrary Library
+        //{
+        //    get { return _library; }
+        //    set
+        //    {
+        //        Set(() => Library, ref _library, value);
+        //    }
+        //}
+
+        private List<IGame> _gameList;
+        public List<IGame> GameList
         {
-            get { return _library; }
+            get { return _gameList; }
             set
             {
-                Set(() => Library, ref _library, value);
+                Set(() => GameList, ref _gameList, value);
             }
         }
 
-        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService)
-            : base(_navigationService){
-                this.navigationService = _navigationService;
-                this.playerLibService = _playerLibService;
+        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _playerStatsService)
+            : base(_navigationService)
+        {
+            this.navigationService = _navigationService;
+            this.playerLibService = _playerLibService;
+            this.playerStatsService = _playerStatsService;
 
-                if (base.IsInDesignMode)
-                {
-                    this.Initialize(null);
-                }
-                this.InitializeCommands();
+            if (base.IsInDesignMode)
+            {
+                this.Initialize(null);
+            }
+            if (Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"] != null)
+            {
+                SelectedSort = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"].ToString();
+            }
+            else
+            {
+                SelectedSort = titleAsc;
+            }
+
+            this.InitializeCommands();
         }
         public RelayCommand<ItemClickEventArgs> OpenGame
         {
             get;
             set;
+        }
+
+        private const string titleAsc = "Title - Asc";
+        private const string titleDsc = "Title - Desc";
+        private const string playTimeAsc = "Playtime - Asc";
+        private const string playTimeDsc = "Playtime - Desc";
+        private const string progressAsc = "Progress - Asc";
+        private const string progressDsc = "Progress - Desc";
+        private const string achCountAsc = "Achievement Count - Asc";
+        private const string achCountDesc = "Achievement Count - Desc";
+
+        public ObservableCollection<string> SortLib
+        {
+            get
+            {
+                return new ObservableCollection<string>() { 
+                    titleAsc,
+                    titleDsc,
+                    playTimeAsc,
+                    playTimeDsc,
+                    progressAsc,
+                    progressDsc,
+                    achCountAsc,
+                    achCountDesc
+            };
+            }
+        }
+
+        private string _mySelectedItem;
+        public string SelectedSort
+        {
+            get { return _mySelectedItem; }
+            set
+            {
+                if (_mySelectedItem != value)
+                {
+
+                    Debug.WriteLine("UpdatingSelected Item");
+                    Set(() => SelectedSort, ref _mySelectedItem, value);
+
+                    Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"] = value;
+                    if (GameList != null)
+                    {
+                        GameList = ApplySort(GameList);
+                    }
+                }
+            }
+        }
+
+        private List<IGame> ApplySort(List<IGame> list)
+        {
+            if (list == null) return null;
+            string sort = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"].ToString();
+            switch (sort)
+            {
+                case titleAsc:
+                    list = list.OrderBy(x => x.Name).ToList();
+                    break;
+                case titleDsc:
+                    list = list.OrderByDescending(x => x.Name).ToList();
+                    break;
+                case playTimeAsc:
+                    list = list.OrderBy(x => x.HoursPlayed).ToList();
+                    break;
+                case playTimeDsc:
+                    list = list.OrderByDescending(x => x.HoursPlayed).ToList();
+                    break;
+                case progressAsc:
+                    list = list.OrderBy(x => x.PercentComplete).ToList();
+                    break;
+                case progressDsc:
+                    list = list.OrderByDescending(x => x.PercentComplete).ToList();
+                    break;
+                case achCountAsc:
+                    list = list.OrderBy(x => x.TotalAchievements).ToList();
+                    break;
+                case achCountDesc:
+                    list = list.OrderByDescending(x => x.TotalAchievements).ToList();
+                    break;
+
+
+            }
+            return list;
         }
 
 
@@ -69,67 +175,25 @@ namespace SteamAchievementTracker.ViewModel
             }
             var gameList = await playerLibService.GetPlayerLibraryCached(base.UserID);
 
-            Library = new PlayerLibrary()
+            //TODO: Check settings;
+            if (true)
             {
-                GameList = gameList.ToList()
-            };
+                gameList = gameList.Where(x => x.StatsLink != null && !string.IsNullOrEmpty(x.StatsLink)).ToList();
+            }
+            GameList = ApplySort(gameList);
+
+
+
+            //Todo: Move to button task
+            var progressIndicator = new Progress<string>(ReportProgress);
+            List<string> gameStats = GameList.Select(x => x.StatsLink).ToList();
+           // playerStatsService.UpdateStatsByList(gameStats, progressIndicator);
+        }
+        public void ReportProgress(string value)
+        {
+            Debug.WriteLine(value);
         }
     }
 
-    //public class GameListItemViewModel : IGame
-    //{
-    //    public GameListItemViewModel(IGame g)
-    //    {
-    //        this.SteamUserID = g.SteamUserID;
-    //        this.AppID = g.AppID;
-    //        this.Name = g.Name;
-    //        this.StatsLink = g.StatsLink;
-    //        this.GameLink = g.GameLink;
-    //        this.Logo = g.Logo;
-    //        this.HoursPlayed = g.HoursPlayed;
-    //        this.RecentHours = g.RecentHours;
-    //        this.LastUpdated = g.LastUpdated;
-    //        this.AchievementRefresh = g.AchievementRefresh;
-    //        this.AchievementsEarned = g.AchievementsEarned;
-    //        this.TotalAchievements = g.TotalAchievements;
-    //    }
 
-
-    //    public long SteamUserID { get; set; }
-    //    public int AppID { get; set; }
-    //    public string Name { get; set; }
-    //    public string StatsLink { get; set; }
-    //    public string GameLink { get; set; }
-    //    public string Logo { get; set; }
-
-    //    public decimal HoursPlayed { get; set; }
-
-    //    public decimal RecentHours { get; set; }
-
-    //    public DateTime LastUpdated { get; set; }
-
-    //    public DateTime AchievementRefresh { get; set; }
-
-    //    public int AchievementsEarned { get; set; }
-
-    //    public int TotalAchievements { get; set; }
-
-    //    public string PercentComplete
-    //    {
-    //        get
-    //        {
-    //            return (AchievementsEarned / TotalAchievements).ToString();                //return AchievementsEarned / TotalAchievements;
-    //        }
-    //    }
-
-    //    public string ProgressText
-    //    {
-    //        get
-    //        {
-    //            return string.Format("{0} of {1}", AchievementsEarned, TotalAchievements);
-    //        }
-    //    }
-    //    public bool HasAchievements { get { return !string.IsNullOrEmpty(this.StatsLink); } }
-    //    public bool BeenProcessed { get { return this.LastUpdated > new DateTime(1900, 2, 1); } }
-    //}
 }

@@ -24,6 +24,8 @@ namespace SteamAchievementTracker.Contracts.Model
 
         bool HasAchievements {get;}
         bool BeenProcessed {get;}
+
+        double PercentComplete { get; }
        
     }
 }

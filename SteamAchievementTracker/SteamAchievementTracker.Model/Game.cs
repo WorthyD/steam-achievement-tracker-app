@@ -10,7 +10,7 @@ using SteamAPI.Models;
 
 namespace SteamAchievementTracker.Model
 {
-   public  class Game : IGame
+    public class Game : IGame
     {
         public long SteamUserID { get; set; }
         public int AppID { get; set; }
@@ -29,7 +29,9 @@ namespace SteamAchievementTracker.Model
         {
             get
             {
-                return ((double)AchievementsEarned / (double)TotalAchievements * 100);
+                if (TotalAchievements == 0) return 0;
+                var a = ((double)AchievementsEarned / (double)TotalAchievements * 100);
+                return Math.Round(a, 2, MidpointRounding.ToEven);
             }
         }
 
@@ -42,7 +44,7 @@ namespace SteamAchievementTracker.Model
             }
         }
 
-     
+
         public bool HasAchievements { get { return !string.IsNullOrEmpty(this.StatsLink); } }
         public bool BeenProcessed { get { return this.AchievementRefresh > new DateTime(2001, 2, 1); } }
 
@@ -69,7 +71,7 @@ namespace SteamAchievementTracker.Model
             {
                 if (TotalAchievements > 0)
                 {
-                    return string.Format("{0}%", (((decimal)AchievementsEarned / (decimal)TotalAchievements) * 100));
+                    return string.Format("{0}%", this.PercentComplete);
                 }
                 return "0%";
             }
