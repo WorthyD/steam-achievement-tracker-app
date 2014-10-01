@@ -28,7 +28,10 @@ namespace SteamAchievementTracker.Services.Data
             var response = await request.GetResponse();
 
             var model = new Model.Profile(response.Profile);
-            if (update)
+
+            IProfile p = GetProfileFromDB(model.ID64);
+
+            if (update || p != null)
             {
                 model.LastUpdate = DateTime.Now;
                 _db.UpdateItem(model.ID64, model);

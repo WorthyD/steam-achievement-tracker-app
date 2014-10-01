@@ -19,53 +19,10 @@
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
             <ItemsWrapGrid MaximumRowsOrColumns="3"/>
         </ItemsPanelTemplate>
-         
+
     </Page.Resources>
     <Grid Style="{StaticResource LayoutRootStyle}"  Name="LayoutRoot"  >
-        <!--<Grid.RowDefinitions>
-            <RowDefinition Height="140"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock x:Name="pageTitle" Grid.Column="1" Text="{Binding Title}" Style="{StaticResource PageHeaderTextStyle}" Margin="4,0,26,38"/>
-        </Grid>
-        <ScrollViewer Grid.Row="1" HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" ZoomMode="Disabled"  >
-            <StackPanel  Grid.Row="1"  Orientation="Horizontal"  Margin="116,0,40,46">
-                <StackPanel>
-                    <TextBlock Grid.Row="0"  Text="Profile" Style="{StaticResource TitleTextStyle}"/>
-                    <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
-                </StackPanel >
-                <Grid  x:Name="GameGrid">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"  Text="Game Library" Style="{StaticResource TitleTextStyle}"/>
-                    <Grid Grid.Row="1"   HorizontalAlignment="Left" VerticalAlignment="Top">
-                        <GridView   ItemsSource="{Binding Library.GameList}"   
-                                ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
-                                
-                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
-                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                      SelectionMode="None" >
-                            <GridView.ItemTemplate>
-                                <DataTemplate >
-                                    <Partials:GameListItem ></Partials:GameListItem>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-
-                        </GridView>
-                    </Grid>
-                </Grid>
-
-            </StackPanel>
-        </ScrollViewer>-->
-        <Hub SectionHeaderClick="Hub_SectionHeaderClick">
+        <Hub SectionHeaderClick="Hub_SectionHeaderClick" Grid.Row="0">
             <Hub.Header>
                 <!-- Back button and page title -->
                 <Grid>
@@ -100,21 +57,37 @@
                               >
                         <interactivity:Interaction.Behaviors>
                             <core:EventTriggerBehavior EventName="ItemClick">
-                                        <core:InvokeCommandAction 
+                                <core:InvokeCommandAction 
                                             Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
                                             CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
                                         />
-                                    </core:EventTriggerBehavior>
+                            </core:EventTriggerBehavior>
                         </interactivity:Interaction.Behaviors>
                         <GridView.ItemTemplate>
                             <DataTemplate >
                                 <Partials:GameListItem ></Partials:GameListItem>
-                </DataTemplate>
+                            </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
                 </DataTemplate>
             </HubSection>
         </Hub>
+        <Grid Grid.Row="0" Background="#D73D3D3D" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Background="#FF3D3D3D" VerticalAlignment="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Partials:LoginView DataContext="{Binding LoginVM}" Grid.Column="1"></Partials:LoginView>
+                </Grid>
+            </StackPanel>
+
+        </Grid>
     </Grid>
 
 </common:LayoutAwarePage>
