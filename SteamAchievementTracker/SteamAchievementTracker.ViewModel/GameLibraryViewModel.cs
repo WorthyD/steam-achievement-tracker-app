@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
@@ -18,19 +19,10 @@ namespace SteamAchievementTracker.ViewModel
 {
     public class GameLibraryViewModel : BaseViewModel, IGameLibraryViewModel
     {
+        //Services
         private IPlayerLibraryService playerLibService;
         private INavigationService navigationService;
-
         private IPlayerStatsService playerStatsService;
-        //private IPlayerLibrary _library;
-        //public IPlayerLibrary Library
-        //{
-        //    get { return _library; }
-        //    set
-        //    {
-        //        Set(() => Library, ref _library, value);
-        //    }
-        //}
 
         private List<IGame> _gameList;
         public List<IGame> GameList
@@ -41,33 +33,17 @@ namespace SteamAchievementTracker.ViewModel
                 Set(() => GameList, ref _gameList, value);
             }
         }
-
-        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _playerStatsService)
-            : base(_navigationService)
+        private string _libProgress;
+        public string LibProgress
         {
-            this.navigationService = _navigationService;
-            this.playerLibService = _playerLibService;
-            this.playerStatsService = _playerStatsService;
-
-            if (base.IsInDesignMode)
+            get
             {
-                this.Initialize(null);
+                return LibProgress;
             }
-            if (Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"] != null)
+            set
             {
-                SelectedSort = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"].ToString();
+                Set(() => LibProgress, ref _libProgress, value);
             }
-            else
-            {
-                SelectedSort = titleAsc;
-            }
-
-            this.InitializeCommands();
-        }
-        public RelayCommand<ItemClickEventArgs> OpenGame
-        {
-            get;
-            set;
         }
 
         private const string titleAsc = "Title - Asc";
@@ -78,6 +54,8 @@ namespace SteamAchievementTracker.ViewModel
         private const string progressDsc = "Progress - Desc";
         private const string achCountAsc = "Achievement Count - Asc";
         private const string achCountDesc = "Achievement Count - Desc";
+
+        private CancellationTokenSource cancelLibrary;
 
         public ObservableCollection<string> SortLib
         {
@@ -117,10 +95,50 @@ namespace SteamAchievementTracker.ViewModel
             }
         }
 
+        //Events 
+        public RelayCommand<ItemClickEventArgs> OpenGame { get; set; }
+        public RelayCommand StartRefresh { get; set; }
+        public RelayCommand CancelRefresh { get; set; }
+
+
+
+
+
+
+        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _playerStatsService)
+            : base(_navigationService)
+        {
+            this.navigationService = _navigationService;
+            this.playerLibService = _playerLibService;
+            this.playerStatsService = _playerStatsService;
+
+            if (base.IsInDesignMode)
+            {
+                this.Initialize(null);
+            }
+            if (Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"] != null)
+            {
+                SelectedSort = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"].ToString();
+            }
+            else
+            {
+                SelectedSort = titleAsc;
+            }
+
+            this.InitializeCommands();
+        }
         private List<IGame> ApplySort(List<IGame> list)
         {
             if (list == null) return null;
-            string sort = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"].ToString();
+
+            string sort = titleAsc;
+
+            if (Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"] != null)
+            {
+                sort = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"].ToString();
+            }
+
+
             switch (sort)
             {
                 case titleAsc:
@@ -163,6 +181,14 @@ namespace SteamAchievementTracker.ViewModel
                 navigationService.Navigate(pageType.GetType(), x.AppID);
                 Debug.WriteLine("Click - " + x.AppID);
             });
+            StartRefresh = new RelayCommand(() =>
+            {
+                StartLibraryRefresh();
+            });
+            CancelRefresh = new RelayCommand(() =>
+            {
+                StopLibraryRefresh();
+            });
         }
         public async void Initialize(object parameter)
         {
@@ -173,6 +199,7 @@ namespace SteamAchievementTracker.ViewModel
                 base.UserID = 76561198025095151;
                 base.UserName = "WorthyD";
             }
+
             var gameList = await playerLibService.GetPlayerLibraryCached(base.UserID);
 
             //TODO: Check settings;
@@ -182,13 +209,27 @@ namespace SteamAchievementTracker.ViewModel
             }
             GameList = ApplySort(gameList);
 
-
-
             //Todo: Move to button task
-            var progressIndicator = new Progress<string>(ReportProgress);
-            List<string> gameStats = GameList.Select(x => x.StatsLink).ToList();
-           // playerStatsService.UpdateStatsByList(gameStats, progressIndicator);
         }
+
+
+        public void StartLibraryRefresh()
+        {
+            cancelLibrary = new CancellationTokenSource();
+            var progressIndicator = new Progress<string>(ReportProgress);
+            //List<string> gameStats = GameList.Select(x => x.StatsLink).ToList();
+            playerStatsService.UpdateStatsByList(GameList, progressIndicator, cancelLibrary.Token);
+
+        }
+
+        public void StopLibraryRefresh()
+        {
+            if (cancelLibrary != null)
+            {
+                cancelLibrary.Cancel();
+            }
+        }
+
         public void ReportProgress(string value)
         {
             Debug.WriteLine(value);

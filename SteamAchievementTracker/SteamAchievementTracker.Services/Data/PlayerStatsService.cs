@@ -7,6 +7,7 @@ using SteamAchievementTracker.App.DataAccess;
 using SteamAchievementTracker.Contracts.Model;
 using SteamAchievementTracker.Contracts.Services;
 using System.Diagnostics;
+using System.Threading;
 
 namespace SteamAchievementTracker.Services.Data
 {
@@ -118,7 +119,7 @@ namespace SteamAchievementTracker.Services.Data
         }
 
         //public 
-        public async Task UpdateStatsByList(List<IGame> gameLibrary, IProgress<string> progress)
+        public async Task UpdateStatsByList(List<IGame> gameLibrary, IProgress<string> progress, CancellationToken ct)
         {
 
             int counter = 0;
@@ -136,7 +137,7 @@ namespace SteamAchievementTracker.Services.Data
             }
 
         }
-        public async Task<List<IGameAchievement>> GetGameStatistics(IGame game, bool delay = false)
+        public async Task<List<IGameAchievement>> GetGameStatistics(IGame game,  bool delay = false)
         {
             List<IGameAchievement> achievements = new List<IGameAchievement>();
             if (game.AchievementRefresh < DateTime.Now.AddMinutes(-Settings.GameAchievement.StatRefreshInterval) || game.TotalAchievements == 0)
