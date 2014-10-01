@@ -8,7 +8,10 @@ namespace SteamAPI.Player {
     public class PlayerGameStatsResponse : Response<PlayerGameStatsRequest> {
         public Models.playerstats PlayerStats { get; set; }
         public PlayerGameStatsResponse() { }
-        public PlayerGameStatsResponse(PlayerGameStatsRequest request) : base(request) { }
+
+        public PlayerGameStatsResponse(PlayerGameStatsRequest request) : base(request) { 
+            this.PlayerStats = new Models.playerstats(); 
+        }
 
     }
 }

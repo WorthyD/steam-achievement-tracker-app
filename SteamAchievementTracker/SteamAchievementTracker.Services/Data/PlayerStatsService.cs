@@ -118,26 +118,51 @@ namespace SteamAchievementTracker.Services.Data
         }
 
         //public 
-        public async Task UpdateStatsByList(List<string> statUrls, IProgress<string> progress)
+        public async Task UpdateStatsByList(List<IGame> gameLibrary, IProgress<string> progress)
         {
 
             int counter = 0;
-            foreach (var statUrl in statUrls)
+            foreach (var game in gameLibrary)
             {
-                Debug.WriteLine("Getting Stats for" + statUrl);
-                await GetFreshStats(statUrl);
-                //todo: settings
-                await Task.Delay(1000);
+                Debug.WriteLine("Getting Stats for" + game.StatsLink);
+                await GetGameStatistics(game, true);
 
                 counter++;
                 if (progress != null)
                 {
-                    progress.Report(string.Format("Updating: {0} out of {1}", counter, statUrls.Count));
+                    progress.Report(string.Format("Updating: {0} out of {1}", counter, gameLibrary.Count));
                 }
-
 
             }
 
+        }
+        public async Task<List<IGameAchievement>> GetGameStatistics(IGame game, bool delay = false)
+        {
+            List<IGameAchievement> achievements = new List<IGameAchievement>();
+            if (game.AchievementRefresh < DateTime.Now.AddMinutes(-Settings.GameAchievement.StatRefreshInterval) || game.TotalAchievements == 0)
+            {
+                achievements = await this.GetFreshStats(game.StatsLink);
+
+                if (delay)
+                {
+                    //todo: settings
+                    await Task.Delay(1000);
+                }
+
+            }
+            else
+            {
+                achievements = this.GetGameAchievementsCached(game.StatsLink);
+            }
+
+            return achievements;
+
+        }
+
+
+        public Task UpdateStatsByList(List<string> statUrls, IProgress<string> progress)
+        {
+            throw new NotImplementedException();
         }
     }
 }

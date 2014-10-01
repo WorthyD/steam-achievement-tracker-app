@@ -90,14 +90,15 @@ namespace SteamAchievementTracker.ViewModel
             if (!string.IsNullOrEmpty(this.Game.StatsLink))
             {
 
-                if (this.Game.AchievementRefresh < DateTime.Now.AddMinutes(-Settings.GameAchievement.StatRefreshInterval) || this.Game.TotalAchievements == 0)
-                {
-                    Achievements = await this.statService.GetFreshStats(this.Game.StatsLink);
-                }
-                else
-                {
-                    Achievements = this.statService.GetGameAchievementsCached(this.Game.StatsLink);
-                }
+                //if (this.Game.AchievementRefresh < DateTime.Now.AddMinutes(-Settings.GameAchievement.StatRefreshInterval) || this.Game.TotalAchievements == 0)
+                //{
+                //    Achievements = await this.statService.GetFreshStats(this.Game.StatsLink);
+                //}
+                //else
+                //{
+                //    Achievements = this.statService.GetGameAchievementsCached(this.Game.StatsLink);
+                //}
+                Achievements = await this.statService.GetGameStatistics(this.Game, false);
 
             }
 
