@@ -22,6 +22,10 @@ namespace SteamAchievementTracker.ViewModel
         private IPlayerProfileService playerProfService;
         private IPlayerLibraryService playerLibService;
         private INavigationService navigationService;
+
+        public ViewModel.LoginViewModel LoginVM { get; set; }
+
+
         public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService)
             : base(_navigationService)
         {
@@ -36,6 +40,10 @@ namespace SteamAchievementTracker.ViewModel
                 this.Initialize(null);
             }
             this.InitializeCommands();
+            LoginVM = new LoginViewModel();
+            LoginVM.playerLibService = _playerLibService;
+            LoginVM.playerProfService = _playerProfService;
+            LoginVM.InitializeCommands();
         }
 
 
