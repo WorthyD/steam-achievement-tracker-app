@@ -121,13 +121,21 @@ namespace SteamAchievementTracker.ViewModel
         {
             _title = "Steam Achievement Tracker";
 
-            if (base.UserID == 0)
+            if (base.UserID != 0)
             {
-                //Return login
-                base.UserID = 76561198025095151;
-                base.UserName = "WorthyD";
+                this.LoadData();
+                this.LoginVM.IsVisible = false;
+            }
+            else
+            {
+                this.LoginVM.IsVisible = true;
             }
 
+
+        }
+
+        public async void LoadData()
+        {
             Profile = playerProfService.GetProfileFromDB(base.UserID);
 
             if ((Profile == null) || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval))
@@ -149,9 +157,7 @@ namespace SteamAchievementTracker.ViewModel
             }
 
 
-            //TODO: Get Stats
-            ///LibCount = Library.GameList.Count().ToString();
-
         }
+
     }
 }

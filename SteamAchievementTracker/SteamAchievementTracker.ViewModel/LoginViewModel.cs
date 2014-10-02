@@ -56,10 +56,25 @@ namespace SteamAchievementTracker.ViewModel
             });
         }
 
-        private void LoginUser()
+        private async Task LoginUser()
         {
 
-            var p = playerProfService.GetFreshPlayerDetails(this.UserName, false);
+            var p = await playerProfService.GetFreshPlayerDetails(this.UserName, false);
+            if (p != null && p.ID64 != 0)
+            {
+                Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID64"] = p.ID64;
+                Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID"] = p.ID;
+
+                //TODO:
+                //Call base viewmodel to load info
+
+                this.IsVisible = false;
+            }
+            else
+            {
+                //TODO:
+                //show validation message
+            }
 
             Debug.WriteLine(this.UserName);
         }

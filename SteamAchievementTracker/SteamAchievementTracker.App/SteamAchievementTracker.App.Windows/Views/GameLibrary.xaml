@@ -30,7 +30,7 @@
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="*"/>
 
-                        <ColumnDefinition Width="160"/>
+                        <ColumnDefinition Width="* "/>
                     </Grid.ColumnDefinitions>
                     <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
                     <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -40,9 +40,14 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-                    <TextBlock x:Name="libraryTitle" x:Uid="Header" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                    <TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
-                    <ComboBox x:Name="comboBox1"   Grid.Column="2"  ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" />
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <ComboBox x:Name="comboBox1"     ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" />
+                        <Button Command="{Binding StartRefresh}">Start Refresh</Button>
+                        <Button Command="{Binding CancelRefresh}">Stop Refresh</Button>
+                        <TextBlock Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
+                    </StackPanel>
                 </Grid>
             </Hub.Header>
             <HubSection>
@@ -55,13 +60,13 @@
                               IsItemClickEnabled="True"
                               >
                         <interactivity:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="ItemClick">
-                    <core:InvokeCommandAction 
+                            <core:EventTriggerBehavior EventName="ItemClick">
+                                <core:InvokeCommandAction 
                                             Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
                                             CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
                                         />
-                </core:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
+                            </core:EventTriggerBehavior>
+                        </interactivity:Interaction.Behaviors>
                         <GridView.ItemTemplate>
                             <DataTemplate >
                                 <Partials:GameListItem ></Partials:GameListItem>
