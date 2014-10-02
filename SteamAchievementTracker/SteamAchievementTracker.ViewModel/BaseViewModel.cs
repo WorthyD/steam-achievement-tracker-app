@@ -1,6 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using SteamAchievementTracker.Contracts.Services;
+using SteamAchievementTracker.Contracts.View;
 using SteamAchievementTracker.Contracts.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,8 @@ namespace SteamAchievementTracker.ViewModel
     public class BaseViewModel : ViewModelBase, IViewModel
     {
         public RelayCommand GoBack { get; set; }
+        public RelayCommand GoLibrary { get; set; }
+        public RelayCommand GoHome { get; set; }
 
 
         public void Initialize(object parameter)
@@ -27,10 +31,21 @@ namespace SteamAchievementTracker.ViewModel
             this.InitializeCommands();
         }
 
-        private void InitializeCommands() {
+        private void InitializeCommands()
+        {
             GoBack = new RelayCommand(() =>
             {
                 _navigationService.GoBack();
+            });
+            GoHome = new RelayCommand(() =>
+            {
+                _navigationService.GoBack();
+
+            });
+            GoLibrary = new RelayCommand(() =>
+            {
+                var pageType = SimpleIoc.Default.GetInstance<IGameLibrary>();
+                _navigationService.Navigate(pageType.GetType(), null);
             });
         }
 
