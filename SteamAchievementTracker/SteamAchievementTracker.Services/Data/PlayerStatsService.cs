@@ -119,25 +119,25 @@ namespace SteamAchievementTracker.Services.Data
         }
 
         //public 
-        public async Task UpdateStatsByList(List<IGame> gameLibrary, IProgress<string> progress, CancellationToken ct)
+        public async Task UpdateStatsByList(List<IGame> gameLibrary, IProgress<int> progress, CancellationToken ct)
         {
 
             int counter = 0;
             foreach (var game in gameLibrary)
             {
                 Debug.WriteLine("Getting Stats for" + game.StatsLink);
-                await GetGameStatistics(game, true);
+                var ach = await GetGameStatistics(game, true);
 
                 counter++;
                 if (progress != null)
                 {
-                    progress.Report(string.Format("Updating: {0} out of {1}", counter, gameLibrary.Count));
+                    progress.Report(counter);
                 }
-
+                ct.ThrowIfCancellationRequested();
             }
 
         }
-        public async Task<List<IGameAchievement>> GetGameStatistics(IGame game,  bool delay = false)
+        public async Task<List<IGameAchievement>> GetGameStatistics(IGame game,  bool delay = false )
         {
             List<IGameAchievement> achievements = new List<IGameAchievement>();
             if (game.AchievementRefresh < DateTime.Now.AddMinutes(-Settings.GameAchievement.StatRefreshInterval) || game.TotalAchievements == 0)

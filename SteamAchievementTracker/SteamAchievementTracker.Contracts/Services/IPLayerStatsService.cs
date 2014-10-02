@@ -13,7 +13,7 @@ namespace SteamAchievementTracker.Contracts.Services
         List<IGameAchievement> GetGameAchievementsCached(string statURL);
         IGameAchievement GetGameAchievementCached(string statURL, string apiName);
         Task<List<IGameAchievement>> GetFreshStats(string statURL);
-        Task UpdateStatsByList(List<IGame> statUrls, IProgress<string> progress, CancellationToken ct);
+        Task UpdateStatsByList(List<IGame> statUrls, IProgress<int> progress, CancellationToken ct);
         Task<List<IGameAchievement>> GetGameStatistics(IGame game, bool delay = false);
     }
 }

@@ -29,7 +29,6 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="*"/>
-
                         <ColumnDefinition Width="* "/>
                     </Grid.ColumnDefinitions>
                     <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
@@ -46,7 +45,7 @@
                         <ComboBox x:Name="comboBox1"     ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" />
                         <Button Command="{Binding StartRefresh}">Start Refresh</Button>
                         <Button Command="{Binding CancelRefresh}">Stop Refresh</Button>
-                        <TextBlock Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
+                        <TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
                     </StackPanel>
                 </Grid>
             </Hub.Header>

@@ -41,7 +41,7 @@ namespace SteamAchievementTracker.DesignData.Services
 
 
 
-        public Task UpdateStatsByList(List<IGame> statUrls, IProgress<string> progress, System.Threading.CancellationToken ct)
+        public Task UpdateStatsByList(List<IGame> statUrls, IProgress<int> progress, System.Threading.CancellationToken ct)
         {
             throw new NotImplementedException();
         }

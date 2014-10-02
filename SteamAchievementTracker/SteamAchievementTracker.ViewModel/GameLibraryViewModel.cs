@@ -115,6 +115,7 @@ namespace SteamAchievementTracker.ViewModel
             if (base.IsInDesignMode)
             {
                 this.Initialize(null);
+                this.LibProgress = "Updating: {0} out of {1}";
             }
             if (Windows.Storage.ApplicationData.Current.RoamingSettings.Values["SortOrder"] != null)
             {
@@ -194,12 +195,7 @@ namespace SteamAchievementTracker.ViewModel
         public async void Initialize(object parameter)
         {
 
-            if (base.UserID == 0)
-            {
-                //Return login
-                base.UserID = 76561198025095151;
-                base.UserName = "WorthyD";
-            }
+
 
             var gameList = await playerLibService.GetPlayerLibraryCached(base.UserID);
 
@@ -217,10 +213,16 @@ namespace SteamAchievementTracker.ViewModel
         public void StartLibraryRefresh()
         {
             cancelLibrary = new CancellationTokenSource();
-            var progressIndicator = new Progress<string>(ReportProgress);
+            var progressIndicator = new Progress<int>(ReportProgress);
             //List<string> gameStats = GameList.Select(x => x.StatsLink).ToList();
-            playerStatsService.UpdateStatsByList(GameList, progressIndicator, cancelLibrary.Token);
-
+            try
+            {
+                playerStatsService.UpdateStatsByList(GameList, progressIndicator, cancelLibrary.Token);
+            }
+            catch (OperationCanceledException ex)
+            {
+                //Do stuff to handle cancellation
+            }
         }
 
         public void StopLibraryRefresh()
@@ -232,10 +234,10 @@ namespace SteamAchievementTracker.ViewModel
             }
         }
 
-        public void ReportProgress(string value)
+        public void ReportProgress(int value)
         {
             Debug.WriteLine(value);
-            LibProgress = value;
+            LibProgress = string.Format("Updating: {0} out of {1}", value, GameList.Count);
         }
     }
 

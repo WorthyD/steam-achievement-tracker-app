@@ -31,7 +31,8 @@ namespace SteamAPI.Tests {
         [TestMethod]
         public async Task GetPlayerGameStats() {
             SteamAPI.Player.PlayerGameStatsRequest request = new SteamAPI.Player.PlayerGameStatsRequest();
-            request.GameUrl = "http://steamcommunity.com/id/WorthyD/stats/Borderlands";
+            request.GameUrl = "http://steamcommunity.com/id/WorthyD/stats/L4D2";
+            //request.GameUrl = "http://steamcommunity.com/id/WorthyD/stats/Borderlands";
             var resposne = await request.GetResponse();
             Assert.IsTrue(resposne.PlayerStats.achievements.Where(x => x.closed == true).Count() > 0);
         }

@@ -17,9 +17,9 @@ namespace SteamAPI.Models {
 
         private playerstatsGame gameField;
 
-        private playerstatsPlayer playerField;
+        //private playerstatsPlayer playerField;
 
-        private playerstatsStats statsField;
+        //private playerstatsStats statsField;
 
         private playerstatsAchievement[] achievementsField;
 
@@ -53,25 +53,25 @@ namespace SteamAPI.Models {
             }
         }
 
-        /// <remarks/>
-        public playerstatsPlayer player {
-            get {
-                return this.playerField;
-            }
-            set {
-                this.playerField = value;
-            }
-        }
+        ///// <remarks/>
+        //public playerstatsPlayer player {
+        //    get {
+        //        return this.playerField;
+        //    }
+        //    set {
+        //        this.playerField = value;
+        //    }
+        //}
 
-        /// <remarks/>
-        public playerstatsStats stats {
-            get {
-                return this.statsField;
-            }
-            set {
-                this.statsField = value;
-            }
-        }
+        ///// <remarks/>
+        //public playerstatsStats stats {
+        //    get {
+        //        return this.statsField;
+        //    }
+        //    set {
+        //        this.statsField = value;
+        //    }
+        //}
 
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("achievement", IsNullable = false)]
@@ -191,22 +191,22 @@ namespace SteamAPI.Models {
         }
     }
 
-    /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-    public partial class playerstatsStats {
+    ///// <remarks/>
+    //[System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+    //public partial class playerstatsStats {
 
-        private decimal hoursPlayedField;
+    //    private decimal hoursPlayedField;
 
-        /// <remarks/>
-        public decimal hoursPlayed {
-            get {
-                return this.hoursPlayedField;
-            }
-            set {
-                this.hoursPlayedField = value;
-            }
-        }
-    }
+    //    /// <remarks/>
+    //    public decimal hoursPlayed {
+    //        get {
+    //            return this.hoursPlayedField;
+    //        }
+    //        set {
+    //            this.hoursPlayedField = value;
+    //        }
+    //    }
+    //}
 
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]

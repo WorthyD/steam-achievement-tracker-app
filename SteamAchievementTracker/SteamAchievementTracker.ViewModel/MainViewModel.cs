@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
@@ -21,12 +22,13 @@ namespace SteamAchievementTracker.ViewModel
 
         private IPlayerProfileService playerProfService;
         private IPlayerLibraryService playerLibService;
+        private IPlayerStatsService playerStatsService;
         private INavigationService navigationService;
 
         public ViewModel.LoginViewModel LoginVM { get; set; }
 
 
-        public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService)
+        public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService, IPlayerStatsService _playerStatsService)
             : base(_navigationService)
         {
 
@@ -34,6 +36,7 @@ namespace SteamAchievementTracker.ViewModel
             this.navigationService = _navigationService;
             this.playerLibService = _playerLibService;
             this.playerProfService = _playerProfService;
+            this.playerStatsService = _playerStatsService;
 
             if (base.IsInDesignMode)
             {
@@ -154,10 +157,40 @@ namespace SteamAchievementTracker.ViewModel
                 {
                     GameList = gameList.ToList()
                 };
+                RefreshRecentGames();
             }
-
-
         }
 
+        public async void RefreshRecentGames()
+        {
+            var progressIndicator = new Progress<int>(ReportProgress);
+            var cancelLibrary = new CancellationTokenSource();
+            await playerStatsService.UpdateStatsByList(Library.GameList, progressIndicator, cancelLibrary.Token);
+            var gameList = playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
+
+            bool refresh = false;
+            foreach (var g in gameList)
+            {
+                var tg = Library.GameList.Where(x => x.AppID == g.AppID).FirstOrDefault();
+                if (g.AchievementsEarned != tg.AchievementsEarned)
+                {
+                    refresh = true;
+                }
+
+            }
+
+            if (refresh)
+            {
+                Library = new PlayerLibrary()
+                {
+                    GameList = gameList.ToList()
+                };
+            }
+
+        }
+        public void ReportProgress(int value)
+        {
+
+        }
     }
 }
