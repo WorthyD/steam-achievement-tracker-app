@@ -145,7 +145,7 @@ namespace SteamAchievementTracker.ViewModel
             {
                 Profile = await playerProfService.GetFreshPlayerDetails(base.UserName, (Profile != null));
                 //TODO: Update library
-                var tempGames = playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName);
+                var tempGames = await playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName);
             }
 
 

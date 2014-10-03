@@ -140,7 +140,7 @@ namespace SteamAchievementTracker.Services.Data
         public async Task<List<IGameAchievement>> GetGameStatistics(IGame game,  bool delay = false )
         {
             List<IGameAchievement> achievements = new List<IGameAchievement>();
-            if (game.AchievementRefresh < DateTime.Now.AddMinutes(-Settings.GameAchievement.StatRefreshInterval) || game.TotalAchievements == 0)
+            if (game.RefreshAchievements)
             {
                 achievements = await this.GetFreshStats(game.StatsLink);
 

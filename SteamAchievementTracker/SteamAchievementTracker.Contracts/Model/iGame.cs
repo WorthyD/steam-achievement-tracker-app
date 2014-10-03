@@ -19,6 +19,7 @@ namespace SteamAchievementTracker.Contracts.Model
         DateTime LastUpdated { get; set; }
         DateTime AchievementRefresh { get; set; }
 
+        bool RefreshAchievements { get; set; }
         int AchievementsEarned { get; set; }
         int TotalAchievements { get; set; }
 

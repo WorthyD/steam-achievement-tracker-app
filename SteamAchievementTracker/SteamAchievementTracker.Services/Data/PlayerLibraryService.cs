@@ -65,18 +65,24 @@ namespace SteamAchievementTracker.Services.Data
                 if (tGame == null)
                 {
                     tGame = new Model.Game(g, steamID64);
+                    tGame.RefreshAchievements = (tGame.HoursPlayed > 0);
                     _db.InsertItem(tGame);
                 }
                 else
                 {
-                    _db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), new Model.Game(g, steamID64));
+                    var ng =  new Model.Game(g, steamID64);
+                    //Has user played game since last time.
+                    if (g.hoursOnRecordSpecified && (tGame.HoursPlayed != g.hoursOnRecord))
+                    {
+                        ng.RefreshAchievements = true;
+                    }
+
+                    _db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), ng);
                 }
 
                 gl.Add(tGame);
 
             }
-
-
 
             return gl;
 

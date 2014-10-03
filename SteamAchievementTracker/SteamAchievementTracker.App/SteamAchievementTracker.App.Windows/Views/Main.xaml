@@ -25,7 +25,7 @@
     <Page.TopAppBar>
 
         <AppBar x:Name="BottomAppBar1" Padding="10,0,10,0" AutomationProperties.Name="Bottom App Bar">
-                <Partials:TopNav></Partials:TopNav>
+                <!--<Partials:TopNav></Partials:TopNav>-->
         </AppBar>
 
     </Page.TopAppBar>

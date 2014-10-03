@@ -22,6 +22,7 @@ namespace SteamAchievementTracker.Model
         public decimal RecentHours { get; set; }
         public DateTime LastUpdated { get; set; }
         public DateTime AchievementRefresh { get; set; }
+        public bool RefreshAchievements { get; set; }
 
         public int AchievementsEarned { get; set; }
         public int TotalAchievements { get; set; }

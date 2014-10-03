@@ -46,6 +46,20 @@ namespace SteamAchievementTracker.ViewModel
             }
         }
 
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get
+            {
+                return _isRefreshing;
+            }
+            set
+            {
+                Set(() => IsRefreshing, ref _isRefreshing, value);
+            }
+        }
+
+
         private const string titleAsc = "Title - Asc";
         private const string titleDsc = "Title - Desc";
         private const string playTimeAsc = "Playtime - Asc";
@@ -195,8 +209,11 @@ namespace SteamAchievementTracker.ViewModel
         public async void Initialize(object parameter)
         {
 
+            await GetGames();
 
-
+        }
+        public async Task GetGames()
+        {
             var gameList = await playerLibService.GetPlayerLibraryCached(base.UserID);
 
             //TODO: Check settings;
@@ -206,23 +223,29 @@ namespace SteamAchievementTracker.ViewModel
             }
             GameList = ApplySort(gameList);
 
-            //Todo: Move to button task
+            this.IsRefreshing = false;
+
         }
 
 
-        public void StartLibraryRefresh()
+        public async  void StartLibraryRefresh()
         {
+            this.IsRefreshing = true;
             cancelLibrary = new CancellationTokenSource();
             var progressIndicator = new Progress<int>(ReportProgress);
             //List<string> gameStats = GameList.Select(x => x.StatsLink).ToList();
             try
             {
-                playerStatsService.UpdateStatsByList(GameList, progressIndicator, cancelLibrary.Token);
+                await playerStatsService.UpdateStatsByList(GameList, progressIndicator, cancelLibrary.Token);
+                this.IsRefreshing = false;
             }
             catch (OperationCanceledException ex)
             {
                 //Do stuff to handle cancellation
+                this.IsRefreshing = false;
             }
+
+            await GetGames();
         }
 
         public void StopLibraryRefresh()
@@ -236,8 +259,8 @@ namespace SteamAchievementTracker.ViewModel
 
         public void ReportProgress(int value)
         {
-            Debug.WriteLine(value);
             LibProgress = string.Format("Updating: {0} out of {1}", value, GameList.Count);
+            Debug.WriteLine(LibProgress);
         }
     }
 

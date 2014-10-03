@@ -43,8 +43,6 @@
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
                     <StackPanel Grid.Column="2" Orientation="Horizontal">
                         <ComboBox x:Name="comboBox1"     ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" />
-                        <Button Command="{Binding StartRefresh}">Start Refresh</Button>
-                        <Button Command="{Binding CancelRefresh}">Stop Refresh</Button>
                         <TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
                     </StackPanel>
                 </Grid>
@@ -76,4 +74,13 @@
             </HubSection>
         </Hub>
     </Grid>
+
+    <Page.BottomAppBar>
+        <AppBar>
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}">Start Refresh</Button>
+                <Button Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}">Stop Refresh</Button>
+            </StackPanel>
+        </AppBar>
+    </Page.BottomAppBar>
 </common:LayoutAwarePage>

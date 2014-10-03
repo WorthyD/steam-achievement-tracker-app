@@ -152,11 +152,11 @@
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MainSettings.xaml.cs">
+      <DependentUpon>MainSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PartialViews\ProfileAndRecentGames.xaml.cs">
       <DependentUpon>ProfileAndRecentGames.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PartialViews\TopNav.xaml.cs">
-      <DependentUpon>TopNav.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -190,11 +190,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PartialViews\ProfileAndRecentGames.xaml">
+    <Page Include="Views\MainSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PartialViews\TopNav.xaml">
+    <Page Include="Views\PartialViews\ProfileAndRecentGames.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

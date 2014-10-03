@@ -158,7 +158,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
         {
             if (obj == null) return false;
             bool tBool = false;
-            bool.TryParse(obj.ToString(), out tBool);
+            //bool.TryParse(obj.ToString(), out tBool);
+            tBool = obj.ToString() != "0";
             return tBool;
         }
 

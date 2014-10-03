@@ -20,6 +20,7 @@ namespace SteamAchievementTracker.DesignData.Model
         public string Logo { get; set; }
 
         public decimal HoursPlayed { get; set; }
+        public bool RefreshAchievements { get; set; }
 
         public decimal RecentHours { get; set; }
         public string RecentHoursFormatted

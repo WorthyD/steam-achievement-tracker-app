@@ -17,6 +17,8 @@ namespace SteamAPI.Player
         public async Task<PlayerGameStatsResponse> GetResponse(int timeout = 30)
         {
             string formattedGameUrl = string.Format("{0}?xml=1", GameUrl);
+
+            Debug.WriteLine(string.Format("Calling: {0}", formattedGameUrl));
             string responseString = await Helpers.WebRequestHelper.ExecuteGetRequest(formattedGameUrl, timeout);
             PlayerGameStatsResponse response = new PlayerGameStatsResponse(this);
             try
@@ -26,7 +28,7 @@ namespace SteamAPI.Player
             }
             catch (Exception)
             {
-                Debug.WriteLine("Error parsing " + formattedGameUrl);
+                Debug.WriteLine("Error parsing {0} " + formattedGameUrl);
             }
 
             return response;

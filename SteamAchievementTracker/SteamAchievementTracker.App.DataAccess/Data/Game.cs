@@ -15,6 +15,16 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         {
             this.connectionString = connection;
         }
+
+        private string selectAllColumns
+        {
+            get
+            {
+                return @"[SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours],
+                    	 [HoursPlayed], [RefreshAchievements], [AchievementsEarned], 
+                         [AchievementCount], [AchievementRefresh], [LastUpdated]";
+            }
+        }
         public override string CreateTable()
         {
             return @"CREATE TABLE IF NOT EXISTS [Game] (
@@ -27,6 +37,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
                 [LargeLogo] vARCHAR(150)  NULL,
                 [HoursPlayed] FLOAT  NULL,
                 [RecentHours] FLOAT  NULL,
+                [RefreshAchievements] BOOLEAN  NULL,
                 [AchievementsEarned] INTEGER  NULL,
                 [AchievementCount] INTEGER  NULL,
                 [AchievementRefresh] TIMESTAMP  NULL,
@@ -39,7 +50,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         {
             return @"Select
 	                    [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours],
-                    	[HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated]
+                    	[HoursPlayed], [RefreshAchievements], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated]
                     FROM
                     	Game";
             //Where
@@ -68,6 +79,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             g.Logo = statement["SmallLogo"].ToSafeString();
             g.StatsLink = statement["StatsLink"].ToSafeString();
             g.TotalAchievements = statement["AchievementCount"].ToInt();
+            g.RefreshAchievements = statement["RefreshAchievements"].ToBool();
             g.LastUpdated = statement["LastUpdated"].ToDate();
             g.AchievementRefresh = statement["AchievementRefresh"].ToDate();
             g.Name = statement["Name"].ToSafeString();
@@ -79,7 +91,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         {
             return @"Select
 	                    SteamID, GameID, Name, StatsLink, GameLink, SmallLogo,RecentHours,
-                    	HoursPlayed, AchievementsEarned, AchievementCount, AchievementRefresh, LastUpdated
+                    	HoursPlayed, AchievementsEarned,  RefreshAchievements, AchievementCount, AchievementRefresh, LastUpdated
                     FROM
                     	Game
                     Where
@@ -110,6 +122,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 				Name, StatsLink,
 				GameLink, SmallLogo,RecentHours,
 				HoursPlayed, AchievementsEarned,
+                RefreshAchievements,
 				AchievementCount, AchievementRefresh,
 				LastUpdated)
 			VALUES
@@ -117,6 +130,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 				@Name, @StatsLink,
 				@GameLink, @SmallLogo, @RecentHours,
 				@HoursPlayed, @AchievementsEarned,
+                @RefreshAchievements,
 				@AchievementCount, @AchievementRefresh,
 				@LastUpdated);";
         }
@@ -131,6 +145,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             statement.Bind("@SmallLogo", item.Logo);
             statement.Bind("@RecentHours", item.RecentHours);
             statement.Bind("@HoursPlayed", item.HoursPlayed);
+            statement.Bind("@RefreshAchievements", true.BoolToBit());
             statement.Bind("@AchievementsEarned", item.AchievementsEarned);
             statement.Bind("@AchievementCount", item.TotalAchievements);
             statement.Bind("@AchievementRefresh", item.AchievementRefresh.DateTimeSQLite());
@@ -145,6 +160,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             	StatsLink = @StatsLink,
             	GameLink = @GameLink,
             	SmallLogo = @SmallLogo,
+                RefreshAchievements = @RefreshAchievements,
                 RecentHours = @RecentHours,
             	HoursPlayed = @HoursPlayed,
             	LastUpdated =@LastUpdated
@@ -162,6 +178,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             statement.Bind("@SmallLogo", item.Logo);
             statement.Bind("@RecentHours", item.RecentHours);
             statement.Bind("@HoursPlayed", item.HoursPlayed);
+            statement.Bind("@RefreshAchievements", item.RefreshAchievements.BoolToBit());
             //statement.Bind("@AchievementsEarned", item.AchievementsEarned);
             //statement.Bind("@AchievementCount", item.TotalAchievements);
             //statement.Bind("@PurchaseDate", item.PurchaseDate);
@@ -175,10 +192,16 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 
         public void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements)
         {
-            string sqlStatement = @"UPDATE Game SET AchievementCount = @AchievementCount, AchievementsEarned = @AchievementsEarned, AchievementRefresh = @AchievementRefresh WHERE StatsLink = @StatsLink";
+            string sqlStatement = @"UPDATE Game SET 
+                    AchievementCount = @AchievementCount, 
+                    AchievementsEarned = @AchievementsEarned, 
+                    RefreshAchievements = @RefreshAchievements,
+                    AchievementRefresh = @AchievementRefresh 
+                    WHERE StatsLink = @StatsLink";
             using (var statement = base.sqlConnection.Prepare(sqlStatement))
             {
                 statement.Bind("@StatsLink", statsUrl);
+                statement.Bind("@RefreshAchievements", false.BoolToBit());
                 statement.Bind("@AchievementsEarned", achievementsEarned);
                 statement.Bind("@AchievementCount", totalAchievements);
                 statement.Bind("@AchievementRefresh", DateTime.Now.DateTimeSQLite());
@@ -190,7 +213,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         public List<IGame> GetGamesBySteamID(long id64)
         {
             var items = new ObservableCollection<IGame>();
-            string sqlStatement = "Select [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours], [HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated] FROM Game Where SteamID = @SteamID";
+            string sqlStatement = "Select [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours], [RefreshAchievements], [HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated] FROM Game Where SteamID = @SteamID";
             using (var statement = base.sqlConnection.Prepare(sqlStatement))
             {
                 statement.Bind("@SteamID", id64);
@@ -205,7 +228,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         }
         public IGame GetGameBySteamIDAndUrl(long id64, string gameURL)
         {
-            string sqlStatement = "Select [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours], [HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated] FROM Game Where SteamID = @SteamID and GameLink = @GameLink";
+            string sqlStatement = "Select [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours],[RefreshAchievements], [HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated] FROM Game Where SteamID = @SteamID and GameLink = @GameLink";
             using (var statement = base.sqlConnection.Prepare(sqlStatement))
             {
                 statement.Bind("@SteamID", id64);
