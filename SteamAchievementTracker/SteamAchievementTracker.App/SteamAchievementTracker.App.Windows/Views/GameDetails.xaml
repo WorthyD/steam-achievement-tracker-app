@@ -12,10 +12,14 @@
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
             <ItemsWrapGrid MaximumRowsOrColumns="8"/>
         </ItemsPanelTemplate>
-        <DataTemplate>
-
-        </DataTemplate>
     </Page.Resources>
+    <Page.TopAppBar>
+
+        <AppBar x:Name="BTopAppBar1" Padding="10,0,10,0" AutomationProperties.Name="Top App Bar">
+            <Partials:TopNav></Partials:TopNav>
+        </AppBar>
+
+    </Page.TopAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Hub>
             <Hub.Header>
@@ -45,14 +49,6 @@
                     </Grid>
                 </Grid>
             </Hub.Header>
-            <!--<HubSection  x:Uid="Section1Header" Header="Profile" >
-                <DataTemplate>
-                    <StackPanel>
-                        <Image Style="{StaticResource GameListLogo}" Source="{Binding Game.Logo}" />
-                        <TextBlock Text="{Binding Game.Name}"></TextBlock>
-                    </StackPanel>
-                </DataTemplate>
-            </HubSection>-->
             <HubSection >
                 <HubSection.HeaderTemplate>
 
@@ -64,18 +60,22 @@
                     </DataTemplate>
                 </HubSection.HeaderTemplate>
                 <DataTemplate >
-                    <GridView ItemsSource="{Binding UnlockedAchievements}"   
+                    <Grid>
+                        <GridView ItemsSource="{Binding UnlockedAchievements}"    Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                       SelectionMode="None" >
-                        <GridView.ItemTemplate>
-                            <DataTemplate >
-                                <Partials:Achievement></Partials:Achievement>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:Achievement></Partials:Achievement>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
 
-                    </GridView>
+                        </Partials:SectionLoading>
+                    </Grid>
                 </DataTemplate>
             </HubSection>
             <HubSection>
@@ -83,23 +83,28 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>Locked:</TextBlock>
-                            <TextBlock Text="{Binding Game.TotalAchievements}"></TextBlock>
+                            <TextBlock Text="{Binding Game.AchievementsLocked}"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </HubSection.HeaderTemplate>
                 <DataTemplate >
-                    <GridView ItemsSource="{Binding LockedAchievements}"   
+
+                    <Grid>
+                        <GridView ItemsSource="{Binding LockedAchievements}"    Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                       SelectionMode="None" >
-                        <GridView.ItemTemplate>
-                            <DataTemplate >
-                                <Partials:Achievement></Partials:Achievement>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:Achievement></Partials:Achievement>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
 
-                    </GridView>
+                        </GridView>
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
+                    </Grid>
                 </DataTemplate>
             </HubSection>
 

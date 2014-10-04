@@ -23,6 +23,13 @@ namespace SteamAchievementTracker.ViewModel
         #endregion
 
         #region Properties
+        public bool CanGoBack
+        {
+            get
+            {
+                return this._navigationService.CanGoBack(); ;
+            }
+        }
         public long UserID
         {
             get
@@ -71,7 +78,7 @@ namespace SteamAchievementTracker.ViewModel
             //SettingsPane.GetForCurrentView().CommandsRequested += ViewModel_CommandsRequested;
             var iSettings = SimpleIoc.Default.GetInstance<ISettingsViewModel>();
             iSettings.Initialize();
- 
+
         }
 
         public virtual void DeInitialize()
@@ -95,7 +102,9 @@ namespace SteamAchievementTracker.ViewModel
             });
             GoHome = new RelayCommand(() =>
             {
-                _navigationService.GoBack();
+
+                var pageType = SimpleIoc.Default.GetInstance<IMain>();
+                _navigationService.Navigate(pageType.GetType(), null);
 
             });
             GoLibrary = new RelayCommand(() =>
@@ -104,7 +113,7 @@ namespace SteamAchievementTracker.ViewModel
                 _navigationService.Navigate(pageType.GetType(), null);
             });
 
-       }
+        }
 
 
 

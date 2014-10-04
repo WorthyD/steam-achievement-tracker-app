@@ -35,6 +35,10 @@ namespace SteamAchievementTracker.Services.Infrastructure
                 Frame.GoBack();
             }
         }
+        public bool CanGoBack()
+        {
+            return Frame.CanGoBack;
+        }
 
         public virtual void Navigate(string pageName)
         {

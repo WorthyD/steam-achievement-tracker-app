@@ -25,6 +25,7 @@ namespace SteamAchievementTracker.Model
         public bool RefreshAchievements { get; set; }
 
         public int AchievementsEarned { get; set; }
+        public int AchievementsLocked { get { return TotalAchievements - AchievementsEarned; } }
         public int TotalAchievements { get; set; }
         public double PercentComplete
         {
@@ -32,7 +33,7 @@ namespace SteamAchievementTracker.Model
             {
                 if (TotalAchievements == 0) return 0;
                 var a = ((double)AchievementsEarned / (double)TotalAchievements * 100);
-                return Math.Round(a, 2, MidpointRounding.ToEven);
+                return Math.Round(a, 0, MidpointRounding.ToEven);
             }
         }
 
