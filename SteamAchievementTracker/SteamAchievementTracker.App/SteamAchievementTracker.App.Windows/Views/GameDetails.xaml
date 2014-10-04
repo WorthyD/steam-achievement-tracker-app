@@ -12,14 +12,17 @@
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
             <ItemsWrapGrid MaximumRowsOrColumns="8"/>
         </ItemsPanelTemplate>
+        <DataTemplate>
+
+        </DataTemplate>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Hub>
             <Hub.Header>
-                <Grid>
+                <Grid HorizontalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
                     <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -29,19 +32,37 @@
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"
                              Command="{Binding GoBack}"/>
-                    <TextBlock x:Name="pageTitle" x:Uid="Header" Text="Steam Achievement Tracker" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
+
+                    <Grid  Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="8*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Style="{StaticResource GameListLogo}" Source="{Binding Game.Logo}" />
+                        <TextBlock Grid.Column="1" Text="{Binding Game.Name}"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{Binding Game.PercentCompleteFormatted}" TextAlignment="Right"></TextBlock>
+                    </Grid>
                 </Grid>
             </Hub.Header>
-            <HubSection  x:Uid="Section1Header" Header="Profile" >
+            <!--<HubSection  x:Uid="Section1Header" Header="Profile" >
                 <DataTemplate>
                     <StackPanel>
                         <Image Style="{StaticResource GameListLogo}" Source="{Binding Game.Logo}" />
                         <TextBlock Text="{Binding Game.Name}"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
-            </HubSection>
-            <HubSection Header="Unlocked">
+            </HubSection>-->
+            <HubSection >
+                <HubSection.HeaderTemplate>
+
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>Unlocked:</TextBlock>
+                            <TextBlock Text="{Binding Game.AchievementsEarned}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </HubSection.HeaderTemplate>
                 <DataTemplate >
                     <GridView ItemsSource="{Binding UnlockedAchievements}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
@@ -57,7 +78,15 @@
                     </GridView>
                 </DataTemplate>
             </HubSection>
-            <HubSection Header="Locked">
+            <HubSection>
+                <HubSection.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>Locked:</TextBlock>
+                            <TextBlock Text="{Binding Game.TotalAchievements}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </HubSection.HeaderTemplate>
                 <DataTemplate >
                     <GridView ItemsSource="{Binding LockedAchievements}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"

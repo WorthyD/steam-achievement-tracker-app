@@ -20,38 +20,25 @@ namespace SteamAchievementTracker.ViewModel
     public class MainViewModel : BaseViewModel, IMainViewModel
     {
 
+        #region Services
         private IPlayerProfileService playerProfService;
         private IPlayerLibraryService playerLibService;
         private IPlayerStatsService playerStatsService;
         private INavigationService navigationService;
+        #endregion
 
-        public ViewModel.LoginViewModel LoginVM { get; set; }
-
-
-        public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService, IPlayerStatsService _playerStatsService)
-            : base(_navigationService)
+        #region Commands
+        public RelayCommand<ItemClickEventArgs> OpenGame
         {
-
-
-            this.navigationService = _navigationService;
-            this.playerLibService = _playerLibService;
-            this.playerProfService = _playerProfService;
-            this.playerStatsService = _playerStatsService;
-
-            if (base.IsInDesignMode)
-            {
-                this.Initialize(null);
-            }
-            this.InitializeCommands();
-            LoginVM = new LoginViewModel();
-            LoginVM.playerLibService = _playerLibService;
-            LoginVM.playerProfService = _playerProfService;
-            LoginVM.InitializeCommands();
+            get;
+            set;
         }
 
 
+        #endregion
 
-
+        #region Properties
+        public ViewModel.LoginViewModel LoginVM { get; set; }
         private string _title;
         public string Title
         {
@@ -95,19 +82,42 @@ namespace SteamAchievementTracker.ViewModel
             }
         }
 
-        //public RelayCommand<IGame> OpenGame
-        public RelayCommand<ItemClickEventArgs> OpenGame
+
+        #endregion
+
+        public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService, IPlayerStatsService _playerStatsService)
+            : base(_navigationService)
         {
-            get;
-            set;
+
+
+            this.navigationService = _navigationService;
+            this.playerLibService = _playerLibService;
+            this.playerProfService = _playerProfService;
+            this.playerStatsService = _playerStatsService;
+
+            if (base.IsInDesignMode)
+            {
+                this.Initialize(null);
+            }
+            this.InitializeCommands();
+            LoginVM = new LoginViewModel();
+            LoginVM.playerLibService = _playerLibService;
+            LoginVM.playerProfService = _playerProfService;
+            LoginVM.InitializeCommands();
         }
 
+
+
+
+        //public RelayCommand<IGame> OpenGame
         private void InitializeCommands()
         {
 
             Debug.WriteLine("Init Commands");
             OpenGame = new RelayCommand<ItemClickEventArgs>(game =>
                     {
+
+                        this.DeInitialize();
                         var x = (IGame)game.ClickedItem;
                         var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
                         navigationService.Navigate(pageType.GetType(), x.AppID);
@@ -116,12 +126,15 @@ namespace SteamAchievementTracker.ViewModel
         }
         public void OpenLibrary()
         {
+            this.DeInitialize();
             var pageType = SimpleIoc.Default.GetInstance<IGameLibrary>();
             navigationService.Navigate(pageType.GetType(), null);
         }
 
-        public async void Initialize(object parameter)
+        public override void Initialize(object parameter)
         {
+            base.Initialize(parameter);
+
             _title = "Steam Achievement Tracker";
 
             if (base.UserID != 0)
@@ -133,8 +146,6 @@ namespace SteamAchievementTracker.ViewModel
             {
                 this.LoginVM.IsVisible = true;
             }
-
-
         }
 
         public async void LoadData()

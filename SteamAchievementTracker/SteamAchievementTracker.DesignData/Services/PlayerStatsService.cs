@@ -17,7 +17,7 @@ namespace SteamAchievementTracker.DesignData.Services
 
         public Contracts.Model.IGameAchievement GetGameAchievementCached(string statURL, string apiName)
         {
-            throw new NotImplementedException();
+            return null;
         }
         public List<Contracts.Model.IGameAchievement> GetStats()
         {
@@ -46,9 +46,10 @@ namespace SteamAchievementTracker.DesignData.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<IGameAchievement>> GetGameStatistics(IGame game, bool delay = false)
+        public async Task<List<IGameAchievement>> GetGameStatistics(IGame game, bool delay = false)
         {
-            throw new NotImplementedException();
+
+            return GetStats();
         }
     }
 }

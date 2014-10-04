@@ -28,17 +28,17 @@ namespace SteamAchievementTracker.App.Views {
         public Main() {
             this.InitializeComponent();
         }
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            SettingsPane.GetForCurrentView().CommandsRequested += onCommandsRequested;
-        }
+        //protected override void OnNavigatedTo(NavigationEventArgs e)
+        //{
+        //    //SettingsPane.GetForCurrentView().CommandsRequested += onCommandsRequested;
+        //}
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
+        //protected override void OnNavigatedFrom(NavigationEventArgs e)
+        //{
+        //    base.OnNavigatedFrom(e);
 
-            SettingsPane.GetForCurrentView().CommandsRequested -= onCommandsRequested;
-        }
+        //    //SettingsPane.GetForCurrentView().CommandsRequested -= onCommandsRequested;
+        //}
 
         IViewModel IView.ViewModel
         {
@@ -51,20 +51,20 @@ namespace SteamAchievementTracker.App.Views {
             model.OpenLibrary();
         }
 
-        void onCommandsRequested(SettingsPane settingsPane, SettingsPaneCommandsRequestedEventArgs e)
-        {
-            SettingsCommand defaultsCommand = new SettingsCommand("defaults", "Defaults",
-                (handler) =>
-                {
-                    // SettingsFlyout1 is defined in "SettingsFlyout1.xaml"
-                    //rootPage.NotifyUser("You opened the 'Defaults' SettingsFlyout.", NotifyType.StatusMessage);
-                    //SettingsFlyout1 sf = new SettingsFlyout1();
-                    MainSettings sf = new MainSettings();
-                    sf.Show();
-                });
-            e.Request.ApplicationCommands.Add(defaultsCommand);
+        //void onCommandsRequested(SettingsPane settingsPane, SettingsPaneCommandsRequestedEventArgs e)
+        //{
+        //    SettingsCommand defaultsCommand = new SettingsCommand("defaults", "Defaults",
+        //        (handler) =>
+        //        {
+        //            // SettingsFlyout1 is defined in "SettingsFlyout1.xaml"
+        //            //rootPage.NotifyUser("You opened the 'Defaults' SettingsFlyout.", NotifyType.StatusMessage);
+        //            //SettingsFlyout1 sf = new SettingsFlyout1();
+        //            MainSettings sf = new MainSettings();
+        //            sf.Show();
+        //        });
+        //    e.Request.ApplicationCommands.Add(defaultsCommand);
 
-        }
+        //}
 
     }
 }

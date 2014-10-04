@@ -17,6 +17,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\LayoutAwarePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\BooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\PartialViews\Achievement.xaml.cs">
       <DependentUpon>Achievement.xaml</DependentUpon>

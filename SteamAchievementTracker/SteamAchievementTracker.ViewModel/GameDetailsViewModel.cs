@@ -17,7 +17,9 @@ namespace SteamAchievementTracker.ViewModel
         private INavigationService navigationService;
         private IPlayerStatsService statService;
 
-        public RelayCommand GoBack { get; set; }
+        #region Commands
+
+        #endregion
 
         public GameDetailsViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _statService)
             : base(_navigationService)
@@ -64,15 +66,17 @@ namespace SteamAchievementTracker.ViewModel
         }
         private void InitializeCommands()
         {
-            GoBack = new RelayCommand(() =>
-            {
-                navigationService.GoBack();
-            });
+            //GoBack = new RelayCommand(() =>
+            //{
+            //    navigationService.GoBack();
+            //});
 
         }
 
-        public async void Initialize(object parameter)
+        public async override void Initialize(object parameter)
         {
+            base.Initialize(parameter);
+
             this.LockedAchievements = new List<IGameAchievement>();
             this.UnlockedAchievements = new List<IGameAchievement>();
             this.Game = new Game();

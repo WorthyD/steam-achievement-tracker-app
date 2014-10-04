@@ -20,9 +20,13 @@ namespace SteamAchievementTracker.ViewModel
     public class GameLibraryViewModel : BaseViewModel, IGameLibraryViewModel
     {
         //Services
+        #region Services
         private IPlayerLibraryService playerLibService;
         private INavigationService navigationService;
         private IPlayerStatsService playerStatsService;
+        #endregion
+
+        #region Properties
 
         private List<IGame> _gameList;
         public List<IGame> GameList
@@ -108,11 +112,14 @@ namespace SteamAchievementTracker.ViewModel
                 }
             }
         }
+        #endregion
 
+        #region Events
         //Events 
         public RelayCommand<ItemClickEventArgs> OpenGame { get; set; }
         public RelayCommand StartRefresh { get; set; }
         public RelayCommand CancelRefresh { get; set; }
+        #endregion
 
 
 
@@ -191,6 +198,7 @@ namespace SteamAchievementTracker.ViewModel
         {
             OpenGame = new RelayCommand<ItemClickEventArgs>(game =>
             {
+                this.DeInitialize();
                 var x = (IGame)game.ClickedItem;
                 var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
                 navigationService.Navigate(pageType.GetType(), x.AppID);
@@ -206,12 +214,14 @@ namespace SteamAchievementTracker.ViewModel
                 StopLibraryRefresh();
             });
         }
-        public async void Initialize(object parameter)
+        public async override void Initialize(object parameter)
         {
+            base.Initialize(parameter);
 
             await GetGames();
 
         }
+
         public async Task GetGames()
         {
             var gameList = await playerLibService.GetPlayerLibraryCached(base.UserID);
