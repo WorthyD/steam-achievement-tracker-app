@@ -29,7 +29,12 @@
 
     </Page.TopAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="LayoutRoot" >
-        <Hub>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ProgressBar Grid.Row="0" Height="10" IsIndeterminate="True" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}"></ProgressBar>
+        <Hub Grid.Row="1" Margin="0,-10,0,0">
             <Hub.Header>
                 <!-- Back button and page title -->
                 <Grid>
@@ -50,43 +55,88 @@
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
                     <StackPanel Grid.Column="2" Orientation="Horizontal">
                         <ComboBox x:Name="comboBox1"     ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" />
-                        <TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
                     </StackPanel>
                 </Grid>
             </Hub.Header>
             <HubSection>
                 <DataTemplate>
-                    <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
+                    <Grid>
+                        <SemanticZoom x:Name="semanticZoom">
+                            <SemanticZoom.ZoomedOutView>
+                                <GridView ScrollViewer.IsHorizontalScrollChainingEnabled="False" ItemsSource="{Binding GameListChars}" >
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                Text="{Binding Group.Key}"
+                                FontFamily="Segoe UI" FontWeight="Light"
+                                FontSize="24"/>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                    <GridView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <ItemsWrapGrid ItemWidth="75" ItemHeight="75" MaximumRowsOrColumns="1"/>
+                                        </ItemsPanelTemplate>
+                                    </GridView.ItemsPanel>
+                                    <GridView.ItemContainerStyle>
+                                        <Style TargetType="GridViewItem">
+                                            <Setter Property="Margin" Value="4" />
+                                            <Setter Property="Padding" Value="10" />
+                                            <Setter Property="BorderBrush" Value="Gray" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                                        </Style>
+                                    </GridView.ItemContainerStyle>
+                                </GridView>
+                            </SemanticZoom.ZoomedOutView>
+                            <SemanticZoom.ZoomedInView>
+                                <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                       SelectionMode="None"
                               IsItemClickEnabled="True"
                               >
-                        <interactivity:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="ItemClick">
-                                <core:InvokeCommandAction 
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:EventTriggerBehavior EventName="ItemClick">
+                                            <core:InvokeCommandAction 
                                             Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
                                             CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
                                         />
-                            </core:EventTriggerBehavior>
-                        </interactivity:Interaction.Behaviors>
-                        <GridView.ItemTemplate>
-                            <DataTemplate >
-                                <Partials:GameListItem ></Partials:GameListItem>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
+                                        </core:EventTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate >
+                                            <Partials:GameListItem ></Partials:GameListItem>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                    <GridView.GroupStyle>
+                                        <GroupStyle>
+                                            <GroupStyle.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text='{Binding Name}' Foreground="{StaticResource ApplicationForegroundThemeBrush}" Margin="5" FontSize="18" FontFamily="Segoe UI" FontWeight="Light" />
+                                                </DataTemplate>
+                                            </GroupStyle.HeaderTemplate>
+                                        </GroupStyle>
+                                    </GridView.GroupStyle>
+                                </GridView>
+                            </SemanticZoom.ZoomedInView>
+                        </SemanticZoom>
+
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
+                    </Grid>
                 </DataTemplate>
             </HubSection>
         </Hub>
     </Grid>
-
     <Page.BottomAppBar>
         <AppBar>
             <StackPanel Orientation="Horizontal">
                 <Button Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}">Start Refresh</Button>
                 <Button Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}">Stop Refresh</Button>
+                <TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>
