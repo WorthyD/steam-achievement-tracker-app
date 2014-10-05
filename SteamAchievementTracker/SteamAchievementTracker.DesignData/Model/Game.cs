@@ -37,6 +37,7 @@ namespace SteamAchievementTracker.DesignData.Model
 
         public int AchievementsEarned { get; set; }
 
+        public int AchievementsLocked { get { return TotalAchievements - AchievementsEarned; } }
         public int TotalAchievements { get; set; }
         public double PercentComplete
         {

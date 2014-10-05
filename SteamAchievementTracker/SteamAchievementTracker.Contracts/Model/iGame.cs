@@ -21,6 +21,7 @@ namespace SteamAchievementTracker.Contracts.Model
 
         bool RefreshAchievements { get; set; }
         int AchievementsEarned { get; set; }
+        int AchievementsLocked { get; }
         int TotalAchievements { get; set; }
 
         bool HasAchievements {get;}

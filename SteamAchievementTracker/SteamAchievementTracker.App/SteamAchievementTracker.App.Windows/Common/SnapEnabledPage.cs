@@ -1,39 +1,30 @@
-﻿using SteamAchievementTracker.App.Common;
-using SteamAchievementTracker.App.Helpers;
-using SteamAchievementTracker.Contracts.View;
-using SteamAchievementTracker.Contracts.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Text;
+using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace SteamAchievementTracker.App.Views
+namespace SteamAchievementTracker.App.Common
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class GameDetails : SnapEnabledPage, IGameDetailsView 
+    [Windows.Foundation.Metadata.WebHostHidden]
+    public class SnapEnabledPage
+         : Page
     {
-        public GameDetails()
+        //public BasicPage()
+        //{
+        //    this.Loaded += page_Loaded;
+        //    this.Unloaded += page_Unloaded;
+        //}
+        public SnapEnabledPage()
         {
-            this.InitializeComponent();
-            //this.Loaded += page_Loaded;
-            //this.Unloaded += page_Unloaded;
+            this.Loaded += page_Loaded;
+            this.Unloaded += page_Unloaded;
         }
+
         private void page_Loaded(object sender, RoutedEventArgs e)
         {
             Window.Current.SizeChanged += Window_SizeChanged;
@@ -79,10 +70,5 @@ namespace SteamAchievementTracker.App.Views
             VisualStateManager.GoToState(this, state, true);
         }
 
-
-        IViewModel IView.ViewModel
-        {
-            get { return this.DataContext as IViewModel; }
-        }
     }
 }

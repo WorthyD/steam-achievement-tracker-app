@@ -20,6 +20,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <NuGetPackageImportStamp>91dd0b95</NuGetPackageImportStamp>
+    <ExpressionBlendVersion>12.0.50716.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\MouseButtonEventArgsToPointConverter.cs" />
+    <Compile Include="Common\SnapEnabledPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\BasicPage1.xaml.cs">
       <DependentUpon>BasicPage1.xaml</DependentUpon>
@@ -166,10 +168,14 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="Design\projectGuides.guides" />
     <None Include="packages.config" />
     <None Include="SteamAchievementTracker.App.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdSamplePage.xaml.txt">
+      <ConnectedServiceReference>SteamAch Tracker</ConnectedServiceReference>
+    </Content>
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
@@ -177,6 +183,11 @@
     <Content Include="Assets\WideLogo.scale-100.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\Windows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Views\BasicPage1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,6 +240,9 @@
     </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, version=12.0">
       <Name>Microsoft Visual C++ 2013 Runtime Package for Windows</Name>
+    </SDKReference>
+    <SDKReference Include="MSAdvertisingXaml, Version=8.1">
+      <Name>Microsoft Advertising SDK for Windows 8.1 %28Xaml%29</Name>
     </SDKReference>
     <SDKReference Include="SQLite.WinRT81, version=3.8.5">
       <Name>SQLite for Windows Runtime %28Windows 8.1%29</Name>

@@ -16,6 +16,7 @@ namespace SteamAchievementTracker.Contracts.Services
         void Navigate(string type);
         void Navigate(string type, object parameter);
         void GoBack();
+        bool CanGoBack();
 
     }
 }

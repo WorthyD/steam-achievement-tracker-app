@@ -25,6 +25,8 @@
                  -->
                 <ResourceDictionary Source="Common/StandardStyles.xaml"/>
                 <ResourceDictionary Source="Styles/Shared.xaml"/>
+                
+                <ResourceDictionary Source="Styles/Windows.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

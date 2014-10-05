@@ -54,6 +54,7 @@
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="View\IGameDetailsView.cs" />
     <Compile Include="View\IGameLibrary.cs" />
+    <Compile Include="View\IMain.cs" />
     <Compile Include="View\IView.cs" />
   </ItemGroup>
   <ItemGroup>

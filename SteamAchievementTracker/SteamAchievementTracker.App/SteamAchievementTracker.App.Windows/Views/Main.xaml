@@ -1,4 +1,4 @@
-﻿<common:LayoutAwarePage
+﻿<Page
     x:Class="SteamAchievementTracker.App.Views.Main"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
 
@@ -25,7 +26,7 @@
     <Page.TopAppBar>
 
         <AppBar x:Name="BottomAppBar1" Padding="10,0,10,0" AutomationProperties.Name="Bottom App Bar">
-                <!--<Partials:TopNav></Partials:TopNav>-->
+            <Partials:TopNav></Partials:TopNav>
         </AppBar>
 
     </Page.TopAppBar>
@@ -37,9 +38,12 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="728"/>
                     </Grid.ColumnDefinitions>
                     <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
+                    <!---->
                     <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        Visibility="{Binding CanGoBack, Converter={StaticResource TrueToVisibleConverter}}"
                         Margin="0,0,39,0" 
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
@@ -47,6 +51,14 @@
                         AutomationProperties.ItemType="Navigation Button"/>
                     <TextBlock x:Name="pageTitle" x:Uid="Header" Text="Steam Achievement Tracker" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
+                    <!--<UI:AdControl  Grid.Column="2"
+            ApplicationId="8bcf9d13-6e1f-4015-882f-a91a4dc7a04f" 
+            AdUnitId="191399" 
+            Width="728"
+            Height="90" 
+            Margin="0,0,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"/>-->
                 </Grid>
             </Hub.Header>
             <HubSection  x:Uid="Section1Header" Header="Profile">
@@ -98,4 +110,4 @@
         </Grid>
     </Grid>
 
-</common:LayoutAwarePage>
+</Page>
