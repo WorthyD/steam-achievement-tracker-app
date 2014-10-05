@@ -7,7 +7,7 @@
     <UseSimulator>false</UseSimulator>
     <RemoteDebugMachine>WorthyD-Surface</RemoteDebugMachine>
     <UseAuthentication>true</UseAuthentication>
-    <RemoteDebugEnabled>true</RemoteDebugEnabled>
+    <RemoteDebugEnabled>false</RemoteDebugEnabled>
   </PropertyGroup>
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>

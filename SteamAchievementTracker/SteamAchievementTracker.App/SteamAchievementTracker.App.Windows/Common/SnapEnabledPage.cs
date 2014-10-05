@@ -8,10 +8,11 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace SteamAchievementTracker.App.Helpers
+namespace SteamAchievementTracker.App.Common
 {
-    class SnapEnabledPage
-        : Page
+    [Windows.Foundation.Metadata.WebHostHidden]
+    public class SnapEnabledPage
+         : Page
     {
         //public BasicPage()
         //{
@@ -57,7 +58,7 @@ namespace SteamAchievementTracker.App.Helpers
             {
                 if (size.Width == 320)
                     state = "Snapped";
-                else if (size.Width <= 500)
+                else if (size.Width <= 700)
                     state = "Narrow";
                 else
                     state = "Filled";
