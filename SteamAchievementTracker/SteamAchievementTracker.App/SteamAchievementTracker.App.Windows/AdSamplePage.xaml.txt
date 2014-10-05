@@ -17,6 +17,14 @@
             Margin="0,0,0,0" 
             HorizontalAlignment="Left" 
             VerticalAlignment="Top"/>
+        <UI:AdControl 
+            ApplicationId="8bcf9d13-6e1f-4015-882f-a91a4dc7a04f" 
+            AdUnitId="191411" 
+            Width="160"
+            Height="600" 
+            Margin="0,0,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"/>
 
     </StackPanel >
 </Page>

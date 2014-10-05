@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\MouseButtonEventArgsToPointConverter.cs" />
+    <Compile Include="Helpers\SnapEnabledPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\BasicPage1.xaml.cs">
       <DependentUpon>BasicPage1.xaml</DependentUpon>
@@ -172,6 +173,9 @@
     <None Include="SteamAchievementTracker.App.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdSamplePage.xaml.txt">
+      <ConnectedServiceReference>SteamAch Tracker</ConnectedServiceReference>
+    </Content>
     <Content Include="Assets\Logo.scale-100.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
