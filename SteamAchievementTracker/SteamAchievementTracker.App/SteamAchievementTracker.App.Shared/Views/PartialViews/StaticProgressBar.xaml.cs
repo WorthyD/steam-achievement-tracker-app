@@ -22,6 +22,15 @@ namespace SteamAchievementTracker.App.Views.PartialViews
         public StaticProgressBar()
         {
             this.InitializeComponent();
+
+            //double dc = this.DataContext as double;
+
+            //double percent = 0;
+            ////double.TryParse(dc, out percent);
+            //double width = dc * this.canvas.ActualWidth;
+
+            //this.bar.Height = this.canvas.ActualHeight;
+            //this.bar.Width = width;
         }
     }
 }

@@ -17,13 +17,17 @@
 
 
 
-    <Canvas x:Name="canvas" >
-        <TextBlock Text="{Binding PercentComplete}"></TextBlock>
-       <Rectangle Fill="White" Height="10"  Width="{Binding 
+    <Canvas x:Name="canvas" Width="250" Height="20" Background="{StaticResource ProgressBarBackgroundThemeBrush}">
+        <!--<TextBlock Text="{Binding PercentComplete}"></TextBlock>-->
+       <Rectangle  Fill="{StaticResource  ProgressBarForegroundThemeBrush}" Height="10"  Width="{Binding PercentComplete,
                        Converter={StaticResource PercentageConverter}, 
-                       ElementName=canvas, 
-                       Path=ActualWidth, 
-                       ConverterParameter=0.1}">
+                       ConverterParameter=250}">
         </Rectangle>
+        <!--<Rectangle x:Name="bar"  Fill="Purple">
+            
+        </Rectangle>-->
     </Canvas>
+    <!--<SolidColorBrush x:Key="ProgressBarBackgroundThemeBrush" Color="#59FFFFFF" />
+    <SolidColorBrush x:Key="ProgressBarBorderThemeBrush" Color="Transparent" />
+    <SolidColorBrush x:Key="ProgressBarForegroundThemeBrush" Color="#FF5B2EC5" />-->
 </UserControl>
