@@ -31,7 +31,8 @@
                     <TextBlock Style="{StaticResource DetailItemTitle}">Progress:</TextBlock>
                     <TextBlock Style="{StaticResource DetailItem}" Text="{Binding ProgressText}"></TextBlock>
                 </Grid>
-                <ProgressBar Height="10" VerticalAlignment="Stretch" Value="{Binding PercentComplete}"/>
+                <!--<ProgressBar Height="10" VerticalAlignment="Stretch" Value="{Binding PercentComplete}"/>-->
+                <local:StaticProgressBar Height="20"></local:StaticProgressBar>
             </StackPanel>
             <StackPanel Visibility="{Binding BeenProcessed, Converter={StaticResource FalseToVisibleConverter}}">
                 <TextBlock Text="No Achievements Processed"></TextBlock>

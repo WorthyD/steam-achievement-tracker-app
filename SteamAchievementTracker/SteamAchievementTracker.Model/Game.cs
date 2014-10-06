@@ -32,6 +32,7 @@ namespace SteamAchievementTracker.Model
             get
             {
                 if (TotalAchievements == 0) return 0;
+                //var a = ((double)AchievementsEarned / (double)TotalAchievements * 100);
                 var a = ((double)AchievementsEarned / (double)TotalAchievements * 100);
                 return Math.Round(a, 0, MidpointRounding.ToEven);
             }

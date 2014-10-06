@@ -43,7 +43,8 @@ namespace SteamAchievementTracker.DesignData.Model
         {
             get
             {
-                return ((double)AchievementsEarned / (double)TotalAchievements * 100);
+                return ((double)AchievementsEarned / (double)TotalAchievements);
+                //return ((double)AchievementsEarned / (double)TotalAchievements * 100);
             }
         }
 
@@ -86,7 +87,7 @@ namespace SteamAchievementTracker.DesignData.Model
             //ticks = 3;
             //ticks = 4;
             this.StatsLink = (ticks % 2 == 0) ? "stuff" : "";
-            //this.StatsLink = "blabhablhba";
+            this.StatsLink = "blabhablhba";
 
             //ticks = 3;
             this.LastUpdated = (ticks % 3 == 0) ? DateTime.MinValue : DateTime.Now;

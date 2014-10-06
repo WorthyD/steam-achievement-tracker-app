@@ -234,7 +234,10 @@ namespace SteamAchievementTracker.ViewModel
             base.Initialize(parameter);
 
             await GetGames();
-            StartLibraryRefresh();
+            if (this.GameList.Where(x => x.RefreshAchievements == true).Count() > 0)
+            {
+                StartLibraryRefresh();
+            }
         }
 
         public async Task GetGames()
@@ -248,21 +251,16 @@ namespace SteamAchievementTracker.ViewModel
                 gameList = gameList.Where(x => x.StatsLink != null && !string.IsNullOrEmpty(x.StatsLink)).ToList();
             }
             GameList = ApplySort(gameList);
-            RefreshCount = gameList.Where(x => x.RefreshAchievements == true).Count();
-            GameListChars = GetFirstChars(gameList);
+            //RefreshCount = gameList.Where(x => x.RefreshAchievements == true).Count();
             this.IsLoading = false;
         }
-        public List<object> GetFirstChars(List<IGame> games)
-        {
-        }
-
 
         public async void StartLibraryRefresh()
         {
             this.IsRefreshing = true;
             cancelLibrary = new CancellationTokenSource();
             var progressIndicator = new Progress<int>(ReportProgress);
-            //List<string> gameStats = GameList.Select(x => x.StatsLink).ToList();
+            RefreshCount = this.GameList.Where(x => x.RefreshAchievements == true).Count();
             try
             {
                 var gToRefresh = GameList.Where(x => x.RefreshAchievements == true).ToList();
@@ -295,7 +293,7 @@ namespace SteamAchievementTracker.ViewModel
         public void ReportProgress(int value)
         {
             LibProgress = string.Format("Updating: {0} out of {1}", value, RefreshCount);
-            if (value > 0 && value % 5 == 0)
+            if (value > 0 && value % 15 == 0)
             {
                 //RefreshUI
                 GetGames();
