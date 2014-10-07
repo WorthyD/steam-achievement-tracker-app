@@ -33,6 +33,11 @@ namespace SteamAchievementTracker.ViewModel
             get;
             set;
         }
+        //public RelayCommand<ItemClickEventArgs> OpenLibrary
+        //{
+        //    get;
+        //    set;
+        //}
 
 
         #endregion
@@ -72,6 +77,15 @@ namespace SteamAchievementTracker.ViewModel
                 Set(() => Library, ref _library, value);
             }
         }
+        private IStatistics _playerStats;
+        public IStatistics PlayerStats
+        {
+            get { return _playerStats; }
+            set
+            {
+                Set(() => PlayerStats, ref _playerStats, value);
+            }
+        }
         private string _libCount;
         public string LibCount
         {
@@ -82,6 +96,8 @@ namespace SteamAchievementTracker.ViewModel
             }
         }
 
+        private bool _IsLoading;
+        public bool IsLoading { get { return _IsLoading; } set { Set(() => IsLoading, ref _IsLoading, value); } }
 
         #endregion
 
@@ -112,8 +128,6 @@ namespace SteamAchievementTracker.ViewModel
         //public RelayCommand<IGame> OpenGame
         private void InitializeCommands()
         {
-
-            Debug.WriteLine("Init Commands");
             OpenGame = new RelayCommand<ItemClickEventArgs>(game =>
                     {
 
@@ -121,7 +135,6 @@ namespace SteamAchievementTracker.ViewModel
                         var x = (IGame)game.ClickedItem;
                         var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
                         navigationService.Navigate(pageType.GetType(), x.AppID);
-                        Debug.WriteLine("Click - " + x.AppID);
                     });
         }
         public void OpenLibrary()
@@ -150,26 +163,46 @@ namespace SteamAchievementTracker.ViewModel
 
         public async void LoadData()
         {
+            this.IsLoading = true;
+            Library = new PlayerLibrary();
             Profile = playerProfService.GetProfileFromDB(base.UserID);
+            List<IGame> AllGames = new List<IGame>();
+            List<IGame> RecentGames = new List<IGame>();
+            List<IGame> NearCompletion = new List<IGame>();
+            List<IGame> MostPlayedGames = new List<IGame>();
 
             if ((Profile == null) || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval))
             {
                 Profile = await playerProfService.GetFreshPlayerDetails(base.UserName, (Profile != null));
-                //TODO: Update library
-                var tempGames = await playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName);
+                AllGames = await playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName);
             }
 
+            this.PlayerStats = playerLibService.GetPlayerStats(base.UserID);
+
+
+            if (AllGames != null && AllGames.Count() > 0)
+            {
+                MostPlayedGames = AllGames.OrderByDescending(x => x.HoursPlayed).Take(6).ToList();
+                NearCompletion = AllGames.Where(x => x.PercentComplete < 100).OrderByDescending(x => x.PercentComplete).Take(6).ToList();
+            }
 
 
             if (Profile.RecentGameLinks != null && Profile.RecentGameLinks.Count > 0)
             {
-                var gameList = playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
-                Library = new PlayerLibrary()
-                {
-                    GameList = gameList.ToList()
-                };
-                RefreshRecentGames();
+                RecentGames = playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
             }
+
+
+            Library = new PlayerLibrary()
+            {
+                GameList = RecentGames,
+                MostPlayedGames = MostPlayedGames,
+                NearCompletion = NearCompletion
+            };
+
+
+            RefreshRecentGames();
+            this.IsLoading = false;
         }
 
         public async void RefreshRecentGames()
@@ -183,7 +216,7 @@ namespace SteamAchievementTracker.ViewModel
             foreach (var g in gameList)
             {
                 var tg = Library.GameList.Where(x => x.AppID == g.AppID).FirstOrDefault();
-                if (g.AchievementsEarned != tg.AchievementsEarned)
+                if (tg != null && g.AchievementsEarned != tg.AchievementsEarned)
                 {
                     refresh = true;
                 }
@@ -199,6 +232,7 @@ namespace SteamAchievementTracker.ViewModel
             }
 
         }
+
         public void ReportProgress(int value)
         {
 

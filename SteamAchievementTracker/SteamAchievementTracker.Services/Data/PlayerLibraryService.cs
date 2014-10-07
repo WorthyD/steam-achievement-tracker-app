@@ -45,6 +45,10 @@ namespace SteamAchievementTracker.Services.Data
             var gl = _db.GetGamesBySteamID(steamID64);
             return gl;
         }
+        public IStatistics GetPlayerStats(long steamID64)
+        {
+            return _db.GetStats(steamID64);
+        }
 
 
         public async Task<List<IGame>> GetPlayerLibraryRefresh(long steamID64, string steamID)

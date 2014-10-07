@@ -10,5 +10,7 @@ namespace SteamAchievementTracker.Model
     public class PlayerLibrary : IPlayerLibrary
     {
         public List<IGame> GameList { get; set; }
+        public List<IGame> MostPlayedGames { get; set; }
+        public List<IGame> NearCompletion { get; set; }
     }
 }

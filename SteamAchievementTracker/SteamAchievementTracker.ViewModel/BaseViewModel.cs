@@ -39,7 +39,6 @@ namespace SteamAchievementTracker.ViewModel
                 if (setting != null)
                 {
                     long.TryParse(setting.ToString(), out tLong);
-                    Debug.WriteLine("Retreiving UserID " + tLong);
                 }
                 return tLong;
 
@@ -47,7 +46,6 @@ namespace SteamAchievementTracker.ViewModel
             set
             {
 
-                Debug.WriteLine("Setting UserID " + value);
                 Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID64"] = value;
             }
         }

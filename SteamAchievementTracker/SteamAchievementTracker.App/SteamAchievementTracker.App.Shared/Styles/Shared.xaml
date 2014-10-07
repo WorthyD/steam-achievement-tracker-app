@@ -4,7 +4,7 @@
     xmlns:local="using:SteamAchievementTracker.App.Styles">
 
     <Style x:Key="GameListLogo" TargetType="Image">
-        <Setter Property="Width" Value="275"></Setter>
+        <Setter Property="Width" Value="250"></Setter>
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         

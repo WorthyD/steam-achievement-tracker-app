@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.DesignData.Services
 {
-    public class PlayerLibraryService: IPlayerLibraryService
+    public class PlayerLibraryService : IPlayerLibraryService
     {
         public async Task<List<Contracts.Model.IGame>> GetPlayerRecentlyPlayedGames(long steamID64, string steamID)
         {
@@ -21,12 +21,12 @@ namespace SteamAchievementTracker.DesignData.Services
             return GetGames();
         }
 
-        public  async Task<List<Contracts.Model.IGame>> GetPlayerLibraryRefresh(long steamID64, string steamID)
+        public async Task<List<Contracts.Model.IGame>> GetPlayerLibraryRefresh(long steamID64, string steamID)
         {
             return GetGames();
         }
 
-        public  async void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements)
+        public async void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements)
         {
         }
         public List<IGame> GetGames()
@@ -54,6 +54,18 @@ namespace SteamAchievementTracker.DesignData.Services
         public IGame GetGameByID(long appID, long userId)
         {
             return GetGames().FirstOrDefault();
+        }
+
+
+        public IStatistics GetPlayerStats(long steamID64)
+        {
+            return new Model.PlayerStats()
+            {
+                AchievementCount = 100,
+                LibraryCount = 100,
+                TotalPlayTime = 100,
+                UnlockedAchievementCount = 100
+            };
         }
     }
 }

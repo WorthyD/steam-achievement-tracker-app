@@ -42,6 +42,7 @@
     <Compile Include="Model\IPlayerLibrary.cs" />
     <Compile Include="Model\IProfile.cs" />
     <Compile Include="Model\IRecentGame.cs" />
+    <Compile Include="Model\IStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\INavigationService.cs" />
     <Compile Include="Services\IPlayerLibraryService.cs" />

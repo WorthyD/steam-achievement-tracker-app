@@ -45,52 +45,111 @@
                     <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
                         Visibility="{Binding CanGoBack, Converter={StaticResource TrueToVisibleConverter}}"
                         Margin="0,0,39,0" 
+                        Command="{Binding GoBack}"
                         VerticalAlignment="Top"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
                     <TextBlock x:Name="pageTitle" x:Uid="Header" Text="Steam Achievement Tracker" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
-                    <!--<UI:AdControl  Grid.Column="2"
-            ApplicationId="8bcf9d13-6e1f-4015-882f-a91a4dc7a04f" 
-            AdUnitId="191399" 
-            Width="728"
-            Height="90" 
-            Margin="0,0,0,0" 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Top"/>-->
                 </Grid>
             </Hub.Header>
             <HubSection  x:Uid="Section1Header" Header="Profile">
                 <DataTemplate>
+                    <StackPanel>
                     <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
+                        <Button Command="{Binding GoLibrary}">View Library</Button>
+                    </StackPanel>
                 </DataTemplate>
             </HubSection>
-            <HubSection  x:Uid="Section2Header" Header="Library" IsHeaderInteractive="True" >
+            <HubSection  x:Uid="Section2Header" Header="Recent Games"  >
                 <DataTemplate >
-                    <GridView x:Name="GameGrid" ItemsSource="{Binding Library.GameList}"   
+                    <Grid>
+                        <GridView x:Name="GameGrid" ItemsSource="{Binding Library.GameList}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                       SelectionMode="None"
                               IsItemClickEnabled="True"
                               >
-                        <interactivity:Interaction.Behaviors>
-                            <core:EventTriggerBehavior EventName="ItemClick">
-                                <core:InvokeCommandAction 
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:InvokeCommandAction 
                                             Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
                                             CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
                                         />
-                            </core:EventTriggerBehavior>
-                        </interactivity:Interaction.Behaviors>
-                        <GridView.ItemTemplate>
-                            <DataTemplate >
-                                <Partials:GameListItem ></Partials:GameListItem>
-                            </DataTemplate>
-                        </GridView.ItemTemplate>
-                    </GridView>
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:GameListItem ></Partials:GameListItem>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
+                    </Grid>
                 </DataTemplate>
             </HubSection>
+            <HubSection  x:Uid="Section4Header" Header="Nearest to Completion" IsHeaderInteractive="false" >
+                <DataTemplate >
+                    <Grid>
+                        <GridView x:Name="GameGrid3" ItemsSource="{Binding Library.NearCompletion}"   
+                                ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
+                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      SelectionMode="None"
+                              IsItemClickEnabled="True"
+                              >
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:InvokeCommandAction 
+                                            Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
+                                            CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
+                                        />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:GameListItem ></Partials:GameListItem>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+            <HubSection  x:Uid="Section3Header" Header="Most Played Games" IsHeaderInteractive="false" >
+                <DataTemplate >
+                    <Grid>
+                        <GridView x:Name="GameGrid2" ItemsSource="{Binding Library.MostPlayedGames}"   
+                                ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
+                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      SelectionMode="None"
+                              IsItemClickEnabled="True"
+                              >
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:InvokeCommandAction 
+                                            Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
+                                            CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
+                                        />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:GameListItem ></Partials:GameListItem>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+
         </Hub>
         <Grid Grid.Row="0" Background="#D73D3D3D" Visibility="{Binding LoginVM.IsVisible, Converter={StaticResource TrueToVisibleConverter}}" >
             <Grid.RowDefinitions>

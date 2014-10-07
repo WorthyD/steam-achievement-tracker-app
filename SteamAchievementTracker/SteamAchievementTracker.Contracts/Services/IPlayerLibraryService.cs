@@ -14,5 +14,6 @@ namespace SteamAchievementTracker.Contracts.Services
         Task<List<IGame>> GetPlayerLibraryRefresh(long steamID64, string steamID);
         void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements);
         IGame GetGameByID(long appID, long userId);
+        IStatistics GetPlayerStats(long steamID64);
     }
 }

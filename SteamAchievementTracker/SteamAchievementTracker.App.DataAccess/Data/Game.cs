@@ -66,13 +66,9 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         protected override IGame CreateItem(SQLitePCL.ISQLiteStatement statement)
         {
             IGame g = new Model.Game();
-
-
             g.AchievementsEarned = statement["AchievementsEarned"].ToInt();
-
             g.SteamUserID = statement["SteamID"].ToLong();
             g.AppID = statement["GameID"].ToInt();
-
             g.GameLink = statement["GameLink"].ToSafeString();
             g.RecentHours = statement["RecentHours"].ToDecimal();
             g.HoursPlayed = statement["HoursPlayed"].ToDecimal();
@@ -84,7 +80,6 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             g.AchievementRefresh = statement["AchievementRefresh"].ToDate();
             g.Name = statement["Name"].ToSafeString();
             return g;
-            //return null;
         }
 
         protected override string GetSelectItemSql()
@@ -241,6 +236,34 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             }
             return GetEmpty();
         }
+
+        public IStatistics GetStats(long id64)
+        {
+            string sqlStatement = @" select 
+	                            (select count(GameID) from game where SteamID = @SteamID) as LibraryCount,
+	                            (select sum(AchievementCount ) from game  where SteamID = @SteamID) as TotalAchievements,
+                                (select count(GameID) from game  where SteamID = @SteamID and AchievementCount = AchievementsEarned and AchievementCount > 0 ) as PerfectGames,
+	                            (select sum(AchievementsEarned) from game  where SteamID = @SteamID) as AchievementsEarned,
+	                            (select sum(HoursPlayed) from game  where SteamID = @SteamID) as HoursPlayed";
+
+            using (var statement = base.sqlConnection.Prepare(sqlStatement))
+            {
+                statement.Bind("@SteamID", id64);
+                if (statement.Step() == SQLiteResult.ROW)
+                {
+                    IStatistics s = new Model.PlayerStats();
+                    s.AchievementCount = statement["TotalAchievements"].ToInt();
+                    s.LibraryCount = statement["LibraryCount"].ToInt();
+                    s.TotalPlayTime = Convert.ToInt32(statement["HoursPlayed"].ToDecimal());
+                    s.UnlockedAchievementCount = statement["AchievementsEarned"].ToInt();
+                    s.PerfectGames = statement["PerfectGames"].ToInt();
+                    return s;
+                }
+            }
+            return null;
+        }
+
+
         //protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key) {
         //    throw new NotImplementedException();
         //}

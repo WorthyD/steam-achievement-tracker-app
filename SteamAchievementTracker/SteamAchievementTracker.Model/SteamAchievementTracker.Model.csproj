@@ -41,6 +41,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameAchievement.cs" />
     <Compile Include="PlayerLibrary.cs" />
+    <Compile Include="PlayerStats.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecentGame.cs" />
