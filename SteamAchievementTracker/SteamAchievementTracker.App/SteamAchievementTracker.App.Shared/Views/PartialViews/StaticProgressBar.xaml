@@ -17,11 +17,10 @@
 
 
 
-    <Canvas x:Name="canvas" Width="250" Height="20" Background="{StaticResource ProgressBarBackgroundThemeBrush}">
+    <Canvas x:Name="canvas" Width="200" Height="10" Background="{StaticResource ProgressBarBackgroundThemeBrush}">
         <!--<TextBlock Text="{Binding PercentComplete}"></TextBlock>-->
-       <Rectangle  Fill="{StaticResource  ProgressBarForegroundThemeBrush}" Height="10"  Width="{Binding PercentComplete,
-                       Converter={StaticResource PercentageConverter}, 
-                       ConverterParameter=250}">
+       <Rectangle  Fill="{StaticResource  ProgressBarForegroundThemeBrush}" Height="10"  Width="{Binding 
+                       Converter={StaticResource PercentageConverter}}">
         </Rectangle>
         <!--<Rectangle x:Name="bar"  Fill="Purple">
             

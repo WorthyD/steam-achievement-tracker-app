@@ -11,7 +11,7 @@
     d:DesignWidth="400"
     d:DataContext="{d:DesignInstance Type=dMode:Game, IsDesignTimeCreatable=True}"
     >
-    <StackPanel Height="165">
+    <StackPanel>
         <Image Style="{StaticResource GameListLogo}" Source="{Binding Logo}" />
         <Grid>
             <TextBlock Style="{StaticResource DetailItemTitle}">Play Time:</TextBlock>
@@ -23,16 +23,20 @@
         </StackPanel>
         <StackPanel Visibility="{Binding HasAchievements, Converter={StaticResource TrueToVisibleConverter}}">
             <StackPanel Visibility="{Binding BeenProcessed, Converter={StaticResource TrueToVisibleConverter}}">
-                <Grid>
+                <!--<Grid>
                     <TextBlock Style="{StaticResource DetailItemTitle}">Complete:</TextBlock>
                     <TextBlock Style="{StaticResource DetailItem}" Text="{Binding PercentCompleteFormatted}"></TextBlock>
                 </Grid>
                 <Grid>
                     <TextBlock Style="{StaticResource DetailItemTitle}">Progress:</TextBlock>
                     <TextBlock Style="{StaticResource DetailItem}" Text="{Binding ProgressText}"></TextBlock>
-                </Grid>
+                </Grid>-->
                 <!--<ProgressBar Height="10" VerticalAlignment="Stretch" Value="{Binding PercentComplete}"/>-->
-                <local:StaticProgressBar  ></local:StaticProgressBar>
+                <Grid>
+                    <TextBlock Style="{StaticResource DetailItemTitle}" Text="{Binding PercentCompleteFormatted}"></TextBlock>
+                    <TextBlock Style="{StaticResource DetailItem}" Text="{Binding ProgressText}"></TextBlock>
+                </Grid>
+                <local:StaticProgressBar DataContext="{Binding PercentComplete}" ></local:StaticProgressBar>
             </StackPanel>
             <StackPanel Visibility="{Binding BeenProcessed, Converter={StaticResource FalseToVisibleConverter}}">
                 <TextBlock Text="No Achievements Processed"></TextBlock>

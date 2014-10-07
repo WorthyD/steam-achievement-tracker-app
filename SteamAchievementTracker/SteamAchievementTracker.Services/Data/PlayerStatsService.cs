@@ -89,8 +89,15 @@ namespace SteamAchievementTracker.Services.Data
         }
         public async Task<List<IGameAchievement>> GetFreshStats(string statURL)
         {
-
-            var stats = await GetPlayerStats(statURL);
+            SteamAPI.Models.playerstats stats = new SteamAPI.Models.playerstats();
+            try
+            {
+                stats = await GetPlayerStats(statURL);
+            }
+            catch (SteamAPI.Player.Exceptions.PlayerGameStatParseException e)
+            {
+                _gDB.UpdateGameStats(statURL, 0, 0);
+            }
             List<IGameAchievement> ach = new List<IGameAchievement>();
             Model.GameAchievement game;
             if (stats.achievements != null)
@@ -111,11 +118,12 @@ namespace SteamAchievementTracker.Services.Data
                     ach.Add(game);
                 }
 
-                //Update DB Flags for game library
-
                 _gDB.UpdateGameStats(statURL, stats.achievements.ToList().Where(x => x.closed == true).Count(), stats.achievements.Count());
             }
+            //Update DB Flags for game library
+
             return ach;
+
         }
 
         //public 
@@ -137,7 +145,7 @@ namespace SteamAchievementTracker.Services.Data
             }
 
         }
-        public async Task<List<IGameAchievement>> GetGameStatistics(IGame game,  bool delay = false )
+        public async Task<List<IGameAchievement>> GetGameStatistics(IGame game, bool delay = false)
         {
             List<IGameAchievement> achievements = new List<IGameAchievement>();
             if (game.RefreshAchievements)

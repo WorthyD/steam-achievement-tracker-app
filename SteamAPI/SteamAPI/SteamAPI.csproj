@@ -47,6 +47,7 @@
     <Compile Include="Models\PlayerStats.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\ProfileGames.cs" />
+    <Compile Include="Player\Exceptions\PlayerGameStatParseException.cs" />
     <Compile Include="Player\PlayerGameStatsRequest.cs" />
     <Compile Include="Player\PlayerGameStatsResponse.cs" />
     <Compile Include="Player\PlayerGamesRequest.cs" />

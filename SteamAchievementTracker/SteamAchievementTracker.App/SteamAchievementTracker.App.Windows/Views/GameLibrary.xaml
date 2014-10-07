@@ -9,6 +9,8 @@
       xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
       
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+
+    xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     
         xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -44,7 +46,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="* "/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
                     <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -55,10 +57,15 @@
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
                     <TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
-                    <StackPanel Grid.Column="2" Orientation="Horizontal">
-                        <ComboBox x:Name="comboBox1"     ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" />
-                    </StackPanel>
+                        VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap"  Margin="0,0,20,0"/>
+                    <UI:AdControl  Grid.Column="2"
+            ApplicationId="8bcf9d13-6e1f-4015-882f-a91a4dc7a04f" 
+            AdUnitId="191399" 
+            Width="728"
+            Height="90" 
+            Margin="0,0,0,0" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top"/>
                 </Grid>
             </Hub.Header>
             <HubSection>
@@ -100,6 +107,7 @@
                 <Button Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}">Start Refresh</Button>
                 <Button Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}">Stop Refresh</Button>
                 <TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
+                <ComboBox x:Name="comboBox1"     ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" />
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>

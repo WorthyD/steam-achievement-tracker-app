@@ -28,6 +28,8 @@ namespace SteamAPI.Player
             }
             catch (Exception)
             {
+                throw new Exceptions.PlayerGameStatParseException();
+
                 Debug.WriteLine("Error parsing {0} " + formattedGameUrl);
             }
 
