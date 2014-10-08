@@ -21,6 +21,7 @@ namespace SteamAchievementTracker.ViewModel
         public RelayCommand GoLibrary { get; set; }
         public RelayCommand GoHome { get; set; }
         public RelayCommand GoHelp { get; set; }
+        public RelayCommand GoSettings { get; set; }
         #endregion
 
         #region Properties
@@ -115,6 +116,14 @@ namespace SteamAchievementTracker.ViewModel
             {
                 var pageType = SimpleIoc.Default.GetInstance<IHelp>();
                 _navigationService.Navigate(pageType.GetType(), null);
+            });
+
+            GoSettings = new RelayCommand(() =>
+            {
+
+                var iSettings = SimpleIoc.Default.GetInstance<ISettingsViewModel>();
+                iSettings.ShowSettings();
+
             });
         }
 
