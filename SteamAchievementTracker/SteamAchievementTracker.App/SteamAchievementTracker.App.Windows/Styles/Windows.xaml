@@ -12,70 +12,35 @@
     <Style x:Key="LoadingText" TargetType="TextBlock">
         <Setter Property="TextAlignment" Value="Center" />
     </Style>
+    <Style x:Key="GameListLogo" TargetType="Image">
+        <Setter Property="Width" Value="250"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
 
-    <Storyboard x:Key="HubNarrow">
-
-    </Storyboard>
-    <Style x:Key="AchievementGridView" TargetType="GridView">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <!--<VisualStateGroup>
-                        <VisualState x:Name="FullScreenLandscape" />
-                        <VisualState x:Name="Filled" />
-                        <VisualState x:Name="Narrow">
-                            <Storyboard>
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="MaximumRowsOrColumns" Storyboard.TargetName="MaxColumn">
-                                    <DiscreteObjectKeyFrame KeyTime="0" Value="1">
-                                    </DiscreteObjectKeyFrame>
-                                </ObjectAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </VisualState>
-                        <VisualState x:Name="Snapped" />
-                    </VisualStateGroup>-->
-                </ControlTemplate>
-            </Setter.Value>
-
-
-        </Setter>
+        <Setter Property="Margin" Value="0,0,0,10"></Setter>
 
     </Style>
 
-    <!--<Style x:Key="GameDetailsHub" TargetType="Hub">
-        <Setter Property="Template">
-            <Setter.Value>
-                                 
-                                <Storyboard>
-                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Hub.Orientation)" Storyboard.TargetName="GameDetailsHub">
-                                        <DiscreteObjectKeyFrame KeyTime="0">
-                                            <DiscreteObjectKeyFrame.Value>
-                                                <Orientation>Vertical</Orientation>
-                                            </DiscreteObjectKeyFrame.Value>
-                                        </DiscreteObjectKeyFrame>
-                                    </ObjectAnimationUsingKeyFrames>
+    <Style x:Key="ArhievementIcon" TargetType="Image">
+        <Setter Property="Height" Value="64"></Setter>
+        <Setter Property="Width" Value="64"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
 
-                                    -->
-    <!--<ObjectAnimationUsingKeyFrames
-                    Storyboard.TargetName="GameDetailsHub"
-                    Storyboard.TargetProperty="Orientation">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Orientation.Horizontal" />
-                        </ObjectAnimationUsingKeyFrames>-->
-    <!--<ObjectAnimationUsingKeyFrames
-                    Storyboard.TargetName="UnLocked"
-                    Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
-                        </ObjectAnimationUsingKeyFrames>-->
+        <Setter Property="Margin" Value="0,0,0,10"></Setter>
 
-    <!--<ObjectAnimationUsingKeyFrames
-                    Storyboard.TargetName="GameImage"
-                    Storyboard.TargetProperty="Visibility">
-                        <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
-                    </ObjectAnimationUsingKeyFrames>-->
-    <!--
+    </Style>
 
-                                </Storyboard>
-                 
-            </Setter.Value>
-        </Setter>
-    </Style>-->
+
+
+
+    <Style x:Key="DetailItem" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Right"></Setter>
+        <Setter Property="Margin" Value="0,0,0,5"></Setter>
+    </Style>
+    <Style x:Key="DetailItemTitle" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Left"></Setter>
+        <Setter Property="Margin" Value="0,0,0,5"></Setter>
+    </Style>
+  
 </ResourceDictionary>

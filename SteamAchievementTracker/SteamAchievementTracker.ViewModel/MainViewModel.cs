@@ -150,7 +150,7 @@ namespace SteamAchievementTracker.ViewModel
 
             _title = "Steam Achievement Tracker";
 
-            if (base.UserID != 0)
+            if (base.UserID != 0 || base.IsInDesignMode)
             {
                 this.LoadData();
                 this.LoginVM.IsVisible = false;

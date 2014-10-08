@@ -26,6 +26,13 @@ namespace SteamAchievementTracker.App.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+        public BaseViewModel Base
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<BaseViewModel>();
+            }
+        }
 
         public GameDetailsViewModel GameDetails
         {
@@ -68,6 +75,7 @@ namespace SteamAchievementTracker.App.ViewModel
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
 
             SimpleIoc.Default.Register<ISettingsViewModel, SettingsViewModel>();
+            SimpleIoc.Default.Register<BaseViewModel>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GameDetailsViewModel>();
             SimpleIoc.Default.Register<GameLibraryViewModel>();

@@ -41,9 +41,10 @@ namespace SteamAchievementTracker.DesignData.Services
 
 
 
-        public Task UpdateStatsByList(List<IGame> statUrls, IProgress<int> progress, System.Threading.CancellationToken ct)
+        public async Task UpdateStatsByList(List<IGame> statUrls, IProgress<int> progress, System.Threading.CancellationToken ct)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            
         }
 
         public async Task<List<IGameAchievement>> GetGameStatistics(IGame game, bool delay = false)

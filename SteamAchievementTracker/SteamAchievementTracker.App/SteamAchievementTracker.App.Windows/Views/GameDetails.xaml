@@ -73,7 +73,6 @@
                         <GridView  x:Name="UnLockedGridView" 
                                    ItemsSource="{Binding UnlockedAchievements}"    
                                    Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
-                                Style="{StaticResource AchievementGridView}"
                                   ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                       SelectionMode="None" >

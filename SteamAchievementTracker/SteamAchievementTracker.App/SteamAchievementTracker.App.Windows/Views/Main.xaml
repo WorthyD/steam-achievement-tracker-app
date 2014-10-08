@@ -10,7 +10,6 @@
     xmlns:UI="using:Microsoft.Advertising.WinRT.UI"
     
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
-
     mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=Main}" 
     xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -18,7 +17,7 @@
     >
     <Page.Resources>
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
-            <ItemsWrapGrid MaximumRowsOrColumns="3"/>
+            <ItemsWrapGrid MaximumRowsOrColumns="8"/>
         </ItemsPanelTemplate>
 
     </Page.Resources>
@@ -34,14 +33,10 @@
         <Hub SectionHeaderClick="Hub_SectionHeaderClick" Grid.Row="0">
             <Hub.Header>
                 <!-- Back button and page title -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="728"/>
-                    </Grid.ColumnDefinitions>
-                    <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
-                    <!---->
+                <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
+                <!---->
+                    <StackPanel Orientation="Horizontal">
+
                     <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
                         Visibility="{Binding CanGoBack, Converter={StaticResource TrueToVisibleConverter}}"
                         Margin="0,0,39,0" 
@@ -50,9 +45,9 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-                    <TextBlock x:Name="pageTitle" x:Uid="Header" Text="Steam Achievement Tracker" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                    <TextBlock x:Name="pageTitle" x:Uid="Header" Text="Steam Achievement Tracker" Style="{StaticResource HeaderTextBlockStyle}" 
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
-                </Grid>
+</StackPanel>
             </Hub.Header>
             <HubSection  x:Uid="Section1Header" Header="Profile">
                 <DataTemplate>
@@ -149,9 +144,23 @@
                     </Grid>
                 </DataTemplate>
             </HubSection>
+         <HubSection  x:Uid="Ad" Header="" IsHeaderInteractive="false" >
+                <DataTemplate >
+                    <Grid>
+                    <UI:AdControl 
+            ApplicationId="8bcf9d13-6e1f-4015-882f-a91a4dc7a04f" 
+            AdUnitId="191612" 
+            Width="300"
+            Height="600" 
+            Margin="0,0,0,0" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"/>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
 
         </Hub>
-        <Grid Grid.Row="0" Background="#D73D3D3D" Visibility="{Binding LoginVM.IsVisible, Converter={StaticResource TrueToVisibleConverter}}" >
+        <!--<Grid Grid.Row="0" Background="#D73D3D3D" Visibility="{Binding LoginVM.IsVisible, Converter={StaticResource TrueToVisibleConverter}}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -166,7 +175,7 @@
                 </Grid>
             </StackPanel>
 
-        </Grid>
+        </Grid>-->
     </Grid>
 
 </Page>

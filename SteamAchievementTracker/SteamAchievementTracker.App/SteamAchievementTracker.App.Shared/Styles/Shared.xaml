@@ -3,34 +3,5 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SteamAchievementTracker.App.Styles">
 
-    <Style x:Key="GameListLogo" TargetType="Image">
-        <Setter Property="Width" Value="250"></Setter>
-        <Setter Property="VerticalAlignment" Value="Top"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        
-        <Setter Property="Margin" Value="0,0,0,10"></Setter>
-
-    </Style>
-
-    <Style x:Key="ArhievementIcon" TargetType="Image">
-        <Setter Property="Height" Value="64"></Setter>
-        <Setter Property="Width" Value="64"></Setter>
-        <Setter Property="VerticalAlignment" Value="Top"></Setter>
-        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        
-        <Setter Property="Margin" Value="0,0,0,10"></Setter>
-
-    </Style>
-
-
-    
-    
-    <Style x:Key="DetailItem" TargetType="TextBlock">
-        <Setter Property="TextAlignment" Value="Right"></Setter>
-        <Setter Property="Margin" Value="0,0,0,5"></Setter>
-    </Style>
-    <Style x:Key="DetailItemTitle" TargetType="TextBlock">
-        <Setter Property="TextAlignment" Value="Left"></Setter>
-        <Setter Property="Margin" Value="0,0,0,5"></Setter>
-    </Style>
+  
 </ResourceDictionary>

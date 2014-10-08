@@ -45,11 +45,7 @@ namespace SteamAchievementTracker.App.Views {
             get { return this.DataContext as IViewModel; }
         }
 
-        private void Hub_SectionHeaderClick(object sender, HubSectionHeaderClickEventArgs e)
-        {
-            SteamAchievementTracker.ViewModel.MainViewModel model = this.DataContext as SteamAchievementTracker.ViewModel.MainViewModel;
-            model.OpenLibrary();
-        }
+
 
         //void onCommandsRequested(SettingsPane settingsPane, SettingsPaneCommandsRequestedEventArgs e)
         //{
