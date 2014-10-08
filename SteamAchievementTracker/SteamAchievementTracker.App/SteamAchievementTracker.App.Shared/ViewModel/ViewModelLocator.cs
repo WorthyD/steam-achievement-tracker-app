@@ -71,6 +71,7 @@ namespace SteamAchievementTracker.App.ViewModel
             SimpleIoc.Default.Register<IGameDetailsView, GameDetails>();
             SimpleIoc.Default.Register<IGameLibrary, GameLibrary>();
             SimpleIoc.Default.Register<IMain, Main>();
+            SimpleIoc.Default.Register<IHelp, Help>();
             
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
 

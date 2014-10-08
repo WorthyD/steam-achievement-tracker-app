@@ -20,6 +20,7 @@ namespace SteamAchievementTracker.ViewModel
         public RelayCommand GoBack { get; set; }
         public RelayCommand GoLibrary { get; set; }
         public RelayCommand GoHome { get; set; }
+        public RelayCommand GoHelp { get; set; }
         #endregion
 
         #region Properties
@@ -100,7 +101,6 @@ namespace SteamAchievementTracker.ViewModel
             });
             GoHome = new RelayCommand(() =>
             {
-
                 var pageType = SimpleIoc.Default.GetInstance<IMain>();
                 _navigationService.Navigate(pageType.GetType(), null);
 
@@ -111,6 +111,11 @@ namespace SteamAchievementTracker.ViewModel
                 _navigationService.Navigate(pageType.GetType(), null);
             });
 
+            GoHelp = new RelayCommand(() =>
+            {
+                var pageType = SimpleIoc.Default.GetInstance<IHelp>();
+                _navigationService.Navigate(pageType.GetType(), null);
+            });
         }
 
 

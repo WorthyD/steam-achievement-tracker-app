@@ -23,7 +23,7 @@ namespace SteamAchievementTracker.App.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class Help : Page, IView
+    public sealed partial class Help : Page,IHelp 
     {
         public Help() {
             this.InitializeComponent();

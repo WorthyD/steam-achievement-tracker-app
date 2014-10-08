@@ -30,7 +30,7 @@
 
     </Page.TopAppBar>
     <Grid Style="{StaticResource LayoutRootStyle}"  Name="LayoutRoot"  >
-        <Hub SectionHeaderClick="Hub_SectionHeaderClick" Grid.Row="0">
+        <Hub  Grid.Row="0">
             <Hub.Header>
                 <!-- Back button and page title -->
                 <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
