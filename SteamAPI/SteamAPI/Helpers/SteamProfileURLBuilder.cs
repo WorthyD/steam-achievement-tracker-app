@@ -11,11 +11,11 @@ namespace SteamAPI.Helpers {
         // http://steamcommunity.com/id/ChetFaliszek/?xml=1
 
         public static string BuildProfileURL(string steamID){
-            int profile64 = 0;
-            int.TryParse(steamID, out profile64);
+            long profile64 = 0;
+            long.TryParse(steamID, out profile64);
             string midPath = "id/";
 
-            if (profile64 < 0) {
+            if (profile64 > 0) {
                 midPath = "profiles/";
             }
 

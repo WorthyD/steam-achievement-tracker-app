@@ -22,5 +22,30 @@ namespace SteamAchievementTracker.DesignData.Model
                 this.GameList.Add(g);
             }
         }
+
+
+        public List<IGame> MostPlayedGames
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public List<IGame> NearCompletion
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

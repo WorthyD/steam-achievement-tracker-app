@@ -9,5 +9,7 @@ namespace SteamAchievementTracker.Contracts.Model
     public interface IPlayerLibrary
     {
         List<IGame> GameList { get; set; }
+        List<IGame> MostPlayedGames { get; set; }
+        List<IGame> NearCompletion { get; set; }
     }
 }

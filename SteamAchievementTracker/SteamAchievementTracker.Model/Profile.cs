@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.Model
 {
-  public   class Profile : IProfile
+    public class Profile : IProfile
     {
         public long ID64 { get; set; }
         public string ID { get; set; }
@@ -33,24 +33,29 @@ namespace SteamAchievementTracker.Model
 
         public Profile(SteamAPI.Models.Profile.profile profile)
         {
-            this.ID = profile.steamID;
+            this.ID = (string.IsNullOrEmpty( profile.customURL))? profile.steamID64.ToString() : profile.customURL;
             this.ID64 = profile.steamID64;
             this.Name = profile.realname;
             this.ThumbURL = profile.avatarFull;
 
             this.RecentGames = new List<IGame>();
-            foreach (var game in profile.mostPlayedGames)
+            this.RecentGameLinks = new List<string>();
+            if (profile.mostPlayedGames != null)
             {
-                this.RecentGames.Add(new Game()
+                foreach (var game in profile.mostPlayedGames)
                 {
-                    GameLink = game.gameLink,
-                    Name = game.gameName,
-                    Logo = game.gameLogoSmall,
-                    RecentHours = game.hoursOnRecord,
-                    HoursPlayed = game.hoursOnRecord
-                });
+                    this.RecentGames.Add(new Game()
+                    {
+                        GameLink = game.gameLink,
+                        Name = game.gameName,
+                        Logo = game.gameLogoSmall,
+                        RecentHours = game.hoursOnRecord,
+                        HoursPlayed = game.hoursOnRecord
+                    });
+                }
+                this.RecentGameLinks = profile.mostPlayedGames.Select(x => x.gameLink).ToList();
+
             }
-            this.RecentGameLinks = profile.mostPlayedGames.Select(x => x.gameLink).ToList();
         }
         public Profile(long id64, string id, string name, string thumbnailurl, DateTime lastUpdate)
         {

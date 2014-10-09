@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using SteamAchievementTracker.Contracts.Model;
 using SteamAchievementTracker.Contracts.Services;
 using SteamAchievementTracker.Contracts.View;
@@ -157,6 +158,20 @@ namespace SteamAchievementTracker.ViewModel
             }
             else
             {
+
+
+                Messenger.Default.Register<string>(this,
+                    message =>
+                    {
+                        if (message == "LoggedIn")
+                        {
+                            this.LoadData();
+                            this.LoginVM.IsVisible = false;
+                            Messenger.Default.Unregister<string>(this);
+                        }
+                    });
+
+                this.EmptyData();
                 this.LoginVM.IsVisible = true;
             }
         }
@@ -204,6 +219,11 @@ namespace SteamAchievementTracker.ViewModel
             RefreshRecentGames();
             this.IsLoading = false;
         }
+        public async void EmptyData()
+        {
+            Library = new PlayerLibrary();
+            Profile = new Profile();
+        }
 
         public async void RefreshRecentGames()
         {
@@ -225,9 +245,12 @@ namespace SteamAchievementTracker.ViewModel
 
             if (refresh)
             {
+                var temp = this.Library;
                 Library = new PlayerLibrary()
                 {
-                    GameList = gameList.ToList()
+                    GameList = gameList.ToList(),
+                    MostPlayedGames = temp.MostPlayedGames,
+                    NearCompletion = temp.NearCompletion
                 };
             }
 

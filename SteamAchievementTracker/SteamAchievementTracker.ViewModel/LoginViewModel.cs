@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using SteamAchievementTracker.Contracts.Services;
 using System;
 using System.Collections.Generic;
@@ -62,11 +63,13 @@ namespace SteamAchievementTracker.ViewModel
             var p = await playerProfService.GetFreshPlayerDetails(this.UserName, false);
             if (p != null && p.ID64 != 0)
             {
+                await playerLibService.GetPlayerLibraryRefresh(p.ID64, p.ID);
                 Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID64"] = p.ID64;
                 Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID"] = p.ID;
 
                 //TODO:
                 //Call base viewmodel to load info
+             Messenger.Default.Send("LoggedIn");
 
                 this.IsVisible = false;
             }
@@ -78,6 +81,6 @@ namespace SteamAchievementTracker.ViewModel
 
             Debug.WriteLine(this.UserName);
         }
-
+     
     }
 }

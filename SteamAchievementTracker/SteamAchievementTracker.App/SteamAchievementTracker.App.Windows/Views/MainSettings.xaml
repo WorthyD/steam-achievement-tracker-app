@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    DataContext="{Binding Source={StaticResource Locator}, Path=Settings}" 
     IconSource="Assets/SmallLogo.png"
     Title="MainSettings"
     d:DesignWidth="346">
@@ -18,12 +19,14 @@
         <!-- Content Section 1-->
         <StackPanel Style="{StaticResource SettingsFlyoutSectionStyle}">
 
-            <!-- Section 1 header -->
             <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="User Info" />
-
-            <!-- Section 1 body -->
-            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap" Text="">
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap" Text="{Binding UserName}">
             </TextBlock>
+
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="User Info" />
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,25" TextWrapping="Wrap" Text="{Binding UserId}">
+            </TextBlock>
+            <Button Command="{Binding LogOutUser}">LogOut</Button>
 
         </StackPanel>
 
