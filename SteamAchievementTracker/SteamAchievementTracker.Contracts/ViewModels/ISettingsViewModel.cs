@@ -10,5 +10,7 @@ namespace SteamAchievementTracker.Contracts.ViewModels
     {
         void Initialize();
         void DeInitialize();
+        void ShowSettings();
+        void LogOut();
     }
 }

@@ -17,6 +17,8 @@
         <StackPanel x:Name="LeftPanel" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
             <Button Command="{Binding GoHome}">Home</Button>
             <Button Command="{Binding GoLibrary}">Library</Button>
+            <Button Command="{Binding GoHelp}">Help</Button>
+            <Button Command="{Binding GoSettings}">Settings</Button>
         </StackPanel>
         <StackPanel x:Name="RightPanel" Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Left">
         </StackPanel>
