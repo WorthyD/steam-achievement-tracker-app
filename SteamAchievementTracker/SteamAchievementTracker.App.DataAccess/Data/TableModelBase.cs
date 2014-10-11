@@ -53,6 +53,16 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             }
         }
 
+        public void DestroySQLDatabase()
+        {
+            if (conn != null)
+            {
+                conn = new SQLiteConnection(connectionString);
+                CreateDatabase.DestroyDatabase(conn);
+                conn = null;
+            }
+        }
+
 
         public ObservableCollection<TItemType> GetAllItems() {
             var items = new ObservableCollection<TItemType>();

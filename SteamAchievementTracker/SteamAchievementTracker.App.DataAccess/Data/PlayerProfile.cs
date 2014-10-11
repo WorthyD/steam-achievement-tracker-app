@@ -7,20 +7,24 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace SteamAchievementTracker.App.DataAccess.Data {
-    public class PlayerProfile : TableModelBase<IProfile, long> {
+namespace SteamAchievementTracker.App.DataAccess.Data
+{
+    public class PlayerProfile : TableModelBase<IProfile, long>
+    {
+
 
         public PlayerProfile(string connection)
         {
-            
             this.connectionString = connection;
         }
 
-        protected override string GetSelectAllSql() {
+        protected override string GetSelectAllSql()
+        {
             return "select [ID64], [ID], [Name], [Thumbnail], [LastUpdate] from PlayerProfile";
         }
 
-        protected override void FillSelectAllStatement(SQLitePCL.ISQLiteStatement statement) {
+        protected override void FillSelectAllStatement(SQLitePCL.ISQLiteStatement statement)
+        {
             throw new NotImplementedException();
         }
 
@@ -37,23 +41,28 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             return p;
         }
 
-        protected override string GetSelectItemSql() {
+        protected override string GetSelectItemSql()
+        {
             return "select [ID64], [ID], [Name], [Thumbnail], [LastUpdate] from PlayerProfile WHERE ID64 = ?";
         }
 
-        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, long key) {
+        protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, long key)
+        {
             statement.Bind(1, key);
         }
 
-        protected override string GetDeleteItemSql() {
+        protected override string GetDeleteItemSql()
+        {
             throw new NotImplementedException();
         }
 
-        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, long key) {
+        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, long key)
+        {
             throw new NotImplementedException();
         }
 
-        protected override string GetInsertItemSql() {
+        protected override string GetInsertItemSql()
+        {
             //throw new NotImplementedException();
             return "INSERT INTO PlayerProfile ([ID64], [ID], [Name], [Thumbnail], [LastUpdate]) VALUES (@id64, @id, @name, @thumbnail, @lastupdate)";
         }
@@ -69,7 +78,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             statement.Bind("@lastupdate", DateTime.Now.DateTimeSQLite());
         }
 
-        protected override string GetUpdateItemSql() {
+        protected override string GetUpdateItemSql()
+        {
             return "UPDATE PlayerProfile set ID = ?, Name = ?, Thumbnail = ?, LastUpdate = ? where ID64 = ?";
         }
 
@@ -88,7 +98,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data {
             return null;
         }
 
-        public override string CreateTable() {
+        public override string CreateTable()
+        {
             return @"CREATE TABLE IF NOT EXISTS  [PlayerProfile] (
                     [ID64] INTEGER  NOT NULL PRIMARY KEY,
                     [ID] VARCHAR(250)  NULL,

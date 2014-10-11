@@ -21,6 +21,7 @@ namespace SteamAchievementTracker.App.ViewModel
         public long UserID { get { return _UserID; } set { Set(() => UserID, ref _UserID, value); } }
 
         public RelayCommand LogOutUser { get; set; }
+        public RelayCommand ClearCacheCommand { get; set; }
 
 
 
@@ -46,6 +47,11 @@ namespace SteamAchievementTracker.App.ViewModel
             {
                 LogOut();
             });
+            ClearCacheCommand = new RelayCommand(() =>
+            {
+                ClearCache();
+            });
+ 
         }
 
         void onCommandsRequested(SettingsPane settingsPane, SettingsPaneCommandsRequestedEventArgs e)
@@ -98,6 +104,18 @@ namespace SteamAchievementTracker.App.ViewModel
 
             var pageType = SimpleIoc.Default.GetInstance<IMain>();
             _navigationService.Navigate(pageType.GetType(), null);
+        }
+
+        public void ClearCache()
+        {
+
+             string DBName = "SteamAchievementTracker.db";
+            DataAccess.Data.PlayerProfile pp = new DataAccess.Data.PlayerProfile(DBName);
+            pp.DestroySQLDatabase();
+
+            var pageType = SimpleIoc.Default.GetInstance<IMain>();
+            _navigationService.Navigate(pageType.GetType(), null);
+ 
         }
     }
 }
