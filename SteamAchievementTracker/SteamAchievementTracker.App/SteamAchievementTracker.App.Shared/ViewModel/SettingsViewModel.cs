@@ -7,7 +7,9 @@ using SteamAchievementTracker.Contracts.View;
 using SteamAchievementTracker.Contracts.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using Windows.Storage;
 using Windows.UI.ApplicationSettings;
 
 namespace SteamAchievementTracker.App.ViewModel
@@ -106,12 +108,26 @@ namespace SteamAchievementTracker.App.ViewModel
             _navigationService.Navigate(pageType.GetType(), null);
         }
 
-        public void ClearCache()
+        public async void ClearCache()
         {
 
              string DBName = "SteamAchievementTracker.db";
             DataAccess.Data.PlayerProfile pp = new DataAccess.Data.PlayerProfile(DBName);
             pp.DestroySQLDatabase();
+            //try
+            //{
+            //    await Windows.Storage.ApplicationData.Current.ClearAsync();
+            //}
+            //catch (Exception)
+            //{
+            //    Debug.WriteLine("Clearing Cache Failed");
+            //}
+            //StorageFile filed = await ApplicationData.Current.LocalFolder.GetFileAsync(DBName);
+            //if (filed != null)
+            //{
+            //    await filed.DeleteAsync();
+
+            //}
 
             var pageType = SimpleIoc.Default.GetInstance<IMain>();
             _navigationService.Navigate(pageType.GetType(), null);

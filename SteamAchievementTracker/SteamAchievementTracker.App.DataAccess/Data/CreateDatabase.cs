@@ -24,8 +24,13 @@ namespace SteamAchievementTracker.App.DataAccess.Data
                     statement.Step();
                 }
             }
+            string sqlVac = "VACUUM";
+            using (var statement = db.Prepare(sqlVac))
+            {
+                statement.Step();
+            }
 
- 
+
         }
 
         public static void LoadDatabase(SQLiteConnection db)
