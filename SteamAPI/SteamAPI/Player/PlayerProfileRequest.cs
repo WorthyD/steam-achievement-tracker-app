@@ -17,11 +17,18 @@ namespace SteamAPI.Player {
             string playerUrl = string.Format("{0}?xml=1", Helpers.SteamProfileURLBuilder.BuildProfileURL(SteamID));
             Debug.WriteLine(string.Format("Calling: {0}", playerUrl));
             string response = await Helpers.WebRequestHelper.ExecuteGetRequest(playerUrl, timeout);
+            PlayerProfileResponse profileResponse = new PlayerProfileResponse();
+            try
+            {
+                Models.Profile.profile profile = response.ParseXML<Models.Profile.profile>();
+                Debug.WriteLine(string.Format("Received: {0}", playerUrl));
 
-            Models.Profile.profile profile = response.ParseXML<Models.Profile.profile>();
-            Debug.WriteLine(string.Format("Received: {0}", playerUrl));
-
-            PlayerProfileResponse profileResponse = new PlayerProfileResponse(this) { Profile = profile };
+                 profileResponse = new PlayerProfileResponse(this) { Profile = profile };
+            }
+            catch (Exception)
+            {
+                throw new Exceptions.PlayerNotFoundException();
+            }
 
             return profileResponse;
         }
