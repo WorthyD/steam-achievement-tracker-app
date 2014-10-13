@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace SteamAchievementTracker.Services.Infrastructure
@@ -23,6 +24,7 @@ namespace SteamAchievementTracker.Services.Infrastructure
             {
                 frame = value;
                 frame.Navigated += OnFrameNavigated;
+                //frame.Unloaded += frame_Unloaded;
             }
         }
 
@@ -101,7 +103,6 @@ namespace SteamAchievementTracker.Services.Infrastructure
                 }
             }
         }
-
 
         public void Navigate(string type, object parameter)
         {

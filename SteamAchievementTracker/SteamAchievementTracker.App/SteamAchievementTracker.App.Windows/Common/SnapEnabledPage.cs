@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SteamAchievementTracker.Contracts.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace SteamAchievementTracker.App.Common
 {
@@ -19,10 +21,29 @@ namespace SteamAchievementTracker.App.Common
         //    this.Loaded += page_Loaded;
         //    this.Unloaded += page_Unloaded;
         //}
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            var navigableViewModel = this.DataContext as IViewModel;
+            if (navigableViewModel != null)
+                navigableViewModel.Load(e.Parameter);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+
+            var navigableViewModel = this.DataContext as IViewModel;
+            if (navigableViewModel != null)
+                navigableViewModel.UnLoad(e.Parameter);
+        }
+
         public SnapEnabledPage()
         {
-            this.Loaded += page_Loaded;
-            this.Unloaded += page_Unloaded;
+            //    this.Loaded += page_Loaded;
+            //   this.Unloaded += page_Unloaded;
         }
 
         private void page_Loaded(object sender, RoutedEventArgs e)

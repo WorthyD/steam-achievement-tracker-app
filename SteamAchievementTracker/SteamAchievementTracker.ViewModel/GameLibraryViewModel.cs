@@ -300,6 +300,12 @@ namespace SteamAchievementTracker.ViewModel
             }
             Debug.WriteLine(LibProgress);
         }
+
+
+        public override void UnLoad(object parameter)
+        {
+                StopLibraryRefresh();
+        }
     }
 
 

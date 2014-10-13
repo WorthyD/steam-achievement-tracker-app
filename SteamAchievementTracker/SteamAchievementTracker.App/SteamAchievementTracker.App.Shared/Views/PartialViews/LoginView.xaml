@@ -11,8 +11,17 @@
 
     <Grid>
         <StackPanel>
+            <TextBlock>Login</TextBlock>
             <TextBox  Text="{Binding UserName, Mode=TwoWay}"></TextBox>
-            <Button Command="{Binding Login}">Login</Button>
+            <StackPanel>
+                <Button Command="{Binding Login}">Login</Button>
+            </StackPanel>
+            <StackPanel>
+                <ProgressBar  Height="10" IsIndeterminate="True"></ProgressBar>
+                <TextBlock Text="{Binding LoginProgress}"></TextBlock>
+            </StackPanel>
+
+ 
         </StackPanel>
     </Grid>
 </UserControl>

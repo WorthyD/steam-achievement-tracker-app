@@ -42,6 +42,8 @@ namespace SteamAchievementTracker.ViewModel
                 {
                     long.TryParse(setting.ToString(), out tLong);
                 }
+
+                this.IsLoggedIn = (tLong > 0);
                 return tLong;
 
             }
@@ -71,6 +73,10 @@ namespace SteamAchievementTracker.ViewModel
                 Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID"] = value;
             }
         }
+
+        private bool _isLoggedIn;
+        public bool IsLoggedIn { get { return _isLoggedIn; } set { Set(() => IsLoggedIn, ref _isLoggedIn, value); } }
+
         #endregion
 
         public virtual void Initialize(object parameter)
@@ -130,5 +136,14 @@ namespace SteamAchievementTracker.ViewModel
 
 
 
+
+
+        public virtual void Load(object parameter)
+        {
+        }
+
+        public virtual void UnLoad(object parameter)
+        {
+        }
     }
 }

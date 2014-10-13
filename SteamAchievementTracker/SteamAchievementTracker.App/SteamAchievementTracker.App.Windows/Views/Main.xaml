@@ -49,7 +49,7 @@
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap" />
 </StackPanel>
             </Hub.Header>
-            <HubSection  x:Uid="Section1Header" Header="Profile">
+            <HubSection  x:Uid="Section1Header" Header="Profile" Visibility="{Binding IsLoggedIn, Converter={StaticResource TrueToVisibleConverter}}">
                 <DataTemplate>
                     <StackPanel>
                     <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
@@ -57,7 +57,7 @@
                     </StackPanel>
                 </DataTemplate>
             </HubSection>
-            <HubSection  x:Uid="Section2Header" Header="Recent Games"  >
+            <HubSection  x:Uid="Section2Header" Header="Recent Games" Visibility="{Binding IsLoggedIn, Converter={StaticResource TrueToVisibleConverter}}" >
                 <DataTemplate >
                     <Grid>
                         <GridView x:Name="GameGrid" ItemsSource="{Binding Library.GameList}"   
@@ -86,7 +86,7 @@
                     </Grid>
                 </DataTemplate>
             </HubSection>
-            <HubSection  x:Uid="Section4Header" Header="Nearest to Completion" IsHeaderInteractive="false" >
+            <HubSection  x:Uid="Section4Header" Header="Nearest to Completion" IsHeaderInteractive="false" Visibility="{Binding IsLoggedIn, Converter={StaticResource TrueToVisibleConverter}}">
                 <DataTemplate >
                     <Grid>
                         <GridView x:Name="GameGrid3" ItemsSource="{Binding Library.NearCompletion}"   
@@ -115,7 +115,7 @@
                     </Grid>
                 </DataTemplate>
             </HubSection>
-            <HubSection  x:Uid="Section3Header" Header="Most Played Games" IsHeaderInteractive="false" >
+            <HubSection  x:Uid="Section3Header" Header="Most Played Games" IsHeaderInteractive="false" Visibility="{Binding IsLoggedIn, Converter={StaticResource TrueToVisibleConverter}}">
                 <DataTemplate >
                     <Grid>
                         <GridView x:Name="GameGrid2" ItemsSource="{Binding Library.MostPlayedGames}"   
@@ -144,7 +144,7 @@
                     </Grid>
                 </DataTemplate>
             </HubSection>
-         <HubSection  x:Uid="Ad" Header="" IsHeaderInteractive="false" >
+         <HubSection  x:Uid="Ad" Header="" IsHeaderInteractive="false" Visibility="{Binding IsLoggedIn, Converter={StaticResource TrueToVisibleConverter}}">
                 <DataTemplate >
                     <Grid>
                     <UI:AdControl 

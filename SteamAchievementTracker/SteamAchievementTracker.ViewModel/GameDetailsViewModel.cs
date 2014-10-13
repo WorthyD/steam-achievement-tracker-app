@@ -117,5 +117,7 @@ namespace SteamAchievementTracker.ViewModel
             this.Completed = this.Game.AchievementsEarned == this.Game.TotalAchievements;
             this.IsLoading = false;
         }
+
+   
     }
 }

@@ -154,6 +154,7 @@ namespace SteamAchievementTracker.ViewModel
             if (base.UserID != 0 || base.IsInDesignMode)
             {
                 this.LoadData();
+                this.IsLoggedIn = true;
                 this.LoginVM.IsVisible = false;
             }
             else
@@ -171,6 +172,7 @@ namespace SteamAchievementTracker.ViewModel
                         }
                     });
 
+                this.IsLoggedIn = false;
                 this.EmptyData();
                 this.LoginVM.IsVisible = true;
             }

@@ -44,5 +44,16 @@ namespace SteamAchievementTracker.DesignData
         {
             throw new NotImplementedException();
         }
+
+
+        public void Load(object parameter)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void UnLoad(object parameter)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

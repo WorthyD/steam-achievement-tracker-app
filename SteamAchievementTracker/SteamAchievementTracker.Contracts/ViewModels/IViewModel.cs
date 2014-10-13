@@ -9,5 +9,7 @@ namespace SteamAchievementTracker.Contracts.ViewModels
     public interface IViewModel
     {
          void Initialize(object parameter);
+         void Load(object parameter);
+         void UnLoad(object parameter);
     }
 }

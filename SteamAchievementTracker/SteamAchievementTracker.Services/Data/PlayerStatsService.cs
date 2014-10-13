@@ -155,7 +155,7 @@ namespace SteamAchievementTracker.Services.Data
                 if (delay)
                 {
                     //todo: settings
-                    await Task.Delay(1000);
+                    await Task.Delay(500);
                 }
 
             }
