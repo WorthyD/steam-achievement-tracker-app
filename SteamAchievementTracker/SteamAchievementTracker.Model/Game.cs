@@ -18,11 +18,13 @@ namespace SteamAchievementTracker.Model
         public string StatsLink { get; set; }
         public string GameLink { get; set; }
         public string Logo { get; set; }
+        public string Icon { get; set; }
         public decimal HoursPlayed { get; set; }
         public decimal RecentHours { get; set; }
         public DateTime LastUpdated { get; set; }
         public DateTime AchievementRefresh { get; set; }
         public bool RefreshAchievements { get; set; }
+        public bool HasAchievements { get; set; }
 
         public int AchievementsEarned { get; set; }
         public int AchievementsLocked { get { return TotalAchievements - AchievementsEarned; } }
@@ -48,7 +50,6 @@ namespace SteamAchievementTracker.Model
         }
 
 
-        public bool HasAchievements { get { return !string.IsNullOrEmpty(this.StatsLink); } }
         public bool BeenProcessed { get { return this.AchievementRefresh > new DateTime(2001, 2, 1); } }
 
         public string RecentHoursFormatted

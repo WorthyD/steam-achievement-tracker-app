@@ -165,6 +165,10 @@
       <Project>{2000d388-ae31-46f9-b811-70581e96c03c}</Project>
       <Name>SteamAchievementTracker.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SteamAchievementTracker.DesignData\SteamAchievementTracker.DesignData.csproj">
+      <Project>{b4164f57-cf7f-4423-995e-46f12ab7444f}</Project>
+      <Name>SteamAchievementTracker.DesignData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SteamAchievementTracker.Model\SteamAchievementTracker.Model.csproj">
       <Project>{f4a9e580-ee40-4dab-a097-20308e80c713}</Project>
       <Name>SteamAchievementTracker.Model</Name>

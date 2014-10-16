@@ -14,6 +14,7 @@ namespace SteamAchievementTracker.Contracts.Model
         string StatsLink { get; set; }
         string GameLink { get; set; }
         string Logo { get; set; }
+        string Icon { get; set; }
         decimal HoursPlayed { get; set; }
         decimal RecentHours { get; set; }
         DateTime LastUpdated { get; set; }
@@ -24,7 +25,7 @@ namespace SteamAchievementTracker.Contracts.Model
         int AchievementsLocked { get; }
         int TotalAchievements { get; set; }
 
-        bool HasAchievements {get;}
+        bool HasAchievements { get; set; }
         bool BeenProcessed {get;}
 
         double PercentComplete { get; }

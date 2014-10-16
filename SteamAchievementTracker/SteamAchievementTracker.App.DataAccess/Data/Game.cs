@@ -16,13 +16,18 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             this.connectionString = connection;
         }
 
+        #region Public Methods
+
+        #endregion 
+
+
         private string selectAllColumns
         {
             get
             {
-                return @"[SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours],
+                return @"[SteamID], [GameID], [Name], [StatsLink], [GameLink], [LargeLogo], [GameIcon], [RecentHours],
                     	 [HoursPlayed], [RefreshAchievements], [AchievementsEarned], 
-                         [AchievementCount], [AchievementRefresh], [LastUpdated]";
+                         [AchievementCount], [HasAchievements], [AchievementRefresh], [LastUpdated]";
             }
         }
         public override string CreateTable()
@@ -33,10 +38,11 @@ namespace SteamAchievementTracker.App.DataAccess.Data
                 [Name] varCHAR(100)  NULL,
                 [StatsLink] vARCHAR(150)  NULL,
                 [GameLink] vARCHAR(150)  NULL,
-                [SmallLogo] vARCHAR(150)  NULL,
+                [GameIcon] vARCHAR(150)  NULL,
                 [LargeLogo] vARCHAR(150)  NULL,
                 [HoursPlayed] FLOAT  NULL,
                 [RecentHours] FLOAT  NULL,
+                [HasAchievements] BOOLEAN  NULL,
                 [RefreshAchievements] BOOLEAN  NULL,
                 [AchievementsEarned] INTEGER  NULL,
                 [AchievementCount] INTEGER  NULL,
@@ -48,19 +54,14 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 
         protected override string GetSelectAllSql()
         {
-            return @"Select
-	                    [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours],
-                    	[HoursPlayed], [RefreshAchievements], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated]
+            return string.Format(@"Select
+	                 {0}
                     FROM
-                    	Game";
-            //Where
-            //    SteamID = @SteamID AND
-            //    GameID = @GameID";
+                    	Game", selectAllColumns);
         }
 
         protected override void FillSelectAllStatement(SQLitePCL.ISQLiteStatement statement)
         {
-            //statement.Bind("@SteamID", 
         }
 
         protected override IGame CreateItem(SQLitePCL.ISQLiteStatement statement)
@@ -72,26 +73,28 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             g.GameLink = statement["GameLink"].ToSafeString();
             g.RecentHours = statement["RecentHours"].ToDecimal();
             g.HoursPlayed = statement["HoursPlayed"].ToDecimal();
-            g.Logo = statement["SmallLogo"].ToSafeString();
+            g.Logo = statement["LargeLogo"].ToSafeString();
+            g.Icon = statement["GameIcon"].ToSafeString();
             g.StatsLink = statement["StatsLink"].ToSafeString();
             g.TotalAchievements = statement["AchievementCount"].ToInt();
             g.RefreshAchievements = statement["RefreshAchievements"].ToBool();
             g.LastUpdated = statement["LastUpdated"].ToDate();
             g.AchievementRefresh = statement["AchievementRefresh"].ToDate();
             g.Name = statement["Name"].ToSafeString();
+
+            g.HasAchievements = statement["HasAchievements"].ToBool();
             return g;
         }
 
         protected override string GetSelectItemSql()
         {
-            return @"Select
-	                    SteamID, GameID, Name, StatsLink, GameLink, SmallLogo,RecentHours,
-                    	HoursPlayed, AchievementsEarned,  RefreshAchievements, AchievementCount, AchievementRefresh, LastUpdated
+            return string.Format(@"Select
+                        {0}
                     FROM
                     	Game
                     Where
                     	SteamID = @SteamID AND
-    	                GameID = @GameID";
+    	                GameID = @GameID", selectAllColumns);
         }
 
         protected override void FillSelectItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key)
@@ -100,33 +103,40 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             statement.Bind("@GameID", key.Value);
         }
 
-        protected override string GetDeleteItemSql()
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         protected override string GetInsertItemSql()
         {
             return @"INSERT INTO Game
-				(SteamID, GameID,
-				Name, StatsLink,
-				GameLink, SmallLogo,RecentHours,
-				HoursPlayed, AchievementsEarned,
-                RefreshAchievements,
-				AchievementCount, AchievementRefresh,
+				(SteamID, 
+                GameID,
+				Name, 
+                StatsLink, 
+                LargeLogo,
+				GameLink, 
+                GameIcon, 
+                RecentHours,
+				HoursPlayed, 
+                AchievementsEarned,
+                RefreshAchievements, 
+                HasAchievements,
+				AchievementCount, 
+                AchievementRefresh,
 				LastUpdated)
 			VALUES
-				(@SteamID, @GameID,
-				@Name, @StatsLink,
-				@GameLink, @SmallLogo, @RecentHours,
-				@HoursPlayed, @AchievementsEarned,
-                @RefreshAchievements,
-				@AchievementCount, @AchievementRefresh,
+				(@SteamID, 
+                @GameID,
+				@Name, 
+                @StatsLink, 
+                @LargeLogo,
+				@GameLink, 
+                @GameIcon, 
+                @RecentHours,
+				@HoursPlayed, 
+                @AchievementsEarned,
+                @RefreshAchievements, 
+                @HasAchievements,
+				@AchievementCount,
+                @AchievementRefresh,
 				@LastUpdated);";
         }
 
@@ -137,9 +147,11 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             statement.Bind("@Name", item.Name);
             statement.Bind("@StatsLink", item.StatsLink);
             statement.Bind("@GameLink", item.GameLink);
-            statement.Bind("@SmallLogo", item.Logo);
+            statement.Bind("@LargeLogo", item.Logo);
+            statement.Bind("@GameIcon", item.Icon);
             statement.Bind("@RecentHours", item.RecentHours);
             statement.Bind("@HoursPlayed", item.HoursPlayed);
+            statement.Bind("@HasAchievements", item.HasAchievements.BoolToBit());
             statement.Bind("@RefreshAchievements", true.BoolToBit());
             statement.Bind("@AchievementsEarned", item.AchievementsEarned);
             statement.Bind("@AchievementCount", item.TotalAchievements);
@@ -154,8 +166,10 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 	            set Name = @Name,
             	StatsLink = @StatsLink,
             	GameLink = @GameLink,
-            	SmallLogo = @SmallLogo,
+                LargeLogo = @LargeLogo,
+            	GameIcon = @GameIcon,
                 RefreshAchievements = @RefreshAchievements,
+                HasAchievements = @HasAchievements,
                 RecentHours = @RecentHours,
             	HoursPlayed = @HoursPlayed,
             	LastUpdated =@LastUpdated
@@ -170,13 +184,12 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             statement.Bind("@Name", item.Name);
             statement.Bind("@StatsLink", item.StatsLink);
             statement.Bind("@GameLink", item.GameLink);
-            statement.Bind("@SmallLogo", item.Logo);
+            statement.Bind("@LargeLogo", item.Logo);
+            statement.Bind("@GameIcon", item.Icon);
             statement.Bind("@RecentHours", item.RecentHours);
             statement.Bind("@HoursPlayed", item.HoursPlayed);
             statement.Bind("@RefreshAchievements", item.RefreshAchievements.BoolToBit());
-            //statement.Bind("@AchievementsEarned", item.AchievementsEarned);
-            //statement.Bind("@AchievementCount", item.TotalAchievements);
-            //statement.Bind("@PurchaseDate", item.PurchaseDate);
+            statement.Bind("@HasAchievements", item.HasAchievements);
             statement.Bind("@LastUpdated", item.LastUpdated.DateTimeSQLite());
         }
 
@@ -208,7 +221,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         public List<IGame> GetGamesBySteamID(long id64)
         {
             var items = new ObservableCollection<IGame>();
-            string sqlStatement = "Select [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours], [RefreshAchievements], [HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated] FROM Game Where SteamID = @SteamID";
+            string sqlStatement =  string.Format("Select {0} FROM Game Where SteamID = @SteamID", selectAllColumns);
             using (var statement = base.sqlConnection.Prepare(sqlStatement))
             {
                 statement.Bind("@SteamID", id64);
@@ -223,7 +236,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         }
         public IGame GetGameBySteamIDAndUrl(long id64, string gameURL)
         {
-            string sqlStatement = "Select [SteamID], [GameID], [Name], [StatsLink], [GameLink], [SmallLogo], [RecentHours],[RefreshAchievements], [HoursPlayed], [AchievementsEarned], [AchievementCount], [AchievementRefresh], [LastUpdated] FROM Game Where SteamID = @SteamID and GameLink = @GameLink";
+            string sqlStatement = string.Format("Select {0} FROM Game Where SteamID = @SteamID and GameLink = @GameLink", selectAllColumns);
             using (var statement = base.sqlConnection.Prepare(sqlStatement))
             {
                 statement.Bind("@SteamID", id64);
@@ -261,6 +274,15 @@ namespace SteamAchievementTracker.App.DataAccess.Data
                 }
             }
             return null;
+        }
+        protected override string GetDeleteItemSql()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void FillDeleteItemStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key)
+        {
+            throw new NotImplementedException();
         }
 
 
