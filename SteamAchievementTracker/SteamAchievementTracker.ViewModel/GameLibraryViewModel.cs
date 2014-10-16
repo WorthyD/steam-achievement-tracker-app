@@ -246,7 +246,7 @@ namespace SteamAchievementTracker.ViewModel
             var gameList = await playerLibService.GetPlayerLibraryCached(base.UserID);
 
             //TODO: Check settings;
-            if (true)
+            if (Settings.Profile.GetGamesWOAchievements == false)
             {
                 gameList = gameList.Where(x => x.StatsLink != null && !string.IsNullOrEmpty(x.StatsLink)).ToList();
             }
@@ -263,7 +263,7 @@ namespace SteamAchievementTracker.ViewModel
             RefreshCount = this.GameList.Where(x => x.RefreshAchievements == true).Count();
             try
             {
-                var gToRefresh = GameList.Where(x => x.RefreshAchievements == true).ToList();
+                var gToRefresh = GameList.Where(x => x.RefreshAchievements == true && x.StatsLink != string.Empty).ToList();
                 await playerStatsService.UpdateStatsByList(gToRefresh, progressIndicator, cancelLibrary.Token);
             }
             catch (OperationCanceledException ex)

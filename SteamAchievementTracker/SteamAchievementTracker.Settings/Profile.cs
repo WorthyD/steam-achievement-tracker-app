@@ -15,5 +15,19 @@ namespace SteamAchievementTracker.Settings
                 return 0;
             }
         }
+
+        public static bool GetGamesWOAchievements
+        {
+            get
+            {
+                bool showNoAch = false;
+                var showNoAchObj = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ShowNoAch"];
+                if (showNoAchObj != null)
+                {
+                    bool.TryParse(showNoAchObj.ToString(), out showNoAch);
+                }
+                return showNoAch;
+            }
+        }
     }
 }

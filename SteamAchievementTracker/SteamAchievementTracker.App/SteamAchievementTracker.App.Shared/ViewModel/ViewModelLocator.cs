@@ -49,13 +49,7 @@ namespace SteamAchievementTracker.App.ViewModel
                 return ServiceLocator.Current.GetInstance<GameLibraryViewModel>();
             }
         }
-        //public SettingsViewModel Settings
-        //{
-        //    get
-        //    {
-        //        return ServiceLocator.Current.GetInstance<SettingsViewModel>();
-        //    }
-        //}
+    
 
 
         static ViewModelLocator()

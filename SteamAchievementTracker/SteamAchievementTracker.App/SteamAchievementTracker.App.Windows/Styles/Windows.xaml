@@ -62,6 +62,19 @@
     </Style>
 
     <Style x:Key="LoginError" TargetType="TextBlock">
-        
     </Style>
+    
+    
+    <!-- SEtting Styles -->
+    <Style x:Key="SettingsContainer" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0,20,0,20"></Setter>
+    </Style>
+
+    <Style x:Key="SettingsCheckbox" TargetType="CheckBox">
+        <Setter Property="Margin" Value="0,10,0,10"></Setter>
+    </Style>
+
+
+
+    
 </ResourceDictionary>

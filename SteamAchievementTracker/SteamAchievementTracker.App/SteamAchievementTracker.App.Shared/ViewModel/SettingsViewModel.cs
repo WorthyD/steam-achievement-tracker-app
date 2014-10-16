@@ -22,6 +22,18 @@ namespace SteamAchievementTracker.App.ViewModel
         private long _UserID;
         public long UserID { get { return _UserID; } set { Set(() => UserID, ref _UserID, value); } }
 
+        private bool _showNoAch;
+        public bool ShowNoAch
+        {
+            get { return _showNoAch; }
+            set
+            {
+                Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ShowNoAch"] = value;
+                Set(() => ShowNoAch, ref _showNoAch, value);
+            }
+        }
+
+
         public RelayCommand LogOutUser { get; set; }
         public RelayCommand ClearCacheCommand { get; set; }
 
@@ -53,17 +65,14 @@ namespace SteamAchievementTracker.App.ViewModel
             {
                 ClearCache();
             });
- 
+
         }
 
         void onCommandsRequested(SettingsPane settingsPane, SettingsPaneCommandsRequestedEventArgs e)
         {
-            SettingsCommand defaultsCommand = new SettingsCommand("defaults", "Defaults",
+            SettingsCommand defaultsCommand = new SettingsCommand("settings", "Settings",
                 (handler) =>
                 {
-                    // SettingsFlyout1 is defined in "SettingsFlyout1.xaml"
-                    //rootPage.NotifyUser("You opened the 'Defaults' SettingsFlyout.", NotifyType.StatusMessage);
-                    //SettingsFlyout1 sf = new SettingsFlyout1();
                     ShowSettings();
                 });
             e.Request.ApplicationCommands.Add(defaultsCommand);
@@ -85,7 +94,15 @@ namespace SteamAchievementTracker.App.ViewModel
             {
                 long.TryParse(userIdObj.ToString(), out userId);
             }
-            UserID = userId; 
+            UserID = userId;
+
+            bool showNoAch = false;
+            var showNoAchObj = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ShowNoAch"];
+            if (showNoAchObj != null)
+            {
+                bool.TryParse(showNoAchObj.ToString(), out showNoAch);
+            }
+            this.ShowNoAch = showNoAch;
 
 
             //Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID64"]
@@ -103,6 +120,7 @@ namespace SteamAchievementTracker.App.ViewModel
         {
             Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID64"] = 0;
             Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID"] = string.Empty;
+            Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ShowNoAch"] = false;
 
             var pageType = SimpleIoc.Default.GetInstance<IMain>();
             _navigationService.Navigate(pageType.GetType(), null);
@@ -111,27 +129,13 @@ namespace SteamAchievementTracker.App.ViewModel
         public async void ClearCache()
         {
 
-             string DBName = "SteamAchievementTracker.db";
+            string DBName = "SteamAchievementTracker.db";
             DataAccess.Data.PlayerProfile pp = new DataAccess.Data.PlayerProfile(DBName);
             pp.DestroySQLDatabase();
-            //try
-            //{
-            //    await Windows.Storage.ApplicationData.Current.ClearAsync();
-            //}
-            //catch (Exception)
-            //{
-            //    Debug.WriteLine("Clearing Cache Failed");
-            //}
-            //StorageFile filed = await ApplicationData.Current.LocalFolder.GetFileAsync(DBName);
-            //if (filed != null)
-            //{
-            //    await filed.DeleteAsync();
-
-            //}
 
             var pageType = SimpleIoc.Default.GetInstance<IMain>();
             _navigationService.Navigate(pageType.GetType(), null);
- 
+
         }
     }
 }
