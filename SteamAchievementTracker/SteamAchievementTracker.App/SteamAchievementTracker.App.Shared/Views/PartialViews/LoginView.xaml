@@ -10,18 +10,25 @@
     d:DesignWidth="400">
 
     <Grid>
-        <StackPanel>
-            <TextBlock>Login</TextBlock>
+        <StackPanel Style="{StaticResource LoginModal}">
+            <TextBlock Style="{StaticResource LoginTitle}">Steam Profile Identifier:</TextBlock>
             <TextBox  Text="{Binding UserName, Mode=TwoWay}"></TextBox>
-            <StackPanel>
+            <StackPanel Visibility="{Binding IsLoggingIn, Converter={StaticResource FalseToVisibleConverter}}">
                 <Button Command="{Binding Login}">Login</Button>
             </StackPanel>
-            <StackPanel>
-                <ProgressBar  Height="10" IsIndeterminate="True"></ProgressBar>
-                <TextBlock Text="{Binding LoginProgress}"></TextBlock>
+            <StackPanel Visibility="{Binding IsLoggingIn, Converter={StaticResource TrueToVisibleConverter}}">
+                <ProgressBar Height="10" IsIndeterminate="True"></ProgressBar>
+                <TextBlock Style="{StaticResource LoginStatus}" Text="{Binding LoginMessage}"></TextBlock>
             </StackPanel>
-
- 
+            <StackPanel>
+                <TextBlock Style="{StaticResource LoginError}" Text="{Binding ErrorMessage}"></TextBlock>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock>Your identifier will be the last part of your Steam Profile URL</TextBlock>
+                <TextBlock FontSize="14">http://steamcommunity.com/id/<Run FontWeight="Bold">*************</Run></TextBlock>
+                <TextBlock FontSize="14">http://steamcommunity.com/profile/<Run FontWeight="Bold">###########</Run></TextBlock>
+                <Button Command="{Binding GoHelp}">Help</Button>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

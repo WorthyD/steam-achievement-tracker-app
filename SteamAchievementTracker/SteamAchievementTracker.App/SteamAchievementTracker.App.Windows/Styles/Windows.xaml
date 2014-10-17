@@ -44,4 +44,37 @@
         <Setter Property="Margin" Value="0,0,0,5"></Setter>
     </Style>
   
+
+    
+    <!--                    LOGIN STYLES                    -->
+    <Style x:Key="LoginModal" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0,50,0,50"></Setter>
+    </Style>
+
+    <Style x:Key="LoginTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+    </Style>
+
+
+    <Style x:Key="LoginStatus" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Center"></Setter>
+    </Style>
+
+    <Style x:Key="LoginError" TargetType="TextBlock">
+    </Style>
+    
+    
+    <!-- SEtting Styles -->
+    <Style x:Key="SettingsContainer" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0,20,0,20"></Setter>
+    </Style>
+
+    <Style x:Key="SettingsCheckbox" TargetType="CheckBox">
+        <Setter Property="Margin" Value="0,10,0,10"></Setter>
+    </Style>
+
+
+
+    
 </ResourceDictionary>
