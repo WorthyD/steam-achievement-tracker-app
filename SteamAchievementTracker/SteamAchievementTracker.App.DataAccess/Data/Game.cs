@@ -189,7 +189,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             statement.Bind("@RecentHours", item.RecentHours);
             statement.Bind("@HoursPlayed", item.HoursPlayed);
             statement.Bind("@RefreshAchievements", item.RefreshAchievements.BoolToBit());
-            statement.Bind("@HasAchievements", item.HasAchievements);
+            statement.Bind("@HasAchievements", item.HasAchievements.BoolToBit());
             statement.Bind("@LastUpdated", item.LastUpdated.DateTimeSQLite());
         }
 

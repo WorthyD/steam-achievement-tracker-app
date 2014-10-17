@@ -44,6 +44,24 @@
         <Setter Property="Margin" Value="0,0,0,5"></Setter>
     </Style>
   
+    <!--Profile Styles-->
+    <Style x:Key="ProImage" TargetType="Image">
+        <Setter Property="Height" Value="200"></Setter> 
+        <Setter Property="Width" Value="200"></Setter> 
+        <Setter Property="Margin" Value="0,0,0,10"></Setter> 
+    </Style>
+    <Style x:Key="ProLCol" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="TextAlignment" Value="Left"></Setter>
+        
+    </Style>
+
+    <Style x:Key="ProRCol" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="TextAlignment" Value="Right"></Setter>
+    </Style>
+
+
 
     
     <!--                    LOGIN STYLES                    -->
@@ -65,7 +83,7 @@
     </Style>
     
     
-    <!-- SEtting Styles -->
+    <!-- Setting Styles -->
     <Style x:Key="SettingsContainer" TargetType="StackPanel">
         <Setter Property="Margin" Value="0,20,0,20"></Setter>
     </Style>

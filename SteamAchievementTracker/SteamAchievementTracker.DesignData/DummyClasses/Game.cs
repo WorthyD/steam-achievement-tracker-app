@@ -20,7 +20,6 @@ namespace SteamAchievementTracker.DesignData.DummyClasses
             int ticks = rnd.Next(0, 100);
             Model.Game g = new Model.Game();
 
-            g.AchievementsEarned = 0;
 
             g.AppID = ticks;
             g.GameLink = "http://google.com";
@@ -28,12 +27,16 @@ namespace SteamAchievementTracker.DesignData.DummyClasses
             g.LastUpdated = DateTime.Now;
             g.Icon = GetRandomImage();
             g.Logo = GetRandomImage();
-            g.Name = "Game"  + ticks;
+            g.Name = name;
             g.RecentHours = 1;
-            g.StatsLink = "http://google.com/" + ticks;
             g.SteamUserID = ticks;
-            g.TotalAchievements = 0;
-            g.HasAchievements = false;
+
+
+            g.StatsLink = (ticks % 2 == 0) ? "stuff" : "";
+            g.AchievementsEarned = ticks;
+            g.TotalAchievements = 100;
+            g.HasAchievements = (ticks % 2 == 0);
+
             return g;
         }
         private static string GetRandomImage()

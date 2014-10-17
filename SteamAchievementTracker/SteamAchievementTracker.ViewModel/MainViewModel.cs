@@ -112,16 +112,17 @@ namespace SteamAchievementTracker.ViewModel
             this.playerProfService = _playerProfService;
             this.playerStatsService = _playerStatsService;
 
-            if (base.IsInDesignMode)
-            {
-                this.Initialize(null);
-            }
             this.InitializeCommands();
             LoginVM = new LoginViewModel();
             LoginVM.playerLibService = _playerLibService;
             LoginVM.playerProfService = _playerProfService;
             LoginVM.InitializeCommands();
-        }
+             if (base.IsInDesignMode)
+            {
+                this.Initialize(null);
+                this.IsLoggedIn = true;
+            }
+       }
 
 
 

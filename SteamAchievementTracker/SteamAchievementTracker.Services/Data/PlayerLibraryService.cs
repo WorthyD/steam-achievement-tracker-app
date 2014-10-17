@@ -70,6 +70,7 @@ namespace SteamAchievementTracker.Services.Data
                 {
                     tGame = new Model.Game(g, steamID64);
                     tGame.RefreshAchievements = (tGame.HoursPlayed > 0);
+                    tGame.HasAchievements = (!string.IsNullOrEmpty(tGame.StatsLink));
                     _db.InsertItem(tGame);
                 }
                 else

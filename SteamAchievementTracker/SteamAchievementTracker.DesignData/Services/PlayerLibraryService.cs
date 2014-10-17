@@ -31,15 +31,13 @@ namespace SteamAchievementTracker.DesignData.Services
         }
         public List<IGame> GetGames()
         {
-            var count = 15;
+            var count = 5;
             var GameList = new List<IGame>();
 
             var rnd = new Random();
             for (var i = 0; i < count; i++)
             {
-                Game g = new Game();
-                g.PopulateDesignData("Game" + i, rnd);
-                GameList.Add(g);
+                GameList.Add(DummyClasses.Game.GetRandomGame("Game" + i, rnd));
             }
             return GameList;
 
@@ -64,7 +62,8 @@ namespace SteamAchievementTracker.DesignData.Services
                 AchievementCount = 100,
                 LibraryCount = 100,
                 TotalPlayTime = 100,
-                UnlockedAchievementCount = 100
+                UnlockedAchievementCount = 100,
+                PerfectGames = 100
             };
         }
     }
