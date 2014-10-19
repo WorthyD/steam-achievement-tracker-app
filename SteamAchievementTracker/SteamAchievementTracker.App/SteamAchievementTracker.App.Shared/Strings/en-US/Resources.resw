@@ -274,4 +274,16 @@
   <data name="NavigationFailedExceptionMessage" xml:space="preserve">
     <value>Navigation failed.</value>
   </data>
+  <data name="help1Header" xml:space="preserve">
+    <value>Video Overview</value>
+  </data>
+  <data name="help2Header" xml:space="preserve">
+    <value>FAQ</value>
+  </data>
+  <data name="help3Header" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="HelpTitle" xml:space="preserve">
+    <value>Help</value>
+  </data>
 </root>

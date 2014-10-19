@@ -27,18 +27,33 @@
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-                    <TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
+                    <TextBlock x:Name="helpTitle" x:Uid="HelpTitle" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap"  Margin="0,0,20,0"/>
-                  
+
                 </Grid>
             </Hub.Header>
-            <HubSection>
+            <HubSection x:Uid="help1Header">
                 <DataTemplate>
                     <Grid>
-                      
+                        <WebView x:Name="webView" Grid.Column="0" />
                     </Grid>
                 </DataTemplate>
             </HubSection>
+            <HubSection x:Uid="help2Header">
+                <DataTemplate>
+                    <Grid>
+
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+            <HubSection x:Uid="help3Header">
+                <DataTemplate>
+                    <Grid>
+
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+
         </Hub>
     </Grid>
 

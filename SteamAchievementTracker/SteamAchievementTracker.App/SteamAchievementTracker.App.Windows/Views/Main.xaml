@@ -53,7 +53,7 @@
                 <DataTemplate>
                     <StackPanel>
                     <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
-                        <Button Command="{Binding GoLibrary}">View Library</Button>
+                        <Button Command="{Binding GoLibrary}" Margin="0,20,0,0">View Library</Button>
                     </StackPanel>
                 </DataTemplate>
             </HubSection>

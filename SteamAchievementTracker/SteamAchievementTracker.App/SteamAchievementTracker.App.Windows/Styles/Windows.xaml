@@ -50,20 +50,26 @@
         <Setter Property="Width" Value="200"></Setter> 
         <Setter Property="Margin" Value="0,0,0,10"></Setter> 
     </Style>
-    <Style x:Key="ProLCol" TargetType="TextBlock">
+
+    <Style x:Key="BaseProCol" TargetType="TextBlock">
         <Setter Property="FontSize" Value="20"></Setter>
-        <Setter Property="TextAlignment" Value="Left"></Setter>
-        
     </Style>
 
-    <Style x:Key="ProRCol" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="20"></Setter>
+   <Style x:Key="ProLCol" TargetType="TextBlock" BasedOn="{StaticResource BaseProCol}">
+        <Setter Property="TextAlignment" Value="Left"></Setter>
+    </Style>
+
+    <Style x:Key="ProRCol" TargetType="TextBlock" BasedOn="{StaticResource BaseProCol}">
         <Setter Property="TextAlignment" Value="Right"></Setter>
     </Style>
 
+    <Style x:Key="ProUserName" TargetType="TextBlock" BasedOn="{StaticResource ProLCol}">
+        <Setter Property="TextAlignment" Value="Left"></Setter>
+        <Setter Property="Margin" Value="0,0,0,10"></Setter> 
+    </Style>
 
 
-    
+
     <!--                    LOGIN STYLES                    -->
     <Style x:Key="LoginModal" TargetType="StackPanel">
         <Setter Property="Margin" Value="0,50,0,50"></Setter>
