@@ -30,7 +30,7 @@
         </AppBar>
 
     </Page.TopAppBar>
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="LayoutRoot" >
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="LayoutRoot"  >
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -39,16 +39,25 @@
             <ProgressBar  Height="10" IsIndeterminate="True"></ProgressBar>
             <TextBlock TextAlignment="Center">Refreshing Achievements</TextBlock>
         </StackPanel>
+        <!--<Grid >
+            <UI:AdControl  Grid.Column="2"
+            ApplicationId="8bcf9d13-6e1f-4015-882f-a91a4dc7a04f" 
+            AdUnitId="191399" 
+            Width="728"
+            Height="90" 
+            Margin="0,0,0,0" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top"/>
+        </Grid>-->
         <Hub Grid.Row="1" Margin="0,-25,0,0">
             <Hub.Header>
-                <!-- Back button and page title -->
-                <Grid>
+                <!--<Grid HorizontalAlignment="Stretch" MaxWidth="1366">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="728"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <!--Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"-->
+                    
                     <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
                         Margin="0,0,39,0" 
                         VerticalAlignment="Top"
@@ -57,16 +66,26 @@
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
                     <TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
-                        VerticalAlignment="Top" IsHitTestVisible="false" TextWrapping="NoWrap"  Margin="0,0,20,0"/>
-                    <UI:AdControl  Grid.Column="2"
-            ApplicationId="8bcf9d13-6e1f-4015-882f-a91a4dc7a04f" 
-            AdUnitId="191399" 
-            Width="728"
-            Height="90" 
-            Margin="0,0,0,0" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Top"/>
-                </Grid>
+                         IsHitTestVisible="false" TextWrapping="NoWrap"  Margin="0,0,20,0"/>
+                    <TextBlock x:Name="libraryCount"  Text="{Binding GameList.Count}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="2" 
+                         IsHitTestVisible="false" TextWrapping="NoWrap"  Margin="0,0,20,0"/>
+ 
+                </Grid>-->
+                <StackPanel Orientation="Horizontal">
+                    <Button  x:Name="backButton" Style="{StaticResource NavigationBackButtonNormalStyle}"
+                        Margin="0,0,39,0" 
+                        VerticalAlignment="Top"
+                              Command="{Binding GoBack}"
+                        AutomationProperties.Name="Back"
+                        AutomationProperties.AutomationId="BackButton"
+                        AutomationProperties.ItemType="Navigation Button"/>
+                    <TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" 
+                        Margin="0,0,20,0" />
+                    <TextBlock Margin="0,0,20,0" Style="{StaticResource HeaderTextBlockStyle}">Game Count - </TextBlock>
+                    <TextBlock x:Name="libraryCount"  Text="{Binding GameList.Count}" Style="{StaticResource HeaderTextBlockStyle}" 
+                         />
+
+                </StackPanel>
             </Hub.Header>
             <HubSection>
                 <DataTemplate>
@@ -100,6 +119,7 @@
                 </DataTemplate>
             </HubSection>
         </Hub>
+
     </Grid>
     <Page.BottomAppBar>
         <AppBar>

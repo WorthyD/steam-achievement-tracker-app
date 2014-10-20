@@ -172,7 +172,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
                 HasAchievements = @HasAchievements,
                 RecentHours = @RecentHours,
             	HoursPlayed = @HoursPlayed,
-            	LastUpdated =@LastUpdated
+            	LastUpdated = @LastUpdated
             Where
             	SteamID = @SteamID AND
             	GameID = @GameID";
@@ -190,7 +190,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             statement.Bind("@HoursPlayed", item.HoursPlayed);
             statement.Bind("@RefreshAchievements", item.RefreshAchievements.BoolToBit());
             statement.Bind("@HasAchievements", item.HasAchievements.BoolToBit());
-            statement.Bind("@LastUpdated", item.LastUpdated.DateTimeSQLite());
+            statement.Bind("@LastUpdated", DateTime.Now.DateTimeSQLite());
         }
 
         protected override IGame GetEmpty()

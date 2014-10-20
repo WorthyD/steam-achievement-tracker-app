@@ -39,15 +39,15 @@ namespace SteamAchievementTracker.ViewModel
                 Set(() => GameList, ref _gameList, value);
             }
         }
-        private List<object> _gameListchar;
-        public List<object> GameListChar
-        {
-            get { return _gameListchar; }
-            set
-            {
-                Set(() => GameListChar, ref _gameListchar, value);
-            }
-        }
+        //private List<object> _gameListchar;
+        //public List<object> GameListChar
+        //{
+        //    get { return _gameListchar; }
+        //    set
+        //    {
+        //        Set(() => GameListChar, ref _gameListchar, value);
+        //    }
+        //}
         private string _libProgress;
         public string LibProgress
         {
