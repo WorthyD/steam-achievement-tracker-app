@@ -49,7 +49,14 @@ namespace SteamAchievementTracker.App.ViewModel
                 return ServiceLocator.Current.GetInstance<GameLibraryViewModel>();
             }
         }
-    
+
+        public HelpViewModel Help
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<HelpViewModel>();
+            }
+        }
 
 
         static ViewModelLocator()
@@ -81,6 +88,7 @@ namespace SteamAchievementTracker.App.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GameDetailsViewModel>();
             SimpleIoc.Default.Register<GameLibraryViewModel>();
+            SimpleIoc.Default.Register<HelpViewModel>();
         }
     }
 }

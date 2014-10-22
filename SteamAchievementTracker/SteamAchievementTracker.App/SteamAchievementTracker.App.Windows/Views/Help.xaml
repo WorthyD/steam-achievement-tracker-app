@@ -7,7 +7,7 @@
     xmlns:common="using:SteamAchievementTracker.App.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    DataContext="{Binding Source={StaticResource Locator}, Path=Base}" 
+    DataContext="{Binding Source={StaticResource Locator}, Path=Help}" 
     mc:Ignorable="d">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="LayoutRoot" >
         <Hub Grid.Row="1" Margin="0,-25,0,0">
@@ -32,10 +32,10 @@
 
                 </Grid>
             </Hub.Header>
-            <HubSection x:Uid="help1Header">
-                <DataTemplate>
-                    <Grid>
-                        <WebView x:Name="webView" Grid.Column="0" />
+            <HubSection x:Uid="help1Header" x:Name="HelperGrid">
+                <DataTemplate x:Name="HelperGridTemplate">
+                    <Grid >
+                        <WebView x:Name="HelpVideo" Grid.Column="0" Height="320" Width="600" Loaded="Grid_Loaded"/>
                     </Grid>
                 </DataTemplate>
             </HubSection>

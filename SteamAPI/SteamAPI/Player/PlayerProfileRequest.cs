@@ -23,7 +23,7 @@ namespace SteamAPI.Player {
                 Models.Profile.profile profile = response.ParseXML<Models.Profile.profile>();
                 Debug.WriteLine(string.Format("Received: {0}", playerUrl));
 
-                 profileResponse = new PlayerProfileResponse(this) { Profile = profile };
+                profileResponse = new PlayerProfileResponse(this) { Profile = profile };
             }
             catch (Exception)
             {

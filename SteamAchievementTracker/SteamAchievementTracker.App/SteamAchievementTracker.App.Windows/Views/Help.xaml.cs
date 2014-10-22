@@ -23,15 +23,34 @@ namespace SteamAchievementTracker.App.Views
     /// <summary>
     /// A basic page that provides characteristics common to most applications.
     /// </summary>
-    public sealed partial class Help : Page,IHelp 
+    public sealed partial class Help : Page, IHelp
     {
-        public Help() {
+        public Help()
+        {
             this.InitializeComponent();
         }
         IViewModel IView.ViewModel
         {
-            get { return this.DataContext as IViewModel; }
+            get { return this.DataContext as IHelpViewModel; }
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            //DependencyObject c = VisualTreeHelper.GetChild(HelperGridTemplate, 0);
+
+            //var x = HelperGrid.FindName("HelpVideo") as WebView;
+            //var x = HelperGrid.f as WebView;
+            //x.NavigateToString(model.VideoContent);
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            SteamAchievementTracker.ViewModel.HelpViewModel model = this.DataContext as SteamAchievementTracker.ViewModel.HelpViewModel;
+            WebView  wv = (WebView)sender;
+            wv.NavigateToString( model.VideoContent);
         }
 
     }
+
 }
