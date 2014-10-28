@@ -42,6 +42,7 @@
             <HubSection x:Uid="help2Header">
                 <DataTemplate>
                     <Grid>
+                    <Button Command="{Binding SendFeedback}">Send feedback</Button>
 
                     </Grid>
                 </DataTemplate>

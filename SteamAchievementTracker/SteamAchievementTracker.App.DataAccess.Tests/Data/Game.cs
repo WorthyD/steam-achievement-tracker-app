@@ -36,7 +36,14 @@ namespace SteamAchievementTracker.App.DataAccess.Tests.Data
             string title = g.Name;
             g = db.GetItem(new KeyValuePair<long, long>(g.SteamUserID, g.AppID));
 
-            Assert.IsTrue(g.Name == title);
+            g.HoursPlayed = 40;
+            g.RefreshAchievements = true;
+            db.UpdateItem(new KeyValuePair<long, long>(g.SteamUserID, g.AppID), g);
+
+            var g2 = db.GetItem(new KeyValuePair<long, long>(g.SteamUserID, g.AppID)); 
+
+
+            Assert.IsTrue(g2.HoursPlayed == g.HoursPlayed);
         }
 
 
