@@ -180,7 +180,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 
         protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key, IGame item)
         {
-            statement.Bind("@GameID", item.AppID);
+            statement.Bind("@GameID", key.Value);
+            statement.Bind("@SteamID", key.Key);
             statement.Bind("@Name", item.Name);
             statement.Bind("@StatsLink", item.StatsLink);
             statement.Bind("@GameLink", item.GameLink);
@@ -254,6 +255,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
         {
             string sqlStatement = @" select 
 	                            (select count(GameID) from game where SteamID = @SteamID) as LibraryCount,
+	                            (select count(GameID) from game where SteamID = @SteamID and HasAchievements = 1 ) as LibraryAchievementCount,
 	                            (select sum(AchievementCount ) from game  where SteamID = @SteamID) as TotalAchievements,
                                 (select count(GameID) from game  where SteamID = @SteamID and AchievementCount = AchievementsEarned and AchievementCount > 0 ) as PerfectGames,
 	                            (select sum(AchievementsEarned) from game  where SteamID = @SteamID) as AchievementsEarned,
@@ -266,6 +268,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
                 {
                     IStatistics s = new Model.PlayerStats();
                     s.AchievementCount = statement["TotalAchievements"].ToInt();
+                    s.LibraryAchievementCount =statement["LibraryAchievementCount"].ToInt(); 
                     s.LibraryCount = statement["LibraryCount"].ToInt();
                     s.TotalPlayTime = Convert.ToInt32(statement["HoursPlayed"].ToDecimal());
                     s.UnlockedAchievementCount = statement["AchievementsEarned"].ToInt();

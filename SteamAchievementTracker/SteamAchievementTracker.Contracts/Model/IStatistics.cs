@@ -9,6 +9,7 @@ namespace SteamAchievementTracker.Contracts.Model
     public interface IStatistics
     {
         int LibraryCount { get; set; }
+        int LibraryAchievementCount { get; set; }
         int AchievementCount { get; set; }
         int PerfectGames { get; set; }
         int UnlockedAchievementCount { get; set; }

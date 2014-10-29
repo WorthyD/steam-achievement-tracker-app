@@ -15,6 +15,7 @@ namespace SteamAchievementTracker.DesignData.Model
             set;
         }
 
+        public int LibraryAchievementCount { get; set; }
         public int AchievementCount
         {
             get;

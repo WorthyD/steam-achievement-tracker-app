@@ -20,6 +20,7 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -29,14 +30,17 @@
                 <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource ProUserName}" Text="{Binding Profile.Name}" />
                 <TextBlock Grid.Column="0" Grid.Row="1" Style="{StaticResource ProLCol}">Games Owned:</TextBlock>
                 <TextBlock Grid.Column="1"  Grid.Row="1"  Style="{StaticResource ProRCol}" Text="{Binding PlayerStats.LibraryCount}"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource ProLCol}">Perfect Games:</TextBlock>
-                <TextBlock Grid.Column="1"  Grid.Row="2"  Style="{StaticResource ProRCol}" Text="{Binding PlayerStats.PerfectGames}"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource ProLCol}">Unlocked Achievements:</TextBlock>
-                <TextBlock Grid.Column="1"  Grid.Row="3"  Style="{StaticResource ProRCol}" Text="{Binding PlayerStats.UnlockedAchievementCount}"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource ProLCol}">Total Achievements:</TextBlock>
-                <TextBlock Grid.Column="1"  Grid.Row="4"  Style="{StaticResource ProRCol}" Text="{Binding PlayerStats.AchievementCount}"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="5" Style="{StaticResource ProLCol}">Total Play Time:</TextBlock>
-                <TextBlock Grid.Column="1"  Grid.Row="5" Style="{StaticResource ProRCol}"  Text="{Binding PlayerStats.TotalPlayTime}"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="2" Style="{StaticResource ProLCol}">Games w/ Achievements:</TextBlock>
+                <TextBlock Grid.Column="1"  Grid.Row="2" Style="{StaticResource ProRCol}"  Text="{Binding PlayerStats.LibraryAchievementCount}"></TextBlock>
+ 
+                <TextBlock Grid.Column="0" Grid.Row="3" Style="{StaticResource ProLCol}">Perfect Games:</TextBlock>
+                <TextBlock Grid.Column="1"  Grid.Row="3"  Style="{StaticResource ProRCol}" Text="{Binding PlayerStats.PerfectGames}"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="4" Style="{StaticResource ProLCol}">Unlocked Achievements:</TextBlock>
+                <TextBlock Grid.Column="1"  Grid.Row="4"  Style="{StaticResource ProRCol}" Text="{Binding PlayerStats.UnlockedAchievementCount}"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="5" Style="{StaticResource ProLCol}">Total Achievements:</TextBlock>
+                <TextBlock Grid.Column="1"  Grid.Row="5"  Style="{StaticResource ProRCol}" Text="{Binding PlayerStats.AchievementCount}"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="6" Style="{StaticResource ProLCol}">Total Play Time:</TextBlock>
+                <TextBlock Grid.Column="1"  Grid.Row="6" Style="{StaticResource ProRCol}"  Text="{Binding PlayerStats.TotalPlayTime}"></TextBlock>
             </Grid>
         </StackPanel>
     </Grid>
