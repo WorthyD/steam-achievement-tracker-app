@@ -180,7 +180,8 @@ namespace SteamAchievementTracker.App.DataAccess.Data
 
         protected override void FillUpdateStatement(SQLitePCL.ISQLiteStatement statement, KeyValuePair<long, long> key, IGame item)
         {
-            statement.Bind("@GameID", item.AppID);
+            statement.Bind("@GameID", key.Value);
+            statement.Bind("@SteamID", key.Key);
             statement.Bind("@Name", item.Name);
             statement.Bind("@StatsLink", item.StatsLink);
             statement.Bind("@GameLink", item.GameLink);
