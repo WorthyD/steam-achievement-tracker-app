@@ -42,14 +42,21 @@
             <HubSection x:Uid="help2Header">
                 <DataTemplate>
                     <Grid>
-                    <Button Command="{Binding SendFeedback}">Send feedback</Button>
-
+                    
+                        <!--<GridView ItemSource="{Binging FAQs}">
+                            <StackPanel>
+                                <TextBlock Te></TextBlock>
+                            </StackPanel>
+                            
+                        </GridView>-->
                     </Grid>
                 </DataTemplate>
             </HubSection>
             <HubSection x:Uid="help3Header">
                 <DataTemplate>
                     <Grid>
+
+                        <Button Command="{Binding SendFeedback}">Send feedback</Button>
 
                     </Grid>
                 </DataTemplate>

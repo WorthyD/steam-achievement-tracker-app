@@ -37,9 +37,9 @@ namespace SteamAchievementTracker.ViewModel
             VideoSource = "https://www.youtube.com/embed/yxzXFrlVPfc";
 
             FAQs = new List<Model.FAQ>();
-            FAQs.Add(new Model.FAQ() { Title = "My stats aren't correct.", Description = "" });
-            FAQs.Add(new Model.FAQ() { Title = "Can I diable ads?", Description = "" });
-            FAQs.Add(new Model.FAQ() { Title = "", Description = "" });
+            FAQs.Add(new Model.FAQ() { Title = "My stats aren't correct.", Description = "Stats will be incorrect until all your games are crawled." });
+            FAQs.Add(new Model.FAQ() { Title = "Can you add this feature?", Description = "Send me some feedback and I'll try. Steam provides limited data." });
+            FAQs.Add(new Model.FAQ() { Title = "Can I diable ads?", Description = "No, I can't garuntee the game data will always be available. I don't feel it's right to do charge for something I can't garuntee." });
             FAQs.Add(new Model.FAQ() { Title = "", Description = "" });
             FAQs.Add(new Model.FAQ() { Title = "", Description = "" });
             FAQs.Add(new Model.FAQ() { Title = "", Description = "" });
