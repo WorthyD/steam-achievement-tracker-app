@@ -60,7 +60,7 @@
             <HubSection  x:Uid="Section2Header" Header="Recent Games" Visibility="{Binding IsLoggedIn, Converter={StaticResource TrueToVisibleConverter}}" >
                 <DataTemplate >
                     <Grid>
-                        <GridView x:Name="GameGrid" ItemsSource="{Binding Library.GameList}"   
+                        <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
@@ -89,7 +89,7 @@
             <HubSection  x:Uid="Section4Header" Header="Nearest to Completion" IsHeaderInteractive="false" Visibility="{Binding IsLoggedIn, Converter={StaticResource TrueToVisibleConverter}}">
                 <DataTemplate >
                     <Grid>
-                        <GridView x:Name="GameGrid3" ItemsSource="{Binding Library.NearCompletion}"   
+                        <GridView x:Name="GameGrid3" ItemsSource="{Binding NearCompletion}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
@@ -118,7 +118,7 @@
             <HubSection  x:Uid="Section3Header" Header="Most Played Games" IsHeaderInteractive="false" Visibility="{Binding IsLoggedIn, Converter={StaticResource TrueToVisibleConverter}}">
                 <DataTemplate >
                     <Grid>
-                        <GridView x:Name="GameGrid2" ItemsSource="{Binding Library.MostPlayedGames}"   
+                        <GridView x:Name="GameGrid2" ItemsSource="{Binding MostPlayedGames}"   
                                 ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
                                       ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"

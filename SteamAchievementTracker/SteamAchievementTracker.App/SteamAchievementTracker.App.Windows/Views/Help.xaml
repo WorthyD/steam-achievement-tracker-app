@@ -9,8 +9,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding Source={StaticResource Locator}, Path=Help}" 
     mc:Ignorable="d">
+    <Page.Resources>
+        <ItemsPanelTemplate x:Key="VariableSizedItemTemplate">
+            <VariableSizedWrapGrid ItemWidth="300" Orientation="Vertical" />
+        </ItemsPanelTemplate>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="LayoutRoot" >
-        <Hub Grid.Row="1" Margin="0,-25,0,0">
+        <Hub Grid.Row="1" Margin="0,0,0,0">
             <Hub.Header>
                 <!-- Back button and page title -->
                 <Grid>
@@ -36,28 +41,31 @@
                 <DataTemplate x:Name="HelperGridTemplate">
                     <Grid >
                         <WebView x:Name="HelpVideo" Grid.Column="0" Height="320" Width="600" Loaded="Grid_Loaded"/>
+                      
                     </Grid>
                 </DataTemplate>
             </HubSection>
             <HubSection x:Uid="help2Header">
                 <DataTemplate>
                     <Grid>
-                    
-                        <!--<GridView ItemSource="{Binging FAQs}">
-                            <StackPanel>
-                                <TextBlock Te></TextBlock>
-                            </StackPanel>
-                            
-                        </GridView>-->
+                        <ListView ItemsSource="{Binding FAQs}" Width="400">
+                           <ListView.ItemTemplate >
+                                <DataTemplate >
+                                    <StackPanel>
+                                        <TextBlock>Testing</TextBlock>
+                                        <TextBlock Style="{StaticResource FAQTitle}"  Text="{Binding Title}"></TextBlock>
+                                        <TextBlock Style="{StaticResource FAQDescription}" Text="{Binding Description}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </Grid>
                 </DataTemplate>
             </HubSection>
             <HubSection x:Uid="help3Header">
                 <DataTemplate>
                     <Grid>
-
                         <Button Command="{Binding SendFeedback}">Send feedback</Button>
-
                     </Grid>
                 </DataTemplate>
             </HubSection>

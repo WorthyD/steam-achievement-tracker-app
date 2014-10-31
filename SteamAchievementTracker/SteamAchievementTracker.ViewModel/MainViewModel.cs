@@ -69,15 +69,27 @@ namespace SteamAchievementTracker.ViewModel
             }
         }
 
-        private IPlayerLibrary _library;
-        public IPlayerLibrary Library
-        {
-            get { return _library; }
-            set
-            {
-                Set(() => Library, ref _library, value);
-            }
-        }
+        //private IPlayerLibrary _library;
+        //public IPlayerLibrary Library
+        //{
+        //    get { return _library; }
+        //    set
+        //    {
+        //        Set(() => Library, ref _library, value);
+        //    }
+        //}
+
+        private List<IGame> _gameList;
+        public List<IGame> GameList { get { return _gameList; } set { Set(() => GameList, ref _gameList, value); } }
+
+        private List<IGame> _mostPlayedGames;
+        public List<IGame> MostPlayedGames { get { return _mostPlayedGames; } set { Set(() => MostPlayedGames, ref _mostPlayedGames, value); } }
+
+        private List<IGame> _NearComp;
+        public List<IGame> NearCompletion { get { return _NearComp; } set { Set(() => NearCompletion, ref _NearComp, value); } }
+
+
+ 
         private IStatistics _playerStats;
         public IStatistics PlayerStats
         {
@@ -99,7 +111,7 @@ namespace SteamAchievementTracker.ViewModel
 
         private bool _IsLoading;
         public bool IsLoading { get { return _IsLoading; } set { Set(() => IsLoading, ref _IsLoading, value); } }
-
+     
         #endregion
 
         public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService, IPlayerStatsService _playerStatsService)
@@ -182,17 +194,20 @@ namespace SteamAchievementTracker.ViewModel
         public async void LoadData()
         {
             this.IsLoading = true;
-            Library = new PlayerLibrary();
             Profile = playerProfService.GetProfileFromDB(base.UserID);
             List<IGame> AllGames = new List<IGame>();
             List<IGame> RecentGames = new List<IGame>();
-            List<IGame> NearCompletion = new List<IGame>();
-            List<IGame> MostPlayedGames = new List<IGame>();
+            List<IGame> nearCompletion = new List<IGame>();
+            List<IGame> mostPlayedGames = new List<IGame>();
 
             if ((Profile == null) || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval))
             {
                 Profile = await playerProfService.GetFreshPlayerDetails(base.UserName, (Profile != null));
                 AllGames = await playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName);
+            }
+            else
+            {
+                AllGames = await playerLibService.GetPlayerLibraryCached(base.UserID);
             }
 
             this.PlayerStats = playerLibService.GetPlayerStats(base.UserID);
@@ -200,9 +215,10 @@ namespace SteamAchievementTracker.ViewModel
 
             if (AllGames != null && AllGames.Count() > 0)
             {
-                MostPlayedGames = AllGames.OrderByDescending(x => x.HoursPlayed).Take(6).ToList();
-                NearCompletion = AllGames.Where(x => x.PercentComplete < 100).OrderByDescending(x => x.PercentComplete).Take(6).ToList();
+                mostPlayedGames = AllGames.OrderByDescending(x => x.HoursPlayed).Take(6).ToList();
+                nearCompletion = AllGames.Where(x => x.PercentComplete < 100).OrderByDescending(x => x.PercentComplete).Take(6).ToList();
             }
+
 
 
             if (Profile.RecentGameLinks != null && Profile.RecentGameLinks.Count > 0)
@@ -210,13 +226,18 @@ namespace SteamAchievementTracker.ViewModel
                 RecentGames = playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
             }
 
+            this.GameList = RecentGames;
+            this.NearCompletion = nearCompletion;
+            this.MostPlayedGames = mostPlayedGames;
 
-            Library = new PlayerLibrary()
-            {
-                GameList = RecentGames,
-                MostPlayedGames = MostPlayedGames,
-                NearCompletion = NearCompletion
-            };
+
+
+            //Library = new PlayerLibrary()
+            //{
+            //    GameList = RecentGames,
+            //    MostPlayedGames = MostPlayedGames,
+            //    NearCompletion = NearCompletion
+            //};
 
 
             RefreshRecentGames();
@@ -224,7 +245,10 @@ namespace SteamAchievementTracker.ViewModel
         }
         public async void EmptyData()
         {
-            Library = new PlayerLibrary();
+            //Library = new PlayerLibrary();
+            GameList = new List<IGame>();
+            NearCompletion = new List<IGame>();
+            MostPlayedGames = new List<IGame>();
             Profile = new Profile();
         }
 
@@ -232,13 +256,13 @@ namespace SteamAchievementTracker.ViewModel
         {
             var progressIndicator = new Progress<int>(ReportProgress);
             var cancelLibrary = new CancellationTokenSource();
-            await playerStatsService.UpdateStatsByList(Library.GameList, progressIndicator, cancelLibrary.Token);
+            await playerStatsService.UpdateStatsByList(GameList, progressIndicator, cancelLibrary.Token);
             var gameList = playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
 
             bool refresh = false;
             foreach (var g in gameList)
             {
-                var tg = Library.GameList.Where(x => x.AppID == g.AppID).FirstOrDefault();
+                var tg = GameList.Where(x => x.AppID == g.AppID).FirstOrDefault();
                 if (tg != null && g.AchievementsEarned != tg.AchievementsEarned)
                 {
                     refresh = true;
@@ -248,13 +272,14 @@ namespace SteamAchievementTracker.ViewModel
 
             if (refresh)
             {
-                var temp = this.Library;
-                Library = new PlayerLibrary()
-                {
-                    GameList = gameList.ToList(),
-                    MostPlayedGames = temp.MostPlayedGames,
-                    NearCompletion = temp.NearCompletion
-                };
+                GameList = gameList.ToList();
+                //var temp = this.Library;
+                //Library = new PlayerLibrary()
+                //{
+                //    GameList = gameList.ToList(),
+                //    MostPlayedGames = temp.MostPlayedGames,
+                //    NearCompletion = temp.NearCompletion
+                //};
             }
 
         }

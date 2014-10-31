@@ -11,6 +11,6 @@ namespace SteamAchievementTracker.Contracts.ViewModels
     {
         string Title { get; set; }
         IProfile Profile { get; set; }
-        IPlayerLibrary Library { get; set; }
+        //IPlayerLibrary Library { get; set; }
     }
 }
