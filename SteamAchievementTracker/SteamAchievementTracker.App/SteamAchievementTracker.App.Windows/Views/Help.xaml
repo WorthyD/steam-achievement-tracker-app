@@ -9,8 +9,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     DataContext="{Binding Source={StaticResource Locator}, Path=Help}" 
     mc:Ignorable="d">
+    <Page.Resources>
+        <ItemsPanelTemplate x:Key="VariableSizedItemTemplate">
+            <VariableSizedWrapGrid ItemWidth="300" Orientation="Vertical" />
+        </ItemsPanelTemplate>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="LayoutRoot" >
-        <Hub Grid.Row="1" Margin="0,-25,0,0">
+        <Hub Grid.Row="1" Margin="0,0,0,0">
             <Hub.Header>
                 <!-- Back button and page title -->
                 <Grid>
@@ -35,19 +40,52 @@
             <HubSection x:Uid="help1Header" x:Name="HelperGrid">
                 <DataTemplate x:Name="HelperGridTemplate">
                     <Grid >
-                        <WebView x:Name="HelpVideo" Grid.Column="0" Height="320" Width="600" Loaded="Grid_Loaded"/>
+                        <!--<WebView x:Name="HelpVideo" Grid.Column="0" Height="320" Width="600" Loaded="Grid_Loaded"/>-->
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap" Width="500">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu magna magna. Donec nec lectus venenatis, molestie est ac, tincidunt diam. Pellentesque in gravida leo. Fusce turpis erat, aliquet vitae lacus id, hendrerit fermentum nibh. Pellentesque pulvinar ex at magna rhoncus, sodales convallis quam commodo. Vestibulum a fermentum mi. Praesent molestie dolor sed est mattis, vitae vehicula quam vehicula. Morbi bibendum egestas libero, non tempor felis ullamcorper porttitor. Nunc efficitur efficitur tellus, quis commodo tortor placerat malesuada. Duis gravida efficitur tempus. Suspendisse vel lorem dui. Aliquam scelerisque eleifend tincidunt. Nulla id nibh dictum, cursus quam sed, efficitur nulla. Donec commodo iaculis arcu non ultricies. Vestibulum faucibus nunc nec nisl mattis, nec hendrerit ex sollicitudin. Curabitur ut ipsum blandit, facilisis ligula in, eleifend diam.
+
+Etiam eleifend velit quam, quis venenatis massa tincidunt et. Integer sit amet enim non orci imperdiet egestas. Suspendisse id magna tempor, blandit nisl id, vestibulum urna. Maecenas luctus, elit sit amet vulputate sodales, augue turpis auctor magna, a congue leo diam sed neque. Proin ut elit vitae libero cursus sodales sagittis ac nunc. Sed rutrum leo convallis, efficitur turpis id, tincidunt lorem. Vivamus in orci felis. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                            </TextBlock>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </HubSection>
             <HubSection x:Uid="help2Header">
                 <DataTemplate>
                     <Grid>
-                    
-                        <!--<GridView ItemSource="{Binging FAQs}">
-                            <StackPanel>
-                                <TextBlock Te></TextBlock>
-                            </StackPanel>
-                            
+                        <ListView ItemsSource="{Binding FAQs}" Width="300">
+                            <!--<ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel >
+                                        <TextBlock Style="{StaticResource FAQTitle}"  Text="{Binding Title}"></TextBlock>
+                                        <TextBlock Style="{StaticResource FAQDescription}" Text="{Binding Description}"></TextBlock>
+                                    </StackPanel>
+ 
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>-->
+                            <ListView.ItemTemplate >
+                                <DataTemplate >
+                                    <StackPanel Width="300">
+                                        <TextBlock>Testing</TextBlock>
+                                        <TextBlock Style="{StaticResource FAQTitle}"  Text="{Binding Title}"></TextBlock>
+                                        <TextBlock Style="{StaticResource FAQDescription}" Text="{Binding Description}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                        <!--<GridView ItemsSource="{Binding FAQs}" ItemsPanel="{StaticResource VariableSizedItemTemplate}">
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <StackPanel >
+                                        <TextBlock Style="{StaticResource FAQTitle}"  Text="{Binding Title}"></TextBlock>
+                                        <TextBlock Style="{StaticResource FAQDescription}" Text="{Binding Description}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+
+                            </GridView.ItemTemplate>
+
                         </GridView>-->
                     </Grid>
                 </DataTemplate>
