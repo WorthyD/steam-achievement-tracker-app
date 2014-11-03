@@ -99,7 +99,16 @@ namespace SteamAchievementTracker.ViewModel
             List<IGameAchievement> Achievements = new List<IGameAchievement>();
             if (!string.IsNullOrEmpty(this.Game.StatsLink))
             {
-                Achievements = await this.statService.GetGameStatistics(this.Game, false);
+                if (base.HasNetwork())
+                {
+                    Achievements = await this.statService.GetFreshStats(this.Game.StatsLink);
+                }
+                else
+                {
+                    Achievements =  this.statService.GetGameAchievementsCached(this.Game.StatsLink);
+                }
+                
+                //Achievements = await this.statService.GetGameStatistics(this.Game, false);
 
                 var g = this.playerLibService.GetGameByID(gameId, base.UserID);
 
