@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Networking.Connectivity;
 
 namespace SteamAchievementTracker.ViewModel
 {
@@ -77,6 +78,11 @@ namespace SteamAchievementTracker.ViewModel
         private bool _isLoggedIn;
         public bool IsLoggedIn { get { return _isLoggedIn; } set { Set(() => IsLoggedIn, ref _isLoggedIn, value); } }
 
+        public bool HasNetwork()
+        {
+            ConnectionProfile connectionProfile = NetworkInformation.GetInternetConnectionProfile();
+            return (connectionProfile != null && connectionProfile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
+        }
         #endregion
 
         public virtual void Initialize(object parameter)

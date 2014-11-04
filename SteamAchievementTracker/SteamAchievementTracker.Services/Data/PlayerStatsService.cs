@@ -96,7 +96,7 @@ namespace SteamAchievementTracker.Services.Data
             }
             catch (SteamAPI.Player.Exceptions.PlayerGameStatParseException e)
             {
-                _gDB.UpdateGameStats(statURL, 0, 0);
+                _gDB.UpdateGameStats(statURL, 0, 0, false);
             }
             List<IGameAchievement> ach = new List<IGameAchievement>();
             Model.GameAchievement game;

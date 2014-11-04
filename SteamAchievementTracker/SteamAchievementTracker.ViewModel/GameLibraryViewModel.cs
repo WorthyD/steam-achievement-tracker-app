@@ -234,7 +234,7 @@ namespace SteamAchievementTracker.ViewModel
             base.Initialize(parameter);
 
             await GetGames();
-            if (this.GameList.Where(x => x.RefreshAchievements == true).Count() > 0)
+            if (this.GameList.Where(x => x.RefreshAchievements == true).Count() > 0 )
             {
                 StartLibraryRefresh();
             }
@@ -243,20 +243,26 @@ namespace SteamAchievementTracker.ViewModel
         public async Task GetGames()
         {
             this.IsLoading = true;
+
             var gameList = await playerLibService.GetPlayerLibraryCached(base.UserID);
 
-            //TODO: Check settings;
             if (Settings.Profile.GetGamesWOAchievements == false)
             {
                 gameList = gameList.Where(x => x.StatsLink != null && !string.IsNullOrEmpty(x.StatsLink)).ToList();
             }
+
             GameList = ApplySort(gameList);
-            //RefreshCount = gameList.Where(x => x.RefreshAchievements == true).Count();
+
             this.IsLoading = false;
         }
 
         public async void StartLibraryRefresh()
         {
+            if (!base.HasNetwork())
+            {
+                return;
+            }
+
             this.IsRefreshing = true;
             cancelLibrary = new CancellationTokenSource();
             var progressIndicator = new Progress<int>(ReportProgress);

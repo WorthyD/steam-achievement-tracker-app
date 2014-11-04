@@ -21,7 +21,33 @@
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
             <ItemsWrapGrid MaximumRowsOrColumns="5"/>
         </ItemsPanelTemplate>
-
+        <!--<Thickness x:Key="CustomizedGridViewItemPresenterSelectedBorderThickness">0,0,0,0</Thickness>
+        <SolidColorBrush x:Key="CustomizedGridViewItemPresenterHighlightBrush" Color="#444617B4"/>
+        <Style x:Key="CustomizedGridViewItemPresenterTemplate" TargetType="GridViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewItem">
+                        <GridViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}" 
+                                               Margin="{TemplateBinding Padding}" SelectionCheckMarkVisualEnabled="True" 
+                                               CheckHintBrush="{ThemeResource ListViewItemCheckHintThemeBrush}" 
+                                               CheckSelectingBrush="{ThemeResource ListViewItemCheckSelectingThemeBrush}" 
+                                               CheckBrush="{ThemeResource ListViewItemCheckThemeBrush}" 
+                                               DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" 
+                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" 
+                                               FocusBorderBrush="{x:Null}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" 
+                                               PointerOverBackground="{StaticResource CustomizedGridViewItemPresenterHighlightBrush}" 
+                                               SelectedBorderThickness="{StaticResource CustomizedGridViewItemPresenterSelectedBorderThickness}" 
+                                               SelectedBackground="{StaticResource CustomizedGridViewItemPresenterHighlightBrush}" 
+                                               SelectedForeground="{ThemeResource ListViewItemSelectedForegroundThemeBrush}" 
+                                               SelectedPointerOverBackground="{StaticResource CustomizedGridViewItemPresenterHighlightBrush}" 
+                                               SelectedPointerOverBorderBrush="{ThemeResource ListViewItemSelectedPointerOverBorderThemeBrush}" 
+                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" 
+                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" 
+                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
     </Page.Resources>
     <Page.TopAppBar>
 
@@ -81,7 +107,7 @@
                         AutomationProperties.ItemType="Navigation Button"/>
                     <TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" 
                         Margin="0,0,20,0" />
-                    <TextBlock Margin="0,0,20,0" Style="{StaticResource HeaderTextBlockStyle}">Game Count - </TextBlock>
+                    <TextBlock Margin="0,0,20,0" Style="{StaticResource HeaderTextBlockStyle}">Game Count -</TextBlock>
                     <TextBlock x:Name="libraryCount"  Text="{Binding GameList.Count}" Style="{StaticResource HeaderTextBlockStyle}" 
                          />
 
@@ -90,13 +116,15 @@
             <HubSection>
                 <DataTemplate>
                     <Grid>
+                        <!--ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"-->
                         <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
-                                ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
-                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
-                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                      SelectionMode="None"
-                              IsItemClickEnabled="True"
-                              >
+                                    ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
+
+                                    ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
+                                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                    SelectionMode="None"
+                                    IsItemClickEnabled="True">
                             <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">
                                     <core:InvokeCommandAction 

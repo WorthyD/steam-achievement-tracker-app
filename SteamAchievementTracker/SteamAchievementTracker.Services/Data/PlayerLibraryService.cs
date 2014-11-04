@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.Services.Data
 {
-    public class PlayerLibraryService : IPlayerLibraryService
+    public class PlayerLibraryService : BaseService, IPlayerLibraryService
     {
         public SteamAchievementTracker.App.DataAccess.Data.Game _db;
         //public string DBName = "SteamAchievementTracker.db";
@@ -41,7 +41,6 @@ namespace SteamAchievementTracker.Services.Data
 
         public async Task<List<IGame>> GetPlayerLibraryCached(long steamID64)
         {
-            //var gl = _db.GetAllItems().Where(x => x.SteamUserID == steamID64).ToList();
             var gl = _db.GetGamesBySteamID(steamID64);
             return gl;
         }
