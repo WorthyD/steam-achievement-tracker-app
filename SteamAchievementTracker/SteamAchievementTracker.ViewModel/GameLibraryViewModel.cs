@@ -280,7 +280,6 @@ namespace SteamAchievementTracker.ViewModel
             await GetGames();
             this.IsRefreshing = false;
             LibProgress = "";
-
         }
 
 
@@ -298,13 +297,22 @@ namespace SteamAchievementTracker.ViewModel
 
         public void ReportProgress(int value)
         {
-            LibProgress = string.Format("Updating: {0} out of {1}", value, RefreshCount);
+            if (IsRefreshing != false)
+            {
+                LibProgress = string.Format("Updating: {0} out of {1}", value, RefreshCount);
+            }
+            else
+            {
+                LibProgress = "";
+            }
+
             if (value > 0 && value % 15 == 0)
             {
                 //RefreshUI
                 GetGames();
             }
             Debug.WriteLine(LibProgress);
+            
         }
 
 

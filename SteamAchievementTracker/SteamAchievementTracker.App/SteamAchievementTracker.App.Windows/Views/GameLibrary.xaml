@@ -152,8 +152,9 @@
     <Page.BottomAppBar>
         <AppBar>
             <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}">Start Refresh</Button>
-                <Button Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}">Stop Refresh</Button>
+
+                <Button Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}" />
+                <Button Style="{StaticResource StopAppBarButtonStyle}" Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}"  AutomationProperties.Name="Stop Refresh"/> 
                 <TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
                 <ComboBox x:Name="comboBox1"     ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" />
             </StackPanel>
