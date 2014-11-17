@@ -200,7 +200,7 @@ namespace SteamAchievementTracker.ViewModel
             List<IGame> nearCompletion = new List<IGame>();
             List<IGame> mostPlayedGames = new List<IGame>();
 
-            if (base.HasNetwork() && (Profile == null) || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval))
+            if (base.HasNetwork() && (Profile == null || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval)))
             {
                 Profile = await playerProfService.GetFreshPlayerDetails(base.UserName, (Profile != null));
                 AllGames = await playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName);

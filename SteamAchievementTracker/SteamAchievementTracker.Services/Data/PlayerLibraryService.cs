@@ -79,7 +79,12 @@ namespace SteamAchievementTracker.Services.Data
                     if (g.hoursOnRecordSpecified && (tGame.HoursPlayed != g.hoursOnRecord))
                     {
                         tGame.RefreshAchievements = true;
+                        tGame.HoursPlayed = g.hoursOnRecord;
+                        if (g.hoursLast2WeeksSpecified) {
+                            tGame.RecentHours = g.hoursLast2Weeks;
+                        }
                     }
+                    
 
                     _db.UpdateItem(new KeyValuePair<long, long>(steamID64, tGame.AppID), tGame);
                 }
