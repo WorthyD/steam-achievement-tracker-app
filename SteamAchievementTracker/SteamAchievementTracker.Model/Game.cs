@@ -106,6 +106,7 @@ namespace SteamAchievementTracker.Model
             this.StatsLink = g.statsLink;
             this.GameLink = g.storeLink;
             this.Logo = g.logo;
+            //this.Icon = g.
             this.HoursPlayed = g.hoursOnRecord;
             this.RecentHours = g.hoursLast2Weeks;
             this.LastUpdated = DateTime.Now;

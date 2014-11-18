@@ -21,7 +21,7 @@
         <ItemsPanelTemplate x:Key="StoreFrontGridItemsPanelTemplate">
             <ItemsWrapGrid MaximumRowsOrColumns="5"/>
         </ItemsPanelTemplate>
-        <!--<Thickness x:Key="CustomizedGridViewItemPresenterSelectedBorderThickness">0,0,0,0</Thickness>
+        <Thickness x:Key="CustomizedGridViewItemPresenterSelectedBorderThickness">0,0,0,0</Thickness>
         <SolidColorBrush x:Key="CustomizedGridViewItemPresenterHighlightBrush" Color="#444617B4"/>
         <Style x:Key="CustomizedGridViewItemPresenterTemplate" TargetType="GridViewItem">
             <Setter Property="Template">
@@ -47,7 +47,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>-->
+        </Style>
     </Page.Resources>
     <Page.TopAppBar>
 
@@ -58,12 +58,13 @@
     </Page.TopAppBar>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Name="LayoutRoot"  >
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}">
             <ProgressBar  Height="10" IsIndeterminate="True"></ProgressBar>
             <TextBlock TextAlignment="Center">Refreshing Achievements</TextBlock>
+            <TextBlock TextAlignment="Center"  Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
         </StackPanel>
         <!--<Grid >
             <UI:AdControl  Grid.Column="2"
@@ -75,7 +76,7 @@
             HorizontalAlignment="Right" 
             VerticalAlignment="Top"/>
         </Grid>-->
-        <Hub Grid.Row="1" Margin="0,-25,0,0">
+        <Hub Grid.Row="1" Margin="0,-50,0,0">
             <Hub.Header>
                 <!--<Grid HorizontalAlignment="Stretch" MaxWidth="1366">
                     <Grid.ColumnDefinitions>
@@ -116,10 +117,9 @@
             <HubSection>
                 <DataTemplate>
                     <Grid>
-                        <!--ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"-->
                         <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
                                     ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
-
+                                    ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"
                                     ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                     ScrollViewer.VerticalScrollBarVisibility="Auto" 
                                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
@@ -152,10 +152,11 @@
     <Page.BottomAppBar>
         <AppBar>
             <StackPanel Orientation="Horizontal">
-                <Button Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}">Start Refresh</Button>
-                <Button Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}">Stop Refresh</Button>
-                <TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
-                <ComboBox x:Name="comboBox1"     ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" />
+
+                <Button Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}" />
+                <Button Style="{StaticResource StopAppBarButtonStyle}" Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}"  AutomationProperties.Name="Stop Refresh"/> 
+                <!--<TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>-->
+                <ComboBox x:Name="comboBox1"  ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" Height="50" />
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>
