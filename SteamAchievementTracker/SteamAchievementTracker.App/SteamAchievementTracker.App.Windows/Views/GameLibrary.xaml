@@ -28,13 +28,16 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="GridViewItem">
                         <GridViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}" 
-                                               Margin="{TemplateBinding Padding}" SelectionCheckMarkVisualEnabled="True" 
+                                              Margin="5,5,5,5"
+                                              />
+
+                        <!--Margin="{TemplateBinding Padding}"
+ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                                SelectionCheckMarkVisualEnabled="True" 
                                                CheckHintBrush="{ThemeResource ListViewItemCheckHintThemeBrush}" 
                                                CheckSelectingBrush="{ThemeResource ListViewItemCheckSelectingThemeBrush}" 
                                                CheckBrush="{ThemeResource ListViewItemCheckThemeBrush}" 
-                                               DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" 
-                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}" 
-                                               FocusBorderBrush="{x:Null}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" 
+                                              FocusBorderBrush="{x:Null}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" 
                                                PointerOverBackground="{StaticResource CustomizedGridViewItemPresenterHighlightBrush}" 
                                                SelectedBorderThickness="{StaticResource CustomizedGridViewItemPresenterSelectedBorderThickness}" 
                                                SelectedBackground="{StaticResource CustomizedGridViewItemPresenterHighlightBrush}" 
@@ -43,7 +46,10 @@
                                                SelectedPointerOverBorderBrush="{ThemeResource ListViewItemSelectedPointerOverBorderThemeBrush}" 
                                                DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}" 
                                                DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" 
-                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"/>
+ 
+                                               DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" 
+                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"-->
+
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -154,7 +160,7 @@
             <StackPanel Orientation="Horizontal">
 
                 <Button Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}" />
-                <Button Style="{StaticResource StopAppBarButtonStyle}" Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}"  AutomationProperties.Name="Stop Refresh"/> 
+                <Button Style="{StaticResource StopAppBarButtonStyle}" Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}"  AutomationProperties.Name="Stop Refresh"/>
                 <!--<TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>-->
                 <ComboBox x:Name="comboBox1"  ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" Height="50" />
             </StackPanel>

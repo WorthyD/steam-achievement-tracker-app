@@ -52,6 +52,7 @@
                         </Grid.ColumnDefinitions>
                         <Image x:Name="GameImage" Grid.Column="0" Style="{StaticResource GameListLogo}" Source="{Binding Game.Logo}" />
                         <TextBlock Grid.Column="1" Text="{Binding Game.Name}"></TextBlock>
+                        <Run> - </Run>
                         <TextBlock Grid.Column="2" Text="{Binding Game.PercentCompleteFormatted}" TextAlignment="Right"></TextBlock>
                     </Grid>
                 </Grid>

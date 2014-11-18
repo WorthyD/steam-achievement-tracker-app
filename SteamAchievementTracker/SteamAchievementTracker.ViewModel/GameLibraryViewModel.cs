@@ -248,7 +248,8 @@ namespace SteamAchievementTracker.ViewModel
 
             if (Settings.Profile.GetGamesWOAchievements == false)
             {
-                gameList = gameList.Where(x => x.StatsLink != null && !string.IsNullOrEmpty(x.StatsLink)).ToList();
+                //gameList = gameList.Where(x => x.StatsLink != null && !string.IsNullOrEmpty(x.StatsLink)).ToList();
+                gameList = gameList.Where(x => x.HasAchievements == true && x.StatsLink != string.Empty).ToList();
             }
 
             GameList = ApplySort(gameList);
