@@ -47,13 +47,19 @@
                     <Grid  Grid.Column="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
-                            <ColumnDefinition Width="8*"></ColumnDefinition>
-                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="9*"></ColumnDefinition>
+                            <!--<ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>-->
                         </Grid.ColumnDefinitions>
                         <Image x:Name="GameImage" Grid.Column="0" Style="{StaticResource GameListLogo}" Source="{Binding Game.Logo}" />
-                        <TextBlock Grid.Column="1" Text="{Binding Game.Name}"></TextBlock>
-                        <Run> - </Run>
-                        <TextBlock Grid.Column="2" Text="{Binding Game.PercentCompleteFormatted}" TextAlignment="Right"></TextBlock>
+                        <StackPanel Grid.Column="1" Margin="20, 0,0,0">
+                            <TextBlock  FontSize="40" Margin="0,0,0,10" Text="{Binding Game.Name}"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock FontSize="30"  Text="Complete:" Margin="0,0,10,0"></TextBlock>
+                                <TextBlock FontSize="30"  Text="{Binding Game.PercentCompleteFormatted}"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Hub.Header>
@@ -62,7 +68,7 @@
 
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock>Unlocked:</TextBlock>
+                            <TextBlock Margin="0,0,10,0">Unlocked:</TextBlock>
                             <TextBlock Text="{Binding Game.AchievementsEarned}"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
@@ -84,7 +90,7 @@
                             </GridView.ItemTemplate>
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                      <ItemsWrapGrid x:Name="MaxColumn" MaximumRowsOrColumns="8"/>
+                                    <ItemsWrapGrid x:Name="MaxColumn" MaximumRowsOrColumns="8"/>
                                 </ItemsPanelTemplate>
                             </GridView.ItemsPanel>
                         </GridView>
@@ -98,7 +104,7 @@
                 <HubSection.HeaderTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock>Locked:</TextBlock>
+                            <TextBlock Margin="0,0,10,0">Locked:</TextBlock>
                             <TextBlock Text="{Binding Game.AchievementsLocked}"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
@@ -160,7 +166,7 @@
 
 
 
-                        <!--
+        <!--
                             
                            <ItemsWrapGrid x:Name="MaxColum" MaximumRowsOrColumns="8"/> 
 
@@ -169,28 +175,28 @@
                     Storyboard.TargetProperty="Orientation">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Orientation.Horizontal" />
                         </ObjectAnimationUsingKeyFrames>-->
-                        <!--<ObjectAnimationUsingKeyFrames
+        <!--<ObjectAnimationUsingKeyFrames
                     Storyboard.TargetName="UnLocked"
                     Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
                         </ObjectAnimationUsingKeyFrames>-->
 
-                        <!--<ObjectAnimationUsingKeyFrames
+        <!--<ObjectAnimationUsingKeyFrames
                     Storyboard.TargetName="GameImage"
                     Storyboard.TargetProperty="Visibility">
                         <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
                     </ObjectAnimationUsingKeyFrames>-->
 
-                    <!--</Storyboard>
+        <!--</Storyboard>
                 </VisualState>
                 <VisualState x:Name="Snapped">
                     <Storyboard>-->
-                        <!--<ObjectAnimationUsingKeyFrames
+        <!--<ObjectAnimationUsingKeyFrames
                         Storyboard.TargetName="GameImage"
                         Storyboard.TargetProperty="(UIElement.Visibility)">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
                         </ObjectAnimationUsingKeyFrames>-->
-                    <!--</Storyboard>
+        <!--</Storyboard>
                 </VisualState>
 
             </VisualStateGroup>
