@@ -24,12 +24,15 @@ namespace SteamAchievementTracker.DesignData.Model
        public void PopulateDesignData(string name, Random rnd)
        {
            int ticks = rnd.Next(0, 100);
+           int ticks2 = rnd.Next(0, 75);
            this.StatsURL = "http://google.com";
            this.AchievementID = name;
            this.IsUnlocked = (ticks % 2 == 0);
            this.AchievementIcon = (this.IsUnlocked) ? "http://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/72850/07a5ef16690568be4686a8c0d3ba5b031acde580.jpg" : "http://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/72850/24f77c69c58ff5cdf6ff574796f2c7ed69ba9e46.jpg";
            this.Name = name;
-           this.Description = name + "Desc";
+           this.Description = name + "Desc ";
+           //this.Description = name + "Desc Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in ex et hendrerit. Quisque Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in ex et hendrerit. Quisque Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in ex et hendrerit. Quisque Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla cursus in ex et hendrerit. Quisque";
+           ////this.Description = this.Description.Substring(0, ticks2);
            this.UnlockTimestamp = DateTime.Now.Ticks.ToString();
 
        }

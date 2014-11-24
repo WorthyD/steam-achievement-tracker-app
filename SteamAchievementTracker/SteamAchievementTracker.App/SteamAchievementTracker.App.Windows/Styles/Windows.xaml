@@ -21,19 +21,28 @@
         <Setter Property="Margin" Value="0,0,0,10"></Setter>
 
     </Style>
+    <Style x:Key="AchievementWrapper" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="Width" Value="400"></Setter>
+        <Setter Property="Height" Value="64"></Setter>
+    </Style>
 
     <Style x:Key="ArhievementIcon" TargetType="Image">
         <Setter Property="Height" Value="64"></Setter>
         <Setter Property="Width" Value="64"></Setter>
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-
         <Setter Property="Margin" Value="0,0,0,10"></Setter>
-
     </Style>
 
 
-
+    <Style x:Key="AchievementTitle" TargetType="TextBlock">
+    </Style>
+    <Style x:Key="AchievementDesc" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Height" Value="64"></Setter>
+        <Setter Property="Width" Value="336"></Setter>
+    </Style>
 
     <Style x:Key="DetailItem" TargetType="TextBlock">
         <Setter Property="TextAlignment" Value="Right"></Setter>
