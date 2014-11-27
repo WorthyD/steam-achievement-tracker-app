@@ -112,8 +112,8 @@ ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
                         AutomationProperties.Name="Back"
                         AutomationProperties.AutomationId="BackButton"
                         AutomationProperties.ItemType="Navigation Button"/>
-                    <TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" 
-                        Margin="0,0,20,0" />
+                    <!--<TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" 
+                        Margin="0,0,20,0" />-->
                     <TextBlock Margin="0,0,20,0" Style="{StaticResource HeaderTextBlockStyle}">Game Count -</TextBlock>
                     <TextBlock x:Name="libraryCount"  Text="{Binding GameList.Count}" Style="{StaticResource HeaderTextBlockStyle}" 
                          />
@@ -162,7 +162,9 @@ ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
                 <Button Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}" />
                 <Button Style="{StaticResource StopAppBarButtonStyle}" Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}"  AutomationProperties.Name="Stop Refresh"/>
                 <!--<TextBlock FontSize="16" Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>-->
-                <ComboBox x:Name="comboBox1"  ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" Height="50" />
+                <ComboBox x:Name="comboBox1"  ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" Height="50" Margin="0,0,10,0" />
+                <CheckBox Style="{StaticResource SettingsCheckbox}" IsChecked="{Binding ShowNoAch, Mode=TwoWay}" Content="Show games without achievements." Margin="0,0,10,0"></CheckBox>
+                <CheckBox Style="{StaticResource SettingsCheckbox}" IsChecked="{Binding ShowOneEarned, Mode=TwoWay}" Content="Show games with at least 1 achievement earned." Margin="0,0,10,0"></CheckBox>
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>
