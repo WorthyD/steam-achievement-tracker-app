@@ -14,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Google.Apis.Analytics;
+//using Google.Apis.Analytics;
 
 namespace SteamAchievementTracker.ViewModel
 {
