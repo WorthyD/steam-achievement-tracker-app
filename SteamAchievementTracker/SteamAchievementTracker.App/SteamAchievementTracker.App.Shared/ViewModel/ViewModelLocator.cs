@@ -84,6 +84,11 @@ namespace SteamAchievementTracker.App.ViewModel
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
 
             SimpleIoc.Default.Register<ISettingsViewModel, SettingsViewModel>();
+
+            var t = GoogleAnalytics.EasyTracker.GetTracker();
+            SimpleIoc.Default.Register<t>();
+            //SimpleIoc.Default.Register<BaseViewModel>();
+
             SimpleIoc.Default.Register<BaseViewModel>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<GameDetailsViewModel>();

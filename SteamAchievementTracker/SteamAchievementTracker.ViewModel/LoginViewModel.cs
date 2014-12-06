@@ -111,7 +111,10 @@ namespace SteamAchievementTracker.ViewModel
 
             try
             {
+                //EasyTracker et = new EasyTracker();
+                //GoogleAnalytics.Core.Tracker t = new GoogleAnalytics.Core.Tracker()
                 p = await playerProfService.GetFreshPlayerDetails(this.UserName, false);
+                
             }
             catch (SteamAPI.Player.Exceptions.PlayerNotFoundException)
             {
