@@ -48,6 +48,7 @@
     <Compile Include="Services\IPlayerLibraryService.cs" />
     <Compile Include="Services\IPlayerProfileService.cs" />
     <Compile Include="Services\IPlayerStatsService.cs" />
+    <Compile Include="Services\ITrackingService.cs" />
     <Compile Include="ViewModels\IGameDetailsViewModel.cs" />
     <Compile Include="ViewModels\IGameLibraryViewModel.cs" />
     <Compile Include="ViewModels\IHelpViewModel.cs" />

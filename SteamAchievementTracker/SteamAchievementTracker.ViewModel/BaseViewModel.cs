@@ -147,6 +147,7 @@ namespace SteamAchievementTracker.ViewModel
 
 
 
+
         public virtual void Load(object parameter)
         {
         }
