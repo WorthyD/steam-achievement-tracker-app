@@ -26,6 +26,9 @@ namespace SteamAchievementTracker.ViewModel
         #endregion
 
         #region Properties
+
+        public GoogleAnalytics.Core.Tracker tracker { get; set; }
+
         public bool CanGoBack
         {
             get
