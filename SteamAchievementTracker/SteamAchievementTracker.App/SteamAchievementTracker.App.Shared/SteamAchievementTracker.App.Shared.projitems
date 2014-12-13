@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\LayoutAwarePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\BooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PercentageConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\TrackingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\PartialViews\Achievement.xaml.cs">
@@ -79,5 +80,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)NewFolder\" />
   </ItemGroup>
 </Project>

@@ -166,8 +166,8 @@ namespace SteamAchievementTracker.ViewModel {
 
 
 
-        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _playerStatsService)
-            : base(_navigationService) {
+        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _playerStatsService, ITrackingService trackingService)
+            : base(_navigationService, trackingService) {
             this.navigationService = _navigationService;
             this.playerLibService = _playerLibService;
             this.playerStatsService = _playerStatsService;

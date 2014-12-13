@@ -28,8 +28,8 @@ namespace SteamAchievementTracker.ViewModel
         }
 
 
-        public HelpViewModel(INavigationService _navigationService)
-            : base(_navigationService)
+        public HelpViewModel(INavigationService _navigationService, ITrackingService ts)
+            : base(_navigationService,ts)
         {
             VideoHeight = 315;
             VideoWidth = 560;

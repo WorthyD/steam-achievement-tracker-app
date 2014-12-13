@@ -21,8 +21,8 @@ namespace SteamAchievementTracker.ViewModel
 
         #endregion
 
-        public GameDetailsViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _statService)
-            : base(_navigationService)
+        public GameDetailsViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _statService, ITrackingService ts)
+            : base(_navigationService, ts)
         {
 
             this.navigationService = _navigationService;
