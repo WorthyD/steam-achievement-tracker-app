@@ -118,6 +118,7 @@ namespace SteamAchievementTracker.ViewModel
             }
             catch (SteamAPI.Player.Exceptions.PlayerNotFoundException)
             {
+                
                 p = null;
                 this.ErrorMessage = "User Not Found";
             }
