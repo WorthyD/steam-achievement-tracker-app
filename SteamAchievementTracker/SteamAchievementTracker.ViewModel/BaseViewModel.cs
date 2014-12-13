@@ -103,9 +103,12 @@ namespace SteamAchievementTracker.ViewModel
         }
 
         private readonly INavigationService _navigationService;
-        public BaseViewModel(INavigationService navigationService)
+        private readonly ITrackingService _trackingService;
+        public BaseViewModel(INavigationService navigationService, ITrackingService trackingService)
         {
             this._navigationService = navigationService;
+            this._trackingService = trackingService;
+
             this.InitializeCommands();
         }
 
