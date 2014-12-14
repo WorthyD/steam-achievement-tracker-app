@@ -16,16 +16,12 @@ using System.Threading.Tasks;
 
 //using Google.Apis.Analytics;
 
-namespace SteamAchievementTracker.ViewModel
-{
-    public class LoginViewModel : ViewModelBase
-    {
+namespace SteamAchievementTracker.ViewModel {
+    public class LoginViewModel : ViewModelBase {
         private string _UserName;
-        public string UserName
-        {
+        public string UserName {
             get { return _UserName; }
-            set
-            {
+            set {
                 Set(() => UserName, ref _UserName, value);
             }
         }
@@ -42,41 +38,33 @@ namespace SteamAchievementTracker.ViewModel
 
 
         private bool _IsVisible;
-        public bool IsVisible
-        {
+        public bool IsVisible {
             get { return _IsVisible; }
-            set
-            {
+            set {
                 Set(() => IsVisible, ref _IsVisible, value);
             }
         }
 
         private bool _IsLoggingIn;
-        public bool IsLoggingIn
-        {
+        public bool IsLoggingIn {
             get { return _IsLoggingIn; }
-            set
-            {
+            set {
                 Set(() => IsLoggingIn, ref _IsLoggingIn, value);
             }
         }
 
         private string _LoginMessage;
-        public string LoginMessage
-        {
+        public string LoginMessage {
             get { return _LoginMessage; }
-            set
-            {
+            set {
                 Set(() => LoginMessage, ref _LoginMessage, value);
             }
         }
 
         private string _ErrorMessage;
-        public string ErrorMessage
-        {
+        public string ErrorMessage {
             get { return _ErrorMessage; }
-            set
-            {
+            set {
                 Set(() => ErrorMessage, ref _ErrorMessage, value);
             }
         }
@@ -87,50 +75,47 @@ namespace SteamAchievementTracker.ViewModel
         public RelayCommand Login { get; set; }
         public RelayCommand GoHelp { get; set; }
 
-        public void InitializeCommands()
-        {
-            Login = new RelayCommand(() =>
-            {
+        public void InitializeCommands() {
+            Login = new RelayCommand(() => {
                 LoginUser();
             });
 
-            GoHelp = new RelayCommand(() =>
-            {
+            GoHelp = new RelayCommand(() => {
                 var pageType = SimpleIoc.Default.GetInstance<IHelp>();
                 INavigationService _navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
                 _navigationService.Navigate(pageType.GetType(), null);
             });
         }
 
-        private async Task LoginUser()
-        {
+        private async Task LoginUser() {
             this.IsLoggingIn = true;
             this.ErrorMessage = "";
             this.LoginMessage = "Logging User In";
             IProfile p = new Profile();
+            ITrackingService _trackingService = ServiceLocator.Current.GetInstance<ITrackingService>();
 
-            try
-            {
-                //EasyTracker et = new EasyTracker();
-                //GoogleAnalytics.Core.Tracker t = new GoogleAnalytics.Core.Tracker()
+            try {
                 p = await playerProfService.GetFreshPlayerDetails(this.UserName, false);
-                
-            }
-            catch (SteamAPI.Player.Exceptions.PlayerNotFoundException)
-            {
-                
+
+            } catch (SteamAPI.Player.Exceptions.PlayerNotFoundException) {
+
+
+                _trackingService.TrackEvent("Login", "Error", this.UserName);
                 p = null;
                 this.ErrorMessage = "User Not Found";
             }
 
-            if (p != null && p.ID64 != 0)
-            {
+            if (p != null && p.ID64 != 0) {
+                _trackingService.TrackEvent("Login", "Success", this.UserName);
 
                 this.LoginMessage = "Getting User Library";
 
-                await playerLibService.GetPlayerLibraryRefresh(p.ID64, p.ID);
+                List<IGame> games = await playerLibService.GetPlayerLibraryRefresh(p.ID64, p.ID);
                 Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID64"] = p.ID64;
                 Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID"] = p.ID;
+                _trackingService.TrackEvent("Library Count", "Login", games.Count().ToString());
+
+
 
                 Messenger.Default.Send("LoggedIn");
 

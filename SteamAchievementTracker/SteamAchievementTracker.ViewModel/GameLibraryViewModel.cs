@@ -166,8 +166,8 @@ namespace SteamAchievementTracker.ViewModel {
 
 
 
-        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _playerStatsService, ITrackingService trackingService)
-            : base(_navigationService, trackingService) {
+        public GameLibraryViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _playerStatsService)
+            : base(_navigationService) {
             this.navigationService = _navigationService;
             this.playerLibService = _playerLibService;
             this.playerStatsService = _playerStatsService;
@@ -249,6 +249,7 @@ namespace SteamAchievementTracker.ViewModel {
             if (this.GameList.Where(x => x.RefreshAchievements == true).Count() > 0) {
                 StartLibraryRefresh();
             }
+            base.TrackEvent("Navigation", "Loaded", "Library");
         }
 
         public async Task GetGames() {

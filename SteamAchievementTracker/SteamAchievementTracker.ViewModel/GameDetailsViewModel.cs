@@ -18,11 +18,11 @@ namespace SteamAchievementTracker.ViewModel
         private IPlayerStatsService statService;
 
         #region Commands
-
+        public RelayCommand LaunchGame { get; set; }
         #endregion
 
-        public GameDetailsViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _statService, ITrackingService ts)
-            : base(_navigationService, ts)
+        public GameDetailsViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _statService)
+            : base(_navigationService)
         {
 
             this.navigationService = _navigationService;
@@ -75,7 +75,14 @@ namespace SteamAchievementTracker.ViewModel
         }
         private void InitializeCommands()
         {
+            LaunchGame = new RelayCommand(() => {
+                LaunchExternalGame();
+            });
+        }
+        private void LaunchExternalGame() {
+            Uri gameUrl = new Uri(string.Format("steam://rungameid/{0}", this.Game.AppID));
 
+            Windows.System.Launcher.LaunchUriAsync(gameUrl);
         }
 
         public async override void Initialize(object parameter)
@@ -125,6 +132,8 @@ namespace SteamAchievementTracker.ViewModel
             this.Started = this.UnlockedAchievements.Count() > 0;
             this.Completed = this.Game.AchievementsEarned == this.Game.TotalAchievements;
             this.IsLoading = false;
+
+            base.TrackEvent("Navigation", "Loaded", string.Format("Game Details {0}", this.Game.Name));
         }
 
    

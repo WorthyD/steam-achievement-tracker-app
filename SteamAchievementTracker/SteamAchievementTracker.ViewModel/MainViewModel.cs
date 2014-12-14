@@ -114,8 +114,8 @@ namespace SteamAchievementTracker.ViewModel
      
         #endregion
 
-        public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService, IPlayerStatsService _playerStatsService, ITrackingService trackingService)
-            : base(_navigationService, trackingService)
+        public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService, IPlayerStatsService _playerStatsService)
+            : base(_navigationService)
         {
 
 
@@ -189,6 +189,7 @@ namespace SteamAchievementTracker.ViewModel
                 this.EmptyData();
                 this.LoginVM.IsVisible = true;
             }
+            base.TrackEvent("Navigation", "Loaded", "HomeScreen");
         }
 
         public async void LoadData()

@@ -4,7 +4,7 @@
     <UseSimulator>true</UseSimulator>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <UseSimulator>false</UseSimulator>
+    <UseSimulator>true</UseSimulator>
     <RemoteDebugMachine>WorthyD-Surface</RemoteDebugMachine>
     <UseAuthentication>true</UseAuthentication>
     <RemoteDebugEnabled>false</RemoteDebugEnabled>

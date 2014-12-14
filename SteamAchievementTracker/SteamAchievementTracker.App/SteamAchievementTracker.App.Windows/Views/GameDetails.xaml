@@ -58,6 +58,10 @@
 
                                 <TextBlock FontSize="30"  Text="Complete:" Margin="0,0,10,0"></TextBlock>
                                 <TextBlock FontSize="30"  Text="{Binding Game.PercentCompleteFormatted}"></TextBlock>
+                                <Button  x:Name="launchGameButton"
+                          
+                             Command="{Binding LaunchGame}">Launch Game</Button>
+
                             </StackPanel>
                         </StackPanel>
                     </Grid>
