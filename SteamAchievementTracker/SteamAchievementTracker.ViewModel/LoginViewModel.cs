@@ -81,9 +81,8 @@ namespace SteamAchievementTracker.ViewModel {
             });
 
             GoHelp = new RelayCommand(() => {
-                var pageType = SimpleIoc.Default.GetInstance<IHelp>();
-                INavigationService _navigationService = ServiceLocator.Current.GetInstance<INavigationService>();
-                _navigationService.Navigate(pageType.GetType(), null);
+                Uri helpUrl = new Uri("http://steamachievementtracker.com/help");
+                Windows.System.Launcher.LaunchUriAsync(helpUrl);
             });
         }
 

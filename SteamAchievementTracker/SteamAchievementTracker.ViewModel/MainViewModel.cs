@@ -34,6 +34,7 @@ namespace SteamAchievementTracker.ViewModel
             get;
             set;
         }
+        public RelayCommand<ItemClickEventArgs> GoToHelp { get; set; }
         //public RelayCommand<ItemClickEventArgs> OpenLibrary
         //{
         //    get;
@@ -150,6 +151,10 @@ namespace SteamAchievementTracker.ViewModel
                         var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
                         navigationService.Navigate(pageType.GetType(), x.AppID);
                     });
+            GoToHelp = new RelayCommand<ItemClickEventArgs>(x => {
+                Uri helpUrl = new Uri("http://steamachievementtracker.com/help");
+                Windows.System.Launcher.LaunchUriAsync(helpUrl);
+            });
         }
         public void OpenLibrary()
         {

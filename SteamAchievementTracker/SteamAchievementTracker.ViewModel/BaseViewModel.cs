@@ -109,8 +109,9 @@ namespace SteamAchievementTracker.ViewModel {
             });
 
             GoHelp = new RelayCommand(() => {
-                var pageType = SimpleIoc.Default.GetInstance<IHelp>();
-                _navigationService.Navigate(pageType.GetType(), null);
+                Uri helpUrl = new Uri("http://steamachievementtracker.com/help");
+                Windows.System.Launcher.LaunchUriAsync(helpUrl);
+ 
             });
 
             GoSettings = new RelayCommand(() => {

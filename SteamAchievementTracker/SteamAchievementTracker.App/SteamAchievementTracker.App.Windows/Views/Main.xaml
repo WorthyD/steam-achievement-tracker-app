@@ -54,6 +54,7 @@
                     <StackPanel>
                     <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
                         <Button Command="{Binding GoLibrary}" Margin="0,20,0,0">View Library</Button>
+                        <Button Command="{Binding GoToHelp}" Margin="0,20,0,0">Help/FAQ</Button>
                     </StackPanel>
                 </DataTemplate>
             </HubSection>
