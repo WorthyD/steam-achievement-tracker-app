@@ -21,5 +21,8 @@ namespace SteamAchievementTracker.Web.WebUI.Controllers {
 
             return View();
         }
+        public ActionResult PrivacyPolicy() {
+            return View();
+        }
     }
 }
