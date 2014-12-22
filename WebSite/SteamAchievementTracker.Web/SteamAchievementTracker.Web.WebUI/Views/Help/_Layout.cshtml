@@ -1,30 +1,81 @@
 ﻿@{
     ViewBag.Title = "_Layout";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<KeyValuePair<string, string>> faqs = new List<KeyValuePair<string, string>>();
+    
 }
 
 @RenderBody()
 
 <h2>General Help</h2>
-<div class="row">
-    <div class="col-sm-6">
-        <h3>My stats aren't correct.</h3>
-        <p>
-            Stats will be incorrect until all your games are crawled.
-        </p>
+
+
+
+
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    My stats aren't correct.
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                Stats will be incorrect until all your games are crawled.
+            </div>
+        </div>
     </div>
-    <div class="col-sm-6">
-        <h3>Can you add this feature?</h3>
-        <p>
-            Send me some feedback and I'll try. Steam provides limited data.
-        </p>
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Can you add this feature?
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+                Send me some feedback and I'll try. Steam provides limited data.
+            </div>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <h3>Can I disable ads?</h3>
-        <p>
-            No, I can't guarantee the game data will always be available. I don't feel it's right to do charge for something I can't guarantee.
-        </p>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Can I disable ads?
+                </a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+                No, I can't guarantee the game data will always be available. I don't feel it's right to do charge for something I can't guarantee.
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading">
+            <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Can I disable ads?
+                </a>
+            </h4>
+        </div>
+        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+                No, I can't guarantee the game data will always be available. I don't feel it's right to do charge for something I can't guarantee.
+            </div>
+        </div>
     </div>
 </div>
