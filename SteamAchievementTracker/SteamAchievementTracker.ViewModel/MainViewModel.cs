@@ -152,7 +152,7 @@ namespace SteamAchievementTracker.ViewModel
                         navigationService.Navigate(pageType.GetType(), x.AppID);
                     });
             GoToHelp = new RelayCommand<ItemClickEventArgs>(x => {
-                Uri helpUrl = new Uri("http://steamachievementtracker.com/help");
+                Uri helpUrl = new Uri("http://steamachievementtracker.com/help/winrt");
                 Windows.System.Launcher.LaunchUriAsync(helpUrl);
             });
         }

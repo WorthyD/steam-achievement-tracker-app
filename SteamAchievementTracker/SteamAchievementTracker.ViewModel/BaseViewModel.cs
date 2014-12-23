@@ -109,7 +109,7 @@ namespace SteamAchievementTracker.ViewModel {
             });
 
             GoHelp = new RelayCommand(() => {
-                Uri helpUrl = new Uri("http://steamachievementtracker.com/help");
+                Uri helpUrl = new Uri("http://steamachievementtracker.com/help/winrt");
                 Windows.System.Launcher.LaunchUriAsync(helpUrl);
  
             });

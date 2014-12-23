@@ -54,6 +54,9 @@ footer ul {
     margin:0 auto;
 
 }
+.ad-container {
+    margin-top:20px;
+}
 
 @media only screen and (min-width: 720px) {
     .app-slider .btn {
