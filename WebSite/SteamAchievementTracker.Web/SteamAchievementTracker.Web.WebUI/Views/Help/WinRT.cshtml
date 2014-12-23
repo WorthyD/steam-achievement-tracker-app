@@ -2,43 +2,38 @@
 @{
     ViewBag.Title = "WinRT";
     Layout = "~/Views/Help/_Layout.cshtml";
+
+
+    List<KeyValuePair<string, string>> faqs = new List<KeyValuePair<string, string>>();
+
+    faqs.Add(new KeyValuePair<string, string>("How do I switch profiles?", ""));
+    faqs.Add(new KeyValuePair<string, string>("It looks like I have some bad data.", ""));
+    faqs.Add(new KeyValuePair<string, string>("", ""));
+    faqs.Add(new KeyValuePair<string, string>("", ""));
+    faqs.Add(new KeyValuePair<string, string>("", ""));
+    faqs.Add(new KeyValuePair<string, string>("", ""));
 }
 
 <hr />
 <h2>Windows 8.1 Help</h2>
-<div class="row">
-    <div class="col-sm-6">
-        <h3>How do I switch profiles?</h3>
-        <p>
-        </p>
-    </div>
-    <div class="col-sm-6">
-        <h3>It looks like I have some bad data.</h3>
-        <p>
-        </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <h3></h3>
-        <p>
-        </p>
-    </div>
-    <div class="col-sm-6">
-        <h3></h3>
-        <p>
-        </p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-6">
-        <h3></h3>
-        <p>
-        </p>
-    </div>
-    <div class="col-sm-6">
-        <h3></h3>
-        <p>
-        </p>
-    </div>
+<div class="panel-group" id="accordionRT" role="tablist">
+
+    @for (var i = 0; i < faqs.Count; i++) {
+        var faq = faqs[i];
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading@(i)">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordionRT" href="#collapseRT@(i)">
+                        @faq.Key
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseRT@(i)" class="panel-collapse collapse" role="tabpanel">
+                <div class="panel-body">
+                    @faq.Value
+                </div>
+            </div>
+        </div>
+    }
 </div>

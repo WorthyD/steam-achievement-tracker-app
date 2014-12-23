@@ -1,90 +1,39 @@
 ﻿@{
-    ViewBag.Title = "_Layout";
+  
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     List<KeyValuePair<string, string>> faqs = new List<KeyValuePair<string, string>>();
 
-    faqs.Add(new KeyValuePair<string, string>("How do I get my SteamID?", ""));
-    faqs.Add(new KeyValuePair<string, string>("", ""));
-    faqs.Add(new KeyValuePair<string, string>("", ""));
-    faqs.Add(new KeyValuePair<string, string>("", ""));
-    faqs.Add(new KeyValuePair<string, string>("", ""));
-    faqs.Add(new KeyValuePair<string, string>("", ""));
-    faqs.Add(new KeyValuePair<string, string>("", ""));
-    faqs.Add(new KeyValuePair<string, string>("", ""));
-    
+    faqs.Add(new KeyValuePair<string, string>("How do I get my SteamID?", "Your Steam ID is apart of the URL of you steam profile. <br /> <br /> http://steamcommunity.com/id/<strong>*************</strong> <br />http://steamcommunity.com/profile/<strong>###########</strong>"));
+    faqs.Add(new KeyValuePair<string, string>("My stats aren't correct.", "Stats will be incorrect until all your games are crawled."));
+    faqs.Add(new KeyValuePair<string, string>("Can you add this feature?", "Send me some feedback and I'll try. Steam provides limited data."));
+    faqs.Add(new KeyValuePair<string, string>("Can I disable ads?", "No, I can't guarantee the game data will always be available. I don't feel it's right to do charge for something I can't guarantee."));
+
 }
 
 @RenderBody()
 
 <h2>General Help</h2>
+<div class="panel-group" id="accordion" role="tablist">
 
+    @for (var i = 0; i < faqs.Count; i++) {
+        var faq = faqs[i];
 
-
-
-
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-
-
-
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingOne">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    My stats aren't correct.
-                </a>
-            </h4>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-            <div class="panel-body">
-                Stats will be incorrect until all your games are crawled.
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading@(i)">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse@(i)">
+                        @faq.Key
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse@(i)" class="panel-collapse collapse" role="tabpanel">
+                <div class="panel-body">
+                    @Html.Raw(faq.Value)
+                </div>
             </div>
         </div>
-    </div>
 
 
-
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingTwo">
-            <h4 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Can you add this feature?
-                </a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-            <div class="panel-body">
-                Send me some feedback and I'll try. Steam provides limited data.
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingThree">
-            <h4 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Can I disable ads?
-                </a>
-            </h4>
-        </div>
-        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-            <div class="panel-body">
-                No, I can't guarantee the game data will always be available. I don't feel it's right to do charge for something I can't guarantee.
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="heading">
-            <h4 class="panel-title">
-                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Can I disable ads?
-                </a>
-            </h4>
-        </div>
-        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-            <div class="panel-body">
-                No, I can't guarantee the game data will always be available. I don't feel it's right to do charge for something I can't guarantee.
-            </div>
-        </div>
-    </div>
+    }
 </div>

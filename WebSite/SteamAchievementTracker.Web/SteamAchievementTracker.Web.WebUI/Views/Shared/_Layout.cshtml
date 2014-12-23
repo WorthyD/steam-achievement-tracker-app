@@ -33,11 +33,13 @@
         @RenderBody()
         <hr />
         <footer>
-            <ul>
+            <ul class="pull-left">
                 <li>&copy; @DateTime.Now.Year</li>
                 <li><a href="@Url.Action("PrivacyPolicy", "home")">Privacy Policy</a></li>
                 <li><a href="https://twitter.com/steamachtracker">Twitter</a></li>
+                <li>App by <a href="http://worthyd.com">WorthyD</a></li>
             </ul>
+            <p class="pull-right">Steam Achievement Tracker is in no way shape or form associated with Steam or Valve.</p>
         </footer>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
