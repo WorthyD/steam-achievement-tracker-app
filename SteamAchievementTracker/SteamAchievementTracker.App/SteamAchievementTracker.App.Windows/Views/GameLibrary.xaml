@@ -28,17 +28,11 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="GridViewItem">
                         <GridViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}" 
-                                              Margin="5,5,5,5"
-                                              />
-
-                        <!--Margin="{TemplateBinding Padding}"
-ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
-                                                SelectionCheckMarkVisualEnabled="True" 
+                                             FocusBorderBrush="{x:Null}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" 
+                                                 SelectionCheckMarkVisualEnabled="True" 
                                                CheckHintBrush="{ThemeResource ListViewItemCheckHintThemeBrush}" 
                                                CheckSelectingBrush="{ThemeResource ListViewItemCheckSelectingThemeBrush}" 
                                                CheckBrush="{ThemeResource ListViewItemCheckThemeBrush}" 
-                                              FocusBorderBrush="{x:Null}" PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" 
-                                               PointerOverBackground="{StaticResource CustomizedGridViewItemPresenterHighlightBrush}" 
                                                SelectedBorderThickness="{StaticResource CustomizedGridViewItemPresenterSelectedBorderThickness}" 
                                                SelectedBackground="{StaticResource CustomizedGridViewItemPresenterHighlightBrush}" 
                                                SelectedForeground="{ThemeResource ListViewItemSelectedForegroundThemeBrush}" 
@@ -48,7 +42,18 @@ ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
                                                DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}" 
  
                                                DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}" 
-                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"-->
+                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                              Margin="5,5,5,5"
+                                              />
+
+                        <!--Margin="{TemplateBinding Padding}"
+ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                              
+                        
+PointerOverBackground="{StaticResource CustomizedGridViewItemPresenterHighlightBrush}" 
+                        
+                        
+                        -->
 
                     </ControlTemplate>
                 </Setter.Value>
@@ -123,13 +128,15 @@ ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
             <HubSection>
                 <DataTemplate>
                     <Grid>
+                        <!--ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"-->
                         <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
                                     ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"
-                                    ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"
+
                                     ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                     ScrollViewer.VerticalScrollBarVisibility="Auto" 
                                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                     SelectionMode="None"
+                                  
                                     IsItemClickEnabled="True">
                             <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">

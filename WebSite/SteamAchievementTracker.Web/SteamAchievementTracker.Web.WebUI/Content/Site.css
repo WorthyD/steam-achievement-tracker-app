@@ -23,6 +23,16 @@ textarea {
     max-width: 280px;
 }
 
+.navbar-brand > img {
+    display: inline-block;
+    margin-top: -5px;
+}
+
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav > li > a  {
+    color: #fff;
+}
+
 footer ul {
     padding: 0;
     margin: 0;
@@ -48,14 +58,15 @@ footer ul {
         margin: 0 auto;
         text-align: center;
     }
-.app-list  img{
-    display:block;
-    max-height:200px;
-    margin:0 auto;
 
+.app-list img {
+    display: block;
+    max-height: 200px;
+    margin: 0 auto;
 }
+
 .ad-container {
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 @media only screen and (min-width: 720px) {
