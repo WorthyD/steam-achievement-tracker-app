@@ -33,10 +33,10 @@
                 </StackPanel>
                 <Button Command="{Binding LogOutUser}">LogOut</Button>
             </StackPanel>
-            <StackPanel Style="{StaticResource SettingsContainer}">
+            <!--<StackPanel Style="{StaticResource SettingsContainer}">
                 <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Preferences" />
                 <CheckBox Style="{StaticResource SettingsCheckbox}" IsChecked="{Binding ShowNoAch, Mode=TwoWay}" Content="Show games without achievements."></CheckBox>
-            </StackPanel>
+            </StackPanel>-->
             <StackPanel Style="{StaticResource SettingsContainer}">
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}" Margin="0,0,0,5" TextWrapping="Wrap">
                     Experiencing odd issues with your game data? Clear your local cache to start clean.
