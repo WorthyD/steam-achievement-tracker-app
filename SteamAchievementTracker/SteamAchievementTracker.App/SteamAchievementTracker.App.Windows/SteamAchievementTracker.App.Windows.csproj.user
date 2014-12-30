@@ -4,13 +4,16 @@
     <UseSimulator>false</UseSimulator>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <UseSimulator>false</UseSimulator>
+    <UseSimulator>true</UseSimulator>
     <RemoteDebugMachine>WorthyD-Surface</RemoteDebugMachine>
     <UseAuthentication>true</UseAuthentication>
     <RemoteDebugEnabled>false</RemoteDebugEnabled>
   </PropertyGroup>
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
+    <AppxPackageIsForStore>False</AppxPackageIsForStore>
+    <AppxShowAllApps>False</AppxShowAllApps>
+    <AppxBuildConfigurationSelection>x86</AppxBuildConfigurationSelection>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <UseSimulator>true</UseSimulator>
