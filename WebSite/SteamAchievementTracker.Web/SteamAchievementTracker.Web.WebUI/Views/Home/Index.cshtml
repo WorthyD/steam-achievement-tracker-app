@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    string winRT = "http://apps.microsoft.com/windows/app/steam-achievement-tracker/fedf0221-68bb-4d88-a01d-df3953c28934";
 }
 
 @*<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -51,7 +52,7 @@
                         <li>See how many achievements you have unlocked.</li>
                         <li>Launch games from app (Windows only)</li>
                     </ul>
-                    <a href="#" class="btn btn-info"><i class="fa fa-windows"></i> Get the app</a>
+                    <a href="@winRT" class="btn btn-info"><i class="fa fa-windows"></i> Get the app</a>
                     <!--Preview App?-->
                 </div>
             </div>
@@ -88,6 +89,9 @@
         </ul>
     </div>
     <div class="col-sm-6">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsve-item" src="//www.youtube.com/embed/cQzjb6lGQcw?rel=0" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
 </div>
 <div class="app-list">
@@ -99,7 +103,7 @@
             <p>
                 Track your Steam Achievements on your Windows Tablet or on your Windows 8 desktop.
             </p>
-            <a href="#" class="btn btn-info"><i class="fa fa-windows"></i> Get the app</a>
+            <a href="@winRT" class="btn btn-info"><i class="fa fa-windows"></i> Get the app</a>
             <div>Development Platform: XAML</div>
         </div>
         <div class="col-md-4">
