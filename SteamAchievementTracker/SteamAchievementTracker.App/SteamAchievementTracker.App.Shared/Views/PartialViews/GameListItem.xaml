@@ -20,18 +20,10 @@
         
         <StackPanel Visibility="{Binding HasAchievements, Converter={StaticResource FalseToVisibleConverter}}">
             <TextBlock Text="No Achievements"></TextBlock>
+            <Canvas Width="250" Height="15"></Canvas>
         </StackPanel>
         <StackPanel Visibility="{Binding HasAchievements, Converter={StaticResource TrueToVisibleConverter}}">
             <StackPanel Visibility="{Binding BeenProcessed, Converter={StaticResource TrueToVisibleConverter}}">
-                <!--<Grid>
-                    <TextBlock Style="{StaticResource DetailItemTitle}">Complete:</TextBlock>
-                    <TextBlock Style="{StaticResource DetailItem}" Text="{Binding PercentCompleteFormatted}"></TextBlock>
-                </Grid>
-                <Grid>
-                    <TextBlock Style="{StaticResource DetailItemTitle}">Progress:</TextBlock>
-                    <TextBlock Style="{StaticResource DetailItem}" Text="{Binding ProgressText}"></TextBlock>
-                </Grid>-->
-                <!--<ProgressBar Height="10" VerticalAlignment="Stretch" Value="{Binding PercentComplete}"/>-->
                 <Grid>
                     <TextBlock Style="{StaticResource DetailItemTitle}" Text="{Binding PercentCompleteFormatted}"></TextBlock>
                     <TextBlock Style="{StaticResource DetailItem}" Text="{Binding ProgressText}"></TextBlock>
@@ -40,6 +32,7 @@
             </StackPanel>
             <StackPanel Visibility="{Binding BeenProcessed, Converter={StaticResource FalseToVisibleConverter}}">
                 <TextBlock Text="No Achievements Processed"></TextBlock>
+                <Canvas Width="250" Height="15"></Canvas>
             </StackPanel>
         </StackPanel>
     </StackPanel>

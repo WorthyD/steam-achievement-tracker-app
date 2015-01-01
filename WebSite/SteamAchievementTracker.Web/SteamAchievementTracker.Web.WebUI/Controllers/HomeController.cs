@@ -22,7 +22,6 @@ namespace SteamAchievementTracker.Web.WebUI.Controllers {
             return View();
         }
         public ActionResult PrivacyPolicy() {
-            albkj
             return View();
         }
     }

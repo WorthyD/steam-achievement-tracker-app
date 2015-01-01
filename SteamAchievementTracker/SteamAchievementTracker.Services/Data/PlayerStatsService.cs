@@ -136,15 +136,16 @@ namespace SteamAchievementTracker.Services.Data
             int counter = 0;
             foreach (var game in gameLibrary)
             {
-                Debug.WriteLine("Getting Stats for" + game.StatsLink);
-                var ach = await GetGameStatistics(game, true);
+                if (!string.IsNullOrEmpty(game.StatsLink)) {
+                    Debug.WriteLine("Getting Stats for" + game.StatsLink);
+                    var ach = await GetGameStatistics(game, true);
 
-                counter++;
-                if (progress != null)
-                {
-                    progress.Report(counter);
+                    counter++;
+                    if (progress != null) {
+                        progress.Report(counter);
+                    }
+                    ct.ThrowIfCancellationRequested();
                 }
-                ct.ThrowIfCancellationRequested();
             }
 
         }

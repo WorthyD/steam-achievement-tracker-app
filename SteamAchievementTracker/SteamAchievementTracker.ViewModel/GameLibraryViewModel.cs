@@ -281,7 +281,7 @@ namespace SteamAchievementTracker.ViewModel {
 
             var gameList = await playerLibService.GetPlayerLibraryCached(base.UserID);
 
-            RefreshCount = gameList.Where(x => x.RefreshAchievements == true).Count();
+            RefreshCount = gameList.Where(x => x.RefreshAchievements == true && x.StatsLink != string.Empty).Count();
             try {
                 var gToRefresh = gameList.Where(x => x.RefreshAchievements == true && x.StatsLink != string.Empty).ToList();
                 await playerStatsService.UpdateStatsByList(gToRefresh, progressIndicator, cancelLibrary.Token);
