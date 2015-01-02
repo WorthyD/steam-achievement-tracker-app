@@ -12,21 +12,16 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using SteamAchievementTracker.App.Common;
-using SteamAchievementTracker.Contracts.View;
-using SteamAchievementTracker.Contracts.ViewModels;
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
 namespace SteamAchievementTracker.App.Views {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Main : Page , IMain{
-        public Main() {
+    public sealed partial class GameLibrary : Page {
+        public GameLibrary() {
             this.InitializeComponent();
-        }
-        IViewModel IView.ViewModel {
-            get { return this.DataContext as IViewModel; }
         }
 
         /// <summary>

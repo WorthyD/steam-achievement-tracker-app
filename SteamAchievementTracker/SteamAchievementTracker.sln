@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SteamAchievementTracker.App", "SteamAchievementTracker.App", "{447CA6F7-4EE9-437A-B499-79FA33E7F231}"
 EndProject
@@ -49,6 +49,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SteamAchievementTracker.App\SteamAchievementTracker.App.Shared\SteamAchievementTracker.App.Shared.projitems*{29f9eb75-b397-4399-be10-1accbfc819bd}*SharedItemsImports = 13
+		SteamAchievementTracker.App\SteamAchievementTracker.App.Shared\SteamAchievementTracker.App.Shared.projitems*{3a08f5e9-d19e-425c-8960-ecc22821cd05}*SharedItemsImports = 4
 		SteamAchievementTracker.App\SteamAchievementTracker.App.Shared\SteamAchievementTracker.App.Shared.projitems*{87561cd3-4ce3-4601-ae84-f972f28eed00}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +102,7 @@ Global
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Debug|ARM.Build.0 = Debug|ARM
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Debug|ARM.Deploy.0 = Debug|ARM
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Debug|x86.ActiveCfg = Debug|x86
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Debug|x86.Build.0 = Debug|x86

@@ -10,7 +10,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using Windows.Storage;
+
+#if WINDOWS_APP
 using Windows.UI.ApplicationSettings;
+#endif
 
 namespace SteamAchievementTracker.App.ViewModel
 {
@@ -48,12 +51,17 @@ namespace SteamAchievementTracker.App.ViewModel
 
         public void Initialize()
         {
+
+#if WINDOWS_APP
             SettingsPane.GetForCurrentView().CommandsRequested += onCommandsRequested;
+#endif
         }
         public void DeInitialize()
         {
 
+#if WINDOWS_APP
             SettingsPane.GetForCurrentView().CommandsRequested -= onCommandsRequested;
+#endif
         }
         public void InitializeCommands()
         {
@@ -68,6 +76,7 @@ namespace SteamAchievementTracker.App.ViewModel
 
         }
 
+#if WINDOWS_APP
         void onCommandsRequested(SettingsPane settingsPane, SettingsPaneCommandsRequestedEventArgs e)
         {
             SettingsCommand defaultsCommand = new SettingsCommand("settings", "Settings",
@@ -77,7 +86,7 @@ namespace SteamAchievementTracker.App.ViewModel
                 });
             e.Request.ApplicationCommands.Add(defaultsCommand);
         }
-
+#endif
         public void ShowSettings()
         {
             if (sf == null) {
@@ -109,7 +118,10 @@ namespace SteamAchievementTracker.App.ViewModel
 
             //Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID64"]
             sf.DataContext = this;
+
+#if WINDOWS_APP
             sf.Show();
+#endif
 
 
 
