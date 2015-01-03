@@ -1,0 +1,123 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SteamAchievementTracker.App.Styles">
+
+    <Style x:Key="LoadingIcon" TargetType="ProgressRing">
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Width" Value="50" />
+        <Setter Property="Margin" Value="0,20,0,20" />
+    </Style>
+
+    <Style x:Key="LoadingText" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="GameListLogo" TargetType="Image">
+        <Setter Property="Width" Value="250"></Setter>
+        <Setter Property="Height" Value="94"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+
+        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+
+    </Style>
+    <Style x:Key="AchievementWrapper" TargetType="StackPanel">
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        <Setter Property="Width" Value="400"></Setter>
+        <Setter Property="Height" Value="64"></Setter>
+    </Style>
+
+    <Style x:Key="ArhievementIcon" TargetType="Image">
+        <Setter Property="Height" Value="64"></Setter>
+        <Setter Property="Width" Value="64"></Setter>
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+    </Style>
+
+
+    <Style x:Key="AchievementTitle" TargetType="TextBlock">
+    </Style>
+    <Style x:Key="AchievementDesc" TargetType="TextBlock">
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Height" Value="64"></Setter>
+        <Setter Property="Width" Value="336"></Setter>
+    </Style>
+
+    <Style x:Key="DetailItem" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Right"></Setter>
+        <Setter Property="Margin" Value="0,0,0,5"></Setter>
+    </Style>
+    <Style x:Key="DetailItemTitle" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Left"></Setter>
+        <Setter Property="Margin" Value="0,0,0,5"></Setter>
+    </Style>
+  
+    <!--Profile Styles-->
+    <Style x:Key="ProImage" TargetType="Image">
+        <Setter Property="Height" Value="200"></Setter> 
+        <Setter Property="Width" Value="200"></Setter> 
+        <Setter Property="Margin" Value="0,0,0,10"></Setter> 
+    </Style>
+
+    <Style x:Key="BaseProCol" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"></Setter>
+    </Style>
+
+   <Style x:Key="ProLCol" TargetType="TextBlock" BasedOn="{StaticResource BaseProCol}">
+        <Setter Property="TextAlignment" Value="Left"></Setter>
+    </Style>
+
+    <Style x:Key="ProRCol" TargetType="TextBlock" BasedOn="{StaticResource BaseProCol}">
+        <Setter Property="TextAlignment" Value="Right"></Setter>
+    </Style>
+
+    <Style x:Key="ProUserName" TargetType="TextBlock" BasedOn="{StaticResource ProLCol}">
+        <Setter Property="TextAlignment" Value="Left"></Setter>
+        <Setter Property="Margin" Value="0,0,0,10"></Setter> 
+    </Style>
+
+
+
+    <!--                    LOGIN STYLES                    -->
+    <Style x:Key="LoginModal" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0,50,0,50"></Setter>
+    </Style>
+
+    <Style x:Key="LoginTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+    </Style>
+
+
+    <Style x:Key="LoginStatus" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Center"></Setter>
+    </Style>
+
+    <Style x:Key="LoginError" TargetType="TextBlock">
+    </Style>
+    
+    
+    <!-- Setting Styles -->
+    <Style x:Key="SettingsContainer" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0,20,0,20"></Setter>
+    </Style>
+
+    <Style x:Key="SettingsCheckbox" TargetType="CheckBox">
+        <Setter Property="Margin" Value="0,10,0,10"></Setter>
+    </Style>
+
+
+    <!-- Help Page-->
+    <Style x:Key="FAQTitle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20" ></Setter>
+    </Style>
+
+    <Style x:Key="FAQDescription" TargetType="TextBlock">
+        <!--<Setter Property="FontSize" Value="16" ></Setter>-->
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+    </Style>
+
+
+    
+</ResourceDictionary>

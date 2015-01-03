@@ -5,10 +5,25 @@
     xmlns:local="using:SteamAchievementTracker.App.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
+    mc:Ignorable="d" 
+    DataContext="{Binding Source={StaticResource Locator}, Path=Main}" 
+    >
+
+    <Grid x:Name="LayoutRoot">
+        <Hub x:Name="Hub" x:Uid="Hub">
+            <HubSection>
+                <DataTemplate>
+                    <StackPanel>
+                        <!--<Partials:Profile DataContext="{Binding Main}"></Partials:Profile>-->
+                        <Button Command="{Binding GoLibrary}" Margin="0,20,0,0">View Library</Button>
+                        <Button Command="{Binding GoToHelp}" Margin="0,20,0,0">Help/FAQ</Button>
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>
+            
+        </Hub>
 
     </Grid>
 </Page>
