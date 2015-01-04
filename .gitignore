@@ -1,3 +1,6 @@
 bin
 obj
 SteamAchievementTracker/packages/
+/SteamAchievementTracker/SteamAchievementTracker.App/SteamAchievementTracker.App.WindowsPhone/*.user
+/SteamAchievementTracker/*.suo
+*.suo
