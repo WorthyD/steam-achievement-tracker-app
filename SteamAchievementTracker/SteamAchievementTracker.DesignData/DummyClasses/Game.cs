@@ -25,7 +25,7 @@ namespace SteamAchievementTracker.DesignData.DummyClasses
             g.GameLink = "http://google.com";
             g.HoursPlayed = 1;
             g.LastUpdated = DateTime.Now;
-            g.Icon = GetRandomImage();
+            g.Icon = "http://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/261640/af5ef05eac8b1eb618e4f57354ac7b3e918ab1bd.jpg";
             g.Logo = GetRandomImage();
             g.Name = name;
             g.RecentHours = 1;

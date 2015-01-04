@@ -83,6 +83,7 @@
     <ProjectReference Include="..\..\SteamAPI\SteamAPI\SteamAPI.csproj">
       <Project>{be7cfeef-26b9-421d-9c27-269af6fc826f}</Project>
       <Name>SteamAPI</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\SteamAchievementTracker.Contracts\SteamAchievementTracker.Contracts.csproj">
       <Project>{2000d388-ae31-46f9-b811-70581e96c03c}</Project>

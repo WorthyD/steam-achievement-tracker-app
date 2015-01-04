@@ -42,7 +42,7 @@
                             </interactivity:Interaction.Behaviors>-->
                             <GridView.ItemTemplate>
                                 <DataTemplate >
-                                    <Partials:GameListItem ></Partials:GameListItem>
+                                    <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>

@@ -79,6 +79,7 @@ namespace SteamAchievementTracker.DesignData.Model
             int ticks = rnd.Next(0, 100);
             this.Name = name;
             this.Logo = GetRandomImage();
+            this.Icon = "http://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/261640/af5ef05eac8b1eb618e4f57354ac7b3e918ab1bd.jpg";
             this.RecentHours = ticks;
 
 
