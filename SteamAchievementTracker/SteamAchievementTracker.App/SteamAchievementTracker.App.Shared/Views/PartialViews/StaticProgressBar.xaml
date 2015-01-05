@@ -14,19 +14,9 @@
     <UserControl.Resources>
         <helpers:PercentageConverter x:Key="PercentageConverter"></helpers:PercentageConverter>
     </UserControl.Resources>
-
-
-
     <Canvas x:Name="canvas" Width="250" Height="10" Background="{StaticResource ProgressBarBackgroundThemeBrush}">
-        <!--<TextBlock Text="{Binding PercentComplete}"></TextBlock>-->
        <Rectangle  Fill="{StaticResource  ProgressBarForegroundThemeBrush}" Height="10"  Width="{Binding 
                        Converter={StaticResource PercentageConverter}}">
         </Rectangle>
-        <!--<Rectangle x:Name="bar"  Fill="Purple">
-            
-        </Rectangle>-->
-    </Canvas>
-    <!--<SolidColorBrush x:Key="ProgressBarBackgroundThemeBrush" Color="#59FFFFFF" />
-    <SolidColorBrush x:Key="ProgressBarBorderThemeBrush" Color="Transparent" />
-    <SolidColorBrush x:Key="ProgressBarForegroundThemeBrush" Color="#FF5B2EC5" />-->
+   </Canvas>
 </UserControl>

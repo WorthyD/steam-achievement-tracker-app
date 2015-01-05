@@ -12,7 +12,7 @@
     >
 
     <Grid x:Name="LayoutRoot">
-        <Hub x:Name="Hub" x:Uid="Hub" Header="Steam Achievement Tracker"  Grid.Row="0">
+        <Hub x:Name="Hub" x:Uid="Hub" Grid.Row="0">
             <HubSection>
                 <DataTemplate>
                     <StackPanel>
@@ -71,7 +71,7 @@
                             </interactivity:Interaction.Behaviors>-->
                             <GridView.ItemTemplate>
                                 <DataTemplate >
-                                    <Partials:GameListItem ></Partials:GameListItem>
+                                    <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>
@@ -100,7 +100,7 @@
                             </interactivity:Interaction.Behaviors>-->
                             <GridView.ItemTemplate>
                                 <DataTemplate >
-                                    <Partials:GameListItem ></Partials:GameListItem>
+                                    <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>

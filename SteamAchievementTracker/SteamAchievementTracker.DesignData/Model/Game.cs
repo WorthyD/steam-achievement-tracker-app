@@ -88,7 +88,8 @@ namespace SteamAchievementTracker.DesignData.Model
 
             //ticks = 3;
             //ticks = 4;
-            this.StatsLink = (ticks % 2 == 0) ? "stuff" : "";
+            //this.StatsLink = (ticks % 2 == 0) ? "stuff" : "";
+            this.StatsLink =  "stuff";
             this.StatsLink = "blabhablhba";
 
             //ticks = 3;

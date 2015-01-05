@@ -19,4 +19,14 @@ namespace SteamAchievementTracker.App.Helpers
             throw new NotImplementedException();
         }
     }
+    public class PercentageTwoHundredConverter : IValueConverter {
+        public object Convert(object value, Type targetType, object parameter, string language) {
+            double percent = System.Convert.ToDouble(value) / 100;
+            return 225 * percent;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language) {
+            throw new NotImplementedException();
+        }
+    }
 }

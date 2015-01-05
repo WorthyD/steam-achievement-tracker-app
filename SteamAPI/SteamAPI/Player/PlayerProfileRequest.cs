@@ -25,8 +25,9 @@ namespace SteamAPI.Player {
 
                 profileResponse = new PlayerProfileResponse(this) { Profile = profile };
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Debug.WriteLine(string.Format("Error Getting Profile: {0}  ||||||||||||||| {1}", e.Message, e.InnerException.Message));
                 throw new Exceptions.PlayerNotFoundException();
             }
 

@@ -32,10 +32,12 @@ namespace SteamAchievementTracker.DesignData.DummyClasses
             g.SteamUserID = ticks;
 
 
-            g.StatsLink = (ticks % 2 == 0) ? "stuff" : "";
+            //g.StatsLink = (ticks % 2 == 0) ? "stuff" : "";
+            g.StatsLink = "STuff";
             g.AchievementsEarned = ticks;
             g.TotalAchievements = 100;
-            g.HasAchievements = (ticks % 2 == 0);
+            //g.HasAchievements = (ticks % 2 == 0);
+            g.HasAchievements = true; 
 
             return g;
         }
