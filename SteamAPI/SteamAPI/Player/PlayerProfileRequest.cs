@@ -21,7 +21,7 @@ namespace SteamAPI.Player {
             PlayerProfileResponse profileResponse = new PlayerProfileResponse();
             try
             {
-                Models.Profile.profile profile = response.Convert();
+                Models.Profile.profile profile = response.StringToProfile();
                 //Models.Profile.profile profile = response.ParseXML<Models.Profile.profile>();
                 Debug.WriteLine(string.Format("Received: {0}", playerUrl));
 

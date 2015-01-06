@@ -40,7 +40,8 @@
     <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\StringToProfile.cs" />
+    <Compile Include="Converters\Game.cs" />
+    <Compile Include="Converters\Profile.cs" />
     <Compile Include="Extensions\Xml.cs" />
     <Compile Include="Helpers\SteamProfileURLBuilder.cs" />
     <Compile Include="Helpers\WebRequestHelper.cs" />

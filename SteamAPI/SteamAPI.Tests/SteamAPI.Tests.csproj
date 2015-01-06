@@ -136,6 +136,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SteamAchievementTracker\SteamAPI.Tests.Agnostic\SteamAPI.Tests.Agnostic.csproj">
+      <Project>{92baf5ec-0d41-41f4-bd73-f3a3b8d727e4}</Project>
+      <Name>SteamAPI.Tests.Agnostic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SteamAPI\SteamAPI.csproj">
       <Project>{be7cfeef-26b9-421d-9c27-269af6fc826f}</Project>
       <Name>SteamAPI</Name>

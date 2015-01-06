@@ -10,12 +10,14 @@ namespace SteamAPI.Tests {
     public class Player {
 
         [TestMethod]
-        public async Task GetPlayerProfile() {
-            SteamAPI.Player.PlayerProfileRequest request = new SteamAPI.Player.PlayerProfileRequest();
-            request.SteamID = "WorthyD";
-            var response =  await  request.GetResponse();
-
-            Assert.IsTrue(response.Profile.steamID == "WorthyD");
+        public async Task W8GetPlayerProfileByName() {
+            bool isTrue = await Agnostic.Profile.GetPlayerProfileByName();
+            Assert.IsTrue(isTrue);
+        }
+        [TestMethod]
+        public async Task W8GetPlayerProfileByID() {
+            bool isTrue = await Agnostic.Profile.GetPlayerProfileByID();
+            Assert.IsTrue(isTrue);
         }
 
 
