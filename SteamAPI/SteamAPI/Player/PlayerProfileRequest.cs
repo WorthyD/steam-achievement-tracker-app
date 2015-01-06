@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SteamAPI.Extensions;
 using System.Diagnostics;
+using SteamAPI.Converters;
 
 namespace SteamAPI.Player {
     public class PlayerProfileRequest : Request {
@@ -20,7 +21,8 @@ namespace SteamAPI.Player {
             PlayerProfileResponse profileResponse = new PlayerProfileResponse();
             try
             {
-                Models.Profile.profile profile = response.ParseXML<Models.Profile.profile>();
+                Models.Profile.profile profile = response.Convert();
+                //Models.Profile.profile profile = response.ParseXML<Models.Profile.profile>();
                 Debug.WriteLine(string.Format("Received: {0}", playerUrl));
 
                 profileResponse = new PlayerProfileResponse(this) { Profile = profile };
