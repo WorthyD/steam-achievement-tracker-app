@@ -48,6 +48,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamAchievementTracker.Set
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamAPI.TestsPhone", "SteamAPI.TestsPhone\SteamAPI.TestsPhone.csproj", "{C420FEF4-1080-4BAC-AFDD-0B23BF547BBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamAPI.Tests.Agnostic", "SteamAPI.Tests.Agnostic\SteamAPI.Tests.Agnostic.csproj", "{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SteamAchievementTracker.App\SteamAchievementTracker.App.Shared\SteamAchievementTracker.App.Shared.projitems*{29f9eb75-b397-4399-be10-1accbfc819bd}*SharedItemsImports = 13
@@ -361,6 +363,20 @@ Global
 		{C420FEF4-1080-4BAC-AFDD-0B23BF547BBF}.Release|x86.ActiveCfg = Release|x86
 		{C420FEF4-1080-4BAC-AFDD-0B23BF547BBF}.Release|x86.Build.0 = Release|x86
 		{C420FEF4-1080-4BAC-AFDD-0B23BF547BBF}.Release|x86.Deploy.0 = Release|x86
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Release|ARM.ActiveCfg = Release|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Release|x64.ActiveCfg = Release|Any CPU
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -379,5 +395,6 @@ Global
 		{B4164F57-CF7F-4423-995E-46F12AB7444F} = {E618722A-B6AB-4E83-8BFB-639379FDD56A}
 		{6FFE85EC-CAB7-40DA-84AD-4B974F59CA94} = {E618722A-B6AB-4E83-8BFB-639379FDD56A}
 		{C420FEF4-1080-4BAC-AFDD-0B23BF547BBF} = {B666D2B4-82E7-4F33-A4F6-A1C1A8C1183A}
+		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4} = {B666D2B4-82E7-4F33-A4F6-A1C1A8C1183A}
 	EndGlobalSection
 EndGlobal
