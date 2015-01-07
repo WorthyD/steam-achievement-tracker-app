@@ -26,7 +26,9 @@ namespace SteamAPI.Converters {
                 }
             }
 
-            return null;
+            retVal.games = gameList.ToArray();
+
+            return retVal;
         }
         public  static gamesListGame ConvertToGame(this XElement x) {
             gamesListGame g = new gamesListGame();

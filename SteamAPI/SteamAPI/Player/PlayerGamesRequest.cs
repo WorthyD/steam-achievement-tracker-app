@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SteamAPI.Extensions;
 using System.Diagnostics;
+using SteamAPI.Converters;
 
 namespace SteamAPI.Player {
     public class PlayerGamesRequest : Request {
@@ -18,7 +19,7 @@ namespace SteamAPI.Player {
             Debug.WriteLine(string.Format("Calling: {0}", gamesUrl));
             string responseString = await Helpers.WebRequestHelper.ExecuteGetRequest(gamesUrl, timeout);
 
-            Models.gamesList gList = responseString.ParseXML<Models.gamesList>();
+            Models.gamesList gList = responseString.StringToGameList();//.ParseXML<Models.gamesList>();
             Debug.WriteLine(string.Format("Recieved: {0}", gamesUrl));
 
             PlayerGamesResponse response = new PlayerGamesResponse(this) { GamesList = gList };
