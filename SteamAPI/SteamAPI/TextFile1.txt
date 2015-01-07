@@ -1,29 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Xml.Serialization;
-
-namespace SteamAPI.Extensions {
-    public static class Xml {
-        public static T ParseXML<T>(this string data) where T : class, new() {
-            if (data == null) {
-                return null;
-            }
-
-            if (data.Trim().Length == 0) {
-                return null;
-            }
-
-            var ser = new XmlSerializer(typeof(T));
-
-            using (var sr = new StringReader(data)) {
-                return (T)ser.Deserialize(sr);
-            }
-        }
+﻿public static class Xml {
         public static string GetStringAttribute(this XElement element, string attributeName, string defaultValue) {
             XAttribute a = element.Attributes().Where(i => i.Name == attributeName).SingleOrDefault();
 
@@ -130,21 +105,6 @@ namespace SteamAPI.Extensions {
             } else
                 return defaultValue;
         }
-
-        public static decimal GetDecimalAttribute(this XElement element, string attributeName, decimal defaultValue) {
-            XAttribute a = element.Attributes().Where(i => i.Name == attributeName).SingleOrDefault();
-
-            if (a != null) {
-                decimal result;
-
-                if (decimal.TryParse(a.Value, out result))
-                    return result;
-                else
-                    return defaultValue;
-            } else
-                return defaultValue;
-        }
-
         public static string GetStringValue(this XElement parentElement, string elementName) {
             return GetStringValue(parentElement, elementName, "");
         }
@@ -174,19 +134,6 @@ namespace SteamAPI.Extensions {
             } else
                 return defaultValue;
         }
-        public static Int64 GetInt64Element(this XElement element, string elementName, Int64 defaultValue) {
-            XElement a = element.Elements().Where(i => i.Name == elementName).SingleOrDefault();
-
-            if (a != null) {
-                Int64 result;
-
-                if (Int64.TryParse(a.Value, out result))
-                    return result;
-                else
-                    return defaultValue;
-            } else
-                return defaultValue;
-        }
         public static List<string> GetListOfChildElementValues(this XElement element, string parentElementName, string childElementNames, List<string> defaultValue) {
             if (element != null) {
                 XElement a = element.Elements(parentElementName).FirstOrDefault();
@@ -204,5 +151,5 @@ namespace SteamAPI.Extensions {
             }
 
         }
+
     }
-}
