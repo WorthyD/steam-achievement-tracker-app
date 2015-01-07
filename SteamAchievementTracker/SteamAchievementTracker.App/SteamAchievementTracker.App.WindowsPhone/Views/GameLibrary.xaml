@@ -5,10 +5,68 @@
     xmlns:local="using:SteamAchievementTracker.App.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:common="using:SteamAchievementTracker.App.Common"
+      xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
+  
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+     DataContext="{Binding Source={StaticResource Locator}, Path=GameLibrary}" >
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}">
+            <ProgressBar  Height="10" IsIndeterminate="True"></ProgressBar>
+            <TextBlock TextAlignment="Center">Refreshing Achievements</TextBlock>
+            <TextBlock TextAlignment="Center"  Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
+        </StackPanel>
 
+        <Hub Grid.Row="1" Margin="0,-50,0,0">
+            <Hub.Header>
+                <StackPanel Orientation="Horizontal">
+                    <!--<TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" 
+                        Margin="0,0,20,0" />-->
+                    <TextBlock Margin="0,0,20,0" Style="{StaticResource HeaderTextBlockStyle}">Game Count -</TextBlock>
+                    <TextBlock x:Name="libraryCount"  Text="{Binding GameList.Count}" Style="{StaticResource HeaderTextBlockStyle}" 
+                         />
+
+                </StackPanel>
+            </Hub.Header>
+            <HubSection>
+                <DataTemplate>
+                    <Grid>
+                        <!--ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"-->
+                        <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
+
+                                    ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
+                                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                    SelectionMode="None"
+                                  
+                                    IsItemClickEnabled="True">
+                            <!--<interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:InvokeCommandAction 
+                                            Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
+                                            CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
+                                        />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>-->
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+
+
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
     </Grid>
 </Page>
