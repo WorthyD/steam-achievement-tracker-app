@@ -21,23 +21,23 @@ namespace SteamAPI.Tests {
         }
 
 
-        [TestMethod]
-        public async Task GetPlayerGames() {
-            SteamAPI.Player.PlayerGamesRequest request = new SteamAPI.Player.PlayerGamesRequest();
-            request.SteamID = "WorthyD";
-            var response = await request.GetResponse();
+        //[TestMethod]
+        //public async Task GetPlayerGames() {
+        //    SteamAPI.Player.PlayerGamesRequest request = new SteamAPI.Player.PlayerGamesRequest();
+        //    request.SteamID = "WorthyD";
+        //    var response = await request.GetResponse();
 
-            Assert.IsTrue(response.GamesList.games.Where(x=> x.name == "Borderlands").Count() > 0);
-        }
+        //    Assert.IsTrue(response.GamesList.games.Where(x=> x.name == "Borderlands").Count() > 0);
+        //}
 
-        [TestMethod]
-        public async Task GetPlayerGameStats() {
-            SteamAPI.Player.PlayerGameStatsRequest request = new SteamAPI.Player.PlayerGameStatsRequest();
-            request.GameUrl = "http://steamcommunity.com/id/WorthyD/stats/L4D2";
-            //request.GameUrl = "http://steamcommunity.com/id/WorthyD/stats/Borderlands";
-            var resposne = await request.GetResponse();
-            Assert.IsTrue(resposne.PlayerStats.achievements.Where(x => x.closed == true).Count() > 0);
-        }
+        //[TestMethod]
+        //public async Task GetPlayerGameStats() {
+        //    SteamAPI.Player.PlayerGameStatsRequest request = new SteamAPI.Player.PlayerGameStatsRequest();
+        //    request.GameUrl = "http://steamcommunity.com/id/WorthyD/stats/L4D2";
+        //    //request.GameUrl = "http://steamcommunity.com/id/WorthyD/stats/Borderlands";
+        //    var resposne = await request.GetResponse();
+        //    Assert.IsTrue(resposne.PlayerStats.achievements.Where(x => x.closed == true).Count() > 0);
+        //}
 
 
     }

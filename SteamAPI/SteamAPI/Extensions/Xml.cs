@@ -174,6 +174,20 @@ namespace SteamAPI.Extensions {
             } else
                 return defaultValue;
         }
+        public static uint GetuinElement(this XElement element, string elementName, uint defaultValue) {
+            XElement a = element.Elements().Where(i => i.Name == elementName).SingleOrDefault();
+
+            if (a != null) {
+                uint result;
+
+                if (uint.TryParse(a.Value, out result))
+                    return result;
+                else
+                    return defaultValue;
+            } else
+                return defaultValue;
+        }
+
         public static Int64 GetInt64Element(this XElement element, string elementName, Int64 defaultValue) {
             XElement a = element.Elements().Where(i => i.Name == elementName).SingleOrDefault();
 

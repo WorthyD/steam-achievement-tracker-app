@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SteamAPI.Extensions;
 using System.Diagnostics;
-
+using SteamAPI.Converters;
 namespace SteamAPI.Player
 {
     public class PlayerGameStatsRequest : Request
@@ -23,7 +23,7 @@ namespace SteamAPI.Player
             PlayerGameStatsResponse response = new PlayerGameStatsResponse(this);
             try
             {
-                Models.playerstats stats = responseString.ParseXML<Models.playerstats>();
+                Models.playerstats stats = responseString.StringToStatsList();
                 response = new PlayerGameStatsResponse(this) { PlayerStats = stats };
             }
             catch (Exception)
