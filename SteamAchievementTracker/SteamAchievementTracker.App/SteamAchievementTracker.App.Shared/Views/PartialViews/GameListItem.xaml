@@ -11,7 +11,7 @@
     d:DesignWidth="400"
     d:DataContext="{d:DesignInstance Type=dMode:Game, IsDesignTimeCreatable=True}"
     >
-    <StackPanel>
+    <StackPanel  Style="{StaticResource GameCell}">
         <Image Style="{StaticResource GameListLogo}" Source="{Binding Logo}" />
         <Grid>
             <TextBlock Style="{StaticResource DetailItemTitle}">Play Time:</TextBlock>

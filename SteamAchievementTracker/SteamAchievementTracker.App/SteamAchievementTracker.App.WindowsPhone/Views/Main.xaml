@@ -42,7 +42,7 @@
                             </interactivity:Interaction.Behaviors>-->
                             <GridView.ItemTemplate>
                                 <DataTemplate >
-                                    <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
+                                    <Partials:GameListItem  ></Partials:GameListItem>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>
@@ -71,7 +71,7 @@
                             </interactivity:Interaction.Behaviors>-->
                             <GridView.ItemTemplate>
                                 <DataTemplate >
-                                    <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
+                                    <Partials:GameListItem ></Partials:GameListItem>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>
@@ -100,7 +100,7 @@
                             </interactivity:Interaction.Behaviors>-->
                             <GridView.ItemTemplate>
                                 <DataTemplate >
-                                    <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
+                                    <Partials:GameListItem ></Partials:GameListItem>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>

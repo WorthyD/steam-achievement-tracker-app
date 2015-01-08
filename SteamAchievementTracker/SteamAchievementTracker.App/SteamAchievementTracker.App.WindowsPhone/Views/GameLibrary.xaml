@@ -12,8 +12,9 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
      DataContext="{Binding Source={StaticResource Locator}, Path=GameLibrary}" >
 
-    <Grid>
+    <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -23,22 +24,23 @@
             <TextBlock TextAlignment="Center"  Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
         </StackPanel>
 
-        <Hub Grid.Row="1" Margin="0,-50,0,0">
-            <Hub.Header>
-                <StackPanel Orientation="Horizontal">
-                    <!--<TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" 
+        <!--<Hub Grid.Row="1" Margin="0,-50,0,0">
+            <Hub.Header>-->
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <!--<TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" 
                         Margin="0,0,20,0" />-->
-                    <TextBlock Margin="0,0,20,0" Style="{StaticResource HeaderTextBlockStyle}">Game Count -</TextBlock>
-                    <TextBlock x:Name="libraryCount"  Text="{Binding GameList.Count}" Style="{StaticResource HeaderTextBlockStyle}" 
+            <TextBlock Margin="0,0,20,0" Style="{StaticResource HeaderTextBlockStyle}">Game Count -</TextBlock>
+            <TextBlock x:Name="libraryCount"  Text="{Binding GameList.Count}" Style="{StaticResource HeaderTextBlockStyle}" 
                          />
 
-                </StackPanel>
-            </Hub.Header>
+        </StackPanel>
+        <!--</Hub.Header>
             <HubSection>
-                <DataTemplate>
-                    <Grid>
-                        <!--ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"-->
-                        <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
+                <DataTemplate>-->
+        <Grid Grid.Row="2">
+            <!--ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"-->
+            <ScrollViewer>
+                <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
 
                                     ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
                                     ScrollViewer.VerticalScrollBarVisibility="Auto" 
@@ -46,7 +48,7 @@
                                     SelectionMode="None"
                                   
                                     IsItemClickEnabled="True">
-                            <!--<interactivity:Interaction.Behaviors>
+                    <!--<interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">
                                     <core:InvokeCommandAction 
                                             Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
@@ -54,19 +56,20 @@
                                         />
                                 </core:EventTriggerBehavior>
                             </interactivity:Interaction.Behaviors>-->
-                            <GridView.ItemTemplate>
-                                <DataTemplate >
-                                    <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>
+                    <GridView.ItemTemplate>
+                        <DataTemplate >
+                            <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
 
 
-                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
-                        </Partials:SectionLoading>
-                    </Grid>
-                </DataTemplate>
+                <!--<Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                </Partials:SectionLoading>-->
+            </ScrollViewer>
+        </Grid>
+        <!--</DataTemplate>
             </HubSection>
-        </Hub>
+        </Hub>-->
     </Grid>
 </Page>

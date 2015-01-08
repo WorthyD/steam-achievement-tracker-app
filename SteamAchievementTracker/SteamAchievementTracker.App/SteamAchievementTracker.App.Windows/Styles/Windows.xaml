@@ -12,6 +12,9 @@
     <Style x:Key="LoadingText" TargetType="TextBlock">
         <Setter Property="TextAlignment" Value="Center" />
     </Style>
+    <Style x:Key="GameCell" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0,0,0,10"></Setter>
+    </Style>
     <Style x:Key="GameListLogo" TargetType="Image">
         <Setter Property="Width" Value="250"></Setter>
         <Setter Property="Height" Value="94"></Setter>
