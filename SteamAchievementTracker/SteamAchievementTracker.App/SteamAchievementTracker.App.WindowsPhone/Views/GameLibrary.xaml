@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:common="using:SteamAchievementTracker.App.Common"
       xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
+      xmlns:UI="using:Microsoft.Advertising.Mobile.UI"
   
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -14,30 +15,23 @@
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}">
-            <ProgressBar  Height="10" IsIndeterminate="True"></ProgressBar>
-            <TextBlock TextAlignment="Center">Refreshing Achievements</TextBlock>
+            <ProgressBar  Height="5" IsIndeterminate="True"></ProgressBar>
             <TextBlock TextAlignment="Center"  Text="{Binding LibProgress, Mode=OneWay}"></TextBlock>
         </StackPanel>
 
-        <!--<Hub Grid.Row="1" Margin="0,-50,0,0">
-            <Hub.Header>-->
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <!--<TextBlock x:Name="libraryTitle" x:Uid="LibraryTitle" Text="Steam Library" Style="{StaticResource HeaderTextBlockStyle}" 
-                        Margin="0,0,20,0" />-->
-            <TextBlock Margin="0,0,20,0" Style="{StaticResource HeaderTextBlockStyle}">Game Count -</TextBlock>
-            <TextBlock x:Name="libraryCount"  Text="{Binding GameList.Count}" Style="{StaticResource HeaderTextBlockStyle}" 
-                         />
-
+            <TextBlock Margin="0,0,0,0" FontSize="20" >Game Count -</TextBlock>
+            <TextBlock x:Name="libraryCount" FontSize="20" Text="{Binding GameList.Count}"  />
         </StackPanel>
-        <!--</Hub.Header>
-            <HubSection>
-                <DataTemplate>-->
-        <Grid Grid.Row="2">
+        <ComboBox x:Name="comboBox1"  ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" Height="50" Margin="0,0,10,0"  Grid.Row="2"/>
+        <Grid Grid.Row="3">
             <!--ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"-->
             <ScrollViewer>
                 <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
@@ -68,6 +62,16 @@
                 </Partials:SectionLoading>-->
             </ScrollViewer>
         </Grid>
+        <UI:AdControl Grid.Row="4"
+          AutoRefreshIntervalInSeconds="60" 
+          ApplicationId="test_client" 
+          AdUnitId="Image320_50" 
+          HorizontalAlignment="Center" 
+          Height="50" 
+          IsAutoRefreshEnabled="True" 
+          
+          VerticalAlignment="Top" 
+          Width="320"/>
         <!--</DataTemplate>
             </HubSection>
         </Hub>-->
