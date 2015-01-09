@@ -81,7 +81,7 @@ namespace SteamAchievementTracker.Services.Data
 
                 //Update DB Flags for game library
 
-                _gDB.UpdateGameStats(statURL, stats.achievements.ToList().Where(x => x.closed == true).Count(), stats.achievements.Count());
+                _gDB.UpdateGameStats(statURL, stats.game.gameIcon ,stats.achievements.ToList().Where(x => x.closed == true).Count(), stats.achievements.Count());
             }
 
 
@@ -99,7 +99,7 @@ namespace SteamAchievementTracker.Services.Data
                 Debug.WriteLine("ERROR");
                 Debug.WriteLine(statURL);
 
-                _gDB.UpdateGameStats(statURL, 0, 0, false);
+                _gDB.UpdateGameStats(statURL, "", 0, 0, false);
             }
             List<IGameAchievement> ach = new List<IGameAchievement>();
             Model.GameAchievement game;
@@ -121,7 +121,7 @@ namespace SteamAchievementTracker.Services.Data
                     ach.Add(game);
                 }
 
-                _gDB.UpdateGameStats(statURL, stats.achievements.ToList().Where(x => x.closed == true).Count(), stats.achievements.Count());
+                _gDB.UpdateGameStats(statURL, stats.game.gameIcon,  stats.achievements.ToList().Where(x => x.closed == true).Count(), stats.achievements.Count());
             }
             //Update DB Flags for game library
 

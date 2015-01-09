@@ -66,5 +66,10 @@ namespace SteamAchievementTracker.DesignData.Services
                 PerfectGames = 100
             };
         }
+
+
+        public void UpdateGameStats(string statsUrl, string gameIcon, int achievementsEarned, int totalAchievements) {
+           // throw new NotImplementedException();
+        }
     }
 }

@@ -199,12 +199,13 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             return null;
         }
 
-        public void UpdateGameStats(string statsUrl, int achievementsEarned, int totalAchievements, bool hasAchievements = true)
+        public void UpdateGameStats(string statsUrl, string gameIcon, int achievementsEarned, int totalAchievements, bool hasAchievements = true)
         {
             string sqlStatement = @"UPDATE Game SET 
                     AchievementCount = @AchievementCount, 
                     AchievementsEarned = @AchievementsEarned, 
                     RefreshAchievements = @RefreshAchievements,
+                    GameIcon = @GameIcon,
                     AchievementRefresh = @AchievementRefresh,
                     HasAchievements = @HasAchievements
                     WHERE StatsLink = @StatsLink";
@@ -212,6 +213,7 @@ namespace SteamAchievementTracker.App.DataAccess.Data
             {
                 statement.Bind("@StatsLink", statsUrl);
                 statement.Bind("@RefreshAchievements", false.BoolToBit());
+                statement.Bind("@GameIcon", gameIcon);
                 statement.Bind("@HasAchievements", hasAchievements.BoolToBit());
                 statement.Bind("@AchievementsEarned", achievementsEarned);
                 statement.Bind("@AchievementCount", totalAchievements);
