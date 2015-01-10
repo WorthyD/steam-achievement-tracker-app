@@ -98,10 +98,12 @@
             </HubSection>
         </Hub>-->
     </Grid>
-    <!--<Page.BottomAppBar>
+    <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
-            <AppBarButton Label="Refresh" Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}" />
-            <AppBarButton Label="Stop Refres" Style="{StaticResource StopAppBarButtonStyle}" Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}"  AutomationProperties.Name="Stop Refresh"/>
+            <AppBarButton Icon="Refresh" Label="Refresh Achievements" Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}" />
+            <AppBarButton Icon="Stop" Label="Stop Refresh" Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}" />
         </CommandBar>
-    </Page.BottomAppBar>-->
+<!--Style="{StaticResource RefreshAppBarButtonStyle}" 
+         Style="{StaticResource StopAppBarButtonStyle}"-->
+    </Page.BottomAppBar>
 </Page>
