@@ -16,37 +16,36 @@
         <helpers:PercentageTwoHundredConverter x:Key="PercentageConverter"></helpers:PercentageTwoHundredConverter>
     </UserControl.Resources>
 
-    <StackPanel  Orientation="Horizontal" Margin="0,0,0,10">
-        <Image Style="{StaticResource GameListIcon}" Source="{Binding Icon}" />
-        <StackPanel>
+    <StackPanel  Margin="0,0,0,10" >
+        <StackPanel  Orientation="Horizontal">
+
+            <Image Style="{StaticResource GameListIcon}" Source="{Binding Icon}" />
             <TextBlock Text="{Binding Name}" Style="{StaticResource GameListTitle}"></TextBlock>
 
+        </StackPanel>
 
-            <Grid>
-                <TextBlock Style="{StaticResource DetailItemTitle}">Play Time:</TextBlock>
-                <TextBlock Style="{StaticResource DetailItem}" Text="{Binding TotalHoursFormatted}"></TextBlock>
-            </Grid>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource DetailItemTitle}"  Margin="0,0,10,0">Play Time:
+            </TextBlock>
+            <TextBlock Style="{StaticResource DetailItem}" Text="{Binding TotalHoursFormatted}" Margin="0,0,15,0"></TextBlock>
 
             <StackPanel Visibility="{Binding HasAchievements, Converter={StaticResource FalseToVisibleConverter}}">
                 <TextBlock Text="No Achievements"></TextBlock>
-                <Canvas Width="250" Height="15"></Canvas>
             </StackPanel>
-            <StackPanel Visibility="{Binding HasAchievements, Converter={StaticResource TrueToVisibleConverter}}">
-                <StackPanel Visibility="{Binding BeenProcessed, Converter={StaticResource TrueToVisibleConverter}}">
-                    <Grid>
-                        <TextBlock Style="{StaticResource DetailItemTitle}" Text="{Binding PercentCompleteFormatted}"></TextBlock>
-                        <TextBlock Style="{StaticResource DetailItem}" Text="{Binding ProgressText}"></TextBlock>
-                    </Grid>
-                    <Canvas x:Name="canvas" Width="225" Height="10" Background="{StaticResource ProgressBarBackgroundThemeBrush}">
-                        <Rectangle  Fill="{StaticResource  ProgressBarForegroundThemeBrush}" Height="10"  Width="{Binding PercentComplete,   Converter={StaticResource PercentageConverter}}">
-                        </Rectangle>
-                    </Canvas>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding HasAchievements, Converter={StaticResource TrueToVisibleConverter}}">
+                <StackPanel Orientation="Horizontal" Visibility="{Binding BeenProcessed, Converter={StaticResource TrueToVisibleConverter}}">
+                    <TextBlock Style="{StaticResource DetailItem}" Text="{Binding ProgressText}" Margin="0,0,15,0"></TextBlock>
+                    <TextBlock Style="{StaticResource DetailItemTitle}" Text="{Binding PercentCompleteFormatted}"></TextBlock>
                 </StackPanel>
                 <StackPanel Visibility="{Binding BeenProcessed, Converter={StaticResource FalseToVisibleConverter}}">
                     <TextBlock Text="No Achievements Processed"></TextBlock>
-                    <Canvas Width="200" Height="15"></Canvas>
                 </StackPanel>
             </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Visibility="{Binding BeenProcessed, Converter={StaticResource TrueToVisibleConverter}}">
+            <local:StaticProgressBar DataContext="{Binding PercentComplete}" ></local:StaticProgressBar>
         </StackPanel>
     </StackPanel>
 </UserControl>

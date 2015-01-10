@@ -8,17 +8,28 @@ using SteamAPI.Models;
 
 
 
-namespace SteamAchievementTracker.Model
-{
-    public class Game : IGame
-    {
+namespace SteamAchievementTracker.Model {
+    public class Game : IGame {
         public long SteamUserID { get; set; }
         public int AppID { get; set; }
         public string Name { get; set; }
         public string StatsLink { get; set; }
         public string GameLink { get; set; }
         public string Logo { get; set; }
-        public string Icon { get; set; }
+        private string _icon;
+        public string Icon {
+            get {
+                if (string.IsNullOrEmpty(_icon)) {
+                    return "http://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/261640/af5ef05eac8b1eb618e4f57354ac7b3e918ab1bd.jpg";
+
+                } else {
+                    return _icon;
+                }
+            }
+            set {
+                _icon = value;
+            }
+        }
         public decimal HoursPlayed { get; set; }
         public decimal RecentHours { get; set; }
         public DateTime LastUpdated { get; set; }
@@ -29,10 +40,8 @@ namespace SteamAchievementTracker.Model
         public int AchievementsEarned { get; set; }
         public int AchievementsLocked { get { return TotalAchievements - AchievementsEarned; } }
         public int TotalAchievements { get; set; }
-        public double PercentComplete
-        {
-            get
-            {
+        public double PercentComplete {
+            get {
                 if (TotalAchievements == 0) return 0;
                 var a = ((double)AchievementsEarned / (double)TotalAchievements * 100);
                 //var a = ((double)AchievementsEarned / (double)TotalAchievements);
@@ -41,10 +50,8 @@ namespace SteamAchievementTracker.Model
         }
 
 
-        public string ProgressText
-        {
-            get
-            {
+        public string ProgressText {
+            get {
                 return string.Format("{0} of {1}", AchievementsEarned, TotalAchievements);
             }
         }
@@ -52,37 +59,29 @@ namespace SteamAchievementTracker.Model
 
         public bool BeenProcessed { get { return this.AchievementRefresh > new DateTime(2001, 2, 1); } }
 
-        public string RecentHoursFormatted
-        {
-            get
-            {
+        public string RecentHoursFormatted {
+            get {
                 return string.Format("{0} hrs", this.RecentHours);
             }
         }
-        public string TotalHoursFormatted
-        {
-            get
-            {
+        public string TotalHoursFormatted {
+            get {
                 return string.Format("{0} hrs", this.HoursPlayed);
             }
         }
 
 
 
-        public string PercentCompleteFormatted
-        {
-            get
-            {
-                if (TotalAchievements > 0)
-                {
+        public string PercentCompleteFormatted {
+            get {
+                if (TotalAchievements > 0) {
                     return string.Format("{0}%", this.PercentComplete);
                 }
                 return "0%";
             }
         }
 
-        public Game()
-        {
+        public Game() {
             this.SteamUserID = 0;
             this.AppID = 0;
             this.Name = string.Empty;
@@ -98,8 +97,7 @@ namespace SteamAchievementTracker.Model
         }
 
         //This is for updating
-        public Game(gamesListGame g, long steamID64)
-        {
+        public Game(gamesListGame g, long steamID64) {
             this.SteamUserID = steamID64;
             this.AppID = g.appID;
             this.Name = g.name;

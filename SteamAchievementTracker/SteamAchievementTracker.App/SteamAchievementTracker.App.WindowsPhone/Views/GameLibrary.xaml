@@ -13,6 +13,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
      DataContext="{Binding Source={StaticResource Locator}, Path=GameLibrary}" >
 
+    <Page.Resources>
+        <ItemsPanelTemplate x:Key="ListViewItemsPanel">
+            <ItemsStackPanel Orientation="Vertical" />
+        </ItemsPanelTemplate>
+    </Page.Resources>
+    
+    
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
@@ -33,7 +40,20 @@
         <ComboBox x:Name="comboBox1"  ItemsSource="{Binding SortLib}" SelectedItem="{Binding SelectedSort, Mode=TwoWay}" Height="50" Margin="0,0,10,0"  Grid.Row="2"/>
         <Grid Grid.Row="3">
             <!--ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"-->
-            <ScrollViewer>
+            <ListView x:Name="GameGrid1" ItemsSource="{Binding GameList}" ItemsPanel="{StaticResource ListViewItemsPanel}" >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                            <Partials:GameListItemNarrow></Partials:GameListItemNarrow>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <!--<ScrollViewer>
+             
                 <GridView x:Name="GameGrid" ItemsSource="{Binding GameList}"   
 
                                     ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
@@ -41,8 +61,19 @@
                                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                     SelectionMode="None"
                                   
-                                    IsItemClickEnabled="True">
-                    <!--<interactivity:Interaction.Behaviors>
+                                    IsItemClickEnabled="True" >
+                   
+                    <GridView.ItemTemplate>
+                        <DataTemplate >
+                            <Partials:GameListItemNarrow></Partials:GameListItemNarrow>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+
+
+              
+            </ScrollViewer>-->
+            <!--<interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">
                                     <core:InvokeCommandAction 
                                             Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
@@ -50,22 +81,13 @@
                                         />
                                 </core:EventTriggerBehavior>
                             </interactivity:Interaction.Behaviors>-->
-                    <GridView.ItemTemplate>
-                        <DataTemplate >
-                            <Partials:GameListItemNarrow ></Partials:GameListItemNarrow>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-
-
-                <!--<Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+            <!--<Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
                 </Partials:SectionLoading>-->
-            </ScrollViewer>
         </Grid>
         <UI:AdControl Grid.Row="4"
           AutoRefreshIntervalInSeconds="60" 
-          ApplicationId="test_client" 
-          AdUnitId="Image320_50" 
+          ApplicationId="1396ceb0-fa0d-4e68-88b7-e5d166767fc5" 
+          AdUnitId="202236" 
           HorizontalAlignment="Center" 
           Height="50" 
           IsAutoRefreshEnabled="True" 
@@ -76,10 +98,10 @@
             </HubSection>
         </Hub>-->
     </Grid>
-    <Page.BottomAppBar>
+    <!--<Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton Label="Refresh" Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}" />
             <AppBarButton Label="Stop Refres" Style="{StaticResource StopAppBarButtonStyle}" Command="{Binding CancelRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource TrueToVisibleConverter}}"  AutomationProperties.Name="Stop Refresh"/>
         </CommandBar>
-    </Page.BottomAppBar>
+    </Page.BottomAppBar>-->
 </Page>

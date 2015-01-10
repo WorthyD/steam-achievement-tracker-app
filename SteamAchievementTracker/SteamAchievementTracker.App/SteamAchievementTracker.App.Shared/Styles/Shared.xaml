@@ -4,8 +4,8 @@
     xmlns:local="using:SteamAchievementTracker.App.Styles">
 
     <Style x:Key="GameListIcon" TargetType="Image">
-        <Setter Property="Width" Value="95"></Setter>
-        <Setter Property="Height" Value="95"></Setter>
+        <Setter Property="Width" Value="32"></Setter>
+        <Setter Property="Height" Value="32"></Setter>
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="Margin" Value="0,0,10,0"></Setter>
@@ -13,6 +13,8 @@
 
     <Style x:Key="GameListTitle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="20" ></Setter>
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+
     </Style>
 
 </ResourceDictionary>

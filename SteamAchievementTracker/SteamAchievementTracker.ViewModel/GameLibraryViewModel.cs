@@ -247,7 +247,7 @@ namespace SteamAchievementTracker.ViewModel {
 
             await GetGames();
             if (this.GameList.Where(x => x.RefreshAchievements == true).Count() > 0) {
-                StartLibraryRefresh();
+                //StartLibraryRefresh();
             }
             base.TrackEvent("Navigation", "Loaded", "Library");
         }
@@ -264,6 +264,8 @@ namespace SteamAchievementTracker.ViewModel {
             if (ShowOneEarned == true) {
                 gameList = gameList.Where(x => x.AchievementsEarned > 0).ToList();
             }
+
+            gameList = gameList.ToList();
 
             GameList = ApplySort(gameList);
 
