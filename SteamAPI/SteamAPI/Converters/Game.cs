@@ -36,8 +36,8 @@ namespace SteamAPI.Converters {
             g.name = x.GetStringValue("name");
             g.logo = x.GetStringValue("logo");
             g.storeLink = x.GetStringValue("storeLink");
-            g.hoursLast2Weeks = x.GetDecimalAttribute("hoursLast2Weeks", 0);
-            g.hoursOnRecord = x.GetDecimalAttribute("hoursOnRecord", 0);
+            g.hoursLast2Weeks = x.GetDecimalElement("hoursLast2Weeks", 0);
+            g.hoursOnRecord = x.GetDecimalElement("hoursOnRecord", 0);
             g.statsLink = x.GetStringValue("statsLink");
 
             return g;

@@ -12,8 +12,7 @@
     <Grid>
         <StackPanel Style="{StaticResource LoginModal}">
             <TextBlock Style="{StaticResource LoginTitle}">Steam Profile Identifier:</TextBlock>
-            <TextBox  Text="{Binding UserName, Mode=TwoWay}" AcceptsReturn="True">
-            </TextBox>
+            <TextBox  Text="{Binding UserName, Mode=TwoWay}"></TextBox>
             <StackPanel Visibility="{Binding IsLoggingIn, Converter={StaticResource FalseToVisibleConverter}}">
                 <Button Command="{Binding Login}">Login</Button>
             </StackPanel>

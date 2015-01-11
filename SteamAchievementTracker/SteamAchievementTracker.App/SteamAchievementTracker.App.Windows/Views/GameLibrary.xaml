@@ -163,7 +163,7 @@ PointerOverBackground="{StaticResource CustomizedGridViewItemPresenterHighlightB
 
     </Grid>
     <Page.BottomAppBar>
-        <AppBar>
+       <AppBar  >
             <StackPanel Orientation="Horizontal">
 
                 <Button Style="{StaticResource RefreshAppBarButtonStyle}" Command="{Binding StartRefresh}" Visibility="{Binding IsRefreshing, Converter={StaticResource FalseToVisibleConverter}}" />
