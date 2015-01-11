@@ -35,6 +35,15 @@ namespace SteamAPI.Tests.Agnostic {
                 if (achs.Count() == 0) {
                     return false;
                 }
+                if (achs.Where(x => x.closed == true).Count() == 0) {
+                    return false;
+                }
+
+                if (achs.Where(x => x.closed == false).Count() == 0) {
+                    return false;
+                }
+
+
 
 
                 var a = achs.FirstOrDefault();
