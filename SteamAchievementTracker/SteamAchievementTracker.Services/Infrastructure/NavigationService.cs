@@ -19,7 +19,7 @@ namespace SteamAchievementTracker.Services.Infrastructure {
             set {
                 frame = value;
                 frame.Navigated += OnFrameNavigated;
-                frame.Unloaded += frame_Unloaded;
+                //frame.Unloaded += frame_Unloaded;
             }
         }
 

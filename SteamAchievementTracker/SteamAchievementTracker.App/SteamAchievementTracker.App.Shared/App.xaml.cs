@@ -110,6 +110,14 @@ namespace SteamAchievementTracker.App
             if (rootFrame.Content == null)
             {
 #if WINDOWS_PHONE_APP
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed += new EventHandler<Windows.Phone.UI.Input.BackPressedEventArgs>((s, d) => {
+                    if (nav.CanGoBack()) {
+                        d.Handled = true;
+                        nav.GoBack();
+                    }
+
+                });//nav.HardwareButtons_BackPressed;
+       
                 // Removes the turnstile navigation for startup.
                 if (rootFrame.ContentTransitions != null)
                 {
