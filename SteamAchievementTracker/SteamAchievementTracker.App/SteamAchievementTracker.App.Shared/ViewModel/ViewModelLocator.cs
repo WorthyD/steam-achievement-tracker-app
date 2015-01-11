@@ -13,64 +13,48 @@ using SteamAchievementTracker.Services.Data;
 using SteamAchievementTracker.Contracts.View;
 using SteamAchievementTracker.App.Views;
 
-namespace SteamAchievementTracker.App.ViewModel
-{
-    public class ViewModelLocator
-    {
+namespace SteamAchievementTracker.App.ViewModel {
+    public class ViewModelLocator {
 
-        public MainViewModel Main
-        {
-            get
-            {
+        public MainViewModel Main {
+            get {
 
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        public BaseViewModel Base
-        {
-            get
-            {
+        public BaseViewModel Base {
+            get {
                 return ServiceLocator.Current.GetInstance<BaseViewModel>();
             }
         }
 
-        public GameDetailsViewModel GameDetails
-        {
-            get
-            {
+        public GameDetailsViewModel GameDetails {
+            get {
                 return ServiceLocator.Current.GetInstance<GameDetailsViewModel>();
             }
         }
 
-        public GameLibraryViewModel GameLibrary
-        {
-            get
-            {
+        public GameLibraryViewModel GameLibrary {
+            get {
                 return ServiceLocator.Current.GetInstance<GameLibraryViewModel>();
             }
         }
 
-        public HelpViewModel Help
-        {
-            get
-            {
+        public HelpViewModel Help {
+            get {
                 return ServiceLocator.Current.GetInstance<HelpViewModel>();
             }
         }
 
 
-        static ViewModelLocator()
-        {
+        static ViewModelLocator() {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            if (ViewModelBase.IsInDesignModeStatic)
-            {
+            if (ViewModelBase.IsInDesignModeStatic) {
                 SimpleIoc.Default.Register<IPlayerLibraryService, DesignData.Services.PlayerLibraryService>();
                 SimpleIoc.Default.Register<IPlayerProfileService, DesignData.Services.PlayerProfileService>();
                 SimpleIoc.Default.Register<IPlayerStatsService, DesignData.Services.PlayerStatsService>();
-             }
-            else
-            {
+            } else {
                 SimpleIoc.Default.Register<IPlayerLibraryService, PlayerLibraryService>();
                 SimpleIoc.Default.Register<IPlayerProfileService, PlayerProfileService>();
                 SimpleIoc.Default.Register<IPlayerStatsService, PlayerStatsService>();
@@ -80,8 +64,12 @@ namespace SteamAchievementTracker.App.ViewModel
             SimpleIoc.Default.Register<IGameLibrary, GameLibrary>();
             SimpleIoc.Default.Register<IMain, Main>();
             //SimpleIoc.Default.Register<IHelp, Help>();
-            
+#if WINDOWS_PHONE_APP
+            SimpleIoc.Default.Register<INavigationService, SteamAchievementTracker.App.Services.NavigationService>();
+#else
+
             SimpleIoc.Default.Register<INavigationService, NavigationService>();
+#endif
 
             SimpleIoc.Default.Register<ISettingsViewModel, SettingsViewModel>();
 

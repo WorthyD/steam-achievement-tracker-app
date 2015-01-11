@@ -149,7 +149,19 @@ namespace SteamAPI.Extensions {
             } else
                 return defaultValue;
         }
+        public static decimal GetDecimalElement(this XElement element, string elementName, decimal defaultValue) {
+            XElement a = element.Elements().Where(i => i.Name == elementName).SingleOrDefault();
 
+            if (a != null) {
+                decimal result;
+
+                if (decimal.TryParse(a.Value, out result))
+                    return result;
+                else
+                    return defaultValue;
+            } else
+                return defaultValue;
+        }
         public static string GetStringValue(this XElement parentElement, string elementName) {
             return GetStringValue(parentElement, elementName, "");
         }

@@ -3,12 +3,141 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SteamAchievementTracker.App.Views"
+    xmlns:help="using:GalaSoft.MvvmLight.Helpers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
+    mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=GameDetails}"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <ItemsPanelTemplate x:Key="ListViewItemsPanel">
+            <ItemsStackPanel Orientation="Vertical" />
+        </ItemsPanelTemplate>
+    </Page.Resources>
     <Grid>
+        <Hub  x:Name="GameDetailsHub"  >
+            <Hub.Header>
+                <StackPanel>
 
+                    <Image x:Name="GameImage"  Style="{StaticResource GameListLogo}" Source="{Binding Game.Logo}" />
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="30"  Text="Complete:" Margin="0,0,10,0"></TextBlock>
+                        <TextBlock FontSize="30" Margin="0,0,15,0" Text="{Binding Game.PercentCompleteFormatted}"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <!--<Grid  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="9*"></ColumnDefinition>
+                   </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="1" Margin="20, 0,0,0">
+                        <TextBlock  FontSize="40" Margin="0,0,0,10" Text="{Binding Game.Name}"></TextBlock>
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock FontSize="30"  Text="Complete:" Margin="0,0,10,0"></TextBlock>
+                            <TextBlock FontSize="30" Margin="0,0,15,0" Text="{Binding Game.PercentCompleteFormatted}"></TextBlock>
+                            <Button  x:Name="launchGameButton"
+                          
+                             Command="{Binding LaunchGame}">Launch Game</Button>
+
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>-->
+            </Hub.Header>
+            <HubSection  x:Name="UnLocked" Visibility="{Binding Started, Converter={StaticResource TrueToVisibleConverter}}">
+                <HubSection.HeaderTemplate>
+
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0,0,10,0">Unlocked:</TextBlock>
+                            <TextBlock Text="{Binding Game.AchievementsEarned}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </HubSection.HeaderTemplate>
+                <DataTemplate >
+                    <Grid x:Name="UnLockedGrid">
+                        <!---->
+                             <!--ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"-->
+
+
+                        <ListView x:Name="UnLockedGridView" ItemsSource="{Binding UnlockedAchievements}"
+                                  ItemsPanel="{StaticResource ListViewItemsPanel}" 
+                                  Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
+                                  >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:Achievement></Partials:Achievement>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        
+                        <!--<GridView  x:Name="UnLockedGridView" 
+                                   ItemsSource="{Binding UnlockedAchievements}"    
+                                   Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
+                                  ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      SelectionMode="None" >
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:Achievement></Partials:Achievement>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                       </GridView>-->
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+            <HubSection Visibility="{Binding Completed, Converter={StaticResource FalseToVisibleConverter}}">
+                <HubSection.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="0,0,10,0">Locked:</TextBlock>
+                            <TextBlock Text="{Binding Game.AchievementsLocked}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </HubSection.HeaderTemplate>
+                <DataTemplate >
+                    <Grid>
+                        <!--ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"-->
+                        <!--<GridView  ItemsSource="{Binding LockedAchievements}"    Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
+                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top"  
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                      SelectionMode="None" >
+                            <GridView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:Achievement></Partials:Achievement>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+
+                        </GridView>-->
+
+                        <ListView x:Name="UnLockedGridView" ItemsSource="{Binding LockedAchievements}"
+                                  ItemsPanel="{StaticResource ListViewItemsPanel}" 
+                                  Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
+                                  >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate >
+                                    <Partials:Achievement></Partials:Achievement>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
+                    </Grid>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
     </Grid>
 </Page>
