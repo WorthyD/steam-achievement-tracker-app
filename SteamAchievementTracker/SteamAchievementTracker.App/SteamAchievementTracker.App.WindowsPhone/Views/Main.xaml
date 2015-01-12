@@ -5,7 +5,7 @@
     xmlns:local="using:SteamAchievementTracker.App.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity" xmlns:core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
     mc:Ignorable="d" 
     DataContext="{Binding Source={StaticResource Locator}, Path=Main}" 
@@ -32,22 +32,23 @@
                                       SelectionMode="None"
                               IsItemClickEnabled="True"
                               >
-                            <!--<interactivity:Interaction.Behaviors>
+                            <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">
                                     <core:InvokeCommandAction 
                                             Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
                                             CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
                                         />
                                 </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>-->
+                            </interactivity:Interaction.Behaviors>
+                           
                             <GridView.ItemTemplate>
                                 <DataTemplate >
                                     <Partials:GameListItem  ></Partials:GameListItem>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>
-                        <!--<Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
-                        </Partials:SectionLoading>-->
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
                     </Grid>
                 </DataTemplate>
             </HubSection>
@@ -61,22 +62,22 @@
                                       SelectionMode="None"
                               IsItemClickEnabled="True"
                               >
-                            <!--<interactivity:Interaction.Behaviors>
+                            <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">
                                     <core:InvokeCommandAction 
                                             Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
                                             CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
                                         />
                                 </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>-->
+                            </interactivity:Interaction.Behaviors>
                             <GridView.ItemTemplate>
                                 <DataTemplate >
                                     <Partials:GameListItem ></Partials:GameListItem>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>
-                        <!--<Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
-                        </Partials:SectionLoading>-->
+                        <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>
                     </Grid>
                 </DataTemplate>
             </HubSection>
