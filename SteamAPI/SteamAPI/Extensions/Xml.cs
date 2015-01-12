@@ -95,12 +95,17 @@ namespace SteamAPI.Extensions {
             if (a != null) {
                 bool result;
 
-                if (bool.TryParse(a.Value, out result))
+                if (bool.TryParse(a.Value, out result)) {
                     return result;
-                else
+                } else {
+                    if (a.Value == "1" || a.Value == "0") {
+                        return a.Value.Equals("0");
+                    }
                     return defaultValue;
-            } else
+                }
+            } else {
                 return defaultValue;
+            }
         }
 
         public static double GetDoubleAttribute(this XElement element, string attributeName, double defaultValue) {
