@@ -91,27 +91,26 @@
                                       SelectionMode="None"
                               IsItemClickEnabled="True"
                               >
-                            <!--<interactivity:Interaction.Behaviors>
+                            <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">
                                     <core:InvokeCommandAction 
                                             Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
                                             CommandParameter="{Binding Path=SelectedItem, ElementName=GameGrid}"
                                         />
                                 </core:EventTriggerBehavior>
-                            </interactivity:Interaction.Behaviors>-->
+                            </interactivity:Interaction.Behaviors>
                             <GridView.ItemTemplate>
                                 <DataTemplate >
                                     <Partials:GameListItem ></Partials:GameListItem>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>
-                        <!--<Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
-                        </Partials:SectionLoading>-->
+                      
                     </Grid>
                 </DataTemplate>
             </HubSection>
         </Hub>
-        <Grid Grid.Row="0" Background="#D73D3D3D" 
+        <!--<Grid Grid.Row="0" Background="#D73D3D3D" 
                 Visibility="{Binding LoginVM.IsVisible, Converter={StaticResource TrueToVisibleConverter}}"
               >
             <Grid.RowDefinitions>
@@ -125,7 +124,9 @@
                 </Grid>
             </StackPanel>
 
-        </Grid>
+        </Grid>-->
 
     </Grid>
 </Page>
+<!--<Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
+                        </Partials:SectionLoading>-->

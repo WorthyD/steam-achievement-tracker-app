@@ -247,7 +247,9 @@ namespace SteamAchievementTracker.ViewModel {
 
             await GetGames();
             if (this.GameList.Where(x => x.RefreshAchievements == true).Count() > 0) {
-                //StartLibraryRefresh();
+#if !WINDOWS_PHONE_APP
+                StartLibraryRefresh();
+#endif
             }
             base.TrackEvent("Navigation", "Loaded", "Library");
         }
