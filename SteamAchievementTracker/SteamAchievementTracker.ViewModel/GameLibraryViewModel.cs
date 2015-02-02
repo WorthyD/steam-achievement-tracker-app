@@ -247,7 +247,7 @@ namespace SteamAchievementTracker.ViewModel {
 
             await GetGames();
             if (this.GameList.Where(x => x.RefreshAchievements == true).Count() > 0) {
-#if !WINDOWS_PHONE_APP
+#if WINDOWS_APP
                 StartLibraryRefresh();
 #endif
             }
@@ -284,6 +284,7 @@ namespace SteamAchievementTracker.ViewModel {
             var progressIndicator = new Progress<int>(ReportProgress);
 
             var gameList = await playerLibService.GetPlayerLibraryCached(base.UserID);
+            gameList = ApplySort(gameList);
 
             RefreshCount = gameList.Where(x => x.RefreshAchievements == true && x.StatsLink != string.Empty).Count();
             try {

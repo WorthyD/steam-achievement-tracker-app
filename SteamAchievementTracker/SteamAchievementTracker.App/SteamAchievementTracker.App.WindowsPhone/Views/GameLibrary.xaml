@@ -8,6 +8,8 @@
       xmlns:common="using:SteamAchievementTracker.App.Common"
       xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
       xmlns:UI="using:Microsoft.Advertising.Mobile.UI"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
   
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -18,9 +20,9 @@
             <ItemsStackPanel Orientation="Vertical" />
         </ItemsPanelTemplate>
     </Page.Resources>
-    
-    
-    <Grid Margin="20">
+
+
+    <Grid Margin="20"  x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="25"></RowDefinition>
@@ -41,14 +43,24 @@
         <Grid Grid.Row="3">
             <!--ItemContainerStyle="{StaticResource CustomizedGridViewItemPresenterTemplate}"-->
             <ListView x:Name="GameGrid1" ItemsSource="{Binding GameList}" ItemsPanel="{StaticResource ListViewItemsPanel}" >
+                <interactivity:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="SelectionChanged">
+                        <core:InvokeCommandAction 
+                                            Command="{Binding DataContext.OpenGame, ElementName=LayoutRoot }"
+                                            CommandParameter="{Binding Path=SelectedValue, ElementName=GameGrid1}"
+                                        />
+                    </core:EventTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+ 
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     </Style>
                 </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
+               <ListView.ItemTemplate>
                     <DataTemplate >
-                            <Partials:GameListItemNarrow></Partials:GameListItemNarrow>
+                       
+                        <Partials:GameListItemNarrow></Partials:GameListItemNarrow>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

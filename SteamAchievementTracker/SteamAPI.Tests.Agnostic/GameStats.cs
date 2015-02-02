@@ -16,7 +16,40 @@ namespace SteamAPI.Tests.Agnostic {
 
             return AnythingEmpty(resposne);
         }
+        public static async Task<bool> GetPlayerGameStatsEmpty(string url) {
+            SteamAPI.Player.PlayerGameStatsRequest request = new SteamAPI.Player.PlayerGameStatsRequest();
 
+            request.GameUrl = url;
+            var p = await request.GetResponse();
+
+            if (p != null && p.PlayerStats.game != null && p.PlayerStats.achievements != null) {
+                var g = p.PlayerStats.game;
+                var achs = p.PlayerStats.achievements;
+
+                if (achs.Where(x => x.closed == false).Count() == achs.Count()) {
+                    return true; 
+                }
+            }
+
+            return false;
+        }
+        public static async Task<bool> GetPlayerGameStatsFull(string url) {
+            SteamAPI.Player.PlayerGameStatsRequest request = new SteamAPI.Player.PlayerGameStatsRequest();
+
+            request.GameUrl = url;
+            var p = await request.GetResponse();
+
+            if (p != null && p.PlayerStats.game != null && p.PlayerStats.achievements != null) {
+                var g = p.PlayerStats.game;
+                var achs = p.PlayerStats.achievements;
+
+                if (achs.Where(x => x.closed == true).Count() == achs.Count()) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public static bool AnythingEmpty(PlayerGameStatsResponse p) {
             if (p != null && p.PlayerStats.game != null && p.PlayerStats.achievements != null) {
