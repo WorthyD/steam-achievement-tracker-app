@@ -9,10 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamAchievementTracker.ViewModel
-{
-    public class GameDetailsViewModel : BaseViewModel, IGameDetailsViewModel
-    {
+namespace SteamAchievementTracker.ViewModel {
+    public class GameDetailsViewModel : BaseViewModel, IGameDetailsViewModel {
         private IPlayerLibraryService playerLibService;
         private INavigationService navigationService;
         private IPlayerStatsService statService;
@@ -22,8 +20,7 @@ namespace SteamAchievementTracker.ViewModel
         #endregion
 
         public GameDetailsViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerStatsService _statService)
-            : base(_navigationService)
-        {
+            : base(_navigationService) {
 
             this.navigationService = _navigationService;
             this.playerLibService = _playerLibService;
@@ -31,8 +28,7 @@ namespace SteamAchievementTracker.ViewModel
 
             this.InitializeCommands();
 
-            if (base.IsInDesignMode)
-            {
+            if (base.IsInDesignMode) {
                 this.Initialize(null);
             }
         }
@@ -53,11 +49,9 @@ namespace SteamAchievementTracker.ViewModel
 
         public int UnLockedCount { get { return UnlockedAchievements.Count(); } }
         private List<IGameAchievement> _UnlockedAchievements;
-        public List<IGameAchievement> UnlockedAchievements
-        {
+        public List<IGameAchievement> UnlockedAchievements {
             get { return _UnlockedAchievements; }
-            set
-            {
+            set {
                 Set(() => UnlockedAchievements, ref  _UnlockedAchievements, value);
             }
         }
@@ -65,16 +59,13 @@ namespace SteamAchievementTracker.ViewModel
 
         public int LockedCount { get { return LockedAchievements.Count(); } }
         private List<IGameAchievement> _LockedAchievements;
-        public List<IGameAchievement> LockedAchievements
-        {
+        public List<IGameAchievement> LockedAchievements {
             get { return _LockedAchievements; }
-            set
-            {
+            set {
                 Set(() => LockedAchievements, ref _LockedAchievements, value);
             }
         }
-        private void InitializeCommands()
-        {
+        private void InitializeCommands() {
             LaunchGame = new RelayCommand(() => {
                 LaunchExternalGame();
             });
@@ -85,8 +76,7 @@ namespace SteamAchievementTracker.ViewModel
             Windows.System.Launcher.LaunchUriAsync(gameUrl);
         }
 
-        public async override void Initialize(object parameter)
-        {
+        public async override void Initialize(object parameter) {
             base.Initialize(parameter);
             this.IsLoading = true;
 
@@ -97,35 +87,14 @@ namespace SteamAchievementTracker.ViewModel
 
             long gameId = 0;
 
-            if (parameter != null)
-            {
+            if (parameter != null) {
                 long.TryParse(parameter.ToString(), out gameId);
             }
 
             this.Game = this.playerLibService.GetGameByID(gameId, base.UserID);
             List<IGameAchievement> Achievements = new List<IGameAchievement>();
-            if (!string.IsNullOrEmpty(this.Game.StatsLink))
-            {
-                if (base.HasNetwork())
-                {
-                    Achievements = await this.statService.GetFreshStats(this.Game.StatsLink);
-                }
-                else
-                {
-                    Achievements =  this.statService.GetGameAchievementsCached(this.Game.StatsLink);
-                }
-                
-                //Achievements = await this.statService.GetGameStatistics(this.Game, false);
 
-                var g = this.playerLibService.GetGameByID(gameId, base.UserID);
-
-                //Update display Data
-                if (g.AchievementsEarned != this.Game.AchievementsEarned)
-                {
-                    this.Game = g;
-                }
-            }
-
+            Achievements = this.statService.GetGameAchievementsCached(this.Game.StatsLink);
 
             this.LockedAchievements = Achievements.Where(x => x.IsUnlocked == false).ToList();
             this.UnlockedAchievements = Achievements.Where(x => x.IsUnlocked == true).ToList();
@@ -133,9 +102,32 @@ namespace SteamAchievementTracker.ViewModel
             this.Completed = this.Game.AchievementsEarned == this.Game.TotalAchievements;
             this.IsLoading = false;
 
+
+
+            RefreshAchievements();
+
             base.TrackEvent("Navigation", "Loaded", string.Format("Game Details {0}", this.Game.Name));
         }
 
-   
+        public async Task RefreshAchievements() {
+            if (!string.IsNullOrEmpty(this.Game.StatsLink)) {
+                List<IGameAchievement> Achievements = new List<IGameAchievement>();
+                if (base.HasNetwork()) {
+                    Achievements = await this.statService.GetFreshStats(this.Game.StatsLink);
+                }
+                var g = this.playerLibService.GetGameByID(this.Game.AppID, base.UserID);
+                //Update display Data
+                if (g.AchievementsEarned != this.Game.AchievementsEarned) {
+                    this.Game = g;
+
+                    this.LockedAchievements = Achievements.Where(x => x.IsUnlocked == false).ToList();
+                    this.UnlockedAchievements = Achievements.Where(x => x.IsUnlocked == true).ToList();
+                    this.Started = this.UnlockedAchievements.Count() > 0;
+                    this.Completed = this.Game.AchievementsEarned == this.Game.TotalAchievements;
+                }
+            }
+
+        }
+
     }
 }
