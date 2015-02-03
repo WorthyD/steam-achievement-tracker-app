@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SteamAchievementTracker.Contracts.View;
+using SteamAchievementTracker.Contracts.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,11 +21,13 @@ namespace SteamAchievementTracker.App.Views {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GameDetails : Page {
+    public sealed partial class GameDetails : Page, IGameDetailsView {
         public GameDetails() {
             this.InitializeComponent();
         }
-
+        IViewModel IView.ViewModel {
+            get { return this.DataContext as IViewModel; }
+        }
         /// <summary>
         /// Invoked when this page is about to be displayed in a Frame.
         /// </summary>

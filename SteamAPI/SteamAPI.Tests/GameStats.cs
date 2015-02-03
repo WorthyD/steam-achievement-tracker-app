@@ -13,5 +13,20 @@ namespace SteamAPI.Tests {
             bool isTrue = await Agnostic.GameStats.GetPlayerGameStats("http://steamcommunity.com/id/WorthyD/stats/L4D2");
             Assert.IsTrue(isTrue);
         }
+        [TestMethod]
+        public async Task W8GetGameStatsEmpty() {
+            bool isTrue = await Agnostic.GameStats.GetPlayerGameStatsEmpty("http://steamcommunity.com/id/WorthyD/stats/AlanWake");
+            Assert.IsTrue(isTrue);
+        }
+        [TestMethod]
+        public async Task W8GetGameStatsFull() {
+            bool isTrue = await Agnostic.GameStats.GetPlayerGameStatsFull("http://steamcommunity.com/id/WorthyD/stats/284870/");
+            Assert.IsTrue(isTrue);
+        }
+
+
+
+
+        //
     }
 }

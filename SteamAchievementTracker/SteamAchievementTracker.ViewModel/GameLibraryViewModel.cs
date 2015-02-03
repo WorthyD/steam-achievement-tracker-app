@@ -128,7 +128,7 @@ namespace SteamAchievementTracker.ViewModel {
             set {
                 Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ShowNoAch"] = value;
                 Set(() => ShowNoAch, ref _showNoAch, value);
-                 GetGames();
+                GetGames();
             }
         }
         private bool _ShowOneEarned;
@@ -147,7 +147,7 @@ namespace SteamAchievementTracker.ViewModel {
             set {
                 Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ShowOneEarned"] = value;
                 Set(() => ShowOneEarned, ref _ShowOneEarned, value);
-                 GetGames();
+                GetGames();
             }
         }
         //ShowOneEarned
@@ -156,7 +156,12 @@ namespace SteamAchievementTracker.ViewModel {
 
         #region Events
         //Events 
+#if WINDOWS_APP
         public RelayCommand<ItemClickEventArgs> OpenGame { get; set; }
+#else
+        public RelayCommand<IGame> OpenGame { get; set; }
+#endif
+
         public RelayCommand StartRefresh { get; set; }
         public RelayCommand CancelRefresh { get; set; }
         #endregion
@@ -227,13 +232,27 @@ namespace SteamAchievementTracker.ViewModel {
 
 
         private void InitializeCommands() {
-            OpenGame = new RelayCommand<ItemClickEventArgs>(game => {
+
+#if WINDOWS_APP
+          OpenGame = new RelayCommand<ItemClickEventArgs>(game => {
                 this.DeInitialize();
                 var x = (IGame)game.ClickedItem;
                 var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
                 navigationService.Navigate(pageType.GetType(), x.AppID);
                 Debug.WriteLine("Click - " + x.AppID);
             });
+#else
+            OpenGame = new RelayCommand<IGame>(game => {
+                this.DeInitialize();
+                var x = (IGame)game;
+                var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
+                navigationService.Navigate(pageType.GetType(), x.AppID);
+                Debug.WriteLine("Click - " + x.AppID);
+            });
+
+
+
+#endif
             StartRefresh = new RelayCommand(() => {
                 StartLibraryRefresh();
             });

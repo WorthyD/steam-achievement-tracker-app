@@ -99,7 +99,7 @@ namespace SteamAPI.Extensions {
                     return result;
                 } else {
                     if (a.Value == "1" || a.Value == "0") {
-                        return a.Value.Equals("0");
+                        return a.Value.Equals("1");
                     }
                     return defaultValue;
                 }

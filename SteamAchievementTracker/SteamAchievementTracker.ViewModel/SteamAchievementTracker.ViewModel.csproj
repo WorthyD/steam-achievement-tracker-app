@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Design|AnyCPU'">
+    <OutputPath>bin\Design\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="GameDetailsViewModel.cs" />
