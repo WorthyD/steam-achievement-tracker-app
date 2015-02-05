@@ -20,7 +20,7 @@ namespace SteamAchievementTracker.Model {
         public string Icon {
             get {
                 if (string.IsNullOrEmpty(_icon)) {
-                    return "http://cdn.akamai.steamstatic.com/steamcommunity/public/images/apps/261640/af5ef05eac8b1eb618e4f57354ac7b3e918ab1bd.jpg";
+                    return "ms-appx:///assets/gameicon.png";
 
                 } else {
                     return _icon;

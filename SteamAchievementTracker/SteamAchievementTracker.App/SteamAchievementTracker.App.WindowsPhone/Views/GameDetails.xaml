@@ -25,24 +25,7 @@
                         <TextBlock FontSize="30" Margin="0,0,15,0" Text="{Binding Game.PercentCompleteFormatted}"></TextBlock>
                     </StackPanel>
                 </StackPanel>
-                <!--<Grid  >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="9*"></ColumnDefinition>
-                   </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="1" Margin="20, 0,0,0">
-                        <TextBlock  FontSize="40" Margin="0,0,0,10" Text="{Binding Game.Name}"></TextBlock>
-                        <StackPanel Orientation="Horizontal">
-
-                            <TextBlock FontSize="30"  Text="Complete:" Margin="0,0,10,0"></TextBlock>
-                            <TextBlock FontSize="30" Margin="0,0,15,0" Text="{Binding Game.PercentCompleteFormatted}"></TextBlock>
-                            <Button  x:Name="launchGameButton"
-                          
-                             Command="{Binding LaunchGame}">Launch Game</Button>
-
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>-->
+        
             </Hub.Header>
             <HubSection  x:Name="UnLocked" Visibility="{Binding Started, Converter={StaticResource TrueToVisibleConverter}}">
                 <HubSection.HeaderTemplate>
@@ -56,11 +39,7 @@
                 </HubSection.HeaderTemplate>
                 <DataTemplate >
                     <Grid x:Name="UnLockedGrid">
-                        <!---->
-                             <!--ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"-->
-
-
-                        <ListView x:Name="UnLockedGridView" ItemsSource="{Binding UnlockedAchievements}"
+                         <ListView x:Name="UnLockedGridView" ItemsSource="{Binding UnlockedAchievements}"
                                   ItemsPanel="{StaticResource ListViewItemsPanel}" 
                                   Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
                                   >
@@ -75,19 +54,7 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        
-                        <!--<GridView  x:Name="UnLockedGridView" 
-                                   ItemsSource="{Binding UnlockedAchievements}"    
-                                   Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
-                                  ShowsScrollingPlaceholders="False" VerticalAlignment="Top" 
-                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                      SelectionMode="None" >
-                            <GridView.ItemTemplate>
-                                <DataTemplate >
-                                    <Partials:Achievement></Partials:Achievement>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                       </GridView>-->
+
                         <Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
                         </Partials:SectionLoading>
                     </Grid>
@@ -104,19 +71,6 @@
                 </HubSection.HeaderTemplate>
                 <DataTemplate >
                     <Grid>
-                        <!--ItemsPanel="{StaticResource StoreFrontGridItemsPanelTemplate}"-->
-                        <!--<GridView  ItemsSource="{Binding LockedAchievements}"    Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"
-                                      ShowsScrollingPlaceholders="False" VerticalAlignment="Top"  
-                                      ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                                      SelectionMode="None" >
-                            <GridView.ItemTemplate>
-                                <DataTemplate >
-                                    <Partials:Achievement></Partials:Achievement>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-
-                        </GridView>-->
-
                         <ListView x:Name="UnLockedGridView" ItemsSource="{Binding LockedAchievements}"
                                   ItemsPanel="{StaticResource ListViewItemsPanel}" 
                                   Visibility="{Binding IsLoading, Converter={StaticResource FalseToVisibleConverter}}"

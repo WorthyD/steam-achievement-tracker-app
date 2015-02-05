@@ -12,7 +12,7 @@ namespace SteamAchievementTracker.App.Services {
             base.OnFrameNavigated(sender, e);
         }
         public void HardwareButtons_BackPressed(object sender, Windows.Phone.UI.Input.BackPressedEventArgs e) {
-            this.GoBack();
+            //this.GoBack();
         }
         private void frame_Unloaded(object sender, RoutedEventArgs e) {
          //   Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;

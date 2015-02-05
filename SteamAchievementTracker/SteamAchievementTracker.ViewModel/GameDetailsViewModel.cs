@@ -96,11 +96,17 @@ namespace SteamAchievementTracker.ViewModel {
 
             Achievements = this.statService.GetGameAchievementsCached(this.Game.StatsLink);
 
-            this.LockedAchievements = Achievements.Where(x => x.IsUnlocked == false).ToList();
-            this.UnlockedAchievements = Achievements.Where(x => x.IsUnlocked == true).ToList();
-            this.Started = this.UnlockedAchievements.Count() > 0;
-            this.Completed = this.Game.AchievementsEarned == this.Game.TotalAchievements;
-            this.IsLoading = false;
+            if (Achievements.Count > 0) {
+                this.IsLoading = false;
+
+                this.LockedAchievements = Achievements.Where(x => x.IsUnlocked == false).ToList();
+                this.UnlockedAchievements = Achievements.Where(x => x.IsUnlocked == true).ToList();
+
+                this.Started = this.UnlockedAchievements.Count() > 0;
+                this.Completed = this.Game.AchievementsEarned == this.Game.TotalAchievements;
+
+
+            }
 
 
 
@@ -126,6 +132,7 @@ namespace SteamAchievementTracker.ViewModel {
                     this.Completed = this.Game.AchievementsEarned == this.Game.TotalAchievements;
                 }
             }
+            this.IsLoading = false;
 
         }
 

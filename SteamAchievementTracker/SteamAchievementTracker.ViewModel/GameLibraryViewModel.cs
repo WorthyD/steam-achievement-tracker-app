@@ -335,11 +335,12 @@ namespace SteamAchievementTracker.ViewModel {
             } else {
                 LibProgress = "";
             }
-
+            #if WINDOWS_APP
             if (value > 0 && value % 15 == 0) {
                 //RefreshUI
                 GetGames();
             }
+            #endif
             Debug.WriteLine(LibProgress);
 
         }
