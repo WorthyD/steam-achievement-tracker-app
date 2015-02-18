@@ -111,14 +111,17 @@ namespace SteamAchievementTracker.ViewModel {
             GoHelp = new RelayCommand(() => {
                 Uri helpUrl = new Uri("http://steamachievementtracker.com/help/winrt");
                 Windows.System.Launcher.LaunchUriAsync(helpUrl);
- 
+
             });
 
             GoSettings = new RelayCommand(() => {
-
+#if WINDOWS_APP
                 var iSettings = SimpleIoc.Default.GetInstance<ISettingsViewModel>();
                 iSettings.ShowSettings();
-
+#else
+                var pageType = SimpleIoc.Default.GetInstance<IMainSettings>();
+                _navigationService.Navigate(pageType.GetType(), null);
+#endif
             });
         }
 

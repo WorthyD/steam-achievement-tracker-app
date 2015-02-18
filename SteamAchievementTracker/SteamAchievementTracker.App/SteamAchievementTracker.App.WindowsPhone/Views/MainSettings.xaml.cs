@@ -13,12 +13,20 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+using SteamAchievementTracker.App.Common;
+using SteamAchievementTracker.Contracts.View;
+using SteamAchievementTracker.Contracts.ViewModels;
+
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace SteamAchievementTracker.App.Views {
-    public sealed partial class MainSettings : UserControl {
+    public sealed partial class MainSettings : Page,  IMainSettings {
         public MainSettings() {
             this.InitializeComponent();
+        }
+
+        IViewModel IView.ViewModel {
+            get { return this.DataContext as IViewModel; }
         }
     }
 }

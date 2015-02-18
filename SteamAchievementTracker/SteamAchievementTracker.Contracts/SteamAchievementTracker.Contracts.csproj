@@ -62,6 +62,7 @@
     <Compile Include="View\IGameLibrary.cs" />
     <Compile Include="View\IHelp.cs" />
     <Compile Include="View\IMain.cs" />
+    <Compile Include="View\IMainSettings.cs" />
     <Compile Include="View\IView.cs" />
   </ItemGroup>
   <ItemGroup>

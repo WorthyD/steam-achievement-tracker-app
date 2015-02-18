@@ -85,6 +85,9 @@
          
         </Hub>
        </Grid>
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <AppBarButton Icon="Setting" Label="Settings" Command="{Binding GoSettings}"></AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
-<!--<Partials:SectionLoading Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}">
-                        </Partials:SectionLoading>-->
