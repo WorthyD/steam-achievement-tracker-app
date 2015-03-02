@@ -16,10 +16,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
-namespace SteamAchievementTracker.ViewModel
-{
-    public class MainViewModel : BaseViewModel, IMainViewModel
-    {
+namespace SteamAchievementTracker.ViewModel {
+    public class MainViewModel : BaseViewModel, IMainViewModel {
 
         #region Services
         private IPlayerProfileService playerProfService;
@@ -29,8 +27,7 @@ namespace SteamAchievementTracker.ViewModel
         #endregion
 
         #region Commands
-        public RelayCommand<ItemClickEventArgs> OpenGame
-        {
+        public RelayCommand<ItemClickEventArgs> OpenGame {
             get;
             set;
         }
@@ -41,31 +38,29 @@ namespace SteamAchievementTracker.ViewModel
         //    set;
         //}
 
-
         #endregion
+
+
+        public ISettingsViewModel SettingsVM {get;set;}
+
 
         #region Properties
         public ViewModel.LoginViewModel LoginVM { get; set; }
         private string _title;
-        public string Title
-        {
+        public string Title {
             get { return _title; }
-            set
-            {
+            set {
                 Set(() => Title, ref _title, value);
             }
         }
 
         private IProfile _profile;
 
-        public IProfile Profile
-        {
-            get
-            {
+        public IProfile Profile {
+            get {
                 return _profile;
             }
-            set
-            {
+            set {
                 Set(() => Profile, ref _profile, value);
             }
         }
@@ -90,34 +85,29 @@ namespace SteamAchievementTracker.ViewModel
         public List<IGame> NearCompletion { get { return _NearComp; } set { Set(() => NearCompletion, ref _NearComp, value); } }
 
 
- 
+
         private IStatistics _playerStats;
-        public IStatistics PlayerStats
-        {
+        public IStatistics PlayerStats {
             get { return _playerStats; }
-            set
-            {
+            set {
                 Set(() => PlayerStats, ref _playerStats, value);
             }
         }
         private string _libCount;
-        public string LibCount
-        {
+        public string LibCount {
             get { return _libCount; }
-            set
-            {
+            set {
                 Set(() => LibCount, ref _libCount, value);
             }
         }
 
         private bool _IsLoading;
         public bool IsLoading { get { return _IsLoading; } set { Set(() => IsLoading, ref _IsLoading, value); } }
-     
+
         #endregion
 
         public MainViewModel(INavigationService _navigationService, IPlayerLibraryService _playerLibService, IPlayerProfileService _playerProfService, IPlayerStatsService _playerStatsService)
-            : base(_navigationService)
-        {
+            : base(_navigationService) {
 
 
             this.navigationService = _navigationService;
@@ -130,21 +120,26 @@ namespace SteamAchievementTracker.ViewModel
             LoginVM.playerLibService = _playerLibService;
             LoginVM.playerProfService = _playerProfService;
             LoginVM.InitializeCommands();
-             if (base.IsInDesignMode)
-            {
+
+
+
+            SettingsVM = SimpleIoc.Default.GetInstance<ISettingsViewModel>();
+
+
+
+
+            if (base.IsInDesignMode) {
                 this.Initialize(null);
                 this.IsLoggedIn = true;
             }
-       }
+        }
 
 
 
 
         //public RelayCommand<IGame> OpenGame
-        private void InitializeCommands()
-        {
-            OpenGame = new RelayCommand<ItemClickEventArgs>(game =>
-                    {
+        private void InitializeCommands() {
+            OpenGame = new RelayCommand<ItemClickEventArgs>(game => {
 
                         this.DeInitialize();
                         var x = (IGame)game.ClickedItem;
@@ -156,34 +151,31 @@ namespace SteamAchievementTracker.ViewModel
                 Windows.System.Launcher.LaunchUriAsync(helpUrl);
             });
         }
-        public void OpenLibrary()
-        {
+        public void OpenLibrary() {
             this.DeInitialize();
             var pageType = SimpleIoc.Default.GetInstance<IGameLibrary>();
             navigationService.Navigate(pageType.GetType(), null);
         }
 
-        public override void Initialize(object parameter)
-        {
+        public override void Initialize(object parameter) {
             base.Initialize(parameter);
 
             _title = "Steam Achievement Tracker";
 
-            if (base.UserID != 0 || base.IsInDesignMode)
-            {
+            if (base.UserID != 0 || base.IsInDesignMode) {
                 this.LoadData();
                 this.IsLoggedIn = true;
                 this.LoginVM.IsVisible = false;
-            }
-            else
-            {
+                #if WINDOWS_APP
+                #else 
+                SettingsVM.ShowSettings();
+                #endif
+            } else {
 
 
                 Messenger.Default.Register<string>(this,
-                    message =>
-                    {
-                        if (message == "LoggedIn")
-                        {
+                    message => {
+                        if (message == "LoggedIn") {
                             this.LoadData();
                             this.LoginVM.IsVisible = false;
                             Messenger.Default.Unregister<string>(this);
@@ -197,8 +189,7 @@ namespace SteamAchievementTracker.ViewModel
             base.TrackEvent("Navigation", "Loaded", "HomeScreen");
         }
 
-        public async void LoadData()
-        {
+        public async void LoadData() {
             this.IsLoading = true;
             Profile = playerProfService.GetProfileFromDB(base.UserID);
             List<IGame> AllGames = new List<IGame>();
@@ -206,29 +197,24 @@ namespace SteamAchievementTracker.ViewModel
             List<IGame> nearCompletion = new List<IGame>();
             List<IGame> mostPlayedGames = new List<IGame>();
 
-            if (base.HasNetwork() && (Profile == null || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval)))
-            {
+            if (base.HasNetwork() && (Profile == null || Profile.LastUpdate < DateTime.Now.AddMinutes(-Settings.Profile.ProfileRefreshInterval))) {
                 Profile = await playerProfService.GetFreshPlayerDetails(base.UserName, (Profile != null));
                 AllGames = await playerLibService.GetPlayerLibraryRefresh(base.UserID, base.UserName);
-            }
-            else
-            {
+            } else {
                 AllGames = await playerLibService.GetPlayerLibraryCached(base.UserID);
             }
 
             this.PlayerStats = playerLibService.GetPlayerStats(base.UserID);
 
 
-            if (AllGames != null && AllGames.Count() > 0)
-            {
+            if (AllGames != null && AllGames.Count() > 0) {
                 mostPlayedGames = AllGames.OrderByDescending(x => x.HoursPlayed).Take(6).ToList();
                 nearCompletion = AllGames.Where(x => x.PercentComplete < 100).OrderByDescending(x => x.PercentComplete).Take(6).ToList();
             }
 
 
 
-            if (Profile.RecentGameLinks != null && Profile.RecentGameLinks.Count > 0)
-            {
+            if (Profile.RecentGameLinks != null && Profile.RecentGameLinks.Count > 0) {
                 RecentGames = playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
             }
 
@@ -246,14 +232,12 @@ namespace SteamAchievementTracker.ViewModel
             //};
 
 
-            if (base.HasNetwork())
-            {
+            if (base.HasNetwork()) {
                 RefreshRecentGames();
             }
             this.IsLoading = false;
         }
-        public async void EmptyData()
-        {
+        public async void EmptyData() {
             //Library = new PlayerLibrary();
             GameList = new List<IGame>();
             NearCompletion = new List<IGame>();
@@ -261,26 +245,22 @@ namespace SteamAchievementTracker.ViewModel
             Profile = new Profile();
         }
 
-        public async void RefreshRecentGames()
-        {
+        public async void RefreshRecentGames() {
             var progressIndicator = new Progress<int>(ReportProgress);
             var cancelLibrary = new CancellationTokenSource();
             await playerStatsService.UpdateStatsByList(GameList, progressIndicator, cancelLibrary.Token);
             var gameList = playerLibService.GetPlayerRecentlyPlayedGames(base.UserID, Profile.RecentGameLinks);
 
             bool refresh = false;
-            foreach (var g in gameList)
-            {
+            foreach (var g in gameList) {
                 var tg = GameList.Where(x => x.AppID == g.AppID).FirstOrDefault();
-                if (tg != null && g.AchievementsEarned != tg.AchievementsEarned)
-                {
+                if (tg != null && g.AchievementsEarned != tg.AchievementsEarned) {
                     refresh = true;
                 }
 
             }
 
-            if (refresh)
-            {
+            if (refresh) {
                 GameList = gameList.ToList();
                 //var temp = this.Library;
                 //Library = new PlayerLibrary()
@@ -293,8 +273,7 @@ namespace SteamAchievementTracker.ViewModel
 
         }
 
-        public void ReportProgress(int value)
-        {
+        public void ReportProgress(int value) {
 
         }
     }

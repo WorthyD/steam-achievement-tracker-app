@@ -86,7 +86,7 @@
             <HubSection Header="Settings">
                 <DataTemplate >
 
-                    <Partials:MainSettings DataContext="{Binding }" Grid.Column="1" Margin="20"></Partials:MainSettings>
+                    <Partials:MainSettings DataContext="{Binding SettingsVM}" Grid.Column="1" Margin="20"></Partials:MainSettings>
                 </DataTemplate>
             </HubSection>
 
@@ -107,9 +107,9 @@
 
         </Grid>
     </Grid>
-    <Page.BottomAppBar>
+    <!--<Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton Icon="Setting" Label="Settings" Command="{Binding GoSettings}"></AppBarButton>
         </CommandBar>
-    </Page.BottomAppBar>
+    </Page.BottomAppBar>-->
 </Page>
