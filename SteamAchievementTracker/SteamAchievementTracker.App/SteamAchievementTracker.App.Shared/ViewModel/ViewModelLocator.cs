@@ -46,11 +46,11 @@ namespace SteamAchievementTracker.App.ViewModel {
             }
         }
 
-        public SettingsViewModel MainSettings {
-            get {
-                return ServiceLocator.Current.GetInstance<SettingsViewModel>();
-            }
-        }
+        //public SettingsViewModel MainSettings {
+        //    get {
+        //        return ServiceLocator.Current.GetInstance<SettingsViewModel>();
+        //    }
+        //}
 
 
         static ViewModelLocator() {
@@ -69,7 +69,7 @@ namespace SteamAchievementTracker.App.ViewModel {
             SimpleIoc.Default.Register<IGameDetailsView, GameDetails>();
             SimpleIoc.Default.Register<IGameLibrary, GameLibrary>();
             SimpleIoc.Default.Register<IMain, Main>();
-            SimpleIoc.Default.Register<IMainSettings, MainSettings>();
+            //SimpleIoc.Default.Register<IMainSettings, MainSettings>();
             //SimpleIoc.Default.Register<IHelp, Help>();
 #if WINDOWS_PHONE_APP
             SimpleIoc.Default.Register<INavigationService, SteamAchievementTracker.App.Services.NavigationService>();

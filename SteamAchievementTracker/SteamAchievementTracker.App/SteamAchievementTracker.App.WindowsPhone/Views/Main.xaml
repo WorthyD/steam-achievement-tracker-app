@@ -19,7 +19,7 @@
                         <Partials:Profile DataContext="{Binding Main}"></Partials:Profile>
                         <Button Command="{Binding GoLibrary}" Margin="0,20,0,0">View Library</Button>
                         <Button Command="{Binding GoToHelp}" Margin="0,20,0,0">Help/FAQ</Button>
-                       <ProgressBar  Height="5" IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}"></ProgressBar>
+                        <ProgressBar  Height="5" IsIndeterminate="True" Visibility="{Binding IsLoading, Converter={StaticResource TrueToVisibleConverter}}"></ProgressBar>
                     </StackPanel>
                 </DataTemplate>
             </HubSection>
@@ -41,7 +41,7 @@
                                         />
                                 </core:EventTriggerBehavior>
                             </interactivity:Interaction.Behaviors>
-                           
+
                             <GridView.ItemTemplate>
                                 <DataTemplate >
                                     <Partials:GameListItem  ></Partials:GameListItem>
@@ -82,9 +82,31 @@
                     </Grid>
                 </DataTemplate>
             </HubSection>
-         
+
+            <HubSection Header="Settings">
+                <DataTemplate >
+
+                    <Partials:MainSettings DataContext="{Binding }" Grid.Column="1" Margin="20"></Partials:MainSettings>
+                </DataTemplate>
+            </HubSection>
+
         </Hub>
-       </Grid>
+        <Grid Grid.Row="0" Background="#D73D3D3D" 
+                Visibility="{Binding LoginVM.IsVisible, Converter={StaticResource TrueToVisibleConverter}}"
+              >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Background="#FF3D3D3D" VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
+                    <Partials:LoginView DataContext="{Binding LoginVM}" Grid.Column="1" Margin="20"></Partials:LoginView>
+                </Grid>
+            </StackPanel>
+
+        </Grid>
+    </Grid>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <AppBarButton Icon="Setting" Label="Settings" Command="{Binding GoSettings}"></AppBarButton>

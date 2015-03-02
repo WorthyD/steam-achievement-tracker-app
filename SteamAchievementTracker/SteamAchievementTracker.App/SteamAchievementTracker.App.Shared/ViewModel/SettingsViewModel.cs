@@ -40,7 +40,9 @@ namespace SteamAchievementTracker.App.ViewModel
         public RelayCommand LogOutUser { get; set; }
         public RelayCommand ClearCacheCommand { get; set; }
 
+#if WINDOWS_APP
         private MainSettings sf { get; set; }
+#endif
 
         private readonly INavigationService _navigationService;
         public SettingsViewModel(INavigationService navigationService)
@@ -89,9 +91,12 @@ namespace SteamAchievementTracker.App.ViewModel
 #endif
         public void ShowSettings()
         {
+
+#if WINDOWS_APP
             if (sf == null) {
                 sf = new MainSettings();
             }
+#endif
             string tUser = string.Empty;
             var setting = Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID"];
             if (setting != null)
@@ -116,10 +121,10 @@ namespace SteamAchievementTracker.App.ViewModel
             this.ShowNoAch = showNoAch;
 
 
+#if WINDOWS_APP
             //Windows.Storage.ApplicationData.Current.RoamingSettings.Values["ID64"]
             sf.DataContext = this;
 
-#if WINDOWS_APP
             sf.Show();
 #endif
 
