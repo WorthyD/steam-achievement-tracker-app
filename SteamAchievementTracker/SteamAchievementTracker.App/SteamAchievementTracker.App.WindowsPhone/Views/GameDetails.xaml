@@ -8,6 +8,7 @@
     xmlns:Partials="using:SteamAchievementTracker.App.Views.PartialViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" DataContext="{Binding Source={StaticResource Locator}, Path=GameDetails}"
+    xmlns:UI="using:Microsoft.Advertising.Mobile.UI"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <ItemsPanelTemplate x:Key="ListViewItemsPanel">
@@ -15,6 +16,10 @@
         </ItemsPanelTemplate>
     </Page.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
         <Hub  x:Name="GameDetailsHub"  >
             <Hub.Header>
                 <StackPanel>
@@ -93,5 +98,15 @@
                 </DataTemplate>
             </HubSection>
         </Hub>
+        <UI:AdControl Grid.Row="1"
+          AutoRefreshIntervalInSeconds="60" 
+          ApplicationId="1396ceb0-fa0d-4e68-88b7-e5d166767fc5" 
+          AdUnitId="202236" 
+          HorizontalAlignment="Center" 
+          Height="50" 
+          IsAutoRefreshEnabled="True" 
+          
+          VerticalAlignment="Top" 
+          Width="320"/>
     </Grid>
 </Page>
