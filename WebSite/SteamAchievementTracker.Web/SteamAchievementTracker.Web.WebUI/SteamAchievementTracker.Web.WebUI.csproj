@@ -126,6 +126,7 @@
     <Content Include="Content\Images\SmallLogo.png" />
     <Content Include="Content\Images\StoreLogo.png" />
     <Content Include="Content\Images\surface.png" />
+    <Content Include="Content\Images\windowsphone.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
