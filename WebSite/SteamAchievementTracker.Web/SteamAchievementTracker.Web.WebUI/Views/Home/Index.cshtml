@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
     string winRT = "http://apps.microsoft.com/windows/app/steam-achievement-tracker/fedf0221-68bb-4d88-a01d-df3953c28934";
+    string wp8 = "http://www.windowsphone.com/en-us/store/app/steam-achievement-tracker/d76598e2-fe4a-4f84-b0db-256361edecc1";
 }
 
 @*<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -39,8 +40,8 @@
     <div class="app-slider">
         <div>
             <div class="row">
-                <div class="col-sm-6 col-sm-push-6">
-                    <img src="~/Content/Images/surface.png" class="img-responsive" />
+                <div class="col-sm-6 col-sm-push-6 text-center">
+                    <img src="~/Content/Images/surface.png" class="img-responsive device-image" />
                 </div>
 
                 <div class="col-sm-6 col-sm-pull-6">
@@ -53,27 +54,29 @@
                         <li>Launch games from app (Windows only)</li>
                     </ul>
                     <a href="@winRT" class="btn btn-info"><i class="fa fa-windows"></i> Get the app</a>
-                    <!--Preview App?-->
                 </div>
             </div>
         </div>
-        @*<div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h3>Steam Achievement Tracker for Windows</h3>
-                        <p>Keep track of all your achievements, see what games you are close to 100% completing and what achievements are still needed.</p>
-                        <ul>
-                            <li>View your library with achievement progress.</li>
-                            <li>See how many achievements you have unlocked.</li>
-                            <li>Launch games from app (Windows only)</li>
-                        </ul>
-                        <a href="#" class="btn btn-info"><i class="fa fa-windows"></i> Get the app</a>
-                    </div>
-                    <div class="col-sm-6">
-                        <img src="~/Content/Images/surface.png" class="img-responsive" />
-                    </div>
+        <div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-push-6 text-center">
+                    <img src="~/Content/Images/windowsphone.png" class="img-responsive device-image" />
                 </div>
-            </div>*@
+
+                <div class="col-sm-6 col-sm-pull-6">
+
+                    <h2>Steam Achievement Tracker for Windows Phone 8.1</h2>
+                    <p>Keep track of all your achievements, see what games you are close to 100% completing and what achievements are still needed.</p>
+                    <ul>
+                        <li>View your library with achievement progress.</li>
+                        <li>See how many achievements you have unlocked.</li>
+                    </ul>
+                    <a href="@wp8" class="btn btn-info"><i class="fa fa-windows"></i> Get the app</a>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 <div class="row">
@@ -99,7 +102,7 @@
         <div class="col-md-4">
             <h2>Windows 8.1</h2>
             <img src="~/Content/Images/surface.png" class="img-responsive" />
-            <h4>Status: Pending Approval</h4>
+            <h4>Status: Published</h4>
             <p>
                 Track your Steam Achievements on your Windows Tablet or on your Windows 8 desktop.
             </p>
@@ -107,13 +110,17 @@
             <div>Development Platform: XAML</div>
         </div>
         <div class="col-md-4">
-            <h2>Windows Phone</h2>
-            <h4>Status: In Development</h4>
+            <h2>Windows Phone 8.1</h2>
+
+            <img src="~/Content/Images/windowsphone.png" class="img-responsive" />
+            <h4>Status: Published</h4>
+
+                    <a href="@wp8" class="btn btn-info"><i class="fa fa-windows"></i> Get the app</a>
             <div>Development Platform: XAML</div>
         </div>
         <div class="col-md-4">
             <h2>Web App</h2>
-            <h4>Status: Planned</h4>
+            <h4>Status: In Development</h4>
             <div>Development Platform: .Net MVC, AngularJS</div>
         </div>
     </div>
