@@ -135,6 +135,39 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Styles\Main.less" />
+    <Content Include="gruntfile.js" />
+    <Content Include="Scripts\App\app.module.js" />
+    <Content Include="Scripts\App\blocks\exception\exception-handler.provider.js" />
+    <Content Include="Scripts\App\blocks\exception\exception.js" />
+    <Content Include="Scripts\App\blocks\exception\exception.module.js" />
+    <Content Include="Scripts\App\blocks\logger\logger.js" />
+    <Content Include="Scripts\App\blocks\logger\logger.module.js" />
+    <Content Include="Scripts\App\blocks\router\routehelper.js" />
+    <Content Include="Scripts\App\blocks\router\router.module.js" />
+    <Content Include="Scripts\App\Core\config.js" />
+    <Content Include="Scripts\App\Core\constants.js" />
+    <Content Include="Scripts\App\Core\core.module.js" />
+    <Content Include="Scripts\App\Core\dataservice.js" />
+    <Content Include="Scripts\App\dashboard\config.route.js" />
+    <Content Include="Scripts\App\dashboard\dashboard.html" />
+    <Content Include="Scripts\App\dashboard\dashboard.js" />
+    <Content Include="Scripts\App\dashboard\dashboard.module.js" />
+    <Content Include="Scripts\App\dashboard\profile.html" />
+    <Content Include="Scripts\App\dashboard\profile.js" />
+    <Content Include="Scripts\App\Layout\layout.module.js" />
+    <Content Include="Scripts\App\Layout\shell.html" />
+    <Content Include="Scripts\App\Layout\shell.js" />
+    <Content Include="Scripts\App\Layout\sidebar.html" />
+    <Content Include="Scripts\App\Layout\sidebar.js" />
+    <Content Include="Scripts\App\Layout\topnav.html" />
+    <Content Include="Scripts\App\Layout\topnav.js" />
+    <Content Include="Scripts\App\widgets\ccSidebar.js" />
+    <Content Include="Scripts\App\widgets\ccSpinner.js" />
+    <Content Include="Scripts\App\widgets\ccWidgetClose.js" />
+    <Content Include="Scripts\App\widgets\ccWidgetHeader.js" />
+    <Content Include="Scripts\App\widgets\ccWidgetMinimize.js" />
+    <Content Include="Scripts\App\widgets\widgetheader.html" />
+    <Content Include="Scripts\App\widgets\widgets.module.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -147,8 +180,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +187,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+    <Content Include="bower.json" />
+    <Content Include="package.json" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>
