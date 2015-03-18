@@ -13,7 +13,7 @@
 
     var config = {
         appErrorPrefix: '[NG-Modular Error] ', //Configure the exceptionHandler decorator
-        appTitle: 'Southwest Airlines',
+        appTitle: '',
         version: '1.0.0'
     };
 

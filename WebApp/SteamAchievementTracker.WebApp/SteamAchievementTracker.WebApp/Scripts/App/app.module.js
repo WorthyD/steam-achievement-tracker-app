@@ -6,6 +6,7 @@
         'app.widgets',
 
         'app.dashboard',
+        'app.login',
         //'app.preplane',
 
         //'app.inline',
