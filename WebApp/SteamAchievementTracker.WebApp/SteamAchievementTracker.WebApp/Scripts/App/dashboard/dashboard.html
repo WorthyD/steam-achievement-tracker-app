@@ -1,0 +1,65 @@
+﻿<section id="dashboard-view" class="mainbar">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="widget wblue">
+                        <div data-cc-widget-header title="People on Flight"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Pic</th>
+                                        <th>Name</th>
+                                        <th>Kind Events</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-repeat="a in vm.avengers">
+                                        <td>
+                                            <img ng-src="{{a.UserGravatarImage}}" style="width:32px;" />
+                                        </td>
+                                        <td><a href="#/profile/{{a.UserID}}">{{a.FullName}}</a></td>
+                                        <td>{{a.EventCount}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-md-6">
+                    <div class="widget wlightblue">
+                        <div data-cc-widget-header title="People on Kind Events"
+                             allow-collapse="true"></div>
+                        <div class="widget-content text-center text-info">
+                            <table class="table table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Event</th>
+                                        <th>Event Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-repeat="a in vm.userEvents">
+                                      
+                                        <td>{{a.UserName}}</td>
+                                        <td>{{a.EventType}}</td>
+                                        <td>{{a.FormattedDate}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="widget-foot">
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

@@ -5,9 +5,10 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace SteamAchievementTracker.WebApp.Controllers.Api
-{
-    public class UserProfileController : ApiController
-    {
+
+namespace SteamAchievementTracker.WebApp.Controllers.Api {
+
+
+    public class UserProfileController : ApiController {
     }
 }

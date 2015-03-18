@@ -1,0 +1,22 @@
+﻿<div>
+    <div id="splash-page" data-ng-show="vm.showSplash" class="dissolve-animation">
+        <div class="page-splash">
+            <div class="page-splash-message">
+                Header
+            </div>
+        </div>
+    </div>
+
+    <header class="clearfix">
+        <div data-ng-include="'scripts/app/layout/topnav.html'"></div>
+    </header>
+    <section id="content" class="content">
+        <!--<div data-ng-include="'scripts/app/layout/sidebar.html'"></div>-->
+
+        <div data-ng-view class="shuffle-animation"></div>
+
+
+    </section>
+</div>
+
+
