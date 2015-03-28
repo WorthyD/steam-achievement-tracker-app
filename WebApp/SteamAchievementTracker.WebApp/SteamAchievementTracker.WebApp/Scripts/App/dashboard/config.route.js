@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -36,6 +36,6 @@
                     title: 'profile'
                 }
             }
-];
-}
+        ];
+    }
 })();

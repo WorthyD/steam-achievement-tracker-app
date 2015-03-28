@@ -5,9 +5,9 @@
         .module('app.layout')
         .controller('Shell', Shell);
 
-    Shell.$inject = ['$timeout', 'config', 'logger'];
+    Shell.$inject = ['$rootScope', '$timeout', 'config', 'logger', 'AuthService'];
 
-    function Shell($timeout, config, logger) {
+    function Shell($rootScope, $timeout, config, logger, AuthService) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -15,6 +15,15 @@
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = false;
         vm.showSplash = false;
+
+
+        $rootScope.currentUser = null;
+        $rootScope.userRoles = USER_ROLES;
+        $rootScope.isAuthorized = AuthService.isAuthorized;
+
+        $rootScope.setCurrentUser = function (user) {
+            $scope.currentUser = user;
+        };
 
         activate();
 
