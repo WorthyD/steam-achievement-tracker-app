@@ -1,4 +1,4 @@
-﻿/// <vs AfterBuild='less' />
+/// <vs AfterBuild='less' SolutionOpened='watch' />
 module.exports = function (grunt) {
 
     grunt.initConfig({
