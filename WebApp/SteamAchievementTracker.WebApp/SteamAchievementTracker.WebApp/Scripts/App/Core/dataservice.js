@@ -7,6 +7,7 @@
 
     /* @ngInject */
     function dataservice($http, $location, $q, exception, logger) {
+        console.log('dataservice');
         var isPrimed = false;
         var primePromise;
 

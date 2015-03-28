@@ -27,7 +27,7 @@
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
-
+        console.log('config');
         // Configure the common route provider
         routehelperConfigProvider.config.$routeProvider = $routeProvider;
         routehelperConfigProvider.config.docTitle = 'NG-Modular: ';

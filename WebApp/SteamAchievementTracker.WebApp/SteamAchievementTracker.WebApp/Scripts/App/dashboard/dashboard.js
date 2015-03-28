@@ -5,10 +5,11 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = ['$scope', '$q', 'dataservice', 'logger'];
+    Dashboard.$inject = [ '$q', 'dataservice', 'logger'];
 
-    function Dashboard($scope, $q, dataservice, logger) {
+    function Dashboard( $q, dataservice, logger) {
 
+        logger.info('dashboard');
 
         /*jshint validthis: true */
         var vm = this;
@@ -34,20 +35,20 @@
             });
         }
 
-        function getNewEvents() {
-            console.log(vm.userEvents);
-            var eLength = vm.userEvents.length;
-            var id = vm.userEvents[eLength - 1].EventID;
+        //function getNewEvents() {
+        //    console.log(vm.userEvents);
+        //    var eLength = vm.userEvents.length;
+        //    var id = vm.userEvents[eLength - 1].EventID;
 
-            return dataservice.getNewTokenEvents(id).then(function (data) {
-                if (data.length > 0) {
-                    logger.info('New Events Found');
-                    for (var i = 0; i < data.length; i++) {
-                        vm.userEvents.push(data[i]);
-                    }
-                }
-            });
-        }
+        //    return dataservice.getNewTokenEvents(id).then(function (data) {
+        //        if (data.length > 0) {
+        //            logger.info('New Events Found');
+        //            for (var i = 0; i < data.length; i++) {
+        //                vm.userEvents.push(data[i]);
+        //            }
+        //        }
+        //    });
+        //}
 
 
 
@@ -66,10 +67,10 @@
             });
         }
 
-        $scope.$on("$destroy", function () {
-            console.log('destorying');
+        //$scope.$on("$destroy", function () {
+        //    console.log('destorying');
 
-            clearInterval(myInterval);
-        });
+        //    clearInterval(myInterval);
+        //});
     }
 })();

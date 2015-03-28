@@ -150,10 +150,12 @@
     <Content Include="Scripts\App\blocks\logger\logger.module.js" />
     <Content Include="Scripts\App\blocks\router\routehelper.js" />
     <Content Include="Scripts\App\blocks\router\router.module.js" />
+    <Content Include="Scripts\App\Core\AuthService.js" />
     <Content Include="Scripts\App\Core\config.js" />
     <Content Include="Scripts\App\Core\constants.js" />
     <Content Include="Scripts\App\Core\core.module.js" />
     <Content Include="Scripts\App\Core\dataservice.js" />
+    <Content Include="Scripts\App\Core\datastore.js" />
     <Content Include="Scripts\App\dashboard\config.route.js" />
     <Content Include="Scripts\App\dashboard\dashboard.html" />
     <Content Include="Scripts\App\dashboard\dashboard.js" />
@@ -167,6 +169,10 @@
     <Content Include="Scripts\App\Layout\sidebar.js" />
     <Content Include="Scripts\App\Layout\topnav.html" />
     <Content Include="Scripts\App\Layout\topnav.js" />
+    <Content Include="Scripts\App\Login\config.route.js" />
+    <Content Include="Scripts\App\Login\login.html" />
+    <Content Include="Scripts\App\Login\login.js" />
+    <Content Include="Scripts\App\Login\login.module.js" />
     <Content Include="Scripts\App\widgets\ccSidebar.js" />
     <Content Include="Scripts\App\widgets\ccSpinner.js" />
     <Content Include="Scripts\App\widgets\ccWidgetClose.js" />

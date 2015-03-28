@@ -151,7 +151,9 @@ Global
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|ARM.ActiveCfg = Release|ARM
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|ARM.Build.0 = Release|ARM
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|ARM.Deploy.0 = Release|ARM
-		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|Mixed Platforms.ActiveCfg = Release|ARM
+		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|Mixed Platforms.Build.0 = Release|ARM
+		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|Mixed Platforms.Deploy.0 = Release|ARM
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|x64.ActiveCfg = Release|Any CPU
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|x86.ActiveCfg = Release|x86
 		{3A08F5E9-D19E-425C-8960-ECC22821CD05}.Release|x86.Build.0 = Release|x86
