@@ -9,12 +9,13 @@
 
     /* @ngInject */
     //function appRun(routehelper, $rootScope, $scope,  $location) {
-    function appRun(routehelper, $rootScope, $location, logger) {
+    function appRun(routehelper, $rootScope, $location, logger, AuthService) {
         routehelper.configureRoutes(getRoutes());
 
         // register listener to watch route changes
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
-            if ($rootScope.loggedUser == null) {
+            logger.info("Is Authenticated", AuthService.isAuthenticated())
+            if (AuthService.isAuthenticated() == false) {
                 // no logged user, we should be going to #login
                 if (next.templateUrl == "scripts/app/login/login.html") {
                     // already going to #login, no redirect needed

@@ -180,6 +180,7 @@
     <Content Include="Scripts\App\widgets\ccWidgetMinimize.js" />
     <Content Include="Scripts\App\widgets\widgetheader.html" />
     <Content Include="Scripts\App\widgets\widgets.module.js" />
+    <Content Include="Scripts\Utilities\Cookies.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

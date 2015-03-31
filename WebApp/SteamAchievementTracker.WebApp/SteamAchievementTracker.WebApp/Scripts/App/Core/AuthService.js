@@ -1,6 +1,7 @@
 ﻿(function () {
     'use strict';
 
+    var CookieName = "SteamID";
     angular
         .module('app.core')
         .factory('AuthService', function ($http, Session) {
@@ -17,16 +18,26 @@
             };
 
             authService.isAuthenticated = function () {
-                return !!Session.userId;
+                var userId = Cookies.Get(CookieName);
+                console.log('UserId '+ userId);
+                if (!Session.userId) {
+                    console.log('SessionId');
+                    if (userId == null || userId == '') {
+                        
+                        return false;
+                    }
+                    Session.Create(userId, userId);
+                }
+                return true;
             };
 
-            authService.isAuthorized = function (authorizedRoles) {
-                if (!angular.isArray(authorizedRoles)) {
-                    authorizedRoles = [authorizedRoles];
-                }
-                return (authService.isAuthenticated() &&
-                  authorizedRoles.indexOf(Session.userRole) !== -1);
-            };
+            //authService.isAuthorized = function (authorizedRoles) {
+            //    if (!angular.isArray(authorizedRoles)) {
+            //        authorizedRoles = [authorizedRoles];
+            //    }
+            //    return (authService.isAuthenticated() &&
+            //      authorizedRoles.indexOf(Session.userRole) !== -1);
+            //};
 
             return authService;
         })

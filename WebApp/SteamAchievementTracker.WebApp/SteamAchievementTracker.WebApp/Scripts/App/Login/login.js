@@ -34,7 +34,7 @@
         activate();
 
 
-        logger.info(AuthService.isAuthenticated());
+        //logger.info(AuthService.isAuthenticated());
 
         function activate() {
             //var promises = [getAvengersCast(), getTokenEvents()];
