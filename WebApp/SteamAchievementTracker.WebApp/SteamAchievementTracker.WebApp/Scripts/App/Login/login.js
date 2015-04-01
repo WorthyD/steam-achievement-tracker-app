@@ -19,8 +19,7 @@
         vm.title = 'Dashboard';
 
         $scope.credentials = {
-            username: '',
-            password: ''
+            username: ''
         };
         //$scope.login = function (credentials) {
         //    AuthService.login(credentials).then(function (user) {
