@@ -10,6 +10,8 @@
 
             authService.login = function (credentials) {
 
+
+                Cookies.Set(CookieName, credentials, 1000);
                 Session.create(credentials, credentials);
                 //return $http
                 //  .post('/login', credentials)

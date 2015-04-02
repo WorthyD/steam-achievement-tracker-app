@@ -18,9 +18,9 @@
         vm.userEvents = [];
         vm.title = 'Dashboard';
 
-        $scope.credentials = {
-            username: ''
-        };
+        //$scope.credentials = {
+        //    username: ''
+        //};
         //$scope.login = function (credentials) {
         //    AuthService.login(credentials).then(function (user) {
         //        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
@@ -84,5 +84,9 @@
 
         //    clearInterval(myInterval);
         //});
+        $scope.Login = function () {
+            console.log('testing');
+            AuthService.login($scope.userid);
+        };
     }
 })();
