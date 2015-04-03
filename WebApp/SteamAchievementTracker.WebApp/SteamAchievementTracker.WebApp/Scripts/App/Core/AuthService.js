@@ -4,7 +4,7 @@
     var CookieName = "SteamID";
     angular
         .module('app.core')
-        .factory('AuthService', function ($http, Session, $location) {
+        .factory('AuthService', function ($http, Session, $location ) {
             console.log('AuthService');
             var authService = {};
 
@@ -32,7 +32,7 @@
 
                         return false;
                     }
-                    Session.Create(userId, userId);
+                    Session.create(userId, userId);
                 }
                 return true;
             };

@@ -31,14 +31,14 @@ namespace SteamAPI.Player {
             {
                 Debug.WriteLine(string.Format("Error Getting Profile: {0}  ||||||||||||||| {1}", e.Message, e.InnerException.Message));
 
-
-
-
-
                 throw new Exceptions.PlayerNotFoundException();
             }
 
             return profileResponse;
+        }
+        public async Task<ViewModels.ProfileViewModel> GetLightResponse() {
+            var r = await GetResponse();
+            return new ViewModels.ProfileViewModel(r.Profile);
         }
     }
 }
