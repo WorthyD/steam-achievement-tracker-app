@@ -5,9 +5,9 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = [ '$q', 'dataservice', 'logger', 'profileservice', 'Session'];
+    Dashboard.$inject = ['$q', 'dataservice', 'logger', 'profileservice', 'Session', '$indexedDB'];
 
-    function Dashboard( $q, dataservice, logger, profileservice, Session) {
+    function Dashboard($q, dataservice, logger, profileservice, Session, $indexedDB) {
 
         logger.info('dashboard');
 
@@ -21,6 +21,20 @@
         vm.title = 'Dashboard';
 
         var myInterval = null;
+        console.log($indexedDB);
+
+
+        $indexedDB.openStore('people', function (store) {
+
+            store.insert({ "ssn": "444-444-222-111", "name": "John Doe", "age": 57 });//.then(function(e){...});
+
+            store.getAll().then(function (people) {
+                // Update scope
+                console.log(people)
+               // $scope.objects = people;
+            });
+
+        });
 
         activate();
 

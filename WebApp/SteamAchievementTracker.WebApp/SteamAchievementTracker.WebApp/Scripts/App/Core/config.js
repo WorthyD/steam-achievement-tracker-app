@@ -22,7 +22,7 @@
     core.config(configure);
 
     /* @ngInject */
-    function configure ($logProvider, $routeProvider, routehelperConfigProvider, exceptionHandlerProvider) {
+    function configure ($logProvider, $routeProvider, routehelperConfigProvider, exceptionHandlerProvider, $indexedDBProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
@@ -43,5 +43,16 @@
 
         // Configure the common exception handler
         exceptionHandlerProvider.configure(config.appErrorPrefix);
+
+
+        console.log('buidling datastore')
+        $indexedDBProvider
+      .connection('myIndexedDB')
+      .upgradeDatabase(1, function (event, db, tx) {
+          console.log('building');
+          var objStore = db.createObjectStore('people', { keyPath: 'ssn' });
+          objStore.createIndex('name_idx', 'name', { unique: false });
+          objStore.createIndex('age_idx', 'age', { unique: false });
+      });
     }
 })();
