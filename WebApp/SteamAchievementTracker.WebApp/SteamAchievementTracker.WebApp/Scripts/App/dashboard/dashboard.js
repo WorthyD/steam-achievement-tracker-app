@@ -5,9 +5,9 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = [ '$q', 'dataservice', 'logger'];
+    Dashboard.$inject = [ '$q', 'dataservice', 'logger', 'profileservice', 'Session'];
 
-    function Dashboard( $q, dataservice, logger) {
+    function Dashboard( $q, dataservice, logger, profileservice, Session) {
 
         logger.info('dashboard');
 
@@ -16,7 +16,7 @@
 
 
         vm.avengerCount = 0;
-        vm.avengers = [];
+        vm.User = null;
         vm.userEvents = [];
         vm.title = 'Dashboard';
 
@@ -25,12 +25,12 @@
         activate();
 
         function activate() {
-            var promises = [getAvengersCast(), getTokenEvents()];
+            var promises = [GetUserByID()];
             //            Using a resolver on all routes or dataservice.ready in every controller
             //            return dataservice.ready(promises).then(function(){
             return $q.all(promises).then(function () {
                 logger.info('Activated Dashboard View');
-                myInterval = setInterval(getNewEvents, 5000);
+                //myInterval = setInterval(getNewEvents, 5000);
                 //getNewEvents();
             });
         }
@@ -52,20 +52,22 @@
 
 
 
-        function getAvengersCast() {
-            return dataservice.getUsers().then(function (data) {
-                vm.avengers = data;
-                return vm.avengers;
+        function GetUserByID() {
+            console.log(Session);
+            return profileservice.getUserById(Session.userId).then(function (data) {
+                vm.User = data;
+                //validate login
+                return vm.User;
             });
         }
 
 
-        function getTokenEvents() {
-            return dataservice.getTokenEvents().then(function (data) {
-                vm.userEvents = data;
-                return vm.userEvents;
-            });
-        }
+        //function getTokenEvents() {
+        //    return dataservice.getTokenEvents().then(function (data) {
+        //        vm.userEvents = data;
+        //        return vm.userEvents;
+        //    });
+        //}
 
         //$scope.$on("$destroy", function () {
         //    console.log('destorying');

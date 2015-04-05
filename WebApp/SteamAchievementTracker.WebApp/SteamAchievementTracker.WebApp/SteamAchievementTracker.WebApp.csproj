@@ -156,6 +156,7 @@
     <Content Include="Scripts\App\Core\core.module.js" />
     <Content Include="Scripts\App\Core\dataservice.js" />
     <Content Include="Scripts\App\Core\datastore.js" />
+    <Content Include="Scripts\App\Core\Web\ProfileService.js" />
     <Content Include="Scripts\App\dashboard\config.route.js" />
     <Content Include="Scripts\App\dashboard\dashboard.html" />
     <Content Include="Scripts\App\dashboard\dashboard.js" />
@@ -207,6 +208,12 @@
       <DependentUpon>Main.css</DependentUpon>
     </Content>
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\SteamAPI\SteamAPI\SteamAPI.csproj">
+      <Project>{be7cfeef-26b9-421d-9c27-269af6fc826f}</Project>
+      <Name>SteamAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
