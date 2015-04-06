@@ -3,10 +3,10 @@
 
     angular
         .module('app.core')
-        .factory('profileservice', profileservice);
+        .factory('profilestore', profilestore);
 
-    /* @ngInject */
-    function profileservice($http, $location, $q, exception, logger) {
+
+    function profilestore($q, profileservice) {
         var isPrimed = false;
         var primePromise;
 
@@ -20,17 +20,19 @@
 
         function getUserById(id) {
             //get from store
-            return $http.get('/api/userprofile/' + id)
-                  .then(getUserByIdComplete)
-                  .catch(function (message) {
-                      exception.catcher('XHR Failed for GetUserById')(message);
-                  });
+            //return $http.get('/api/userprofile/' + id)
+            //      .then(getUserByIdComplete)
+            //      .catch(function (message) {
+            //          exception.catcher('XHR Failed for GetUserById')(message);
+            //      });
 
-            function getUserByIdComplete(data, status, headers, config) {
-                console.log(data.data);
-                //Add to store
-                return data.data
-            }
+            //function getUserByIdComplete(data, status, headers, config) {
+            //    console.log(data.data);
+            //    //Add to store
+            //    return data.data
+            //}
+
+
         }
 
         function prime() {
@@ -55,6 +57,5 @@
                 .then(function () { return $q.all(nextPromises); })
                 .catch(exception.catcher('"ready" function failed'));
         }
-
     }
 })();
