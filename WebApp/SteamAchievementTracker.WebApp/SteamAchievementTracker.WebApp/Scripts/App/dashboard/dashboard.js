@@ -5,9 +5,9 @@
         .module('app.dashboard')
         .controller('Dashboard', Dashboard);
 
-    Dashboard.$inject = ['$q', 'dataservice', 'logger', 'profileservice', 'Session', '$indexedDB'];
+    Dashboard.$inject = ['$q', 'dataservice', 'logger', 'profilestore', 'Session'];
 
-    function Dashboard($q, dataservice, logger, profileservice, Session, $indexedDB) {
+    function Dashboard($q, dataservice, logger, profilestore, Session) {
 
         logger.info('dashboard');
 
@@ -21,20 +21,20 @@
         vm.title = 'Dashboard';
 
         var myInterval = null;
-        console.log($indexedDB);
+        //console.log($indexedDB);
 
 
-        $indexedDB.openStore('people', function (store) {
+        //$indexedDB.openStore('people', function (store) {
 
-            store.insert({ "ssn": "444-444-222-111", "name": "John Doe", "age": 57 });//.then(function(e){...});
+        //    store.insert({ "ssn": "444-444-222-111", "name": "John Doe", "age": 57 });//.then(function(e){...});
 
-            store.getAll().then(function (people) {
-                // Update scope
-                console.log(people)
-               // $scope.objects = people;
-            });
+        //    store.getAll().then(function (people) {
+        //        // Update scope
+        //        console.log(people)
+        //       // $scope.objects = people;
+        //    });
 
-        });
+        //});
 
         activate();
 
@@ -68,7 +68,8 @@
 
         function GetUserByID() {
             console.log(Session);
-            return profileservice.getUserById(Session.userId).then(function (data) {
+            return profilestore.getUserById(Session.userId).then(function (data) {
+                console.log('this');
                 vm.User = data;
                 //validate login
                 return vm.User;

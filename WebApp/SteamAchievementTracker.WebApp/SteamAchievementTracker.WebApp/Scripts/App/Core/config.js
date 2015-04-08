@@ -51,10 +51,10 @@
       .upgradeDatabase(1, function (event, db, tx) {
           var objStore = db.createObjectStore('PlayerProfile', { keyPath: 'SteamID64' });
 
-          var objStore2 = db.createObjectStore('PlayerRecentGames', { keyPath: 'ID64-GameLink' });
+          var objStore2 = db.createObjectStore('PlayerRecentGames', { keyPath: 'ID64GameLink' });
           objStore2.createIndex("SteamID64", "SteamID64", { unique: false });
 
-          var objStore3 = db.createObjectStore('Game', { keyPath: 'GameID-SteamID' });
+          var objStore3 = db.createObjectStore('Game', { keyPath: 'GameIDSteamID' });
           objStore3.createIndex("SteamID64", "SteamID64", { unique: false });
           objStore3.createIndex("GameID", "GameID", { unique: false });
 

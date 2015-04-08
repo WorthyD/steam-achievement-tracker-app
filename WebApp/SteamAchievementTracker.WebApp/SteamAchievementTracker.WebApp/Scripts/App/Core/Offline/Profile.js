@@ -6,7 +6,7 @@
         .factory('profilestore', profilestore);
 
 
-    function profilestore($q, profileservice) {
+    function profilestore($q, profileservice, $indexedDB) {
         var isPrimed = false;
         var primePromise;
 
@@ -31,8 +31,16 @@
             //    //Add to store
             //    return data.data
             //}
+            console.log('finding player');
+            return $indexedDB.openStore('PlayerProfile', function (store) {
+                console.log('ting')
+                store.find(id).then(function (person) {
+                    console.log('person');
+                    console.log(person);
 
-
+                    return person;
+                });
+            });
         }
 
         function prime() {
