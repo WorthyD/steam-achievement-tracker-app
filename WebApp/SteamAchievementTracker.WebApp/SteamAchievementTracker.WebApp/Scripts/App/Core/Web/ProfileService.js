@@ -20,6 +20,7 @@
 
         function getUserById(id) {
             //get from store
+            console.log('getUserById')
             return $http.get('/api/userprofile/' + id)
                   .then(getUserByIdComplete)
                   .catch(function (message) {

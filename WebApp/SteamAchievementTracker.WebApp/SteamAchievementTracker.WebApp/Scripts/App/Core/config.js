@@ -50,6 +50,7 @@
       .connection('SteamAPI')
       .upgradeDatabase(1, function (event, db, tx) {
           var objStore = db.createObjectStore('PlayerProfile', { keyPath: 'SteamID64' });
+          objStore.createIndex("SteamID", "SteamID", { unique: false });
 
           var objStore2 = db.createObjectStore('PlayerRecentGames', { keyPath: 'ID64GameLink' });
           objStore2.createIndex("SteamID64", "SteamID64", { unique: false });

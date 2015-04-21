@@ -31,14 +31,31 @@
             //    //Add to store
             //    return data.data
             //}
+            var addProfileToDB = function () {
+                return profileservice.getUserById(id).then(function (data) {
+                    return $indexedDB.openStore('PlayerProfile', function (store) {
+                        return store.insert(data).then(function () {
+                            return data;
+                        });
+                    });
+                });
+
+            };
+
+
             console.log('finding player');
             return $indexedDB.openStore('PlayerProfile', function (store) {
                 console.log('ting')
-                store.find(id).then(function (person) {
+                return store.find(id).then(function (person) {
                     console.log('person');
                     console.log(person);
 
                     return person;
+                }).catch(function (error) {
+                    if (error == "PlayerProfile:" + id + " not found.") {
+                        console.log('getting player');
+                        return addProfileToDB();
+                    }
                 });
             });
         }
