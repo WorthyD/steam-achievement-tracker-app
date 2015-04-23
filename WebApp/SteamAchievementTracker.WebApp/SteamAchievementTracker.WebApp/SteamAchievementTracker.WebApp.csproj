@@ -156,6 +156,7 @@
     <Content Include="Scripts\App\Core\core.module.js" />
     <Content Include="Scripts\App\Core\dataservice.js" />
     <Content Include="Scripts\App\Core\datastore.js" />
+    <Content Include="Scripts\App\Core\Offline\Profile.js" />
     <Content Include="Scripts\App\Core\Web\ProfileService.js" />
     <Content Include="Scripts\App\dashboard\config.route.js" />
     <Content Include="Scripts\App\dashboard\dashboard.html" />

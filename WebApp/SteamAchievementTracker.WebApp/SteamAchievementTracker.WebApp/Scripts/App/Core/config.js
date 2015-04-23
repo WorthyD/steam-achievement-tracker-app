@@ -22,12 +22,12 @@
     core.config(configure);
 
     /* @ngInject */
-    function configure ($logProvider, $routeProvider, routehelperConfigProvider, exceptionHandlerProvider) {
+    function configure ($logProvider, $routeProvider, routehelperConfigProvider, exceptionHandlerProvider, $indexedDBProvider) {
         // turn debugging off/on (no info or warn)
         if ($logProvider.debugEnabled) {
             $logProvider.debugEnabled(true);
         }
-        console.log('config');
+
         // Configure the common route provider
         routehelperConfigProvider.config.$routeProvider = $routeProvider;
         routehelperConfigProvider.config.docTitle = 'NG-Modular: ';
@@ -43,5 +43,24 @@
 
         // Configure the common exception handler
         exceptionHandlerProvider.configure(config.appErrorPrefix);
+
+
+        console.log('buidling datastore')
+        $indexedDBProvider
+      .connection('SteamAPI')
+      .upgradeDatabase(1, function (event, db, tx) {
+          var objStore = db.createObjectStore('PlayerProfile', { keyPath: 'SteamID64' });
+          objStore.createIndex("SteamID", "SteamID", { unique: false });
+
+          var objStore2 = db.createObjectStore('PlayerRecentGames', { keyPath: 'ID64GameLink' });
+          objStore2.createIndex("SteamID64", "SteamID64", { unique: false });
+
+          var objStore3 = db.createObjectStore('Game', { keyPath: 'GameIDSteamID' });
+          objStore3.createIndex("SteamID64", "SteamID64", { unique: false });
+          objStore3.createIndex("GameID", "GameID", { unique: false });
+
+          var objStore4 = db.createObjectStore('GameAchievement', { });
+          objStore4.createIndex("StatsURL", "StatsURL", { unique: false });
+      });
     }
 })();

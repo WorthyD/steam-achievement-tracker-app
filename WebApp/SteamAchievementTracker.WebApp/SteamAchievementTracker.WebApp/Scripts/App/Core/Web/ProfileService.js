@@ -7,7 +7,6 @@
 
     /* @ngInject */
     function profileservice($http, $location, $q, exception, logger) {
-        console.log('dataservice');
         var isPrimed = false;
         var primePromise;
 
@@ -21,6 +20,7 @@
 
         function getUserById(id) {
             //get from store
+            console.log('getUserById')
             return $http.get('/api/userprofile/' + id)
                   .then(getUserByIdComplete)
                   .catch(function (message) {
