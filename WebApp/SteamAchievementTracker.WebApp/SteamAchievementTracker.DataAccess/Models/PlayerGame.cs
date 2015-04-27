@@ -5,17 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SteamAchievementTracker.Contracts.Models;
 
 namespace SteamAchievementTracker.DataAccess.Models {
-    public class PlayerGame {
+    public class PlayerGame  : IPlayerGame{
 
 
+        [ForeignKey("PlayerProfiles")]
         [Key, Column(Order = 10)]
         public long PlayerID64 { get; set; }
 
         [Key, Column(Order = 20)]
         public int AppID { get; set; }
-
 
         [Required]
         [StringLength(250)]
@@ -66,8 +67,8 @@ namespace SteamAchievementTracker.DataAccess.Models {
         [Required]
         public bool HasAchievements { get; set; }
 
-        public bool BeenProcessed { get;}
-        public double PercentComplete { get; }
+        public bool BeenProcessed { get; set; }
+        public double PercentComplete { get; set; }
 
 
     }

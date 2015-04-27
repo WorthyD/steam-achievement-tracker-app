@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 
 namespace SteamAchievementTracker.DataAccess {
-    public class ModelContext :DbContext {
+    public class ModelContext : DbContext, IDisposable  {
         public static string Connection {
             get {
 
-                return "SteamAchievementTracker";
+                return "DefaultConnection";
             }
         }
         public ModelContext() : base(Connection) { }
 
 
-
+        public DbSet<Models.PlayerGame> PlayerGames { get; set; }
+        public DbSet<Models.PlayerGameAchievements> PlayerGameAchievements { get; set; }
+        public DbSet<Models.PlayerGameTags> PlayerGameTags { get; set; }
+        public DbSet<Models.PlayerProfile> PlayerProfiles { get; set; }
+        public DbSet<Models.ProfileRecentGame> ProfileRecentGames { get; set; }
 
     }
 }

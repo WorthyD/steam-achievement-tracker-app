@@ -5,12 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SteamAchievementTracker.Contracts.Models;
 
 namespace SteamAchievementTracker.DataAccess.Models {
-    public class ProfileRecentGame {
+    public class ProfileRecentGame : IProfileRecentGame{
             
         [ForeignKey("PlayerProfiles")]
         public long ID64 { get; set; }
-        public string GameLink { get; set; }
+
+        [ForeignKey("PlayerGames")]
+        public int AppID { get; set; }
     }
 }
