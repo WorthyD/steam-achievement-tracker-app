@@ -14,16 +14,23 @@ namespace SteamAchievementTracker.DataAccess.Models {
         public long PlayerID64 { get; set; }
 
         [Required]
+        [StringLength(250)]
         public string CustomUrl { get; set; }
 
         [Required]
+        [StringLength(250)]
         public string Name { get; set; }
 
         [Required]
+        [StringLength(250)]
         public string ThumbURL { get; set; }
 
         [Required]
         public DateTime LastUpdate { get; set; }
+
+        [Required]
+        public DateTime LibraryLastUpdate { get; set; }
+
 
 
         public virtual IList<PlayerGame> PlayerGames {get;set;}
