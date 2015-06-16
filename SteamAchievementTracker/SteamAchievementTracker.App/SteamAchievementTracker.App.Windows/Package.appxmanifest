@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="55814WorthyD.SteamAchievementTracker" Publisher="CN=BA676AFD-B57C-4D0C-98FA-3C089699ADC8" Version="1.1.0.1" />
+  <Identity Name="55814WorthyD.SteamAchievementTracker" Publisher="CN=BA676AFD-B57C-4D0C-98FA-3C089699ADC8" Version="1.1.0.3" />
   <Properties>
     <DisplayName>Steam Achievement Tracker</DisplayName>
     <PublisherDisplayName>WorthyD</PublisherDisplayName>

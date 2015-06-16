@@ -168,7 +168,7 @@ namespace SteamAchievementTracker.ViewModel {
                 this.LoginVM.IsVisible = false;
                 #if WINDOWS_APP
                 #else 
-                SettingsVM.ShowSettings();
+               // SettingsVM.ShowSettings();
                 #endif
             } else {
 

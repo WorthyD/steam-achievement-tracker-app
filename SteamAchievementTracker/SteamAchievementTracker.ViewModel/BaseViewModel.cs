@@ -115,13 +115,13 @@ namespace SteamAchievementTracker.ViewModel {
             });
 
             GoSettings = new RelayCommand(() => {
-#if WINDOWS_APP
+//#if WINDOWS_APP
                 var iSettings = SimpleIoc.Default.GetInstance<ISettingsViewModel>();
                 iSettings.ShowSettings();
-#else
-                var pageType = SimpleIoc.Default.GetInstance<IMainSettings>();
-                _navigationService.Navigate(pageType.GetType(), null);
-#endif
+//#else
+//                var pageType = SimpleIoc.Default.GetInstance<IMainSettings>();
+//                _navigationService.Navigate(pageType.GetType(), null);
+//#endif
             });
         }
 
