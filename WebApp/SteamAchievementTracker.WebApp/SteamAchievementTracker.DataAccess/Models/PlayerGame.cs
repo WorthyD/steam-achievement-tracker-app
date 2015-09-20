@@ -7,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using SteamAchievementTracker.Contracts.Models;
 
-namespace SteamAchievementTracker.DataAccess.Models {
-    public class PlayerGame  : IPlayerGame{
+namespace SteamAchievementTracker.DataAccess.Models
+{
+    public class PlayerGame : IPlayerGame
+    {
 
 
         [ForeignKey("PlayerProfiles")]
@@ -25,9 +27,9 @@ namespace SteamAchievementTracker.DataAccess.Models {
         [Required]
         public string StatsLink { get; set; }
 
-         [Required]
+        [Required]
         [StringLength(250)]
- 
+
         public string GameLink { get; set; }
 
         [Required]
@@ -36,7 +38,7 @@ namespace SteamAchievementTracker.DataAccess.Models {
 
         [Required]
         [StringLength(250)]
- 
+
         public string Icon { get; set; }
 
         [Required]
@@ -70,6 +72,9 @@ namespace SteamAchievementTracker.DataAccess.Models {
         public bool BeenProcessed { get; set; }
         public double PercentComplete { get; set; }
 
+        public virtual PlayerProfile PlayerProfiles { get; set; }
 
+        public virtual IList<PlayerGameAchievements> PlayerGameAchievements { get; set; }
+        public virtual IList<ProfileRecentGame> ProfileRecentGames { get; set; } 
     }
 }

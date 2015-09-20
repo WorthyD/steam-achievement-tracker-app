@@ -13,12 +13,12 @@ namespace SteamAchievementTracker.DataAccess {
                 return "DefaultConnection";
             }
         }
-        public ModelContext() : base(Connection) { }
+        public ModelContext() : base("SteamAchievementTracker") { }
 
 
         public DbSet<Models.PlayerGame> PlayerGames { get; set; }
-        public DbSet<Models.PlayerGameAchievements> PlayerGameAchievements { get; set; }
-        public DbSet<Models.PlayerGameTags> PlayerGameTags { get; set; }
+        //public DbSet<Models.PlayerGameAchievements> PlayerGameAchievements { get; set; }
+        //public DbSet<Models.PlayerGameTags> PlayerGameTags { get; set; }
         public DbSet<Models.PlayerProfile> PlayerProfiles { get; set; }
         public DbSet<Models.ProfileRecentGame> ProfileRecentGames { get; set; }
 

@@ -42,7 +42,7 @@ namespace SteamAchievementTracker.BLL.Providers {
 
 
                 if (dbProfile.LibraryLastUpdate < Settings.ProfileExpiration) {
-
+                    InsertUpdateGames(db, response.Profile.steamID64, gResponse.GamesList);
                 }
 
 
@@ -52,7 +52,7 @@ namespace SteamAchievementTracker.BLL.Providers {
         }
 
 
-        public DataAccess.Models.PlayerProfile AddProfile(DataAccess.ModelContext db, SteamAPI.Models.Profile.profile p) {
+        private DataAccess.Models.PlayerProfile AddProfile(DataAccess.ModelContext db, SteamAPI.Models.Profile.profile p) {
             DataAccess.Models.PlayerProfile profile = new DataAccess.Models.PlayerProfile();
             profile.PlayerID64 = p.steamID64;
             profile.CustomUrl = p.customURL;
@@ -68,7 +68,7 @@ namespace SteamAchievementTracker.BLL.Providers {
             db.ProfileRecentGames.AddRange(rgList);
             return profile;
         }
-        public void UpdateProfile(DataAccess.ModelContext db, DataAccess.Models.PlayerProfile p, SteamAPI.Models.Profile.profile pr) {
+        private void UpdateProfile(DataAccess.ModelContext db, DataAccess.Models.PlayerProfile p, SteamAPI.Models.Profile.profile pr) {
             p.CustomUrl = pr.customURL;
             p.LastUpdate = DateTime.Now;
             p.Name = pr.realname;
@@ -84,7 +84,7 @@ namespace SteamAchievementTracker.BLL.Providers {
 
 
 
-        public List<DataAccess.Models.ProfileRecentGame> SetRecentGames( long id, SteamAPI.Models.Profile.profileMostPlayedGame[] games) {
+        private List<DataAccess.Models.ProfileRecentGame> SetRecentGames( long id, SteamAPI.Models.Profile.profileMostPlayedGame[] games) {
             List<DataAccess.Models.ProfileRecentGame> rgList = new List<DataAccess.Models.ProfileRecentGame>();
             foreach (var i in games) {
                 DataAccess.Models.ProfileRecentGame rg = new DataAccess.Models.ProfileRecentGame();
@@ -98,7 +98,7 @@ namespace SteamAchievementTracker.BLL.Providers {
             return rgList;
         }
 
-        public void InsertUpdateGames(DataAccess.ModelContext db,long userId64,  SteamAPI.Models.gamesList gl) {
+        private void InsertUpdateGames(DataAccess.ModelContext db,long userId64,  SteamAPI.Models.gamesList gl) {
             var userGames = db.PlayerGames.Where(x => x.PlayerID64 == userId64).ToList();
 
             foreach (var g in gl.games) {
@@ -110,13 +110,21 @@ namespace SteamAchievementTracker.BLL.Providers {
                     db.PlayerGames.Add(existingG);
 
                     existingG.BeenProcessed = false;
-                    //existingG.HasAchievements = (!string.IsNullOrEmpty(tGame.StatsLink));
+                    existingG.HasAchievements = (!string.IsNullOrEmpty(g.statsLink));
+
+                    existingG.PlayerID64 = userId64;
+                    existingG.AppID = g.appID;
+                    existingG.Icon = string.Empty;
 
                 }
 
-
+                existingG.Name = g.name;
+                existingG.StatsLink = g.statsLink;
+                existingG.GameLink = g.storeLink;
+                existingG.Icon = g.logo;
 
             }
+            db.SaveChanges();
 
         }
     }

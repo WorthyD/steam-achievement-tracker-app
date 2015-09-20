@@ -8,19 +8,20 @@ using System.Threading.Tasks;
 using SteamAchievementTracker.Contracts.Models;
 
 namespace SteamAchievementTracker.DataAccess.Models {
-    public class PlayerGameAchievements : IPlayerGameAchievement{
+    public class PlayerGameAchievements : IPlayerGameAchievement
+    {
 
 
         [Key, Column(Order = 10)]
-        [ForeignKey("PlayerProfiles")]
+       // [ForeignKey("PlayerProfile")]
         public long PlayerID64 { get; set; }
 
         [Key, Column(Order = 20)]
-        [ForeignKey("PlayerGames")]
+        //[ForeignKey("PlayerGame")]
         public int AppID { get; set; }
 
 
-        [Key, Column(Order = 20)]
+        [Key, Column(Order = 30)]
         [StringLength(250)]
         public string AchievementID { get; set; }
 
@@ -45,5 +46,8 @@ namespace SteamAchievementTracker.DataAccess.Models {
 
         [Required]
         public string UnlockTimestamp { get; set; }
+
+        public virtual PlayerProfile PlayerProfile { get; set; }
+        public virtual PlayerGame PlayerGame { get; set; }
     }
 }
