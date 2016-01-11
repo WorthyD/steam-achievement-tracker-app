@@ -12,19 +12,25 @@ namespace SteamAchievementTracker.DataAccess.Models {
 
         [Key]
         [Required]
-        public long PlayerID64 { get; set; }
+        public long SteamId { get; set; }
 
         [Required]
         [StringLength(250)]
-        public string CustomUrl { get; set; }
+        public string PersonaName { get; set; }
 
         [Required]
         [StringLength(250)]
-        public string Name { get; set; }
+        public string RealName { get; set; }
 
         [Required]
         [StringLength(250)]
-        public string ThumbURL { get; set; }
+        public string AvatarFull { get; set; }
+
+        [Required]
+        [StringLength(250)]
+        public string ProfileUrl { get; set; }
+
+
 
         [Required]
         public DateTime LastUpdate { get; set; }

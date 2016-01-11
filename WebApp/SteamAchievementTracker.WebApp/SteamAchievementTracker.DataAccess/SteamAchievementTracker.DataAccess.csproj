@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
+    <Compile Include="Models\GameAchievement.cs" />
     <Compile Include="Models\PlayerGame.cs" />
     <Compile Include="Models\PlayerGameAchievements.cs" />
     <Compile Include="Models\PlayerProfile.cs" />

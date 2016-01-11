@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamAchievementTracker.WebApp", "SteamAchievementTracker.WebApp\SteamAchievementTracker.WebApp.csproj", "{DB3E4EBC-EA9F-4660-8002-6FBAB5FD29C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamAchievementTracker.WebApp.Tests", "SteamAchievementTracker.WebApp.Tests\SteamAchievementTracker.WebApp.Tests.csproj", "{0B7671F6-C289-48A2-851F-CEC518D66600}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamAPI", "..\..\SteamAPI\SteamAPI\SteamAPI.csproj", "{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A6A1A4A1-5963-406D-BCAB-F270FBED8465}"
 EndProject
@@ -80,21 +78,6 @@ Global
 		{0B7671F6-C289-48A2-851F-CEC518D66600}.Release|ARM.ActiveCfg = Release|Any CPU
 		{0B7671F6-C289-48A2-851F-CEC518D66600}.Release|x64.ActiveCfg = Release|Any CPU
 		{0B7671F6-C289-48A2-851F-CEC518D66600}.Release|x86.ActiveCfg = Release|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Design|Any CPU.ActiveCfg = Design|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Design|Any CPU.Build.0 = Design|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Design|ARM.ActiveCfg = Design|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Design|x64.ActiveCfg = Design|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Design|x86.ActiveCfg = Design|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Release|ARM.ActiveCfg = Release|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Release|x64.ActiveCfg = Release|Any CPU
-		{BE7CFEEF-26B9-421D-9C27-269AF6FC826F}.Release|x86.ActiveCfg = Release|Any CPU
 		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92BAF5EC-0D41-41F4-BD73-F3A3B8D727E4}.Debug|ARM.ActiveCfg = Debug|Any CPU

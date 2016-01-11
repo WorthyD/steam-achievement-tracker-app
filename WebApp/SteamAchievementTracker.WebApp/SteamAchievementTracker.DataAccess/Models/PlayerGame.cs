@@ -15,7 +15,7 @@ namespace SteamAchievementTracker.DataAccess.Models
 
         [ForeignKey("PlayerProfiles")]
         [Key, Column(Order = 10)]
-        public long PlayerID64 { get; set; }
+        public long SteamId { get; set; }
 
         [Key, Column(Order = 20)]
         public int AppID { get; set; }
@@ -25,33 +25,34 @@ namespace SteamAchievementTracker.DataAccess.Models
         public string Name { get; set; }
 
         [Required]
-        public string StatsLink { get; set; }
+        public decimal Playtime_Forever { get; set; }
+
+        [Required]
+        public decimal Playtime_2weeks { get; set; }
+
+
 
         [Required]
         [StringLength(250)]
+        public string Img_Icon_Url { get; set; }
 
-        public string GameLink { get; set; }
-
-        [Required]
-        [StringLength(250)]
-        public string Logo { get; set; }
 
         [Required]
         [StringLength(250)]
+        public string Img_Logo_Url { get; set; }
 
-        public string Icon { get; set; }
-
-        [Required]
-        public decimal HoursPlayed { get; set; }
 
         [Required]
-        public decimal RecentHours { get; set; }
+        public bool has_community_visible_stats { get; set; }
+
+
 
         [Required]
         public DateTime LastUpdated { get; set; }
 
         [Required]
         public DateTime AchievementRefresh { get; set; }
+
 
         [Required]
         public bool RefreshAchievements { get; set; }
@@ -66,11 +67,11 @@ namespace SteamAchievementTracker.DataAccess.Models
         public int TotalAchievements { get; set; }
 
 
-        [Required]
-        public bool HasAchievements { get; set; }
-
+      
         public bool BeenProcessed { get; set; }
         public double PercentComplete { get; set; }
+
+
 
         public virtual PlayerProfile PlayerProfiles { get; set; }
 

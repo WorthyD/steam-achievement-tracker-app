@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.Contracts.Models {
    public  interface IPlayerProfile {
-         long PlayerID64 { get; set; }
+         long SteamId { get; set; }
 
-         string CustomUrl { get; set; }
+         string PersonaName { get; set; }
 
-         string Name { get; set; }
+         string RealName { get; set; }
 
-         string ThumbURL { get; set; }
+         string AvatarFull { get; set; }
+         string ProfileUrl { get; set; }
 
          DateTime LastUpdate { get; set; }
 
