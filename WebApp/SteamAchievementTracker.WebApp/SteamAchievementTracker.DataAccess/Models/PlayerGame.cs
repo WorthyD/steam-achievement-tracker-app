@@ -30,29 +30,22 @@ namespace SteamAchievementTracker.DataAccess.Models
         [Required]
         public decimal Playtime_2weeks { get; set; }
 
-
-
         [Required]
         [StringLength(250)]
         public string Img_Icon_Url { get; set; }
-
 
         [Required]
         [StringLength(250)]
         public string Img_Logo_Url { get; set; }
 
-
         [Required]
         public bool has_community_visible_stats { get; set; }
-
-
 
         [Required]
         public DateTime LastUpdated { get; set; }
 
         [Required]
         public DateTime AchievementRefresh { get; set; }
-
 
         [Required]
         public bool RefreshAchievements { get; set; }
@@ -65,8 +58,6 @@ namespace SteamAchievementTracker.DataAccess.Models
 
         [Required]
         public int TotalAchievements { get; set; }
-
-
       
         public bool BeenProcessed { get; set; }
         public double PercentComplete { get; set; }

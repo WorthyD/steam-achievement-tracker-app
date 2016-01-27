@@ -4,26 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SteamAchievementTracker.Contracts.Models {
-   public  interface IPlayerGame {
-
-        long PlayerID64 { get; set; }
+namespace SteamAchievementTracker.Contracts.Models
+{
+    public interface IPlayerGame
+    {
+        long SteamId { get; set; }
         int AppID { get; set; }
         string Name { get; set; }
-        string StatsLink { get; set; }
-        string GameLink { get; set; }
-        string Logo { get; set; }
-        string Icon { get; set; }
-        decimal HoursPlayed { get; set; }
-        decimal RecentHours { get; set; }
+        decimal Playtime_Forever { get; set; }
+        decimal Playtime_2weeks { get; set; }
+        string Img_Icon_Url { get; set; }
+        string Img_Logo_Url { get; set; }
+        bool has_community_visible_stats { get; set; }
         DateTime LastUpdated { get; set; }
         DateTime AchievementRefresh { get; set; }
         bool RefreshAchievements { get; set; }
         int AchievementsEarned { get; set; }
         int AchievementsLocked { get; set; }
         int TotalAchievements { get; set; }
-        bool HasAchievements { get; set; }
-        bool BeenProcessed { get; }
-        double PercentComplete { get; }
+        bool BeenProcessed { get; set; }
+        double PercentComplete { get; set; }
     }
 }

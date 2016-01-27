@@ -49,9 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201509180105118_frart3.cs" />
-    <Compile Include="Migrations\201509180105118_frart3.Designer.cs">
-      <DependentUpon>201509180105118_frart3.cs</DependentUpon>
+    <Compile Include="Migrations\201601270329131_testing.cs" />
+    <Compile Include="Migrations\201601270329131_testing.Designer.cs">
+      <DependentUpon>201601270329131_testing.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
@@ -75,8 +75,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201509180105118_frart3.resx">
-      <DependentUpon>201509180105118_frart3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601270329131_testing.resx">
+      <DependentUpon>201601270329131_testing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
