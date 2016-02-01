@@ -14,7 +14,7 @@ namespace SteamAchievementTracker.DataAccess.Models
     public class GameAchievement
     {
         [Required]
-        [Key, Column(Order = 10)]
+        [Key, Column(Order = 10),  DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long AppId { get; set; }
 
         [Key, Column(Order = 20)]

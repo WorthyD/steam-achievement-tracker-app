@@ -14,10 +14,10 @@ namespace SteamAchievementTracker.DataAccess.Models
 
 
         [ForeignKey("PlayerProfiles")]
-        [Key, Column(Order = 10)]
+        [Key, Column(Order = 10),  DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long SteamId { get; set; }
 
-        [Key, Column(Order = 20)]
+        [Key, Column(Order = 20),  DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int AppID { get; set; }
 
         [Required]

@@ -13,7 +13,7 @@ namespace SteamAchievementTracker.DataAccess {
                 return "DefaultConnection";
             }
         }
-        public ModelContext() : base("SteamAchievementTracker") { }
+        public ModelContext() : base("DefaultConnection") { }
 
 
         public DbSet<Models.PlayerGame> PlayerGames { get; set; }

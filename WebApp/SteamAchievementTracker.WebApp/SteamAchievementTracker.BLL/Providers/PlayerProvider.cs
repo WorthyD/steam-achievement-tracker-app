@@ -20,52 +20,64 @@ namespace SteamAchievementTracker.BLL.Providers
         public async Task<Contracts.Models.IPlayerProfile> GetProfileFromLogin(long steamId)
         {
             DataAccess.Models.PlayerProfile profile = new DataAccess.Models.PlayerProfile();
-
-
-            var request = new SteamApiWrapper.SteamUser.GetPlayerSummariesRequest(base.APIKey);
-            var gRequest = new SteamApiWrapper.PlayerService.GetOwnedGamesRequest(base.APIKey);
-
-
-
-            //SteamAPI.Player.PlayerProfileRequest request = new SteamAPI.Player.PlayerProfileRequest();
-            //SteamAPI.Player.PlayerGamesRequest gRequest = new SteamAPI.Player.PlayerGamesRequest();
-
-
-
-            request.ProfileIds = new List<long>();
-            request.ProfileIds.Add(steamId);
-
-            var response = await request.GetResponse();
-            if (response == null || response.Players == null)
-            {
-                //Throw new exception
-            }
-
-            var player = response.Players.FirstOrDefault();
-
-
-
             using (var db = new DataAccess.ModelContext())
             {
-                var dbProfile = db.PlayerProfiles.Where(x => x.SteamId == steamId).FirstOrDefault();
 
+                profile = db.PlayerProfiles.Where(x => x.SteamId == steamId).FirstOrDefault();
 
-                if (dbProfile == null)
+                if (profile == null || ExperationService.isProfileExpired(profile.LastUpdate))
                 {
-                    dbProfile = AddProfile(db, player);
-                }
-                else if (dbProfile.LastUpdate < Settings.ProfileExpiration)
-                {
-                    dbProfile.ConvertService(player);
-                }
 
 
-                gRequest.SteamId = steamId;
-                var gResponse = await gRequest.GetResponse();
 
-                if (dbProfile.LibraryLastUpdate < Settings.ProfileExpiration)
-                {
-                    InsertUpdateGames(db, steamId, gResponse.OwnedGames);
+                    var request = new SteamApiWrapper.SteamUser.GetPlayerSummariesRequest(base.APIKey);
+                    var gRequest = new SteamApiWrapper.PlayerService.GetOwnedGamesRequest(base.APIKey);
+
+
+
+                    //SteamAPI.Player.PlayerProfileRequest request = new SteamAPI.Player.PlayerProfileRequest();
+                    //SteamAPI.Player.PlayerGamesRequest gRequest = new SteamAPI.Player.PlayerGamesRequest();
+
+
+
+                    request.ProfileIds = new List<long>();
+                    request.ProfileIds.Add(steamId);
+
+                    var response = await request.GetResponse();
+                    if (response == null || response.Players == null)
+                    {
+                        //Throw new exception
+                        return null;
+                    }
+
+                    var player = response.Players.FirstOrDefault();
+
+
+
+
+
+                    if (profile == null)
+                    {
+                        profile = AddProfile(db, player);
+                        db.PlayerProfiles.Add(profile);
+                    }
+                    else
+                    {
+                        profile.ConvertService(player);
+                    }
+
+                    db.SaveChanges();
+
+                    gRequest.SteamId = steamId;
+                    gRequest.include_appinfo = "1";
+                    gRequest.include_played_free_games = "1";
+                    var gResponse = await gRequest.GetResponse();
+
+                    if (profile.LibraryLastUpdate < Settings.ProfileExpiration)
+                    {
+                        InsertUpdateGames(db, steamId, gResponse.OwnedGames);
+                        profile.LibraryLastUpdate = DateTime.Now;
+                    }
                 }
 
 
@@ -83,7 +95,7 @@ namespace SteamAchievementTracker.BLL.Providers
             profile.ConvertService(p);
 
             profile.LastUpdate = DateTime.Now;
-            profile.LibraryLastUpdate = DateTime.MinValue;
+            profile.LibraryLastUpdate = new DateTime(2000, 1, 1);
 
             //List<DataAccess.Models.ProfileRecentGame> rgList = SetRecentGames(p.steamID64, p.mostPlayedGames);
 
@@ -91,7 +103,7 @@ namespace SteamAchievementTracker.BLL.Providers
             //db.ProfileRecentGames.AddRange(rgList);
             return profile;
         }
-        private void UpdateProfile(DataAccess.ModelContext db, DataAccess.Models.PlayerProfile p, SteamApiWrapper.Models.PlayerSummaries.Player  pr)
+        private void UpdateProfile(DataAccess.ModelContext db, DataAccess.Models.PlayerProfile p, SteamApiWrapper.Models.PlayerSummaries.Player pr)
         {
             p.ConvertService(pr);
         }
@@ -129,12 +141,32 @@ namespace SteamAchievementTracker.BLL.Providers
 
                     db.PlayerGames.Add(existingG);
 
-                    existingG.BeenProcessed = false;
+                    existingG.Playtime_Forever = 0;
+                    existingG.AchievementRefresh = new DateTime(2000, 1, 1);
+                    existingG.TotalAchievements = 0;
+                    existingG.AchievementsLocked = 0;
+                    existingG.AchievementsEarned = 0;
                 }
 
+
+                existingG.LastUpdated = DateTime.Now;
+                existingG.RefreshAchievements = (g.playtime_forever != existingG.Playtime_Forever);
+
                 existingG.ConvertService(g, steamId);
+
+                existingG.LastUpdated = DateTime.Now;
             }
-            db.SaveChanges();
+            try
+            {
+
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+
 
         }
     }

@@ -10,7 +10,7 @@ using SteamAchievementTracker.Contracts.Models;
 namespace SteamAchievementTracker.DataAccess.Models {
     public class PlayerProfile : IPlayerProfile{
 
-        [Key]
+        [Key,  DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Required]
         public long SteamId { get; set; }
 
