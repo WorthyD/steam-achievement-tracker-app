@@ -22,7 +22,5 @@ namespace SteamAchievementTracker.Contracts.Models
         int AchievementsEarned { get; set; }
         int AchievementsLocked { get; set; }
         int TotalAchievements { get; set; }
-        bool BeenProcessed { get; set; }
-        double PercentComplete { get; set; }
     }
 }

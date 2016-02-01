@@ -18,8 +18,8 @@ namespace SteamAchievementTracker.WebApi.Controllers
 
         public async Task<ViewModels.PlayerProfile> Get(long id)
         {
-            var profile = await PlayerProvider.GetProfileFromLogin(id) as ViewModels.PlayerProfile;
-            return profile;
+            var profile = await PlayerProvider.GetProfileFromLogin(id);
+            return new ViewModels.PlayerProfile(profile);
         }
     }
 }

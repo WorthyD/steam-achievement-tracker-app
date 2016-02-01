@@ -77,6 +77,7 @@ namespace SteamAchievementTracker.BLL.Providers
                     {
                         InsertUpdateGames(db, steamId, gResponse.OwnedGames);
                         profile.LibraryLastUpdate = DateTime.Now;
+                        db.SaveChanges();
                     }
                 }
 

@@ -59,8 +59,7 @@ namespace SteamAchievementTracker.DataAccess.Models
         [Required]
         public int TotalAchievements { get; set; }
       
-        public bool BeenProcessed { get; set; }
-        public double PercentComplete { get; set; }
+    
 
 
 

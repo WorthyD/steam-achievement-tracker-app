@@ -17,5 +17,16 @@ namespace SteamAchievementTracker.WebApi.ViewModels
         public DateTime LastUpdate { get; set; }
         public DateTime LibraryLastUpdate { get; set; }
 
+        public PlayerProfile(IPlayerProfile p)
+        {
+            this.SteamId = p.SteamId;
+            this.PersonaName = p.PersonaName;
+            this.RealName = p.RealName;
+            this.AvatarFull = p.AvatarFull;
+            this.ProfileUrl = p.ProfileUrl;
+            this.LastUpdate = p.LastUpdate;
+            this.LibraryLastUpdate = p.LibraryLastUpdate;
+        }
+
     }
 }

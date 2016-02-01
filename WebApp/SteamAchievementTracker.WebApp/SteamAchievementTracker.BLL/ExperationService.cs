@@ -10,7 +10,7 @@ namespace SteamAchievementTracker.BLL
     {
         public static bool isProfileExpired(DateTime lastUpdate)
         {
-            return lastUpdate < new DateTime().AddDays(-1);
+            return lastUpdate < DateTime.Now.AddDays(-1);
         }
     }
 }
