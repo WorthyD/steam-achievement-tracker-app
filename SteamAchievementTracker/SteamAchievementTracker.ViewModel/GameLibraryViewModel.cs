@@ -157,10 +157,11 @@ namespace SteamAchievementTracker.ViewModel {
         #region Events
         //Events 
 #if WINDOWS_APP
-        public RelayCommand<ItemClickEventArgs> OpenGame { get; set; }
+      //  public RelayCommand<ItemClickEventArgs> OpenGame { get; set; }
 #else
-        public RelayCommand<IGame> OpenGame { get; set; }
+    //    public RelayCommand<IGame> OpenGame { get; set; }
 #endif
+        public RelayCommand<ItemClickEventArgs> OpenGame { get; set; }
 
         public RelayCommand StartRefresh { get; set; }
         public RelayCommand CancelRefresh { get; set; }
@@ -242,9 +243,22 @@ namespace SteamAchievementTracker.ViewModel {
                 Debug.WriteLine("Click - " + x.AppID);
             });
 #else
-            OpenGame = new RelayCommand<IGame>(game => {
+            //OpenGame = new RelayCommand<IGame>(game => {
+            //    this.DeInitialize();
+            //    var x = (IGame)game;
+            //    var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
+            //    navigationService.Navigate(pageType.GetType(), x.AppID);
+            //    Debug.WriteLine("Click - " + x.AppID);
+            //});
+
+
+
+#endif
+
+
+            OpenGame = new RelayCommand<ItemClickEventArgs>(game => {
                 this.DeInitialize();
-                var x = (IGame)game;
+                var x = (IGame)game.ClickedItem;
                 var pageType = SimpleIoc.Default.GetInstance<IGameDetailsView>();
                 navigationService.Navigate(pageType.GetType(), x.AppID);
                 Debug.WriteLine("Click - " + x.AppID);
@@ -252,7 +266,6 @@ namespace SteamAchievementTracker.ViewModel {
 
 
 
-#endif
             StartRefresh = new RelayCommand(() => {
                 StartLibraryRefresh();
             });
@@ -266,9 +279,9 @@ namespace SteamAchievementTracker.ViewModel {
 
             await GetGames();
             if (this.GameList.Where(x => x.RefreshAchievements == true).Count() > 0) {
-#if WINDOWS_APP
+
                 StartLibraryRefresh();
-#endif
+
             }
             base.TrackEvent("Navigation", "Loaded", "Library");
         }

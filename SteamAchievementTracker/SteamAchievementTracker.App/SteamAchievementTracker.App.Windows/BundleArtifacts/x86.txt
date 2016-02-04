@@ -1,2 +1,2 @@
-MainPackage=D:\Dev\steamapp\SteamAchievementTracker\SteamAchievementTracker.App\SteamAchievementTracker.App.Windows\bin\x86\Release\SteamAchievementTracker.App.Windows_1.1.0.3_Bundle\SteamAchievementTracker.App.Windows_1.1.0.3_x86.appx
-SymbolPackage=D:\Dev\steamapp\SteamAchievementTracker\SteamAchievementTracker.App\SteamAchievementTracker.App.Windows\AppPackages\SteamAchievementTracker.App.Windows_1.1.0.3_Test\SteamAchievementTracker.App.Windows_1.1.0.3_x86.appxsym
+MainPackage=C:\Dev\steamapp\SteamAchievementTracker\SteamAchievementTracker.App\SteamAchievementTracker.App.Windows\bin\x86\Release\SteamAchievementTracker.App.Windows_1.1.0.4_Bundle\SteamAchievementTracker.App.Windows_1.1.0.4_x86.appx
+SymbolPackage=C:\Dev\steamapp\SteamAchievementTracker\SteamAchievementTracker.App\SteamAchievementTracker.App.Windows\AppPackages\SteamAchievementTracker.App.Windows_1.1.0.4_Test\SteamAchievementTracker.App.Windows_1.1.0.4_x86.appxsym

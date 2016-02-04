@@ -123,7 +123,7 @@ namespace SteamAchievementTracker.ViewModel {
                 }
                 var g = this.playerLibService.GetGameByID(this.Game.AppID, base.UserID);
                 //Update display Data
-                if (g.AchievementsEarned != this.Game.AchievementsEarned) {
+                if (g.AchievementsEarned != this.Game.AchievementsEarned || g.AchievementsEarned == 0) {
                     this.Game = g;
 
                     this.LockedAchievements = Achievements.Where(x => x.IsUnlocked == false).ToList();
