@@ -61,9 +61,26 @@
     <Compile Include="Migrations\201602011825179_T1.Designer.cs">
       <DependentUpon>201602011825179_T1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602030228233_AddingGameSchema.cs" />
+    <Compile Include="Migrations\201602030228233_AddingGameSchema.Designer.cs">
+      <DependentUpon>201602030228233_AddingGameSchema.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602030232541_AddingGameSchema1.cs" />
+    <Compile Include="Migrations\201602030232541_AddingGameSchema1.Designer.cs">
+      <DependentUpon>201602030232541_AddingGameSchema1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602030251228_AddingGameSchema2.cs" />
+    <Compile Include="Migrations\201602030251228_AddingGameSchema2.Designer.cs">
+      <DependentUpon>201602030251228_AddingGameSchema2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201602040335217_AddingGameSchema3.cs" />
+    <Compile Include="Migrations\201602040335217_AddingGameSchema3.Designer.cs">
+      <DependentUpon>201602040335217_AddingGameSchema3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
     <Compile Include="Models\GameAchievement.cs" />
+    <Compile Include="Models\GameSchema.cs" />
     <Compile Include="Models\PlayerGame.cs" />
     <Compile Include="Models\PlayerGameAchievements.cs" />
     <Compile Include="Models\PlayerProfile.cs" />
@@ -91,6 +108,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602011825179_T1.resx">
       <DependentUpon>201602011825179_T1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602030228233_AddingGameSchema.resx">
+      <DependentUpon>201602030228233_AddingGameSchema.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602030232541_AddingGameSchema1.resx">
+      <DependentUpon>201602030232541_AddingGameSchema1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602030251228_AddingGameSchema2.resx">
+      <DependentUpon>201602030251228_AddingGameSchema2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602040335217_AddingGameSchema3.resx">
+      <DependentUpon>201602040335217_AddingGameSchema3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

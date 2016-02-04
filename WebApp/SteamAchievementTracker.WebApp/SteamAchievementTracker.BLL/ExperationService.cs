@@ -12,5 +12,10 @@ namespace SteamAchievementTracker.BLL
         {
             return lastUpdate < DateTime.Now.AddDays(-1);
         }
+        public static bool isSchemaExpired(DateTime lastUpdate)
+        {
+            return lastUpdate < DateTime.Now.AddDays(-1);
+        }
+
     }
 }

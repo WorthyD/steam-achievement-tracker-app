@@ -17,10 +17,14 @@ namespace SteamAchievementTracker.DataAccess {
 
 
         public DbSet<Models.PlayerGame> PlayerGames { get; set; }
-        //public DbSet<Models.PlayerGameAchievements> PlayerGameAchievements { get; set; }
         //public DbSet<Models.PlayerGameTags> PlayerGameTags { get; set; }
         public DbSet<Models.PlayerProfile> PlayerProfiles { get; set; }
         public DbSet<Models.ProfileRecentGame> ProfileRecentGames { get; set; }
+
+        public DbSet<Models.PlayerGameAchievements> PlayerGameAchievements { get; set; }
+        public DbSet<Models.GameAchievement> GameAchievements { get; set; }
+        public DbSet<Models.GameSchema> GameSchemas { get; set; }
+
 
     }
 }

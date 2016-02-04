@@ -18,8 +18,17 @@ namespace SteamAchievementTracker.DataAccess.Models
         [StringLength(250)]
         public string Name { get; set; }
 
+       [Required]
+        public DateTime LastSchemaSUpdate { get; set; }
+
+
         [Required]
         public DateTime LastAchievementUpdate { get; set; }
+
+        [Required]
+        public bool HasAchievements { get; set; }
+
+
 
         public virtual IList<GameAchievement> GameAchievements { get; set; }
     }

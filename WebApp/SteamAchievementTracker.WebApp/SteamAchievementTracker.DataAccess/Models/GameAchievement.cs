@@ -11,7 +11,7 @@ using SteamAchievementTracker.Contracts.Models;
 namespace SteamAchievementTracker.DataAccess.Models
 {
     //Todo add game table for better updating
-    public class GameAchievement
+    public class GameAchievement : IGameAchievement
     {
         [Required]
         [Key, Column(Order = 10),  DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -38,6 +38,7 @@ namespace SteamAchievementTracker.DataAccess.Models
         
         public double Percent { get; set; }
 
+        public virtual GameSchema Game { get; set; }
 
 
     }

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\GameAchievement.cs" />
     <Compile Include="Models\IPlayerGame.cs" />
     <Compile Include="Models\IPlayerGameAchievement.cs" />
     <Compile Include="Models\IPlayerGameTags.cs" />
