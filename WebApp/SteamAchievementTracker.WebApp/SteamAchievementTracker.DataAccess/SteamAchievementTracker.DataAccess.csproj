@@ -77,6 +77,10 @@
     <Compile Include="Migrations\201602040335217_AddingGameSchema3.Designer.cs">
       <DependentUpon>201602040335217_AddingGameSchema3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602041841482_IStupid.cs" />
+    <Compile Include="Migrations\201602041841482_IStupid.Designer.cs">
+      <DependentUpon>201602041841482_IStupid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
     <Compile Include="Models\GameAchievement.cs" />
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602040335217_AddingGameSchema3.resx">
       <DependentUpon>201602040335217_AddingGameSchema3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602041841482_IStupid.resx">
+      <DependentUpon>201602041841482_IStupid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

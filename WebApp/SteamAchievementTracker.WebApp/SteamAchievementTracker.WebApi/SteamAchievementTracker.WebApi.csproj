@@ -223,6 +223,10 @@
       <Project>{1e147116-9fca-44a1-a83b-b9e7accf50b1}</Project>
       <Name>SteamAchievementTracker.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SteamAchievementTracker.DataAccess\SteamAchievementTracker.DataAccess.csproj">
+      <Project>{33efd57a-1ce8-4c10-989d-a386f3ca9433}</Project>
+      <Name>SteamAchievementTracker.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

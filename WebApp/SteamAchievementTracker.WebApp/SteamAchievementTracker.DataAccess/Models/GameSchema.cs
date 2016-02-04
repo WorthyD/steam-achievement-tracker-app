@@ -19,11 +19,8 @@ namespace SteamAchievementTracker.DataAccess.Models
         public string Name { get; set; }
 
        [Required]
-        public DateTime LastSchemaSUpdate { get; set; }
+        public DateTime LastSchemaUpdate { get; set; }
 
-
-        [Required]
-        public DateTime LastAchievementUpdate { get; set; }
 
         [Required]
         public bool HasAchievements { get; set; }

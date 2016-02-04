@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\ServiceToModel\GameAchievement.cs" />
     <Compile Include="Converters\ServiceToModel\PlayerGame.cs" />
     <Compile Include="Converters\ServiceToModel\PlayerProfile.cs" />
     <Compile Include="ExperationService.cs" />

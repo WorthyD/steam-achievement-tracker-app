@@ -8,6 +8,7 @@ namespace SteamAchievementTracker.Contracts.Models
 {
     public interface IGameAchievement
     {
+        long AppId { get; set; }
         string Name { get; set; }
         string DisplayName { get; set; }
         bool Hidden { get; set; }

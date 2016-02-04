@@ -1,37 +1,42 @@
 ﻿using SteamApiWrapper.Models;
+using SteamAchievementTracker.BLL.Converters.ServiceToModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
+using System.Data.Entity;
 
-namespace SteamAchievementTracker.BLL.Providers
-{
-    public class GameAchievementProvider : BaseProvider
-    {
-        public async Task GetGameAchievements(long appId, long steamId)
-        {
+namespace SteamAchievementTracker.BLL.Providers {
+    public class GameAchievementProvider : BaseProvider {
+
+        public async Task<DataAccess.Models.GameSchema> GetGameAchievements(long appId, long steamId) {
             var db = new DataAccess.ModelContext();
 
-            var game = db.GameSchemas.Where(x => x.AppId == appId).FirstOrDefault();
+            var game = db.GameSchemas.Include(x => x.GameAchievements).Where(x => x.AppId == appId).FirstOrDefault();
 
-            if (game == null || ExperationService.isSchemaExpired(game.LastSchemaSUpdate))
-            {
+            if (game == null || ExperationService.isSchemaExpired(game.LastSchemaUpdate)) {
                 var gameSchemaRequest = new SteamApiWrapper.SteamUserStats.GetSchemaForGameRequest(base.APIKey);
+                var gameStatRequest = new SteamApiWrapper.SteamUserStats.GetGlobalAchievementPercentagesForAppRequest();
                 gameSchemaRequest.appid = (int)appId;
+                gameStatRequest.GameId = (int)appId;
 
+                var gameSchema = gameSchemaRequest.GetResponse();
+                var gameStats = gameStatRequest.GetResponse();
 
-                var gameSchema = await gameSchemaRequest.GetResponse();
-                ProcessSchema(db, appId, game, gameSchema.GameSchema);
+                await Task.WhenAll(gameSchema, gameStats);
+                var gameSchemaResult = await gameSchema;
+                var gameStatsResult = await gameStats;
 
-
-
+                ProcessSchema(db, appId, game, gameSchemaResult.GameSchema, gameStatsResult.GlobalAchievementPercentages.achievements);
             }
 
             db.Dispose();
+            return game;
         }
 
-        public DataAccess.Models.GameSchema ProcessSchema(DataAccess.ModelContext db, long appId, DataAccess.Models.GameSchema game, SchemaForGame.Game gameSchema)
+        public DataAccess.Models.GameSchema ProcessSchema(DataAccess.ModelContext db, long appId, DataAccess.Models.GameSchema game, SchemaForGame.Game gameSchema, List<GlobalAchievementPercentages.Achievement> achievementPercentages)
         {
             if (game == null)
             {
@@ -49,19 +54,25 @@ namespace SteamAchievementTracker.BLL.Providers
                 if (gameAchievements == null)
                 {
                     game.GameAchievements = new List<DataAccess.Models.GameAchievement>();
-
-
                 }
-                else {
 
+                //Update data
+                foreach(var ach in gameSchema.availableGameStats.achievements){
+                    var gameAch = game.GameAchievements.Where(x => x.Name == ach.name).FirstOrDefault();
+                    if (gameAch == null) {
+                        gameAch = new DataAccess.Models.GameAchievement();
+                        game.GameAchievements.Add(gameAch);
+                    }
+                    gameAch.ConvertService(appId, ach,achievementPercentages.Where(x => x.name == ach.name).FirstOrDefault()) ;
                 }
-            }
+                game.LastSchemaUpdate = DateTime.Now;
+                game.HasAchievements = true;
+           }
             else {
                 game.HasAchievements = false;
             }
 
-
-
+            db.SaveChanges();
 
             return game;
         }
