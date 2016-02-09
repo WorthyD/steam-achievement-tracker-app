@@ -16,6 +16,10 @@ namespace SteamAchievementTracker.BLL
         {
             return lastUpdate < DateTime.Now.AddDays(-1);
         }
+        public static bool areAchievementsExpired(DateTime lastUpdate)
+        {
+            return lastUpdate < DateTime.Now.AddDays(-1); 
+        }
 
     }
 }

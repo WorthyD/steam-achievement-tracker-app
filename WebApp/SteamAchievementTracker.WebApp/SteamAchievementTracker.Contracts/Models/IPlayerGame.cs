@@ -9,7 +9,7 @@ namespace SteamAchievementTracker.Contracts.Models
     public interface IPlayerGame
     {
         long SteamId { get; set; }
-        int AppID { get; set; }
+        long AppID { get; set; }
         string Name { get; set; }
         decimal Playtime_Forever { get; set; }
         decimal Playtime_2weeks { get; set; }

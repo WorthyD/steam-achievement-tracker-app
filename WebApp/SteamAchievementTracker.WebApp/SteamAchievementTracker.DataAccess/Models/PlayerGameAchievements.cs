@@ -7,47 +7,34 @@ using System.Text;
 using System.Threading.Tasks;
 using SteamAchievementTracker.Contracts.Models;
 
-namespace SteamAchievementTracker.DataAccess.Models {
+namespace SteamAchievementTracker.DataAccess.Models
+{
     public class PlayerGameAchievements : IPlayerGameAchievement
     {
 
 
-        [Key, Column(Order = 10),  DatabaseGenerated(DatabaseGeneratedOption.None)]
-       // [ForeignKey("PlayerProfile")]
-        public long PlayerID64 { get; set; }
+        [Key, Column(Order = 10), DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("PlayerGame")]
+        public long SteamId { get; set; }
 
-        [Key, Column(Order = 20),  DatabaseGenerated(DatabaseGeneratedOption.None)]
-        //[ForeignKey("PlayerGame")]
-        public int AppID { get; set; }
-
+        [Key, Column(Order = 20), DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("PlayerGame")]
+        public long AppID { get; set; }
 
         [Key, Column(Order = 30)]
         [StringLength(250)]
-        public string AchievementID { get; set; }
+        public string ApiName { get; set; }
 
         [Required]
-        [StringLength(250)]
-        public string StatsURL { get; set; }
+        public bool Achieved { get; set; }
 
         [Required]
-        public bool IsUnlocked { get; set; }
+        public DateTime UnlockTimestamp { get; set; }
 
-        [Required]
-        [StringLength(250)]
-        public string AchievementIcon { get; set; }
-
-        [Required]
-        [StringLength(250)]
-        public string Name { get; set; }
-
-        [Required]
-        [StringLength(250)]
-        public string Description { get; set; }
-
-        [Required]
-        public string UnlockTimestamp { get; set; }
-
+        [ForeignKey("SteamId")]
         public virtual PlayerProfile PlayerProfile { get; set; }
+        //[ForeignKey("SteamId")]
         public virtual PlayerGame PlayerGame { get; set; }
+        //public virtual GameSchema GameSchema { get; set; }
     }
 }

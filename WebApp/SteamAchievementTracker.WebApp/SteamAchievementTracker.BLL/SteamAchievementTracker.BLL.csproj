@@ -59,11 +59,13 @@
   <ItemGroup>
     <Compile Include="Converters\ServiceToModel\GameAchievement.cs" />
     <Compile Include="Converters\ServiceToModel\PlayerGame.cs" />
+    <Compile Include="Converters\ServiceToModel\PlayerGameAchievement.cs" />
     <Compile Include="Converters\ServiceToModel\PlayerProfile.cs" />
     <Compile Include="ExperationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\BaseProvider.cs" />
     <Compile Include="Providers\GameAchievementProvider.cs" />
+    <Compile Include="Providers\PlayerGamceAchievementProvider.cs" />
     <Compile Include="Providers\PlayerLibraryProvider.cs" />
     <Compile Include="Providers\PlayerProvider.cs" />
     <Compile Include="Settings.cs" />

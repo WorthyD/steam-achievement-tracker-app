@@ -15,6 +15,7 @@ namespace SteamAchievementTracker.DataAccess.Models
     {
         [Required]
         [Key, Column(Order = 10),  DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("GameSchema")]
         public long AppId { get; set; }
 
         [Key, Column(Order = 20)]
@@ -38,7 +39,7 @@ namespace SteamAchievementTracker.DataAccess.Models
         
         public double Percent { get; set; }
 
-        public virtual GameSchema Game { get; set; }
+        public virtual GameSchema GameSchema { get; set; }
 
 
     }

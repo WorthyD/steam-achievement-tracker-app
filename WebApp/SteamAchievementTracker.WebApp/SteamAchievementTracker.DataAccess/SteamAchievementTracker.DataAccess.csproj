@@ -49,37 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201601270329131_testing.cs" />
-    <Compile Include="Migrations\201601270329131_testing.Designer.cs">
-      <DependentUpon>201601270329131_testing.cs</DependentUpon>
+    <Compile Include="Migrations\201602090254024_Stuff.cs" />
+    <Compile Include="Migrations\201602090254024_Stuff.Designer.cs">
+      <DependentUpon>201602090254024_Stuff.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602010336298_T.cs" />
-    <Compile Include="Migrations\201602010336298_T.Designer.cs">
-      <DependentUpon>201602010336298_T.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602011825179_T1.cs" />
-    <Compile Include="Migrations\201602011825179_T1.Designer.cs">
-      <DependentUpon>201602011825179_T1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602030228233_AddingGameSchema.cs" />
-    <Compile Include="Migrations\201602030228233_AddingGameSchema.Designer.cs">
-      <DependentUpon>201602030228233_AddingGameSchema.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602030232541_AddingGameSchema1.cs" />
-    <Compile Include="Migrations\201602030232541_AddingGameSchema1.Designer.cs">
-      <DependentUpon>201602030232541_AddingGameSchema1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602030251228_AddingGameSchema2.cs" />
-    <Compile Include="Migrations\201602030251228_AddingGameSchema2.Designer.cs">
-      <DependentUpon>201602030251228_AddingGameSchema2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602040335217_AddingGameSchema3.cs" />
-    <Compile Include="Migrations\201602040335217_AddingGameSchema3.Designer.cs">
-      <DependentUpon>201602040335217_AddingGameSchema3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602041841482_IStupid.cs" />
-    <Compile Include="Migrations\201602041841482_IStupid.Designer.cs">
-      <DependentUpon>201602041841482_IStupid.cs</DependentUpon>
+    <Compile Include="Migrations\201602090322306_Stuff2.cs" />
+    <Compile Include="Migrations\201602090322306_Stuff2.Designer.cs">
+      <DependentUpon>201602090322306_Stuff2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
@@ -104,29 +80,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601270329131_testing.resx">
-      <DependentUpon>201601270329131_testing.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602090254024_Stuff.resx">
+      <DependentUpon>201602090254024_Stuff.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602010336298_T.resx">
-      <DependentUpon>201602010336298_T.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602011825179_T1.resx">
-      <DependentUpon>201602011825179_T1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602030228233_AddingGameSchema.resx">
-      <DependentUpon>201602030228233_AddingGameSchema.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602030232541_AddingGameSchema1.resx">
-      <DependentUpon>201602030232541_AddingGameSchema1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602030251228_AddingGameSchema2.resx">
-      <DependentUpon>201602030251228_AddingGameSchema2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602040335217_AddingGameSchema3.resx">
-      <DependentUpon>201602040335217_AddingGameSchema3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602041841482_IStupid.resx">
-      <DependentUpon>201602041841482_IStupid.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602090322306_Stuff2.resx">
+      <DependentUpon>201602090322306_Stuff2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

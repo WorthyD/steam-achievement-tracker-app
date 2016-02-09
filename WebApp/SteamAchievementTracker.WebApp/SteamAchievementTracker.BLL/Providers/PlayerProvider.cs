@@ -28,17 +28,8 @@ namespace SteamAchievementTracker.BLL.Providers
                 if (profile == null || ExperationService.isProfileExpired(profile.LastUpdate))
                 {
 
-
-
                     var request = new SteamApiWrapper.SteamUser.GetPlayerSummariesRequest(base.APIKey);
                     var gRequest = new SteamApiWrapper.PlayerService.GetOwnedGamesRequest(base.APIKey);
-
-
-
-                    //SteamAPI.Player.PlayerProfileRequest request = new SteamAPI.Player.PlayerProfileRequest();
-                    //SteamAPI.Player.PlayerGamesRequest gRequest = new SteamAPI.Player.PlayerGamesRequest();
-
-
 
                     request.ProfileIds = new List<long>();
                     request.ProfileIds.Add(steamId);

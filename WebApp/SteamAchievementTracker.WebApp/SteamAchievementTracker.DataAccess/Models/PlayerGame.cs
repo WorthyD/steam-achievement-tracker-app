@@ -13,12 +13,12 @@ namespace SteamAchievementTracker.DataAccess.Models
     {
 
 
-        [ForeignKey("PlayerProfiles")]
-        [Key, Column(Order = 10),  DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, Column(Order = 10), DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("PlayerProfile")]
         public long SteamId { get; set; }
 
-        [Key, Column(Order = 20),  DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int AppID { get; set; }
+        [Key, Column(Order = 20), DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public long AppID { get; set; }
 
         [Required]
         [StringLength(250)]
@@ -58,14 +58,10 @@ namespace SteamAchievementTracker.DataAccess.Models
 
         [Required]
         public int TotalAchievements { get; set; }
-      
-    
 
 
-
-        public virtual PlayerProfile PlayerProfiles { get; set; }
+        public virtual PlayerProfile PlayerProfile { get; set; }
 
         public virtual IList<PlayerGameAchievements> PlayerGameAchievements { get; set; }
-        public virtual IList<ProfileRecentGame> ProfileRecentGames { get; set; } 
     }
 }

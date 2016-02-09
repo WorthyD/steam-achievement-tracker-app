@@ -7,13 +7,13 @@ namespace SteamAchievementTracker.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddingGameSchema2 : IMigrationMetadata
+    public sealed partial class Stuff2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddingGameSchema2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Stuff2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201602030251228_AddingGameSchema2"; }
+            get { return "201602090322306_Stuff2"; }
         }
         
         string IMigrationMetadata.Source

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace SteamAchievementTracker.DataAccess {
     public class ModelContext : DbContext, IDisposable  {
@@ -25,6 +26,11 @@ namespace SteamAchievementTracker.DataAccess {
         public DbSet<Models.GameAchievement> GameAchievements { get; set; }
         public DbSet<Models.GameSchema> GameSchemas { get; set; }
 
-
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<aspnet_UsersInRoles>().HasMany(i => i.Users).WithRequired().WillCascadeOnDelete(false);
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
 }
