@@ -46,7 +46,21 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             }
         }
 
-        public List<GameAchievement> Achievements { get; set; }
+        public IList<GameAchievement> GameAchievements { get; set; }
+
+      
+        public IList<IPlayerGameAchievement> PlayerGameAchievements
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         private void ApplyBase(IPlayerGame pg)
         {
@@ -64,7 +78,7 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             this.AchievementsEarned = pg.AchievementsEarned;
             this.AchievementsLocked = pg.AchievementsLocked;
             this.TotalAchievements = pg.TotalAchievements;
-            this.Achievements = new List<GameAchievement>();
+            this.GameAchievements = new List<GameAchievement>();
 
         }
 
@@ -81,7 +95,7 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             {
                 var pga = pgas.Where(x => x.ApiName == ga.Name).FirstOrDefault();
 
-                this.Achievements.Add(new GameAchievement(pga, ga));
+                this.GameAchievements.Add(new GameAchievement(pga, ga));
             }
         }
     }

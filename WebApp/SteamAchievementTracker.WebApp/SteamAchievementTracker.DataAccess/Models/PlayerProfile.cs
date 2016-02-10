@@ -42,7 +42,7 @@ namespace SteamAchievementTracker.DataAccess.Models {
 
         public virtual IList<PlayerGame> PlayerGames {get;set;}
         public virtual IList<ProfileRecentGame> PlayerRecentGames {get;set;}
-        public virtual IList<PlayerGameAchievements> PlayerGameAchievements {get;set;}
+        public virtual IList<PlayerGameAchievement> PlayerGameAchievements {get;set;}
 
 
 

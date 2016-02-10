@@ -9,7 +9,7 @@ using SteamAchievementTracker.Contracts.Models;
 
 namespace SteamAchievementTracker.DataAccess.Models
 {
-    public class PlayerGameAchievements : IPlayerGameAchievement
+    public class PlayerGameAchievement : IPlayerGameAchievement
     {
 
 

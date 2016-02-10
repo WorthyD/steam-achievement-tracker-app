@@ -13,22 +13,36 @@ namespace SteamAchievementTracker.WebApi.Controllers
         public BLL.Providers.GameAchievementProvider GameAchievementProvider { get; set; }
         public BLL.Providers.PlayerGamceAchievementProvider PlayerGamceAchievementProvider { get; set; }
 
-        public GameAchievementController() {
+        public GameAchievementController()
+        {
             GameAchievementProvider = new BLL.Providers.GameAchievementProvider();
             PlayerGamceAchievementProvider = new BLL.Providers.PlayerGamceAchievementProvider();
         }
 
-        public async Task<DataAccess.Models.GameSchema> Get(long id, long steamId) {
-            var gameAch =  GameAchievementProvider.GetGameAchievements(id, 0);
-            var playerAch = PlayerGamceAchievementProvider.GetAppAchievementsForPlayer(steamId, id);
+        public async Task<ViewModels.GameDetails> Get(long id, long steamId)
+        {
+            try
+            {
 
-            await Task.WhenAll(gameAch, playerAch);
-            var gameAchResult = await gameAch;
-            var playerAchResult = await playerAch;
+                var gameAch = GameAchievementProvider.GetGameAchievements(id);
+                var playerAch = PlayerGamceAchievementProvider.GetAppAchievementsForPlayer(steamId, id);
+
+                await Task.WhenAll(gameAch, playerAch);
+                var gameAchResult = await gameAch;
+                var playerAchResult = await playerAch;
+
+
+                return new ViewModels.GameDetails(playerAchResult, gameAchResult.GameAchievements.ToList(), playerAchResult.PlayerGameAchievements.ToList());
+
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
 
 
 
-            return gameAchResult;
         }
     }
 }

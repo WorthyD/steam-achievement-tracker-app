@@ -7,16 +7,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Data.Entity;
+using SteamAchievementTracker.Contracts.Models;
 
-namespace SteamAchievementTracker.BLL.Providers {
-    public class GameAchievementProvider : BaseProvider {
+namespace SteamAchievementTracker.BLL.Providers
+{
+    public class GameAchievementProvider : BaseProvider
+    {
 
-        public async Task<DataAccess.Models.GameSchema> GetGameAchievements(long appId, long steamId) {
+        public async Task<Contracts.Models.IGameSchema> GetGameAchievements(long appId)
+        {
             var db = new DataAccess.ModelContext();
 
             var game = db.GameSchemas.Include(x => x.GameAchievements).Where(x => x.AppId == appId).FirstOrDefault();
 
-            if (game == null || ExperationService.isSchemaExpired(game.LastSchemaUpdate)) {
+            if (game == null || ExperationService.isSchemaExpired(game.LastSchemaUpdate))
+            {
                 var gameSchemaRequest = new SteamApiWrapper.SteamUserStats.GetSchemaForGameRequest(base.APIKey);
                 var gameStatRequest = new SteamApiWrapper.SteamUserStats.GetGlobalAchievementPercentagesForAppRequest();
                 gameSchemaRequest.appid = (int)appId;
@@ -45,29 +50,34 @@ namespace SteamAchievementTracker.BLL.Providers {
                 game.AppId = appId;
             }
 
-            game.Name = gameSchema.gameName;
+            game.Name = (string.IsNullOrEmpty(gameSchema.gameName)) ? "Name title found" : gameSchema.gameName;
 
             if (gameSchema.availableGameStats != null && gameSchema.availableGameStats.achievements != null)
             {
                 var gameAchievements = game.GameAchievements;
 
+
                 if (gameAchievements == null)
                 {
-                    game.GameAchievements = new List<DataAccess.Models.GameAchievement>();
+                    var ga = new List<DataAccess.Models.GameAchievement>();
+                    game.GameAchievements = ga.ToList<IGameAchievement>();// as List<IGameAchievement>;
+                    //game.GameAchievements = new IList<IGameAchievement>();
                 }
 
                 //Update data
-                foreach(var ach in gameSchema.availableGameStats.achievements){
+                foreach (var ach in gameSchema.availableGameStats.achievements)
+                {
                     var gameAch = game.GameAchievements.Where(x => x.Name == ach.name).FirstOrDefault();
-                    if (gameAch == null) {
+                    if (gameAch == null)
+                    {
                         gameAch = new DataAccess.Models.GameAchievement();
                         game.GameAchievements.Add(gameAch);
                     }
-                    gameAch.ConvertService(appId, ach,achievementPercentages.Where(x => x.name == ach.name).FirstOrDefault()) ;
+                    gameAch.ConvertService(appId, ach, achievementPercentages.Where(x => x.name == ach.name).FirstOrDefault());
                 }
                 game.LastSchemaUpdate = DateTime.Now;
                 game.HasAchievements = true;
-           }
+            }
             else {
                 game.HasAchievements = false;
             }

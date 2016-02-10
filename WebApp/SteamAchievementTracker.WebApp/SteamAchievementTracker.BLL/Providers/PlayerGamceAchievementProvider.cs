@@ -46,7 +46,7 @@ namespace SteamAchievementTracker.BLL.Providers
                 var gameAch = game.PlayerGameAchievements.Where(x => x.ApiName == ach.apiname).FirstOrDefault();
                 if (gameAch == null)
                 {
-                    gameAch = new DataAccess.Models.PlayerGameAchievements();
+                    gameAch = new DataAccess.Models.PlayerGameAchievement();
                     game.PlayerGameAchievements.Add(gameAch);
                     gameAch.Achieved = false;
                 }

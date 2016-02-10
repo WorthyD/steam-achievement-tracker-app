@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SteamAchievementTracker.Contracts.Models;
 
 namespace SteamAchievementTracker.DataAccess.Models
 {
-    public class GameSchema
+    public class GameSchema : IGameSchema
     {
         [Required]
         [Key, Column(Order = 10), DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -27,6 +28,33 @@ namespace SteamAchievementTracker.DataAccess.Models
 
 
 
-        public virtual IList<GameAchievement> GameAchievements { get; set; }
+        public virtual List<GameAchievement> GameAchievements { get; set; }
+
+        //IList<IGameAchievement> IGameSchema.GameAchievements
+        //{
+        //    get
+        //    {
+        //        //  throw new NotImplementedException();
+        //        return GameAchievements as IList<IGameAchievement>;
+        //    }
+
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
+
+        //IList<IGameAchievement> IGameSchema.GameAchievements
+        //{
+        //    get
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
     }
 }

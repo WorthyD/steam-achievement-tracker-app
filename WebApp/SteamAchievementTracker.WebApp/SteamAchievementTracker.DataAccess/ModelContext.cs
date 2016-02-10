@@ -22,7 +22,7 @@ namespace SteamAchievementTracker.DataAccess {
         public DbSet<Models.PlayerProfile> PlayerProfiles { get; set; }
         public DbSet<Models.ProfileRecentGame> ProfileRecentGames { get; set; }
 
-        public DbSet<Models.PlayerGameAchievements> PlayerGameAchievements { get; set; }
+        public DbSet<Models.PlayerGameAchievement> PlayerGameAchievements { get; set; }
         public DbSet<Models.GameAchievement> GameAchievements { get; set; }
         public DbSet<Models.GameSchema> GameSchemas { get; set; }
 

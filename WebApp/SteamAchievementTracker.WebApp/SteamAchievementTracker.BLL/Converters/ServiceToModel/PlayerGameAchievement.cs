@@ -9,7 +9,7 @@ namespace SteamAchievementTracker.BLL.Converters.ServiceToModel
 {
     public static class PlayerGameAchievement
     {
-        public static void ConvertService(this IPlayerGameAchievement pga, long appId, long steamId, SteamApiWrapper.Models.PlayerAchievements.Achievement a)
+        public static void ConvertService(this Contracts.Models.IPlayerGameAchievement pga, long appId, long steamId, SteamApiWrapper.Models.PlayerAchievements.Achievement a)
         {
             //pga.AchievementIcon = a.
             pga.Achieved = (a.achieved == 1) ? true : false;
