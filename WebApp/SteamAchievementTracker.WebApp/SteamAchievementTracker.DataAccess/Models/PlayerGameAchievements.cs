@@ -28,8 +28,7 @@ namespace SteamAchievementTracker.DataAccess.Models
         [Required]
         public bool Achieved { get; set; }
 
-        [Required]
-        public DateTime UnlockTimestamp { get; set; }
+        public DateTime? UnlockTimestamp { get; set; }
 
         [ForeignKey("SteamId")]
         public virtual PlayerProfile PlayerProfile { get; set; }

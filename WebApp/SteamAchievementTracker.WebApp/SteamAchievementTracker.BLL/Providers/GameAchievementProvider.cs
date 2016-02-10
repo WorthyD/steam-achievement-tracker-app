@@ -14,7 +14,8 @@ namespace SteamAchievementTracker.BLL.Providers
     public class GameAchievementProvider : BaseProvider
     {
 
-        public async Task<Contracts.Models.IGameSchema> GetGameAchievements(long appId)
+        //public async Task<Contracts.Models.IGameSchema> GetGameAchievements(long appId)
+        public async Task<DataAccess.Models.GameSchema> GetGameAchievements(long appId)
         {
             var db = new DataAccess.ModelContext();
 
@@ -59,9 +60,9 @@ namespace SteamAchievementTracker.BLL.Providers
 
                 if (gameAchievements == null)
                 {
-                    var ga = new List<DataAccess.Models.GameAchievement>();
-                    game.GameAchievements = ga.ToList<IGameAchievement>();// as List<IGameAchievement>;
-                    //game.GameAchievements = new IList<IGameAchievement>();
+                    //var ga = new List<DataAccess.Models.GameAchievement>();
+                    //game.GameAchievements = ga.ToList<IGameAchievement>();// as List<IGameAchievement>;
+                    game.GameAchievements = new List<DataAccess.Models.GameAchievement>();
                 }
 
                 //Update data

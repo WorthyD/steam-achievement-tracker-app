@@ -10,6 +10,7 @@ namespace SteamAchievementTracker.BLL.Converters.ServiceToModel {
         public static void ConvertService(this IGameAchievement ia, long appId, SteamApiWrapper.Models.SchemaForGame.Achievement a, SteamApiWrapper.Models.GlobalAchievementPercentages.Achievement ap) {
             ia.AppId = appId;
             ia.DisplayName = a.displayName;
+            ia.Description = (string.IsNullOrEmpty( a.description))? string.Empty : a.description;
             ia.Hidden = a.hidden == 1 ? true : false;
             ia.Icon = a.icon;
             ia.IconGray = a.icongray;

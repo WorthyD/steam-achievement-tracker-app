@@ -12,6 +12,5 @@ namespace SteamAchievementTracker.Contracts.Models
         string Name { get; set; }
         DateTime LastSchemaUpdate { get; set; }
         bool HasAchievements { get; set; }
-        List<IGameAchievement> GameAchievements { get; set; }
     }
 }

@@ -64,19 +64,19 @@ namespace SteamAchievementTracker.DataAccess.Models
 
         public virtual List<PlayerGameAchievement> PlayerGameAchievements { get; set; }
 
-        IList<IPlayerGameAchievement> IPlayerGame.PlayerGameAchievements
-        {
-            get
-            {
-                return PlayerGameAchievements as IList<IPlayerGameAchievement>;
-                //throw new NotImplementedException();
-            }
+        //IList<IPlayerGameAchievement> IPlayerGame.PlayerGameAchievements
+        //{
+        //    get
+        //    {
+        //        return PlayerGameAchievements as IList<IPlayerGameAchievement>;
+        //        //throw new NotImplementedException();
+        //    }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        //    set
+        //    {
+        //        throw new NotImplementedException();
+        //    }
+        //}
 
         //IList<IPlayerGameAchievement>  
         //{

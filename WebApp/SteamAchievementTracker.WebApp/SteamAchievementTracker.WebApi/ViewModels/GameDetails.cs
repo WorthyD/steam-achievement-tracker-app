@@ -46,21 +46,10 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             }
         }
 
-        public IList<GameAchievement> GameAchievements { get; set; }
+        public List<GameAchievement> GameAchievements { get; set; }
 
       
-        public IList<IPlayerGameAchievement> PlayerGameAchievements
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+    
 
         private void ApplyBase(IPlayerGame pg)
         {
@@ -88,7 +77,7 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             this.ApplyBase(pg);
         }
 
-        public GameDetails(IPlayerGame pg, List<IGameAchievement> gas, List<IPlayerGameAchievement> pgas)
+        public GameDetails(DataAccess.Models.PlayerGame pg, List<DataAccess.Models.GameAchievement> gas, List<DataAccess.Models.PlayerGameAchievement> pgas)
         {
             this.ApplyBase(pg);
             foreach (var ga in gas)

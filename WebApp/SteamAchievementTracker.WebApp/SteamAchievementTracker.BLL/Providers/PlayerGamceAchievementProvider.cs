@@ -11,7 +11,7 @@ namespace SteamAchievementTracker.BLL.Providers
 {
     public class PlayerGamceAchievementProvider : BaseProvider
     {
-        public async Task<IPlayerGame> GetAppAchievementsForPlayer(long steamId, long appId)
+        public async Task<DataAccess.Models.PlayerGame> GetAppAchievementsForPlayer(long steamId, long appId)
         {
             var db = new DataAccess.ModelContext();
             DataAccess.Models.PlayerGame pg = db.PlayerGames.Include(x => x.PlayerGameAchievements).Where(x => x.AppID == appId && x.SteamId == steamId).FirstOrDefault();
@@ -65,7 +65,7 @@ namespace SteamAchievementTracker.BLL.Providers
             game.AchievementsLocked = game.PlayerGameAchievements.Where(x => x.Achieved == true).Count();
             game.TotalAchievements = game.PlayerGameAchievements.Count();
 
-            db.SaveChangesAsync();
+            db.SaveChanges();
 
             return game;
         }

@@ -12,7 +12,7 @@ namespace SteamAchievementTracker.Contracts.Models
         long AppID { get; set; }
         string ApiName { get; set; }
         bool Achieved { get; set; }
-        DateTime UnlockTimestamp { get; set; }
+        DateTime? UnlockTimestamp { get; set; }
 
 
     }
