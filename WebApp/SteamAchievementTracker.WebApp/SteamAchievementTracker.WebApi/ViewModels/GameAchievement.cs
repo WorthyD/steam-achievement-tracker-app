@@ -34,7 +34,6 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             this.Icon = ga.Icon;
             this.IconGray = ga.IconGray;
             this.Percent = ga.Percent;
-            this.Description = ga.Description;
 
             this.SteamId = pga.SteamId;
             this.AppID = pga.AppID;

@@ -94,6 +94,24 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\app.config.js" />
+    <Content Include="App\app.info.js" />
+    <Content Include="App\app.modules.js" />
+    <Content Include="App\app.run.js" />
+    <Content Include="App\app.startup.js" />
+    <Content Include="App\blocks\router-helper.provider.js" />
+    <Content Include="App\core\constants.js" />
+    <Content Include="App\core\core.module.js" />
+    <Content Include="App\home\home.controller.js" />
+    <Content Include="App\home\home.html" />
+    <Content Include="App\home\home.module.js" />
+    <Content Include="App\home\home.states.js" />
+    <Content Include="App\layout\layout.module.js" />
+    <Content Include="App\layout\shell.html" />
+    <Content Include="App\layout\shell.js" />
+    <Content Include="App\layout\sidebar.html" />
+    <Content Include="App\layout\sidebar.js" />
+    <Content Include="App\layout\topnav.html" />
     <Content Include="Grunt.js" />
     <Content Include="Grunt\default.js" />
     <Content Include="packages.config" />
@@ -117,7 +135,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App\services\" />
+    <Folder Include="Content\Sass\" />
+    <Folder Include="Dist\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

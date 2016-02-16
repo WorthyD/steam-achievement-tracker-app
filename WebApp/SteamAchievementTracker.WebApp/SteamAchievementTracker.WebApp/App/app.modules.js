@@ -5,9 +5,12 @@
     angular.module(appName, [
         /* shared modules */
         appName + ".core",
-        appName + ".widgets",
+        //appName + ".widgets",
         appName + ".layout",
-        appName + ".services",
+        //appName + ".services",
+
+
+        appName + ".home",
 
     ]);
 })();

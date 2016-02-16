@@ -1,9 +1,6 @@
-/**
- * Created by m1thang on 6/2/15.
- */
 (function() {
     "use strict";
-    angular.module("mfeApp")
+    angular.module("app")
         .factory("appInfo",appInfo);
 
     appInfo.$inject = [];
@@ -11,9 +8,7 @@
     function appInfo(){
 
         var appInfo = {
-            "name" : "mfeApp",
-            "icon" : "style/img/app_logo.svg",
-            "busUnitIcon" : "style/img/spark.svg"
+            "name" : "App"
         } ;
 
         return {

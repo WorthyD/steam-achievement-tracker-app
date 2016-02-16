@@ -13,5 +13,6 @@
         /*
          * 3rd Party modules
          */
+         'blocks.router'
     ]);
 })();
