@@ -5,13 +5,13 @@
         .module('app.layout')
         .controller('Shell', Shell);
 
-    Shell.$inject = ['$timeout' ];
+    Shell.$inject = ['$timeout', 'config' ];
 
-    function Shell($timeout ) {
+    function Shell($timeout, config ) {
         /*jshint validthis: true */
         var vm = this;
 
-        //vm.title = config.appTitle;
+        vm.title = config.appTitle;
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
         vm.showSplash = true;
@@ -19,11 +19,7 @@
         activate();
 
         function activate() {
-            //logger.success(config.appTitle + ' loaded!', null);
-//            Using a resolver on all routes or dataservice.ready in every controller
-//            dataservice.ready().then(function(){
-                hideSplash();
-//            });
+            //Ready up services
             hideSplash();
         }
 
