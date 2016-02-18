@@ -1,0 +1,6 @@
+﻿{
+    "sass": {
+        "src": "content/sass/main.scss",
+        "dist": "dist/main.css"
+    }
+}
