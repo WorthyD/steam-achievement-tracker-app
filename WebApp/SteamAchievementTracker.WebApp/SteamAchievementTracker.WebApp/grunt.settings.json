@@ -1,6 +1,19 @@
 ﻿{
-    "sass": {
+    "css": {
         "src": "content/sass/main.scss",
-        "dist": "dist/main.css"
+        "dist": "content/styles/",
+        "distfilename": "main",
+        "workingdirectory": [ "content/sass/*.scss" ]
+    },
+    "js": {
+        "developmentmap": {
+            "dist/output.js": [ "script/app/*.js" ],
+            "dist/lib.js": [ "script/lib/*.js" ]
+        },
+        "productionmap": {
+            "dist/output.min.js": [ "script/app/*.js" ],
+            "dist/lib.min.js": [ "script/lib/*.js" ]
+        },
+        "workingdirectory": [ "script/**/*.js", "script/*.js" ]
     }
 }

@@ -1,7 +1,12 @@
 module.exports = {
-  combine: {
-    files: {
-      'css/build/minified/global.css': ['css/build/prefixed/global.css']
+    combine: {
+        options: {
+            banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+              '<%= grunt.template.today("yyyy-mm-dd hh:MM:ss tt") %> */'
+        },
+
+        files: {
+            '<%= settings.css.dist%><%=settings.css.distfilename%>.min.css': ['<%= settings.css.dist%><%=settings.css.distfilename%>.css']
+        }
     }
-  }
 }

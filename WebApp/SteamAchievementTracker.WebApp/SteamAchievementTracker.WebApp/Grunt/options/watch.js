@@ -1,20 +1,22 @@
+var settings = require('../settings');
 module.exports = {
-  options: {
-    livereload: true,
-  },
-  //scripts: {
-  //  files: ['js/*.js'],
-  //  tasks: ['jshint', 'concat', 'uglify'],
-  //  options: {
-  //    spawn: false,
-  //  }
-  //},
-  css: {
-    files: ['content/sass/*.scss'],
-    //tasks: ['sass',  'cssmin'],
-    tasks: ['sass'],
     options: {
-      spawn: false,
+        livereload: true,
+    },
+    css: {
+        files: settings.css.workingdirectory,
+        tasks: ['watchcss'],  //Task in watchtasks.js
+        options: {
+            spawn: false,
+        }
     }
-  }
+    ,
+    js: {
+        files: settings.js.workingdirectory,
+        tasks: ['watchjs'],   //Task in watchtasks.js
+        options: {
+            spawn: false,
+        }
+    }
+
 }

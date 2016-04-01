@@ -1,6 +1,18 @@
+var settings = require('../settings');
 module.exports = {
-  build: {
-    src: 'js/build/production.js',
-    dest: 'js/build/production.min.js'
-  }
+    options: {
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+          '<%= grunt.template.today("yyyy-mm-dd hh:MM:ss tt") %> */'
+    },
+    development: {
+        options:{
+            sourceMap: true,
+            beautify: true,
+            mangle: false,
+        },
+        files: settings.js.developmentmap
+    },
+    production: {
+        files: settings.js.productionmap
+    }
 }

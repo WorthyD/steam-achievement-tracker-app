@@ -1,9 +1,10 @@
+var settings = require('../settings');
 module.exports = {
-  dist: {
-    src: [
-      'js/libs/*.js',
-      'js/global.js'
-    ],
-    dest: 'js/build/production.js'
-  }
+    dist: {
+        options: {
+            banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+              '<%= grunt.template.today("yyyy-mm-dd hh:MM:ss tt") %> */'
+        },
+        files: settings.js.concatfiles
+    }
 }

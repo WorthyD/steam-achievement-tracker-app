@@ -1,0 +1,39 @@
+{
+    "important": true,                       //Need this in some cases
+  "adjoining-classes": false,               ///Relevant in some cases. Not supporting IE6
+  "known-properties": true,                 //Catches invalid properties
+  "box-sizing": false,                      //Not supportin IE6 and 7
+  "box-model": false,                       //Not overly worried about
+  "overqualified-elements": true,          //I like the idea of this rule, but want to test it.
+  "display-property-grouping": true,        //Catches stuff like using float on an inline block or vertical align on block element
+  "bulletproof-font-face": false,           //Feels only relevant in IE8
+  "compatible-vendor-prefixes": false,      //There are almost too many of these to keep up with and most are becoming deprecated
+  "regex-selectors": true,                  //Catches stuff that may caused performance problems
+  "errors": false,
+  "duplicate-background-images": true,      //performance. 
+  "duplicate-properties": true,             //Want to test this
+  "empty-rules": true,                      //Should catch poor practices
+  "selector-max-approaching": false,
+  "gradients": false,                       //Likes the other vender prefix. Too many to keep up with that are irrelevant
+  "fallback-colors": false,                 //only relevant in IE8
+  "font-sizes": false,                      //Want to turn this on, but I have a feeling it will be hard to work around.
+  "font-faces": true,                       //Fires off warning when 5 fonts are reached. Think it would be good practicce
+  "floats": false,                          //Pretty generic.  Don't feel like this rule will scale to large projects.
+  "star-property-hack": true,               //To heck with hacks
+  "outline-none": true,                     //Considered an accessiblility thing. http://outlinenone.com/
+  "import": true,                           //Bad practice. We can use LESS instead.
+  "ids": false,                             //Sorry, I see a use in this for some cases and it's debatable
+  "underscore-property-hack": true,         //I hate hacks
+  "rules-count": false,
+  "qualified-headings": false,              //Feel like this will stink on a scaled set
+  "selector-max": false,
+  "shorthand": true,                        //pretty leanient. Only applies when all 4 props are used in one statement
+  "text-indent": true,                      //Sets rules around negative text indent. There are better ways to handle this now.
+  "unique-headings": false,                 //COuld be problematic in in scale
+  "universal-selector": false,              //I really want to turn this on but I think there is valididty in having it off.
+  "unqualified-attributes": true,           //Testing on this one          
+  "vendor-prefix": true,                    //forces proper use of vendor prefixes
+  "zero-units": true                        //Miro optimization, good practice 
+  
+  ///https://github.com/gruntjs/grunt-contrib-csslint
+}
