@@ -7,7 +7,7 @@
 
     function appInfo(){
 
-        var appInfo = {
+        var appInfos = {
             "name" : "App"
         } ;
 
@@ -16,7 +16,7 @@
         };
 
         function getAppInfo() {
-            return appInfo;
+            return appInfos;
         }
     }
 

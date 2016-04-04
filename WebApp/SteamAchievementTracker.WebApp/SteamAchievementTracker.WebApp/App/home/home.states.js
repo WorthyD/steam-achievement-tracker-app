@@ -17,6 +17,6 @@
                 templateUrl: "app/home/home.html",
                 controller: "HomeController as home"
             }
-        }]
+        }];
     }
 })();

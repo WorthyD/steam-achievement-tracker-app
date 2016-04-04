@@ -26,12 +26,12 @@
 
             function configureStates(states, otherwisePath) {
                 states.forEach(function (state) {
-                    console.log("adding state", state.state, "with config", state.config);
+                    console.log('adding state', state.state, 'with config', state.config);
                     $stateProvider.state(state.state, state.config);
                 });
                 if (otherwisePath && !hasOtherwise) {
                     hasOtherwise = true;
-                    console.log("adding otherwisePath", otherwisePath);
+                    console.log('adding otherwisePath', otherwisePath);
                     $urlRouterProvider.otherwise(otherwisePath);
                 }
 

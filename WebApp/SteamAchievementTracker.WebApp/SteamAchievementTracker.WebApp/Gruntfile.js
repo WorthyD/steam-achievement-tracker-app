@@ -47,7 +47,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build-styles-notify', ['build-styles', 'notify:css']);
 
     //Watch Specific Tasks
-    grunt.registerTask('watchcss', ['build-styles-notify']);
-    grunt.registerTask('watchjs', ['build-script-notify']);
+    grunt.registerTask('watchcss', ['build-styles']);
+    grunt.registerTask('watchjs', ['build-scripts']);
 
 };

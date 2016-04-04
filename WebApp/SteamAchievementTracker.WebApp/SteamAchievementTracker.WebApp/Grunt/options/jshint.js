@@ -12,7 +12,7 @@ module.exports = {
             force: true,
             indent: 4,
             quotmark: true,
-            maxlen: 80
+            maxlen: 800
         }
     }
 

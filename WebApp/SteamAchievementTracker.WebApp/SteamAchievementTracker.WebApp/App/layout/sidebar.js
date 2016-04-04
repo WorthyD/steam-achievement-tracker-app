@@ -9,7 +9,7 @@
 
     function Sidebar() {
         /*jshint validthis: true */
-        var vm = this;
+        //      var vm = this;
         //var routes = routehelper.getRoutes();
         //vm.isCurrent = isCurrent;
         //vm.sidebarReady = function(){console.log('done animating menu')}; // example
@@ -25,7 +25,7 @@
         //        return r1.settings.nav - r2.settings.nav;
         //    });
         //}
-
+          
         //function isCurrent(route) {
         //    if (!route.title || !$route.current || !$route.current.title) {
         //        return '';

@@ -7,13 +7,23 @@
     },
     "js": {
         "developmentmap": {
-            "dist/output.js": [ "script/app/*.js" ],
-            "dist/lib.js": [ "script/lib/*.js" ]
+            "dist/modules.js": [ "app/*.modules.js", "app/**/*.module.js" ],
+            "dist/main.js": [
+                "app/*.js",
+                "app/**/*.js",
+                "!app/*.modules.js",
+                "!app/**/*.module.js"
+            ]
         },
         "productionmap": {
-            "dist/output.min.js": [ "script/app/*.js" ],
-            "dist/lib.min.js": [ "script/lib/*.js" ]
+            "dist/modules.min.js": [ "app/*.modules.js", "app/**/*.module.js" ],
+            "dist/main.min.js": [
+                "app/*.js",
+                "app/**/*.js",
+                "!app/*.modules.js",
+                "!app/**/*.module.js"
+            ]
         },
-        "workingdirectory": [ "script/**/*.js", "script/*.js" ]
+        "workingdirectory": [ "app/**/*.js", "app/*.js" ]
     }
 }
