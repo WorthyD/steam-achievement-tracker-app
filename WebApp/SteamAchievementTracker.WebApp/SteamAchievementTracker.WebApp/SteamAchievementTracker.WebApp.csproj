@@ -16,7 +16,7 @@
     <RootNamespace>SteamAchievementTracker.WebApp</RootNamespace>
     <AssemblyName>SteamAchievementTracker.WebApp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -100,8 +100,13 @@
     <Content Include="App\app.run.js" />
     <Content Include="App\app.startup.js" />
     <Content Include="App\blocks\router-helper.provider.js" />
+    <Content Include="App\components\app.components.module.js" />
+    <Content Include="App\components\saLoginDialog\saLoginDialog.component.js" />
+    <Content Include="App\components\saLoginDialog\saLoginDialog.template.html" />
     <Content Include="App\core\constants.js" />
     <Content Include="App\core\core.module.js" />
+    <Content Include="App\core\session.service.js" />
+    <Content Include="App\directives\directive.js" />
     <Content Include="App\home\home.controller.js" />
     <Content Include="App\home\home.html" />
     <Content Include="App\home\home.module.js" />
@@ -112,13 +117,31 @@
     <Content Include="App\layout\sidebar.html" />
     <Content Include="App\layout\sidebar.js" />
     <Content Include="App\layout\topnav.html" />
-    <Content Include="Grunt.js" />
+    <Content Include="App\services\authService.factory.js" />
+    <Content Include="App\services\baseService.factory.js" />
+    <Content Include="App\services\services.module.js" />
+    <Content Include="Dist\main.css" />
+    <Content Include="Dist\main.js" />
+    <Content Include="Dist\main.min.js" />
+    <Content Include="Dist\modules.js" />
+    <Content Include="Dist\modules.min.js" />
+    <Content Include="Gruntfile.js" />
     <Content Include="Grunt\default.js" />
+    <Content Include="Grunt\options\concat.js" />
+    <Content Include="Grunt\options\csslint.js" />
+    <Content Include="Grunt\options\cssmin.js" />
+    <Content Include="Grunt\options\jshint.js" />
+    <Content Include="Grunt\options\less.js" />
+    <Content Include="Grunt\options\notify.js" />
+    <Content Include="Grunt\options\sass.js" />
+    <Content Include="Grunt\options\uglify.js" />
+    <Content Include="Grunt\options\watch.js" />
     <Content Include="packages.config" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="package.json" />
+    <Content Include="grunt.settings.json" />
+    <Content Include="Dist\main.css.map" />
+    <Content Include="Dist\main.js.map" />
+    <Content Include="Dist\modules.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -136,9 +159,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\services\" />
     <Folder Include="Content\Sass\" />
-    <Folder Include="Dist\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -155,7 +176,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60844</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50972/</IISUrl>
+          <IISUrl>http://localhost/saweb</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
