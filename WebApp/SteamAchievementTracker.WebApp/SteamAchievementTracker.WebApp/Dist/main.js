@@ -1,4 +1,4 @@
-/*! BoilerPlate - v0.1.0 - 2016-04-04 12:38:34 pm */
+/*! BoilerPlate - v0.1.0 - 2016-04-25 12:25:29 pm */
 !function() {
     function configure() {}
     var app = angular.module("app");
@@ -50,7 +50,38 @@
     routerHelperProvider.$inject = [ "$locationProvider", "$stateProvider", "$urlRouterProvider" ];
 }(), function() {
     "use strict";
+    function saLoginDialogController() {}
+    var componentConfig = {
+        bindings: {
+            data: "<"
+        },
+        templateUrl: "app/components/saLoginDialog/saLoginDialog.template.html",
+        controller: "saLoginDialogController as vm"
+    };
+    angular.module("app.components").component("saLoginDialog", componentConfig).controller("saLoginDialogController", saLoginDialogController);
+}(), function() {
+    "use strict";
+    function authenticationWrapper($http) {
+        function getData() {}
+        var service = {
+            getData: getData
+        };
+        return service;
+    }
+    angular.module("app").factory("authenticationWrapper", authenticationWrapper), authenticationWrapper.$inject = [ "$http" ];
+}(), function() {
+    "use strict";
     angular.module("app.core");
+}(), function() {
+    "use strict";
+    function session() {
+        this.create = function(sessionId, userId) {
+            this.sessionId = sessionId, this.userId = userId;
+        }, this.destroy = function() {
+            this.sessionId = null, this.userId = null;
+        };
+    }
+    angular.module("app.core").service("Session", session), session.$inject = [];
 }(), function() {
     "use strict";
     function HomeController($location) {
@@ -97,5 +128,25 @@
         activate();
     }
     angular.module("app.layout").controller("Sidebar", Sidebar), Sidebar.$inject = [];
+}(), function() {
+    "use strict";
+    function authService($http) {
+        function getData() {}
+        var service = {
+            getData: getData
+        };
+        return service;
+    }
+    angular.module("app.services").factory("authService", authService), authService.$inject = [ "$http" ];
+}(), function() {
+    "use strict";
+    function baseService($http) {
+        function getData() {}
+        var service = {
+            getData: getData
+        };
+        return service;
+    }
+    angular.module("app.services").factory("baseService", baseService), baseService.$inject = [ "$http" ];
 }();
 //# sourceMappingURL=main.js.map

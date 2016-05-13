@@ -39,12 +39,12 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['concurrent:concurrentbuild']);
 
     //JS Specific Tasks
-    grunt.registerTask('build-scripts', ['jshint:strict', 'jshint:warn', 'concurrent:concurrentjsbuild']);
-    grunt.registerTask('build-scripts-notify', ['build-scripts', 'notify:js']);
+    grunt.registerTask('build-scripts', ['jshint:strict', 'concurrent:concurrentjsbuild']);
+    //grunt.registerTask('build-scripts-notify', ['build-scripts', 'notify:js']);
 
     //CSS Specific Tasks
     grunt.registerTask('build-styles', ['newer:sass', 'cssmin']);
-    grunt.registerTask('build-styles-notify', ['build-styles', 'notify:css']);
+    //grunt.registerTask('build-styles-notify', ['build-styles', 'notify:css']);
 
     //Watch Specific Tasks
     grunt.registerTask('watchcss', ['build-styles']);

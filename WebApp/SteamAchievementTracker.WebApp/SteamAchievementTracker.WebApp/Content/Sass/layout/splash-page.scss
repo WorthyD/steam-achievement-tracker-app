@@ -1,0 +1,23 @@
+﻿#splash-page {
+    z-index: 99999 !important;
+    .bar{
+        width:100%;
+    }
+}
+.page-splash {
+    z-index: 99999 !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.page-splash-message {
+    text-align: center;
+    margin: 20% auto 0 auto;
+    font-size: 400%;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    padding: 0;
+}

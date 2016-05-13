@@ -14,7 +14,7 @@ module.exports = {
             quotmark: true,
             maxlen: 800
         }
-    }
+    }  
 
 
 }
