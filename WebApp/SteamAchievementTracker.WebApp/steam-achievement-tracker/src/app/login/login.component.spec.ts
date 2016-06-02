@@ -10,11 +10,13 @@ import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testin
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { LoginComponent } from './login.component';
+import { AuthServiceService } from '../shared/auth-service.service';
+import { HTTP_PROVIDERS } from '@angular/http';
 
 describe('Component: Login', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [LoginComponent]);
+  beforeEachProviders(() => [HTTP_PROVIDERS,AuthServiceService, LoginComponent]);
   beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
     builder = tcb;
   }));

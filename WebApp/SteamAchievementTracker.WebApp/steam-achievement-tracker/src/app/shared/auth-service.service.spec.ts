@@ -6,9 +6,10 @@ import {
   inject
 } from '@angular/core/testing';
 import { AuthServiceService } from './auth-service.service';
+import { HTTP_PROVIDERS } from '@angular/http';
 
 describe('AuthService Service', () => {
-  beforeEachProviders(() => [AuthServiceService]);
+  beforeEachProviders(() => [HTTP_PROVIDERS, AuthServiceService]);
 
   it('should ...',
       inject([AuthServiceService], (service: AuthServiceService) => {
