@@ -1,24 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { AuthServiceService } from '../shared/auth-service.service';
 
+import { UserService } from '../shared/user.service';
+
 @Component({
-  moduleId: module.id,
-  selector: 'app-login',
-  providers: [AuthServiceService],  
-  templateUrl: 'login.component.html',
-  styleUrls: ['login.component.css']
+    moduleId: module.id,
+    selector: 'app-login',
+    providers: [AuthServiceService ],
+    templateUrl: 'login.component.html',
+    styleUrls: ['login.component.css']
 })
 export class LoginComponent implements OnInit {
+    @Output() loggedIn = new EventEmitter<boolean>();
 
-  constructor(private authServiceService: AuthServiceService ) {}
+    constructor(private authServiceService: AuthServiceService) { }
 
-  onClickMe() {
-      console.log('works'); 
-      this.authServiceService.login();
-  }
+    userId = '76561198025095151';
 
-  ngOnInit() {
-  }
+
+    login() {
+        this.authServiceService.manualLogin(this.userId);
+        this.loggedIn.emit(true);
+    }
+
+    ngOnInit() {
+    }
 
 }

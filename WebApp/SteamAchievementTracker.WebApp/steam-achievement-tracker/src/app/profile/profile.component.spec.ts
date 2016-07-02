@@ -9,28 +9,27 @@ import {
 import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { LoginComponent } from './login.component';
-import { AuthServiceService } from '../shared/auth-service.service';
-import { UserService } from '../shared/user.service';
-import { HTTP_PROVIDERS } from '@angular/http';
+import { ProfileComponent } from './profile.component';
 
-describe('Component: Login', () => {
+import {UserService} from '../shared/user.service';
+
+describe('Component: Profile', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [HTTP_PROVIDERS,AuthServiceService, LoginComponent, UserService]);
+  beforeEachProviders(() => [ProfileComponent,UserService ]);
   beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
     builder = tcb;
   }));
 
-  it('should inject the component', inject([LoginComponent],
-      (component: LoginComponent) => {
+  it('should inject the component', inject([ProfileComponent],
+      (component: ProfileComponent) => {
     expect(component).toBeTruthy();
   }));
 
   it('should create the component', inject([], () => {
-    return builder.createAsync(LoginComponentTestController)
+    return builder.createAsync(ProfileComponentTestController)
       .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(LoginComponent));
+        let query = fixture.debugElement.query(By.directive(ProfileComponent));
         expect(query).toBeTruthy();
         expect(query.componentInstance).toBeTruthy();
       });
@@ -40,10 +39,10 @@ describe('Component: Login', () => {
 @Component({
   selector: 'test',
   template: `
-    <app-login></app-login>
+    <app-profile></app-profile>
   `,
-  directives: [LoginComponent]
+  directives: [ProfileComponent]
 })
-class LoginComponentTestController {
+class ProfileComponentTestController {
 }
 

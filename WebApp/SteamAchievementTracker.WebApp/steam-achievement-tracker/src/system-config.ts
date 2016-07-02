@@ -3,10 +3,13 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+    'angular2-cookie': 'vendor/angular2-cookie'
 };
 
 /** User packages configuration. */
 const packages: any = {
+    'angular2-cookie': { main: 'core.js', defaultExtension: 'js' },
+
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +33,7 @@ const barrels: string[] = [
   'app',
   'app/shared',
   'app/login',
+  'app/profile',
   /** @cli-barrel */
 ];
 

@@ -1,2 +1,2 @@
-export {environment} from './environment';
-export {SteamAchievementTrackerAppComponent} from './steam-achievement-tracker.component';
+export * from './environment';
+export * from './app.component';

@@ -220,22 +220,38 @@ namespace SteamAchievementTracker.WebApi.Controllers
             return Ok();
         }
 
-        // GET api/Account/ExternalLogin
         [OverrideAuthentication]
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
-        [Route("ExternalLogin", Name = "ExternalLogin")]
+        [Route("ExternalLogins", Name = "ExternalLogins")]
+        public async Task<IEnumerable<AuthenticationDescription>> GetExternalLogins()
+        {
+            var loginProviders = HttpContext.Current.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+            return loginProviders;
+        }
+
+
+
+
+
+        // GET api/Account/ExternalLogin
+        //[OverrideAuthentication]
+        //[HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
+        [AllowAnonymous]
+        [Route("ExternalLoginer", Name = "ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
             if (error != null)
             {
                 return Redirect(Url.Content("~/") + "#error=" + Uri.EscapeDataString(error));
             }
-
+            /*
             if (!User.Identity.IsAuthenticated)
             {
-                return new ChallengeResult(provider, this);
+                var t = new ChallengeResult(provider, this);
+                return t;
             }
+            */
 
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
