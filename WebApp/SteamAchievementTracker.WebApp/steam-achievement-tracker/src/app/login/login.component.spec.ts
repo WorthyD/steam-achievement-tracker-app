@@ -14,10 +14,12 @@ import { AuthServiceService } from '../shared/auth-service.service';
 import { UserService } from '../shared/user.service';
 import { HTTP_PROVIDERS } from '@angular/http';
 
+import {  CookieService } from 'angular2-cookie/core';
+
 describe('Component: Login', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [HTTP_PROVIDERS,AuthServiceService, LoginComponent, UserService]);
+  beforeEachProviders(() => [HTTP_PROVIDERS, CookieService,AuthServiceService, LoginComponent, UserService]);
   beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
     builder = tcb;
   }));

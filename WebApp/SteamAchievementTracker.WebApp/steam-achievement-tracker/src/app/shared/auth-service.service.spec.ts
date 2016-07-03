@@ -12,7 +12,7 @@ import {  CookieService } from 'angular2-cookie/core';
 import { UserService } from './user.service';
 
 describe('AuthService Service', () => {
-    beforeEachProviders(() => [HTTP_PROVIDERS, AuthServiceService, UserService]);
+    beforeEachProviders(() => [HTTP_PROVIDERS, CookieService, AuthServiceService, UserService]);
 
     it('should inject  the component',
         inject([AuthServiceService, UserService], (service: AuthServiceService, userService: UserService) => {
