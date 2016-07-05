@@ -7,7 +7,6 @@ import { UserService } from '../shared/user.service';
 @Component({
     moduleId: module.id,
     selector: 'app-login',
-    providers: [AuthServiceService ],
     templateUrl: 'login.component.html',
     styleUrls: ['login.component.css']
 })

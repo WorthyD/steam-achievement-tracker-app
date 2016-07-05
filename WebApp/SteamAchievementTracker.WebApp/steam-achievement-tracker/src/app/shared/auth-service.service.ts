@@ -8,14 +8,17 @@ import 'rxjs/add/operator/toPromise';
 import {UserService} from './user.service';
 
 @Injectable()
-export class AuthServiceService implements OnInit {
+export class AuthServiceService  {
     private cookieName = "SteamId";
 
-    constructor(private http: Http, private userService: UserService, private cookies:CookieService) { }
+    constructor(private http: Http, private userService: UserService, private cookies: CookieService) {
+        this.activate();
+    }
 
     private baseUrl = "http://localhost/sat/";
 
-    ngOnInit() {
+    activate() {
+        console.log('Init auth service');
         var userId = this.cookies.get(this.cookieName);
    
         if (userId) {
