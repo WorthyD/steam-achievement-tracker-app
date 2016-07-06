@@ -77,6 +77,10 @@
     <Compile Include="Migrations\201602101924275_nullabled233333443434.Designer.cs">
       <DependentUpon>201602101924275_nullabled233333443434.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607061730409_Stuff1.cs" />
+    <Compile Include="Migrations\201607061730409_Stuff1.Designer.cs">
+      <DependentUpon>201607061730409_Stuff1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
     <Compile Include="Models\GameAchievement.cs" />
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201602101924275_nullabled233333443434.resx">
       <DependentUpon>201602101924275_nullabled233333443434.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607061730409_Stuff1.resx">
+      <DependentUpon>201607061730409_Stuff1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
