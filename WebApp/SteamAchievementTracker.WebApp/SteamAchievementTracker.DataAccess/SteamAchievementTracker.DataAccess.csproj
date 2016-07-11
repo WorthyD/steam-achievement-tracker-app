@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201607061730409_Stuff1.Designer.cs">
       <DependentUpon>201607061730409_Stuff1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607110227583_test.cs" />
+    <Compile Include="Migrations\201607110227583_test.Designer.cs">
+      <DependentUpon>201607110227583_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
     <Compile Include="Models\GameAchievement.cs" />
@@ -127,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607061730409_Stuff1.resx">
       <DependentUpon>201607061730409_Stuff1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607110227583_test.resx">
+      <DependentUpon>201607110227583_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
