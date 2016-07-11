@@ -3,7 +3,7 @@ namespace SteamAchievementTracker.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Stuff : DbMigration
+    public partial class Fix : DbMigration
     {
         public override void Up()
         {
@@ -13,6 +13,7 @@ namespace SteamAchievementTracker.DataAccess.Migrations
                     {
                         AppId = c.Long(nullable: false),
                         Name = c.String(nullable: false, maxLength: 250),
+                        Description = c.String(maxLength: 250),
                         DisplayName = c.String(nullable: false, maxLength: 250),
                         Hidden = c.Boolean(nullable: false),
                         Icon = c.String(nullable: false, maxLength: 250),
@@ -42,7 +43,7 @@ namespace SteamAchievementTracker.DataAccess.Migrations
                         AppID = c.Long(nullable: false),
                         ApiName = c.String(nullable: false, maxLength: 250),
                         Achieved = c.Boolean(nullable: false),
-                        UnlockTimestamp = c.String(nullable: false),
+                        UnlockTimestamp = c.DateTime(),
                     })
                 .PrimaryKey(t => new { t.SteamId, t.AppID, t.ApiName })
                 .ForeignKey("dbo.PlayerProfiles", t => t.SteamId)
@@ -91,17 +92,14 @@ namespace SteamAchievementTracker.DataAccess.Migrations
                 "dbo.ProfileRecentGames",
                 c => new
                     {
-                        ID64 = c.Long(nullable: false),
-                        AppID = c.Int(nullable: false),
-                        PlayerGame_SteamId = c.Long(),
-                        PlayerGame_AppID = c.Long(),
-                        PlayerProfile_SteamId = c.Long(),
+                        SteamId = c.Long(nullable: false),
+                        AppId = c.Long(nullable: false),
                     })
-                .PrimaryKey(t => new { t.ID64, t.AppID })
-                .ForeignKey("dbo.PlayerGames", t => new { t.PlayerGame_SteamId, t.PlayerGame_AppID })
-                .ForeignKey("dbo.PlayerProfiles", t => t.PlayerProfile_SteamId)
-                .Index(t => new { t.PlayerGame_SteamId, t.PlayerGame_AppID })
-                .Index(t => t.PlayerProfile_SteamId);
+                .PrimaryKey(t => new { t.SteamId, t.AppId })
+                .ForeignKey("dbo.GameSchemas", t => t.AppId)
+                .ForeignKey("dbo.PlayerProfiles", t => t.SteamId)
+                .Index(t => t.SteamId)
+                .Index(t => t.AppId);
             
         }
         
@@ -109,12 +107,12 @@ namespace SteamAchievementTracker.DataAccess.Migrations
         {
             DropForeignKey("dbo.PlayerGameAchievements", new[] { "SteamId", "AppID" }, "dbo.PlayerGames");
             DropForeignKey("dbo.PlayerGames", "SteamId", "dbo.PlayerProfiles");
-            DropForeignKey("dbo.ProfileRecentGames", "PlayerProfile_SteamId", "dbo.PlayerProfiles");
-            DropForeignKey("dbo.ProfileRecentGames", new[] { "PlayerGame_SteamId", "PlayerGame_AppID" }, "dbo.PlayerGames");
+            DropForeignKey("dbo.ProfileRecentGames", "SteamId", "dbo.PlayerProfiles");
+            DropForeignKey("dbo.ProfileRecentGames", "AppId", "dbo.GameSchemas");
             DropForeignKey("dbo.PlayerGameAchievements", "SteamId", "dbo.PlayerProfiles");
             DropForeignKey("dbo.GameAchievements", "AppId", "dbo.GameSchemas");
-            DropIndex("dbo.ProfileRecentGames", new[] { "PlayerProfile_SteamId" });
-            DropIndex("dbo.ProfileRecentGames", new[] { "PlayerGame_SteamId", "PlayerGame_AppID" });
+            DropIndex("dbo.ProfileRecentGames", new[] { "AppId" });
+            DropIndex("dbo.ProfileRecentGames", new[] { "SteamId" });
             DropIndex("dbo.PlayerGames", new[] { "SteamId" });
             DropIndex("dbo.PlayerGameAchievements", new[] { "SteamId", "AppID" });
             DropIndex("dbo.PlayerGameAchievements", new[] { "SteamId" });

@@ -12,14 +12,17 @@ namespace SteamAchievementTracker.DataAccess.Models {
     {
 
         [Key, Column(Order = 10)]
-        //[ForeignKey("PlayerProfile")]
-        public long ID64 { get; set; }
+        [ForeignKey("PlayerProfile")]
+        [Required]
+        public long SteamId { get; set; }
 
         [Key, Column(Order = 20)]
-        //[ForeignKey("PlayerGame")]
-        public int AppID { get; set; }
+        [ForeignKey("GameSchema")]
+        [Required]
+        public long AppId { get; set; }
 
         public virtual PlayerProfile PlayerProfile { get; set; }
-        public virtual PlayerGame PlayerGame { get; set; }
+        //public virtual PlayerGame PlayerGame { get; set; }
+        public virtual GameSchema GameSchema { get; set; }
     }
 }

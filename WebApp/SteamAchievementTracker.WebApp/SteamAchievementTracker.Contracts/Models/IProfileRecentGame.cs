@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SteamAchievementTracker.Contracts.Models {
     public interface IProfileRecentGame {
 
-        long ID64 { get; set; }
-        int AppID { get; set; }
+        long SteamId { get; set; }
+        long AppId { get; set; }
     }
 }

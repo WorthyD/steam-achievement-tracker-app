@@ -68,6 +68,7 @@
     <Compile Include="Providers\PlayerGamceAchievementProvider.cs" />
     <Compile Include="Providers\PlayerLibraryProvider.cs" />
     <Compile Include="Providers\PlayerProvider.cs" />
+    <Compile Include="Providers\RecentGameProvider.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>

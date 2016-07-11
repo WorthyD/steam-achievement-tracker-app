@@ -7,13 +7,13 @@ namespace SteamAchievementTracker.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class nullabled : IMigrationMetadata
+    public sealed partial class Fix : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(nullabled));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Fix));
         
         string IMigrationMetadata.Id
         {
-            get { return "201602101909592_nullabled"; }
+            get { return "201607111746589_Fix"; }
         }
         
         string IMigrationMetadata.Source

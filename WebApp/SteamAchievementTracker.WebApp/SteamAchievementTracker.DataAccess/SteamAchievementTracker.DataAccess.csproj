@@ -49,41 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201602090254024_Stuff.cs" />
-    <Compile Include="Migrations\201602090254024_Stuff.Designer.cs">
-      <DependentUpon>201602090254024_Stuff.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602090322306_Stuff2.cs" />
-    <Compile Include="Migrations\201602090322306_Stuff2.Designer.cs">
-      <DependentUpon>201602090322306_Stuff2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602101909209_nullable.cs" />
-    <Compile Include="Migrations\201602101909209_nullable.Designer.cs">
-      <DependentUpon>201602101909209_nullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602101909592_nullabled.cs" />
-    <Compile Include="Migrations\201602101909592_nullabled.Designer.cs">
-      <DependentUpon>201602101909592_nullabled.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602101911432_nullabled23.cs" />
-    <Compile Include="Migrations\201602101911432_nullabled23.Designer.cs">
-      <DependentUpon>201602101911432_nullabled23.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602101915252_nullabled23333.cs" />
-    <Compile Include="Migrations\201602101915252_nullabled23333.Designer.cs">
-      <DependentUpon>201602101915252_nullabled23333.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201602101924275_nullabled233333443434.cs" />
-    <Compile Include="Migrations\201602101924275_nullabled233333443434.Designer.cs">
-      <DependentUpon>201602101924275_nullabled233333443434.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607061730409_Stuff1.cs" />
-    <Compile Include="Migrations\201607061730409_Stuff1.Designer.cs">
-      <DependentUpon>201607061730409_Stuff1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607110227583_test.cs" />
-    <Compile Include="Migrations\201607110227583_test.Designer.cs">
-      <DependentUpon>201607110227583_test.cs</DependentUpon>
+    <Compile Include="Migrations\201607111746589_Fix.cs" />
+    <Compile Include="Migrations\201607111746589_Fix.Designer.cs">
+      <DependentUpon>201607111746589_Fix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
@@ -108,32 +76,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602090254024_Stuff.resx">
-      <DependentUpon>201602090254024_Stuff.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602090322306_Stuff2.resx">
-      <DependentUpon>201602090322306_Stuff2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602101909209_nullable.resx">
-      <DependentUpon>201602101909209_nullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602101909592_nullabled.resx">
-      <DependentUpon>201602101909592_nullabled.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602101911432_nullabled23.resx">
-      <DependentUpon>201602101911432_nullabled23.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602101915252_nullabled23333.resx">
-      <DependentUpon>201602101915252_nullabled23333.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201602101924275_nullabled233333443434.resx">
-      <DependentUpon>201602101924275_nullabled233333443434.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607061730409_Stuff1.resx">
-      <DependentUpon>201607061730409_Stuff1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607110227583_test.resx">
-      <DependentUpon>201607110227583_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607111746589_Fix.resx">
+      <DependentUpon>201607111746589_Fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
