@@ -19,7 +19,7 @@ export class PlayerLibraryService {
 
   constructor(private http: Http, private base: BaseServiceService) {
     console.log('constructing player lib service');
-   }
+  }
 
   getLibrary(steamID: number): Observable<IGame[]> {
     if (!this.library) {
@@ -34,6 +34,11 @@ export class PlayerLibraryService {
       // return this.createObservable(this.customers);
       return this.base.createObservable(this.library);
     }
+  }
+  getGamesByIds(appIds: number[]): IGame[] {
+
+
+    return null;
   }
 
 }
