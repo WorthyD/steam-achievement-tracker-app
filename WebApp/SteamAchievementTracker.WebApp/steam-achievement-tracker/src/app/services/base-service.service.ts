@@ -3,6 +3,8 @@ import {  Http, Response} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 
+import {UserService} from '../shared/user.service';
+
 import {IRequestSettings} from './models/request-settings';
 import { environment } from '../';
 
@@ -12,9 +14,13 @@ import 'rxjs/add/operator/toPromise';
 export class BaseServiceService {
 
     baseUrl = environment.baseUrl;
-    constructor(private http: Http) {
+    constructor(private http: Http, private userService: UserService) {
         console.log('constructing base service');
 
+    }
+
+    getUserId(): string {
+        return this.userService.getUserId();
     }
 
 

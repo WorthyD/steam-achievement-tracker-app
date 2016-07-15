@@ -5,6 +5,8 @@ import {Http, Response } from '@angular/http';
 import { BaseServiceService  } from './base-service.service';
 import {IGame, IRequestSettings} from './models/';
 
+import {UserService} from '../shared/user.service';
+
 import { Observable } from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
@@ -21,7 +23,8 @@ export class PlayerLibraryService {
     console.log('constructing player lib service');
   }
 
-  getLibrary(steamID: number): Observable<IGame[]> {
+  getLibrary(): Observable<IGame[]> {
+    let steamID = this.base.getUserId();
     if (!this.library) {
       return this.http.get(this.base.baseUrl + '/playerlibrary/' + steamID)
         .map((res: Response) => {

@@ -8,7 +8,9 @@ import {IGame, IRequestSettings} from './models/';
 @Injectable()
 export class RecentGamesService {
 
-  constructor(private http: Http, private base: BaseServiceService, private playerLibrary ) {}
+  constructor(private http: Http, private base: BaseServiceService, private playerLibrary: PlayerLibraryService ) {
+
+  }
   
 
 

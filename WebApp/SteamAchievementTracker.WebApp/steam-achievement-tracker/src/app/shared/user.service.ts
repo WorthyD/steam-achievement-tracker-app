@@ -17,11 +17,11 @@ export class UserService {
         this.userId = '';
     }
 
-    isLoggedIn() {
+    isLoggedIn() : boolean {
         return  this.userId !== '';
     }
 
-     getUserId() {
+     getUserId() : string {
         return  this.userId;
     }
 

@@ -11,20 +11,23 @@ import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ProfileComponent } from './profile.component';
 
+import { BaseServiceService  } from '../services/base-service.service';
+import { PlayerProfileService } from '../services/player-profile.service';
+
 import {UserService} from '../shared/user.service';
 
 describe('Component: Profile', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [ProfileComponent,UserService ]);
+  beforeEachProviders(() => [ProfileComponent, UserService, BaseServiceService, PlayerProfileService]);
   beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
     builder = tcb;
   }));
 
   it('should inject the component', inject([ProfileComponent],
-      (component: ProfileComponent) => {
-    expect(component).toBeTruthy();
-  }));
+    (component: ProfileComponent) => {
+      expect(component).toBeTruthy();
+    }));
 
   it('should create the component', inject([], () => {
     return builder.createAsync(ProfileComponentTestController)
