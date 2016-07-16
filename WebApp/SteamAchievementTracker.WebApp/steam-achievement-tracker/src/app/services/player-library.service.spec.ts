@@ -10,6 +10,11 @@ import { PlayerLibraryService } from './player-library.service';
 import { BaseServiceService  } from './base-service.service';
 import {UserService} from '../shared/user.service';
 import { MockBackend } from '@angular/http/testing';
+
+import { Library } from './mock-data/library.mock-data';
+
+
+
 import {provide} from '@angular/core';
 import {Http, Response, BaseRequestOptions, ResponseOptions} from '@angular/http';
 
@@ -45,20 +50,16 @@ describe('PlayerLibrary Service', () => {
     let response = ["ru", "es"];
     mockBackend.connections.subscribe(connection => {
       //connection.mockRespond(new Response({ body: JSON.stringify(response) }));
-      let test = '';
-      connection.mockRespond(new Response( new ResponseOptions({
-              body: [
-                {
-                  id: 26,
-                  contentRendered: "<p><b>Hi there</b></p>",
-                  contentMarkdown: "*Hi there*"
-                }]
-            }
-          )));
+      let body = JSON.stringify(Library);
+      connection.mockRespond(new Response(new ResponseOptions({
+        body: body
+      })));
     });
 
     service.getLibrary().subscribe(x => {
       //check stuff  
+      expect(x).toBeTruthy();
+      expect(x.length).toEqual(4);
 
       done();
 

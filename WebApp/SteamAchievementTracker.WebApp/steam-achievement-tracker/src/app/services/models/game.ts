@@ -1,21 +1,21 @@
 export interface IGame {
-    steamId: number,
-    appID: number,
+  steamId: number,
+  appID: number,
   name: string,
   playtime_Forever: number,
   playtime_2weeks: number,
   img_Icon_Url: string,
   img_Logo_Url: string,
   has_community_visible_stats: boolean,
-  lastUpdated: Date, 
-  achievementRefresh: Date,
+  lastUpdated: string,
+  achievementRefresh: string,
   refreshAchievements: boolean,
   achievementsEarned: number,
   achievementsLocked: number,
   totalAchievements: number,
   beenProcessed: boolean,
   percentComplete: number,
- // gameAchievements: [
+  gameAchievements: any
 
 }
 
