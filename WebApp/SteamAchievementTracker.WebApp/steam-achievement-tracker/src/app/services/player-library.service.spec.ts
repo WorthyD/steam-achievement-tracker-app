@@ -47,7 +47,6 @@ describe('PlayerLibrary Service', () => {
 
 
   it('should get your library', done => {
-    let response = ["ru", "es"];
     mockBackend.connections.subscribe(connection => {
       //connection.mockRespond(new Response({ body: JSON.stringify(response) }));
       let body = JSON.stringify(Library);
@@ -60,16 +59,51 @@ describe('PlayerLibrary Service', () => {
       //check stuff  
       expect(x).toBeTruthy();
       expect(x.length).toEqual(4);
-
       done();
+    });
+  });
 
+  it('should get and filter library your library', done => {
+    mockBackend.connections.subscribe(connection => {
+      //connection.mockRespond(new Response({ body: JSON.stringify(response) }));
+      let body = JSON.stringify(Library);
+      connection.mockRespond(new Response(new ResponseOptions({
+        body: body
+      })));
     });
 
+    let appIds: number[] = [261640, 263820];
+  service.getLibrary().subscribe(y => {
+    service.getGamesByIds(appIds).then(x => {
+      //check stuff  
+
+      expect(x).toBeTruthy();
+      expect(x.length).toEqual(2);
+      done();
+    });
+  });
   });
 
 
+  it('should filter your library', done => {
+    mockBackend.connections.subscribe(connection => {
+      //connection.mockRespond(new Response({ body: JSON.stringify(response) }));
+      let body = JSON.stringify(Library);
+      connection.mockRespond(new Response(new ResponseOptions({
+        body: body
+      })));
+    });
 
+    let appIds: number[] = [261640, 263820];
 
+    service.getGamesByIds(appIds).then(x => {
+      //check stuff  
+
+      expect(x).toBeTruthy();
+      expect(x.length).toEqual(2);
+      done();
+    });
+  });
 
 
 

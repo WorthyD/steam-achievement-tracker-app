@@ -11,6 +11,8 @@ import { Observable } from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/switchMap';
 
 
 
@@ -38,10 +40,43 @@ export class PlayerLibraryService {
       return this.base.createObservable(this.library);
     }
   }
-  getGamesByIds(appIds: number[]): IGame[] {
+
+  getGamesByIds(appIds: number[]): Promise<IGame[]> {
+    if (!this.library){
+      /*
+      return this.getLibrary().toPromise()
+            .then((lib : Promise<IGame[]>) => {
+               return this.library.filter((game) =>  appIds.indexOf(game.appID) > -1);
+            });
+           // .then((library) => this.library.filter((game) =>  appIds.indexOf(game.appID) > -1));
+           */
+          /*
+          return this.getLibrary().toPromise().then( x => {
+            return null;
+          });
+          */
+            return this.getLibrary().toPromise().then(games => {
+                        this.library = games;
+                       return this.filterGames(appIds);
+            });
+
+    }else{
+      return Promise.resolve(this.filterGames(appIds));
+    }
 
 
-    return null;
   }
+
+  private filterGames(appIds: number[]): IGame[]{
+    console.log(appIds);
+    const games = this.library.filter((game) =>  appIds.indexOf(game.appID) > -1);
+    return (games.length) ? games : null;
+
+  }
+
+
+
+
+
 
 }
