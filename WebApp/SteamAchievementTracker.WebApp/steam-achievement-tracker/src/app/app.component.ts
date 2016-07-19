@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { BaseServiceService  } from './services/base-service.service';
 import { Subject }    from 'rxjs/Subject';
 
@@ -14,7 +14,7 @@ import { APP_PROVIDERS } from './app.providers';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-    directives: [LoginComponent, ProfileComponent],
+    directives: [LoginComponent, DashboardComponent],
     providers: [ APP_PROVIDERS] 
 })
 export class AppComponent implements OnInit {

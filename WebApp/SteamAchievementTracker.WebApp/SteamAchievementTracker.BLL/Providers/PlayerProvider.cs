@@ -71,7 +71,7 @@ namespace SteamAchievementTracker.BLL.Providers
                 await Task.WhenAll(profileTask, recentGameTask);
 
                 profile = await profileTask;
-
+                profile.LastUpdate = DateTime.Now;
                 db.SaveChangesAsync();
 
 
@@ -146,6 +146,7 @@ namespace SteamAchievementTracker.BLL.Providers
             {
                 var oldRecentGames = db.ProfileRecentGames.Where(x => x.SteamId == steamId);
                 db.ProfileRecentGames.RemoveRange(oldRecentGames);
+                db.SaveChanges();
 
 
                 var recentGames = new List<DataAccess.Models.ProfileRecentGame>();

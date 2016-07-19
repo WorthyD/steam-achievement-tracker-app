@@ -5,14 +5,30 @@ import { BaseServiceService  } from './base-service.service';
 import { PlayerLibraryService  } from './player-library.service';
 import {IGame, IRequestSettings} from './models/';
 
+import { Observable } from 'rxjs/Observable';
+
 @Injectable()
 export class RecentGamesService {
 
-  constructor(private http: Http, private base: BaseServiceService, private playerLibrary: PlayerLibraryService ) {
+  recentGames: IGame[];
+  constructor(private http: Http, private base: BaseServiceService, private playerLibrary: PlayerLibraryService) {
 
   }
-  
 
+  getRecentGames(): Observable<IGame[]>{
+    let steamID = this.base.getUserId();
 
+    if (!this.recentGames){
+      return this.http.get(this.base.baseUrl + '/recentgames/' + steamID)
+              .map((res: Response) =>{
+                console.log(res);
+                 return this.playerLibrary.getGamesByIds(res.json()).then(x =>{
+                   return x;
+                 });
 
+              }).catch(this.base.handleObsError);
+    }else{
+      return this.base.createObservable(this.recentGames);
+    }
+  }
 }
