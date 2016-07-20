@@ -2,6 +2,7 @@
 import {UserService} from './shared/user.service';
 import {AuthServiceService} from './shared/auth-service.service';
 import {BaseServiceService} from './services/base-service.service';
+import {PlayerLibraryService} from './services/player-library.service';
 import {  CookieService } from 'angular2-cookie/core';
 //import { Sorter } from './shared/utils/sorter';
 //import { DataService } from './shared/services/data.service';
@@ -12,5 +13,6 @@ export const APP_PROVIDERS = [
     UserService,
     HTTP_PROVIDERS,
     CookieService,
-    BaseServiceService
+    BaseServiceService,
+PlayerLibraryService
 ];

@@ -30,7 +30,9 @@ export class PlayerLibraryService {
     if (!this.library) {
       return this.http.get(this.base.baseUrl + '/playerlibrary/' + steamID)
         .map((res: Response) => {
-          this.library = res.json();
+          this.library = res.json().library;
+          console.log('this is my library');
+          console.log(this.library);
           return this.library;
         })
         .catch(this.base.handleObsError);
@@ -41,7 +43,8 @@ export class PlayerLibraryService {
     }
   }
 
-  getGamesByIds(appIds: number[]): Promise<IGame[]> {
+  getGamesByIds(appIds: number[]): Observable<IGame[]> {
+  //getGamesByIds(appIds: number[]): PromiseIGame[]> {
     if (!this.library){
       /*
       return this.getLibrary().toPromise()
@@ -55,13 +58,16 @@ export class PlayerLibraryService {
             return null;
           });
           */
-            return this.getLibrary().toPromise().then(games => {
+            return this.getLibrary().map(games => {
+              console.log('--------------------to promise');
+              console.log(games);
                         this.library = games;
                        return this.filterGames(appIds);
             });
 
     }else{
-      return Promise.resolve(this.filterGames(appIds));
+      //return Promise.resolve(this.filterGames(appIds));
+      return this.base.createObservable(this.filterGames(appIds));
     }
 
 

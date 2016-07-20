@@ -21,8 +21,9 @@ export class RecentGamesService {
     if (!this.recentGames){
       return this.http.get(this.base.baseUrl + '/recentgames/' + steamID)
               .map((res: Response) =>{
-                console.log(res);
-                 return this.playerLibrary.getGamesByIds(res.json()).then(x =>{
+                 return this.playerLibrary.getGamesByIds(res.json()).map(x =>{
+                   console.log('---- Game by Ids------------');
+                   console.log(x);
                    return x;
                  });
 

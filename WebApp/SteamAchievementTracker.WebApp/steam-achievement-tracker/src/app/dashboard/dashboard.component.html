@@ -5,7 +5,15 @@
 
 
 <!-- Recent Game List -->
-{{recentGames.length}}
+<div *ngIf="recentGames">
+
+  <ul>
+      <li *ngFor="let game of recentGames">
+        {{ game.name }}
+      </li>
+    </ul>
+
+</div>
 
 <!-- Nearest To Completion -->
 

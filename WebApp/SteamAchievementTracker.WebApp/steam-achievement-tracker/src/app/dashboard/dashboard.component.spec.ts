@@ -11,10 +11,16 @@ import {
 } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
+import {RecentGamesService} from '../services/recent-games.service';
+
+import { BaseServiceService  } from '../services/base-service.service';
+import { PlayerLibraryService  } from '../services/player-library.service';
 
 describe('Component: Dashboard', () => {
-  it('should create an instance', () => {
-    let component = new DashboardComponent();
+  beforeEachProviders(() => [BaseServiceService, PlayerLibraryService, RecentGamesService]);
+  
+  it('should create an instance', inject([RecentGamesService], (service: RecentGamesService)  => {
+    let component = new DashboardComponent(service);
     expect(component).toBeTruthy();
-  });
+  }));
 });

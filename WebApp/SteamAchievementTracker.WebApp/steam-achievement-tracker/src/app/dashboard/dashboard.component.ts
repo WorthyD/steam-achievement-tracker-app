@@ -3,6 +3,7 @@ import { ProfileComponent } from '../profile/profile.component';
 
 import {IGame} from '../services/models/game';
 import {RecentGamesService} from '../services/recent-games.service';
+import {PlayerLibraryService} from '../services/player-library.service';
 
 
 @Component({
@@ -11,11 +12,12 @@ import {RecentGamesService} from '../services/recent-games.service';
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.css'],
   directives: [ProfileComponent],
+  providers: [RecentGamesService]
 })
 export class DashboardComponent implements OnInit {
   recentGames: IGame[];
 
-  constructor(private recentGameService: RecentGamesService) { }
+  constructor(private recentGameService: RecentGamesService, private playerLibraryService: PlayerLibraryService) { }
 
   ngOnInit() {
     this.loadRecentGames();
@@ -23,7 +25,10 @@ export class DashboardComponent implements OnInit {
 
   loadRecentGames() {
 
-    this.recentGameService.getRecentGames().subscribe((x: IGame[]) => {
+    this.playerLibraryService.getLibrary().subscribe((x: IGame[]) => {
+    //this.recentGameService.getRecentGames().subscribe((x: IGame[]) => {
+      console.log('-------dashboard-------');
+      console.log(x);
       this.recentGames = x;
     });
 
