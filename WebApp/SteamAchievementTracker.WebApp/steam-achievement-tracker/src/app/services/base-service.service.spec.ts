@@ -9,6 +9,7 @@ import {
 import { BaseServiceService } from './base-service.service';
 import {UserService} from '../shared/user.service';
 
+/*
 describe('BaseService Service', () => {
   let user;
 
@@ -18,6 +19,7 @@ describe('BaseService Service', () => {
   beforeEach(inject([UserService], s => {
     user = s;
     user.create('user');
+
   }));
   
 
@@ -34,3 +36,4 @@ describe('BaseService Service', () => {
 
 });
 
+*/

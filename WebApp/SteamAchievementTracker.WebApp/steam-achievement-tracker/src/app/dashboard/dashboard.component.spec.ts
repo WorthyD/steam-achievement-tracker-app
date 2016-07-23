@@ -9,6 +9,8 @@ import {
   expect, it, xit,
   async, inject
 } from '@angular/core/testing';
+import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
+import { Component } from '@angular/core';
 
 import { DashboardComponent } from './dashboard.component';
 import {RecentGamesService} from '../services/recent-games.service';
@@ -24,3 +26,13 @@ describe('Component: Dashboard', () => {
     expect(component).toBeTruthy();
   }));
 });
+
+@Component({
+  selector: 'test',
+  template: `
+    <app-profile></app-profile>
+  `,
+  directives: [ProfileComponent]
+})
+class ProfileComponentTestController {
+}

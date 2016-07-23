@@ -17,7 +17,7 @@ import {PlayerLibraryService} from '../services/player-library.service';
 export class DashboardComponent implements OnInit {
   recentGames: IGame[];
 
-  constructor(private recentGameService: RecentGamesService, private playerLibraryService: PlayerLibraryService) { }
+  constructor(private recentGameService: RecentGamesService) { }
 
   ngOnInit() {
     this.loadRecentGames();
@@ -25,8 +25,8 @@ export class DashboardComponent implements OnInit {
 
   loadRecentGames() {
 
-    this.playerLibraryService.getLibrary().subscribe((x: IGame[]) => {
-    //this.recentGameService.getRecentGames().subscribe((x: IGame[]) => {
+    //this.playerLibraryService.getLibrary().subscribe((x: IGame[]) => {
+    this.recentGameService.getRecentGames().subscribe((x: IGame[]) => {
       console.log('-------dashboard-------');
       console.log(x);
       this.recentGames = x;

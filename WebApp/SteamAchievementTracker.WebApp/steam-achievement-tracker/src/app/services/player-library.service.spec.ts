@@ -20,22 +20,27 @@ import {Http, Response, BaseRequestOptions, ResponseOptions} from '@angular/http
 
 describe('PlayerLibrary Service', () => {
   let user;
-  let service;
+ // let service;
   let mockBackend;
 
+/*
   beforeEachProviders(() => [PlayerLibraryService, BaseServiceService, UserService, MockBackend, BaseRequestOptions,
     provide(Http, {
       useFactory: (backend, options) => new Http(backend, options),
       deps: [MockBackend, BaseRequestOptions]
     })]);
+    */
 
+  beforeEachProviders(() => [BaseServiceService, PlayerLibraryService, UserService]);
 
+/*
   beforeEach(inject([UserService, PlayerLibraryService, MockBackend], (s, pls, mck) => {
     user = s;
     user.create('user');
-    service = pls;
+    //service = pls(Http, BaseServiceService);
     mockBackend = mck;
   }));
+  */
 
 
 
@@ -45,7 +50,7 @@ describe('PlayerLibrary Service', () => {
       expect(service).toBeTruthy();
     }));
 
-
+/*
   it('should get your library', done => {
     mockBackend.connections.subscribe(connection => {
       //connection.mockRespond(new Response({ body: JSON.stringify(response) }));
@@ -74,7 +79,7 @@ describe('PlayerLibrary Service', () => {
 
     let appIds: number[] = [261640, 263820];
   service.getLibrary().subscribe(y => {
-    service.getGamesByIds(appIds).then(x => {
+    service.getGamesByIds(appIds).subscribe(x => {
       //check stuff  
 
       expect(x).toBeTruthy();
@@ -96,7 +101,7 @@ describe('PlayerLibrary Service', () => {
 
     let appIds: number[] = [261640, 263820];
 
-    service.getGamesByIds(appIds).then(x => {
+    service.getGamesByIds(appIds).subscribe(x => {
       //check stuff  
 
       expect(x).toBeTruthy();
@@ -104,7 +109,7 @@ describe('PlayerLibrary Service', () => {
       done();
     });
   });
-
+*/
 
 
 });

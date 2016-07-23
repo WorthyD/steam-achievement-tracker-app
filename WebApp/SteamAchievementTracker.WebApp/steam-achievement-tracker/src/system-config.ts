@@ -35,6 +35,7 @@ const barrels: string[] = [
   'app/login',
   'app/profile',
   'app/dashboard',
+  'app/my-new-component',
   /** @cli-barrel */
 ];
 
