@@ -4,6 +4,6 @@ export class SteamAchievementTrackerPage {
   }
 
   getParagraphText() {
-    return element(by.css('steam-achievement-tracker-app h1')).getText();
+    return element(by.css('app-root h1')).getText();
   }
 }

@@ -13,7 +13,7 @@ import { PlayerLibraryService  } from './player-library.service';
 
 /*
 describe('RecentGames Service', () => {
-  beforeEachProviders(() => [BaseServiceService, PlayerLibraryService,  RecentGamesService]);
+  beforeEachProviders(() => [BaseServiceService,  RecentGamesService]);
 
   it('should ...',
       inject([RecentGamesService], (service: RecentGamesService) => {

@@ -5,7 +5,7 @@ import {IGame} from '../services/models/game';
 import {RecentGamesService} from '../services/recent-games.service';
 import {PlayerLibraryService} from '../services/player-library.service';
 
-
+import 'rxjs/add/operator/toPromise';
 @Component({
   moduleId: module.id,
   selector: 'app-dashboard',
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   loadRecentGames() {
 
     //this.playerLibraryService.getLibrary().subscribe((x: IGame[]) => {
-    this.recentGameService.getRecentGames().subscribe((x: IGame[]) => {
+    this.recentGameService.getRecentGames().then((x: IGame[]) => {
       console.log('-------dashboard-------');
       console.log(x);
       this.recentGames = x;

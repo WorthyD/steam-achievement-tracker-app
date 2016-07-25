@@ -15,21 +15,23 @@ export class RecentGamesService {
 
   }
 
-  getRecentGames(): Observable<IGame[]>{
+  getRecentGames(): Promise<IGame[]>{
     let steamID = this.base.getUserId();
 
     if (!this.recentGames){
       return this.http.get(this.base.baseUrl + '/recentgames/' + steamID)
-              .map((res: Response) =>{
-                 return this.playerLibrary.getGamesByIds(res.json()).map(x =>{
+              .toPromise().then((res: Response) =>{
+                //console.log(res.json());
+                console.log('got recent games');
+                 return this.playerLibrary.getGamesByIds(res.json()).then(x =>{
                    console.log('---- Game by Ids------------');
                    console.log(x);
                    return x;
                  });
 
-              }).catch(this.base.handleObsError);
+              });//.catch(this.base.handleObsError);
     }else{
-      return this.base.createObservable(this.recentGames);
+      //return this.base.createObservable(this.recentGames);
     }
   }
 }
