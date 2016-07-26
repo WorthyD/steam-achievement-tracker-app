@@ -27,8 +27,6 @@ export class DashboardComponent implements OnInit {
 
     //this.playerLibraryService.getLibrary().subscribe((x: IGame[]) => {
     this.recentGameService.getRecentGames().then((x: IGame[]) => {
-      console.log('-------dashboard-------');
-      console.log(x);
       this.recentGames = x;
     });
 
