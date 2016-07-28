@@ -36,6 +36,10 @@ const barrels: string[] = [
   'app/profile',
   'app/dashboard',
   'app/my-new-component',
+  'app/game/game-card',
+  'app/game/game-list',
+  'app/game-list',
+  'app/game-details',
   /** @cli-barrel */
 ];
 

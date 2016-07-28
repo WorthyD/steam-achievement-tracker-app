@@ -1,21 +1,3 @@
-<p>
-  dashboard works!
-</p>
-<app-profile></app-profile>
-
-
-<!-- Recent Game List -->
-<div *ngIf="recentGames">
-
-  <ul>
-      <li *ngFor="let game of recentGames">
-        {{ game.name }}
-      </li>
-    </ul>
-
-</div>
-
-<!-- Nearest To Completion -->
-
-
-<!-- Most Played Game -->
+  <app-profile></app-profile>
+  <!-- Recent Game List -->
+  <game-list [games]="recentGames" [title]="'Title'"></game-list>

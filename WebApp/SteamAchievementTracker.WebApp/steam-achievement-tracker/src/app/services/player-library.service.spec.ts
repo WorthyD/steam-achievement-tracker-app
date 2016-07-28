@@ -68,7 +68,7 @@ describe('PlayerLibrary Service', () => {
   it('should get and filter library your library', done => {
     let appIds: number[] = [261640, 263820];
     service.getLibrary().subscribe(y => {
-      service.getGamesByIds(appIds).subscribe(x => {
+      service.getGamesByIds(appIds).then(x => {
         //check stuff  
 
         expect(x).toBeTruthy();
@@ -83,7 +83,7 @@ describe('PlayerLibrary Service', () => {
 
     let appIds: number[] = [261640, 263820];
 
-    service.getGamesByIds(appIds).subscribe(x => {
+    service.getGamesByIds(appIds).then(x => {
       expect(x).toBeTruthy();
       expect(x.length).toEqual(2);
       done();

@@ -6,7 +6,7 @@ import { Subject }    from 'rxjs/Subject';
 
 import { AuthServiceService } from './shared/auth-service.service'
 import { UserService } from './shared/user.service'
-
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { APP_PROVIDERS } from './app.providers';
 
 @Component({
@@ -14,9 +14,8 @@ import { APP_PROVIDERS } from './app.providers';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-    directives: [LoginComponent, DashboardComponent],
-    providers: [ APP_PROVIDERS] 
-})
+    directives: [LoginComponent, DashboardComponent, ROUTER_DIRECTIVES],
+    providers: [ APP_PROVIDERS] })
 export class AppComponent implements OnInit {
     title = 'steam-achievement-tracker works!';
     userId = '';

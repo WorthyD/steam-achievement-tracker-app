@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileComponent } from '../profile/profile.component';
+import {GameListComponent} from '../game-list/';
 
 import {IGame} from '../services/models/game';
 import {RecentGamesService} from '../services/recent-games.service';
@@ -11,7 +12,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'app-dashboard',
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.css'],
-  directives: [ProfileComponent],
+  directives: [ProfileComponent,GameListComponent ],
   providers: [RecentGamesService]
 })
 export class DashboardComponent implements OnInit {
