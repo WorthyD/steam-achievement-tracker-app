@@ -35,7 +35,7 @@ namespace SteamAchievementTracker.BLL.Providers
                 var gameSchemaResult = await gameSchema;
                 var gameStatsResult = await gameStats;
 
-                ProcessSchema(db, appId, game, gameSchemaResult.GameSchema, gameStatsResult.GlobalAchievementPercentages.achievements);
+              game =  ProcessSchema(db, appId, game, gameSchemaResult.GameSchema, gameStatsResult.GlobalAchievementPercentages.achievements);
             }
 
             db.Dispose();

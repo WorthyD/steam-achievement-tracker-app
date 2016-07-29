@@ -60,6 +60,7 @@ namespace SteamAchievementTracker.BLL.Providers
 
             }
             game.RefreshAchievements = false;
+            game.AchievementRefresh = DateTime.Now;
 
             game.AchievementsEarned = game.PlayerGameAchievements.Where(x => x.Achieved == true).Count();
             game.AchievementsLocked = game.PlayerGameAchievements.Where(x => x.Achieved != true).Count();

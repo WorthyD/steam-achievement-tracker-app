@@ -20,6 +20,7 @@ import 'rxjs/add/operator/switchMap';
 export class PlayerLibraryService {
 
   library: IGame[];
+  loadedGames: number[];
 
   constructor(private http: Http, private base: BaseServiceService) {
     console.log('constructing player lib service');
@@ -38,14 +39,21 @@ export class PlayerLibraryService {
         .catch(this.base.handleObsError);
 
     } else {
-      console.log('there is a lib'); 
+      console.log('there is a lib');
       // return this.createObservable(this.customers);
       return this.base.createObservable(this.library);
     }
   }
+
   getLibPromise() {
     return this.getLibrary().toPromise();
   }
+
+
+  updateGame(game: IGame): Observable<boolean> {
+    return null;
+  }
+
 
 
 

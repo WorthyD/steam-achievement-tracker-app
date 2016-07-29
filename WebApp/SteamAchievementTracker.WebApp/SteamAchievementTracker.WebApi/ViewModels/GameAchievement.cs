@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.WebApi.ViewModels
 {
-    public class GameAchievement : IPlayerGameAchievement, IGameAchievement
+    public class GameAchievement 
     {
         public long AppId { get; set; }
 
@@ -16,28 +16,23 @@ namespace SteamAchievementTracker.WebApi.ViewModels
         public bool Hidden { get; set; }
         public string Description { get; set; }
         public string Icon { get; set; }
-        public string IconGray { get; set; }
-        public double Percent { get; set; }
+        public int Percent { get; set; }
 
-        public long SteamId { get; set; }
-        public long AppID { get; set; }
-        public string ApiName { get; set; }
         public bool Achieved { get; set; }
         public DateTime? UnlockTimestamp { get; set; }
 
+       
         public GameAchievement(IPlayerGameAchievement pga, IGameAchievement ga)
         {
             this.AppId = ga.AppId;
             this.Name = ga.Name;
             this.DisplayName = ga.DisplayName;
             this.Hidden = ga.Hidden;
-            this.Icon = ga.Icon;
-            this.IconGray = ga.IconGray;
-            this.Percent = ga.Percent;
+            this.Icon = (pga.Achieved)? ga.Icon : ga.IconGray;
+            this.Description = ga.Description;
+            ///this.IconGray = ga.IconGray;
+            this.Percent = (int)ga.Percent;
 
-            this.SteamId = pga.SteamId;
-            this.AppID = pga.AppID;
-            this.ApiName = pga.ApiName;
             this.Achieved = pga.Achieved;
             this.UnlockTimestamp = pga.UnlockTimestamp;
         }

@@ -29,13 +29,11 @@ namespace SteamAchievementTracker.WebApi.ViewModels
 
         public bool BeenProcessed
         {
-            get
-            {
-                return this.AchievementRefresh > DateTime.MinValue;
-            }
+            get;set;
         }
-        public double PercentComplete
+        public int PercentComplete
         {
+            /*
             get
             {
                 if (this.TotalAchievements > 0)
@@ -44,6 +42,8 @@ namespace SteamAchievementTracker.WebApi.ViewModels
                 }
                 return 0;
             }
+            */
+            get;set;
         }
 
         public List<GameAchievement> GameAchievements { get; set; }
@@ -68,6 +68,14 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             this.AchievementsLocked = pg.AchievementsLocked;
             this.TotalAchievements = pg.TotalAchievements;
             this.GameAchievements = new List<GameAchievement>();
+
+            this.BeenProcessed = this.AchievementRefresh > DateTime.MinValue;
+            int perc = 0;
+            if (this.TotalAchievements > 0)
+            {
+                perc = (int)(((decimal)this.AchievementsEarned / (decimal)this.TotalAchievements) * 100);
+            }
+            this.PercentComplete = perc;
 
         }
 

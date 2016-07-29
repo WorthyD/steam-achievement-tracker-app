@@ -2,6 +2,7 @@ import { provideRouter, RouterConfig } from '@angular/router';
 
 import { GameDetailsRoutes } from './game-details/game-details.routes';
 import { DashboardRoutes } from './dashboard/dashboard.routes';
+import { AppComponent } from './app.component';
 
 export const APP_ROUTES: RouterConfig = [
   ...DashboardRoutes,

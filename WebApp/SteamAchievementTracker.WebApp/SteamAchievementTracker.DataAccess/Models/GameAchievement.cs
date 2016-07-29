@@ -27,7 +27,6 @@ namespace SteamAchievementTracker.DataAccess.Models
         public string Description { get; set; }
 
 
-
         [Required]
         [StringLength(250)]
         public string DisplayName { get; set; }

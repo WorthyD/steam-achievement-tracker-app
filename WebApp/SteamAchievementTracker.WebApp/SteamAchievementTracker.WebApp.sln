@@ -32,27 +32,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamAchievementTracker.Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamAchievementTracker.WebAppAng20", "SteamAchievementTracker.WebAppAng20\SteamAchievementTracker.WebAppAng20.csproj", "{309E7E2D-7008-4366-B7E5-E89B5121FA6D}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "steam-achievement-tracker(1)", "steam-achievement-tracker\", "{688AD7A0-0E29-4BEC-918B-6E80EC71080A}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_55195"
-		Debug.AspNetCompiler.PhysicalPath = "steam-achievement-tracker\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55195\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_55195"
-		Release.AspNetCompiler.PhysicalPath = "steam-achievement-tracker\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_55195\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "55195"
-		SlnRelativePath = "steam-achievement-tracker\"
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

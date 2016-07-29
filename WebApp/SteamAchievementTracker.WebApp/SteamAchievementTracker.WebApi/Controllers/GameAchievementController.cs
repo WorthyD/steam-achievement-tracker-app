@@ -24,21 +24,29 @@ namespace SteamAchievementTracker.WebApi.Controllers
             try
             {
 
-            var gameAch = GameAchievementProvider.GetGameAchievements(id);
-            var playerAch = PlayerGamceAchievementProvider.GetAppAchievementsForPlayer(steamId, id);
+                var gameAch = GameAchievementProvider.GetGameAchievements(id);
+                var playerAch = PlayerGamceAchievementProvider.GetAppAchievementsForPlayer(steamId, id);
 
-            await Task.WhenAll(gameAch, playerAch);
-            var gameAchResult = await gameAch;
-            var playerAchResult = await playerAch;
+                await Task.WhenAll(gameAch, playerAch);
+                var gameAchResult = await gameAch;
+                var playerAchResult = await playerAch;
+
+                return new ViewModels.GameDetails(playerAchResult, gameAchResult.GameAchievements.ToList(), playerAchResult.PlayerGameAchievements.ToList());
+
+/*
+                var gameAch = await GameAchievementProvider.GetGameAchievements(id);
+                var playerAch = await PlayerGamceAchievementProvider.GetAppAchievementsForPlayer(steamId, id);
 
 
-            return new ViewModels.GameDetails(playerAchResult, gameAchResult.GameAchievements.ToList(), playerAchResult.PlayerGameAchievements.ToList());
+                return new ViewModels.GameDetails(playerAch, gameAch.GameAchievements.ToList(), playerAch.PlayerGameAchievements.ToList());
+                */
+
 
             }
             catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
 
 
