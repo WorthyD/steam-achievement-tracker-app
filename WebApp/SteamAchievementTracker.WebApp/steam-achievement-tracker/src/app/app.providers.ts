@@ -12,7 +12,7 @@ import {AuthGuard} from './shared/utils/auth.guard';
 export const APP_PROVIDERS = [
    // AuthGuard,
     AuthServiceService,
-    UserService,
+    //UserService,
     HTTP_PROVIDERS,
     CookieService,
     BaseServiceService,

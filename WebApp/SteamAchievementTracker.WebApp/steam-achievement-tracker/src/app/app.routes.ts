@@ -3,7 +3,9 @@ import { provideRouter, RouterConfig } from '@angular/router';
 import { GameDetailsRoutes } from './game-details/game-details.routes';
 import { DashboardRoutes } from './dashboard/dashboard.routes';
 import { AppComponent } from './app.component';
+import {AuthGuard} from './shared/utils/auth.guard';
 
+import {UserService} from './shared/user.service';
 import { LoginComponent } from './login/login.component';
 
 export const APP_ROUTES: RouterConfig = [
@@ -14,5 +16,7 @@ export const APP_ROUTES: RouterConfig = [
 ];
 
 export const APP_ROUTER_PROVIDERS = [
-  provideRouter(APP_ROUTES)
+  provideRouter(APP_ROUTES),
+  UserService,
+  AuthGuard
 ]

@@ -4,6 +4,6 @@ import { AuthGuard} from '../shared/utils/auth.guard';
 
 export const DashboardRoutes: RouterConfig = [{
     path: 'dashboard',
-    component: DashboardComponent
-//    canActivate: [AuthGuard]
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
 }];

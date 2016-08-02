@@ -10,20 +10,24 @@ import { AuthServiceService } from './shared/auth-service.service'
 import { UserService } from './shared/user.service'
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { APP_PROVIDERS } from './app.providers';
+
+import { Router } from '@angular/router';
+
 //import {AuthGuard} from './shared/utils/auth.guard';
 @Component({
-  moduleId: module.id,
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-    directives: [ ROUTER_DIRECTIVES, MainComponent ],
-    providers: [ APP_PROVIDERS ] })
+    moduleId: module.id,
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.css'],
+    directives: [ROUTER_DIRECTIVES, MainComponent],
+    providers: [APP_PROVIDERS]
+})
 export class AppComponent implements OnInit {
     title = 'steam-achievement-tracker works!';
     userId = '';
     isLoggedIn = false;
 
-    constructor(private authService: AuthServiceService, private userService : UserService) {
+    constructor(private authService: AuthServiceService, private userService: UserService, private router: Router) {
         console.log('AppComponent Constructor');
     }
 
@@ -32,7 +36,10 @@ export class AppComponent implements OnInit {
 
         this.authService.activate();
         this.isLoggedIn = this.userService.isLoggedIn();
+
         this.userId = this.userService.getUserId();
+
+
     }
 
 

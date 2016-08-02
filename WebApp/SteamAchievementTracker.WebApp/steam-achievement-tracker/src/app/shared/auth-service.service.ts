@@ -7,11 +7,13 @@ import 'rxjs/add/operator/toPromise';
 
 import {UserService} from './user.service';
 
+import { Router } from '@angular/router';
+
 @Injectable()
 export class AuthServiceService  {
     private cookieName = "SteamId";
 
-    constructor(private http: Http, private userService: UserService, private cookies: CookieService) {
+    constructor(private http: Http, private userService: UserService, private cookies: CookieService, private router: Router) {
         this.activate();
     }
 
@@ -46,6 +48,15 @@ export class AuthServiceService  {
             .then(response => console.log(response.json().data))
             .catch(this.handleError);
         */
+    }
+
+    checkCredentials() : boolean{
+        if(this.userService.isLoggedIn() == false){
+            console.log('going to login');
+            this.router.navigate(['login']);
+            return false;
+        }
+        return true;
     }
 
     private handleError(error: any) {
