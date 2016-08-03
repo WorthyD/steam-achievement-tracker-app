@@ -6,16 +6,14 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
   moduleId: module.id,
   selector: 'app-main',
   templateUrl: 'main.component.html',
-  directives: [ROUTER_DIRECTIVES, DashboardComponent],
-  styleUrls: ['main.component.css']
+  directives: [DashboardComponent],
+  styleUrls: ['main.component.scss']
 })
 export class MainComponent implements OnInit {
 
-  constructor(private authService: AuthServiceService) { }
+  constructor() { }
 
   ngOnInit() {
-    if (this.authService.checkCredentials()) {
-    }
-  }
+ }
 
 }

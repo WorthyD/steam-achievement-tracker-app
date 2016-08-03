@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import { Router,
+    RouterStateSnapshot,
+     CanActivate } from '@angular/router';
 
 import {UserService} from '../user.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private router: Router, private user: UserService) { 
+    constructor(private router: Router, private user: UserService, state: RouterStateSnapshot) { 
     //constructor(private router: Router) { 
         console.log("ACTIVATING");
     }
@@ -16,7 +18,7 @@ export class AuthGuard implements CanActivate {
             return true;
         }
             // Store the attempted URL for redirecting
-//    this.authService.redirectUrl = state.url;
+//    this..redirectUrl = state.url;
 
 
         this.router.navigate(['/login']);
