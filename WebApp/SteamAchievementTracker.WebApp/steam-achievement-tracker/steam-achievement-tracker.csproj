@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <ProjectGuid>{009D2FEC-94BD-4B6F-9E0E-656030D948C5}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="angular-cli-build.js" />
+    <Content Include="config\environment.js" />
+    <Content Include="config\karma-test-shim.js" />
+    <Content Include="config\karma.conf.js" />
+    <Content Include="config\protractor.conf.js" />
+    <Content Include="src\app\app.component.css" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\dashboard\dashboard.component.html" />
+    <Content Include="src\app\game-details\game-details.component.html" />
+    <Content Include="src\app\game-list\game-list.component.html" />
+    <Content Include="src\app\login\login.component.css" />
+    <Content Include="src\app\login\login.component.html" />
+    <Content Include="src\app\main\main.component.html" />
+    <Content Include="src\app\profile\profile.component.css" />
+    <Content Include="src\app\profile\profile.component.html" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\index.html" />
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="config\environment.dev.ts" />
+    <TypeScriptCompile Include="config\environment.prod.ts" />
+    <TypeScriptCompile Include="e2e\app.e2e-spec.ts" />
+    <TypeScriptCompile Include="e2e\app.e2e.ts" />
+    <TypeScriptCompile Include="e2e\app.po.ts" />
+    <TypeScriptCompile Include="e2e\typings.d.ts" />
+    <TypeScriptCompile Include="src\app\app.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\app.providers.ts" />
+    <TypeScriptCompile Include="src\app\app.routes.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\dashboard.routes.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\index.ts" />
+    <TypeScriptCompile Include="src\app\dashboard\shared\index.ts" />
+    <TypeScriptCompile Include="src\app\environment.ts" />
+    <TypeScriptCompile Include="src\app\game-details\game-details.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\game-details\game-details.component.ts" />
+    <TypeScriptCompile Include="src\app\game-details\game-details.routes.ts" />
+    <TypeScriptCompile Include="src\app\game-details\index.ts" />
+    <TypeScriptCompile Include="src\app\game-details\shared\index.ts" />
+    <TypeScriptCompile Include="src\app\game-list\game-list.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\game-list\game-list.component.ts" />
+    <TypeScriptCompile Include="src\app\game-list\index.ts" />
+    <TypeScriptCompile Include="src\app\game-list\shared\index.ts" />
+    <TypeScriptCompile Include="src\app\index.ts" />
+    <TypeScriptCompile Include="src\app\login\index.ts" />
+    <TypeScriptCompile Include="src\app\login\login.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="src\app\login\shared\index.ts" />
+    <TypeScriptCompile Include="src\app\main\index.ts" />
+    <TypeScriptCompile Include="src\app\main\main.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\main\main.component.ts" />
+    <TypeScriptCompile Include="src\app\main\shared\index.ts" />
+    <TypeScriptCompile Include="src\app\profile\index.ts" />
+    <TypeScriptCompile Include="src\app\profile\profile.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\profile\profile.component.ts" />
+    <TypeScriptCompile Include="src\app\services\base-service.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\services\base-service.service.ts" />
+    <TypeScriptCompile Include="src\app\services\game-details.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\services\game-details.service.ts" />
+    <TypeScriptCompile Include="src\app\services\mock-data\library.mock-data.ts" />
+    <TypeScriptCompile Include="src\app\services\models\achievement.ts" />
+    <TypeScriptCompile Include="src\app\services\models\game.ts" />
+    <TypeScriptCompile Include="src\app\services\models\index.ts" />
+    <TypeScriptCompile Include="src\app\services\models\player-profile.ts" />
+    <TypeScriptCompile Include="src\app\services\models\request-settings.ts" />
+    <TypeScriptCompile Include="src\app\services\player-library.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\services\player-library.service.ts" />
+    <TypeScriptCompile Include="src\app\services\player-profile.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\services\player-profile.service.ts" />
+    <TypeScriptCompile Include="src\app\services\recent-games.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\services\recent-games.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\auth-service.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\shared\auth-service.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\index.ts" />
+    <TypeScriptCompile Include="src\app\shared\user.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\shared\user.service.ts" />
+    <TypeScriptCompile Include="src\app\shared\utils\auth.guard.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\system-config.ts" />
+    <TypeScriptCompile Include="src\typings.d.ts" />
+    <TypeScriptCompile Include="typings\browser.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\angular-protractor\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\es6-shim\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\jasmine\index.d.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\selenium-webdriver\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\angular-protractor\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\es6-shim\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\selenium-webdriver\index.d.ts" />
+    <TypeScriptCompile Include="typings\index.d.ts" />
+    <TypeScriptCompile Include="typings\main.d.ts" />
+    <TypeScriptCompile Include="typings\main\ambient\angular-protractor\index.d.ts" />
+    <TypeScriptCompile Include="typings\main\ambient\es6-shim\index.d.ts" />
+    <TypeScriptCompile Include="typings\main\ambient\jasmine\index.d.ts" />
+    <TypeScriptCompile Include="typings\main\ambient\selenium-webdriver\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".clang-format" />
+    <Content Include=".editorconfig" />
+    <Content Include="angular-cli.json" />
+    <Content Include="e2e\tsconfig.json" />
+    <Content Include="package.json" />
+    <Content Include="public\.npmignore" />
+    <Content Include="README.md" />
+    <Content Include="src\app\app.component.scss" />
+    <Content Include="src\app\dashboard\dashboard.component.scss" />
+    <Content Include="src\app\game-details\game-details.component.scss" />
+    <Content Include="src\app\game-list\game-list.component.scss" />
+    <Content Include="src\app\main\main.component.scss" />
+    <Content Include="src\tsconfig.json" />
+    <Content Include="test.ps1" />
+    <Content Include="tslint.json" />
+    <Content Include="typings.json" />
+    <Content Include="typings\globals\angular-protractor\typings.json" />
+    <Content Include="typings\globals\es6-shim\typings.json" />
+    <Content Include="typings\globals\jasmine\typings.json" />
+    <Content Include="typings\globals\selenium-webdriver\typings.json" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\app\game\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>steam_achievement_tracker</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\WebApplications\Microsoft.WebApplication.targets')" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49935</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49935/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
+    <TypeScriptSourceMap>false</TypeScriptSourceMap>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+</Project>
