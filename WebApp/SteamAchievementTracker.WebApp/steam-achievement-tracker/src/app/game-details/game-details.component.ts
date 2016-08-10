@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {IGame} from '../services/models/';
 
 import {PlayerLibraryService} from '../services/player-library.service';
+import {GameDetailsService} from '../services/game-details.service';
 
 @Component({
     moduleId: module.id,
@@ -14,16 +15,20 @@ import {PlayerLibraryService} from '../services/player-library.service';
 export class GameDetailsComponent implements OnInit {
 
     private sub: any;
+    game: IGame;
+
     appId;
-    constructor(private router: Router, private route: ActivatedRoute, private playerLib: PlayerLibraryService) { }
+    constructor(private router: Router, private route: ActivatedRoute, private playerLib: PlayerLibraryService, private gameService: GameDetailsService) { }
 
     ngOnInit() {
         console.log(this.route.params);
         console.log(this.router);
         const id = this.route.params['id'];
         this.appId = id;
+        this.game = null;
         this.sub = this.route.params.subscribe(params => {
             let id = +params['id']; // (+) converts string 'id' to a number
+            let appId = this.appId;
             console.log(id);
             //this.service.getHero(id).then(hero => this.hero = hero);
 
@@ -34,6 +39,16 @@ export class GameDetailsComponent implements OnInit {
             this.playerLib.getGameByID(id).then((game: IGame) => {
                 console.log('in complete');
                 console.log(game);
+                this.game = game;
+                if (this.game.gameAchievements.length == 0) {
+                    console.log('getting more details');
+                    console.log(id);
+                    this.gameService.getAchievementsForGame(id).then((game: IGame) => {
+                        this.game = game;
+
+                    });
+                }
+
 
             });
 

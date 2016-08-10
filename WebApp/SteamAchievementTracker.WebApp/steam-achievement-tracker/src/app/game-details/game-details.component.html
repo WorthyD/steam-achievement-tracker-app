@@ -1,4 +1,13 @@
 <p>
-  game-details works!
+    game-details works!
 </p>
 <h3>{{appId}}</h3>
+<div *ngIf="game">
+    <h3>{{game.name}}</h3>
+
+
+    <div *ngFor="let ach of game.gameAchievements;" class="game-card">
+        <h5>Game Ach</h5>
+    </div>
+
+</div>
