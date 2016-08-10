@@ -6,6 +6,7 @@ import { PlayerLibraryService  } from './player-library.service';
 import {IGame, IRequestSettings} from './models/';
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class RecentGamesService {

@@ -11,11 +11,10 @@ import {AuthGuard} from './app/shared/utils/auth.guard';
 import {APP_PROVIDERS} from './app/app.providers';
 
 if (environment.production) {
-  enableProdMode();
+    enableProdMode();
 }
 
 //bootstrap(SteamAchievementTrackerAppComponent, [HTTP_PROVIDERS, UserService]);
 bootstrap(AppComponent, [HTTP_PROVIDERS, APP_ROUTER_PROVIDERS]);
 //bootstrap(AppComponent, [APP_PROVIDERS, APP_ROUTER_PROVIDERS]);
 
-  

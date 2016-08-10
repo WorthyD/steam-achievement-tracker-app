@@ -18,8 +18,8 @@ import { Router } from '@angular/router';
     moduleId: module.id,
     selector: 'app-root',
     templateUrl: 'app.component.html',
-    styleUrls: ['app.component.css'],
-    directives: [ROUTER_DIRECTIVES, MainComponent],
+    //styleUrls: ['app.component.css'],
+    directives: [ MainComponent],
     providers: [APP_PROVIDERS]
 })
 export class AppComponent implements OnInit {

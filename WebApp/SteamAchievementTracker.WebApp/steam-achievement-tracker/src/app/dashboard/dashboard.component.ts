@@ -12,7 +12,7 @@ import 'rxjs/add/operator/toPromise';
   moduleId: module.id,
   selector: 'app-dashboard',
   templateUrl: 'dashboard.component.html',
-  styleUrls: ['dashboard.component.scss'],
+//  styleUrls: ['dashboard.component.css'],
   directives: [ProfileComponent, GameListComponent],
   providers: [RecentGamesService]
 })

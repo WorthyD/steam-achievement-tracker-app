@@ -9,7 +9,7 @@ import{IPlayerProfile} from '../services/models/player-profile';
     selector: 'app-profile',
     providers:[PlayerProfileService],
     templateUrl: 'profile.component.html',
-    styleUrls: ['profile.component.css']
+    //styleUrls: ['profile.component.css']
 })
 export class ProfileComponent implements OnInit {
     profile: IPlayerProfile;
