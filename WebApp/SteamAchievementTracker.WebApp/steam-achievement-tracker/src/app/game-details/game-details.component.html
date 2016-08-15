@@ -6,8 +6,17 @@
     <h3>{{game.name}}</h3>
 
 
-    <div *ngFor="let ach of game.gameAchievements;" class="game-card">
-        <h5>Game Ach</h5>
+    <h2>Unlocked</h2>
+    <div *ngFor="let ach of game.unlockedAchievements;" class="game-card">
+        <h5>{{ach.displayName}}</h5>
+        <h6>{{ach.description}}</h6>
     </div>
+
+    <h2>Locked</h2>
+    <div *ngFor="let ach of game.lockedAchievements;" class="game-card">
+        <h5>{{ach.displayName}}</h5>
+        <h6>{{ach.description}}</h6>
+    </div>
+
 
 </div>

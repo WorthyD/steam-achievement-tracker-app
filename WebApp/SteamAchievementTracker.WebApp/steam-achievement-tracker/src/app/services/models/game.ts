@@ -15,7 +15,8 @@ export interface IGame {
   totalAchievements: number,
   beenProcessed: boolean,
   percentComplete: number,
-  gameAchievements: any
+  unlockedAchievements: any,
+  lockedAchievements: any
 
 }
 

@@ -31,8 +31,6 @@ export class GameDetailsService {
         return this.http.get(this.base.baseUrl + '/gameachievement/' + appId + '?steamId=' + steamID).toPromise().then((res: Response) => {
 
             let game: IGame = res.json();
-            console.log('game response');
-            console.log(JSON.stringify(game));
             this.libservice.updateGame(game);
 
             return game;

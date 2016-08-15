@@ -40,7 +40,7 @@ export class GameDetailsComponent implements OnInit {
                 console.log('in complete');
                 console.log(game);
                 this.game = game;
-                if (this.game.gameAchievements.length == 0) {
+                if (this.game.unlockedAchievements.length == 0 && this.game.lockedAchievements.length == 0) {
                     console.log('getting more details');
                     console.log(id);
                     this.gameService.getAchievementsForGame(id).then((game: IGame) => {

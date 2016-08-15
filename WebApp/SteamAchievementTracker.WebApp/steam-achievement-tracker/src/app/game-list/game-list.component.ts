@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   moduleId: module.id,
   selector: 'game-list',
   templateUrl: 'game-list.component.html',
-//  styleUrls: ['game-list.component.css']
+  styleUrls: ['game-list.component.css']
 })
 export class GameListComponent implements OnInit {
 

@@ -29,7 +29,7 @@ namespace SteamAchievementTracker.WebApi.ViewModels
 
         public bool BeenProcessed
         {
-            get;set;
+            get; set;
         }
         public int PercentComplete
         {
@@ -43,13 +43,14 @@ namespace SteamAchievementTracker.WebApi.ViewModels
                 return 0;
             }
             */
-            get;set;
+            get; set;
         }
 
-        public List<GameAchievement> GameAchievements { get; set; }
+        public List<GameAchievement> UnlockedAchievements { get; set; }
+        public List<GameAchievement> LockedAchievements { get; set; }
 
-      
-    
+
+
 
         private void ApplyBase(IPlayerGame pg)
         {
@@ -67,7 +68,9 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             this.AchievementsEarned = pg.AchievementsEarned;
             this.AchievementsLocked = pg.AchievementsLocked;
             this.TotalAchievements = pg.TotalAchievements;
-            this.GameAchievements = new List<GameAchievement>();
+            //this.GameAchievements = new List<GameAchievement>();
+            this.UnlockedAchievements = new List<GameAchievement>();
+            this.LockedAchievements = new List<GameAchievement>();
 
             this.BeenProcessed = this.AchievementRefresh > DateTime.MinValue;
             int perc = 0;
@@ -92,7 +95,15 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             {
                 var pga = pgas.Where(x => x.ApiName == ga.Name).FirstOrDefault();
 
-                this.GameAchievements.Add(new GameAchievement(pga, ga));
+                var game = new GameAchievement(pga, ga);
+                if (pga.Achieved == true)
+                {
+                    this.UnlockedAchievements.Add(game);
+                }
+                else
+                {
+                    this.LockedAchievements.Add(game);
+                }
             }
         }
     }

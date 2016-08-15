@@ -1,7 +1,25 @@
 <p>
-  game-list works!
+    game-list works!
 </p>
 <h2>{{title}}</h2>
 <div *ngFor="let game of games;" class="game-card">
- <h3 (click)="gotoDetail(game)">{{game.name}}</h3> 
+    <div (click)="gotoDetail(game)">
+        <h5>{{game.name}}</h5>
+        <div>
+            Hours: {{game.playtime_Forever}} | {{game.playtime_2weeks}}
+        </div>
+        <div>
+            Stats: {{game.has_community_visible_stats}}
+        </div>
+         <div>
+             Dates: LU:{{game.lastUpdated}} | AR {{game.achievementRefresh}} | ra {{game.refreshAchievements}}
+         </div>
+        <div>
+            Counts: E{{game.achievementsEarned}} | l {{game.achievementsLocked}} | t {{game.totalAchievements}}
+        </div>
+        <div>
+            BeenP: {{game.beenProcessed}} | pec {{game.percentComplete}}
+        </div>
+    </div>
+
 </div>
