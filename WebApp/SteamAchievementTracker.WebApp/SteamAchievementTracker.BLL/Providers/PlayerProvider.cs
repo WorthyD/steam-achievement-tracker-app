@@ -31,40 +31,7 @@ namespace SteamAchievementTracker.BLL.Providers
             if (profile == null || ExperationService.isProfileExpired(profile.LastUpdate))
             {
 
-                /*
-                var request = new SteamApiWrapper.SteamUser.GetPlayerSummariesRequest(base.APIKey);
-                var rgRequest = new SteamApiWrapper.PlayerService.GetRecentlyPlayedGamesRequest(base.APIKey);
-
-                request.ProfileIds = new List<long>();
-                request.ProfileIds.Add(steamId);
-
-                rgRequest.SteamId = steamId;
-
-                var profileResponse = request.GetResponse();
-                var recentGamesResponse = rgRequest.GetResponse();
-
-                await Task.WhenAll(profileResponse, recentGamesResponse);
-
-                var response = await profileResponse;
-                var recentGames = await recentGamesResponse;
-
-
-                if (response == null || response.Players == null)
-                {
-                    //Throw new exception
-                    return null;
-                }
-
-
-                var player = response.Players.FirstOrDefault();
-    
-                var profileTask = ProcessProfile( profile,  player);
-
-
-                await Task.WhenAll(profileTask, recentGamesResponse);
-
-                db.SaveChanges();
-                */
+          
 
                 var profileTask = ProcessProfile(steamId, profile);
                 var recentGameTask = ProcessRecentGames(steamId);

@@ -72,7 +72,7 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             this.UnlockedAchievements = new List<GameAchievement>();
             this.LockedAchievements = new List<GameAchievement>();
 
-            this.BeenProcessed = this.AchievementRefresh > DateTime.MinValue;
+            this.BeenProcessed = this.AchievementRefresh >new DateTime(2000, 1, 1);
             int perc = 0;
             if (this.TotalAchievements > 0)
             {

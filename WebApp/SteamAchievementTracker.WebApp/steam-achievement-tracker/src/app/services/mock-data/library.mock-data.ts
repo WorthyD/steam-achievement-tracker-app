@@ -20,7 +20,9 @@ export var Library: IGame[] = [
         "totalAchievements": 0,
         "beenProcessed": true,
         "percentComplete": 0.0,
-        "gameAchievements": []
+        "unlockedAchievements": [],
+        "lockedAchievements":[]
+        //"gameAchievements": []
     },
 
     {
@@ -40,7 +42,9 @@ export var Library: IGame[] = [
         "totalAchievements": 0,
         "beenProcessed": true,
         "percentComplete": 0.0,
-        "gameAchievements": []
+        "unlockedAchievements": [],
+        "lockedAchievements": []
+        //"gameAchievements": []
     },
 
     {
@@ -60,7 +64,9 @@ export var Library: IGame[] = [
         "totalAchievements": 0,
         "beenProcessed": true,
         "percentComplete": 0.0,
-        "gameAchievements": []
+        "unlockedAchievements": [],
+        "lockedAchievements": []
+        //"gameAchievements": []
     },
     {
         "steamId": 76561198025095151,
@@ -79,7 +85,9 @@ export var Library: IGame[] = [
         "totalAchievements": 0,
         "beenProcessed": true,
         "percentComplete": 0.0,
-        "gameAchievements": []
+        "unlockedAchievements": [],
+        "lockedAchievements": []
+       // "gameAchievements": []
     }
 
 ];

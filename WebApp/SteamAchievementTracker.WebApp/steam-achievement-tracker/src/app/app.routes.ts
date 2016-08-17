@@ -1,5 +1,6 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 
+import { LibraryRoutes } from './library/library.routes';
 import { GameDetailsRoutes } from './game-details/game-details.routes';
 import { DashboardRoutes } from './dashboard/dashboard.routes';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import {UserService} from './shared/user.service';
 import { LoginComponent } from './login/login.component';
 
 export const APP_ROUTES: RouterConfig = [
+    ...LibraryRoutes,
     ...DashboardRoutes,
     ...GameDetailsRoutes,
     { path: 'login', component: LoginComponent },

@@ -1328,6 +1328,7 @@
     <Content Include="src\app\dashboard\dashboard.component.html" />
     <Content Include="src\app\game-details\game-details.component.html" />
     <Content Include="src\app\game-list\game-list.component.html" />
+    <Content Include="src\app\library\library.component.html" />
     <Content Include="src\app\login\login.component.html" />
     <Content Include="src\app\main\main.component.html" />
     <Content Include="src\app\profile\profile.component.html" />
@@ -1379,6 +1380,11 @@
     <TypeScriptCompile Include="src\app\game-list\index.ts" />
     <TypeScriptCompile Include="src\app\game-list\shared\index.ts" />
     <TypeScriptCompile Include="src\app\index.ts" />
+    <TypeScriptCompile Include="src\app\library\library.routes.ts" />
+    <TypeScriptCompile Include="src\app\library\index.ts" />
+    <TypeScriptCompile Include="src\app\library\library.component.spec.ts" />
+    <TypeScriptCompile Include="src\app\library\library.component.ts" />
+    <TypeScriptCompile Include="src\app\library\shared\index.ts" />
     <TypeScriptCompile Include="src\app\login\index.ts" />
     <TypeScriptCompile Include="src\app\login\login.component.spec.ts" />
     <TypeScriptCompile Include="src\app\login\login.component.ts" />
@@ -1442,7 +1448,7 @@
     <Content Include="src\app\app.component.scss" />
     <Content Include="src\app\dashboard\dashboard.component.scss" />
     <Content Include="src\app\game-details\game-details.component.scss" />
-    <Content Include="src\app\game-list\game-list.component.scss" />
+    <Content Include="src\app\game-list\game-list.component.css" />
     <Content Include="src\app\main\main.component.scss" />
     <Content Include="src\tsconfig.json" />
     <Content Include="test.ps1" />
@@ -2703,6 +2709,7 @@
     <Content Include="dist\vendor\rxjs\util\toSubscriber.js.map" />
     <Content Include="dist\vendor\rxjs\util\tryCatch.js.map" />
     <Content Include="dist\vendor\rxjs\util\UnsubscriptionError.js.map" />
+    <Content Include="src\app\library\library.component.scss" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
