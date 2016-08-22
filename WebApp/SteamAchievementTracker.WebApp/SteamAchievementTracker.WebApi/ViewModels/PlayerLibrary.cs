@@ -11,12 +11,12 @@ namespace SteamAchievementTracker.WebApi.ViewModels
     {
         public List<GameDetails> Library { get; set; }
 
-        public PlayerLibrary(IList<IPlayerGame> pg)
+        public PlayerLibrary(IList<IFullGameDetails> pg)
         {
             this.Library = new List<GameDetails>();
             foreach (var p in pg)
             {
-                this.Library.Add(new GameDetails(p));
+                this.Library.Add(new GameDetails(p.PlayerGame, p.Schema ));
             }
         }
 

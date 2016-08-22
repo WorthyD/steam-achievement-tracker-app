@@ -18,11 +18,14 @@ namespace SteamAchievementTracker.DataAccess.Models
         public long SteamId { get; set; }
 
         [Key, Column(Order = 20), DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("GameSchema")]
         public long AppID { get; set; }
 
+        /*
         [Required]
         [StringLength(250)]
         public string Name { get; set; }
+        */
 
         [Required]
         public decimal Playtime_Forever { get; set; }
@@ -30,6 +33,7 @@ namespace SteamAchievementTracker.DataAccess.Models
         [Required]
         public decimal Playtime_2weeks { get; set; }
 
+        /*
         [Required]
         [StringLength(250)]
         public string Img_Icon_Url { get; set; }
@@ -40,7 +44,9 @@ namespace SteamAchievementTracker.DataAccess.Models
 
         [Required]
         public bool has_community_visible_stats { get; set; }
-
+        [Required]
+        public bool has_achievements { get; set; }
+        */
         [Required]
         public DateTime LastUpdated { get; set; }
 
@@ -63,6 +69,8 @@ namespace SteamAchievementTracker.DataAccess.Models
         public virtual PlayerProfile PlayerProfile { get; set; }
 
         public virtual List<PlayerGameAchievement> PlayerGameAchievements { get; set; }
+
+        public virtual GameSchema GameSchema { get; set; }
 
         //IList<IPlayerGameAchievement> IPlayerGame.PlayerGameAchievements
         //{

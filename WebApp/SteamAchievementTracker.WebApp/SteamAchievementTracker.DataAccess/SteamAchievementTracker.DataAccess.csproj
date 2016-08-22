@@ -49,13 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201607111746589_Fix.cs" />
-    <Compile Include="Migrations\201607111746589_Fix.Designer.cs">
-      <DependentUpon>201607111746589_Fix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607121725165_thing.cs" />
-    <Compile Include="Migrations\201607121725165_thing.Designer.cs">
-      <DependentUpon>201607121725165_thing.cs</DependentUpon>
+    <Compile Include="Migrations\201608181741167_Test.cs" />
+    <Compile Include="Migrations\201608181741167_Test.Designer.cs">
+      <DependentUpon>201608181741167_Test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
@@ -80,11 +76,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607111746589_Fix.resx">
-      <DependentUpon>201607111746589_Fix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607121725165_thing.resx">
-      <DependentUpon>201607121725165_thing.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608181741167_Test.resx">
+      <DependentUpon>201608181741167_Test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

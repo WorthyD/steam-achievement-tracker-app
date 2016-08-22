@@ -19,16 +19,32 @@ namespace SteamAchievementTracker.DataAccess.Models
         [StringLength(250)]
         public string Name { get; set; }
 
-       [Required]
+        [Required]
         public DateTime LastSchemaUpdate { get; set; }
 
 
         [Required]
         public bool HasAchievements { get; set; }
 
+        [Required]
+        [StringLength(250)]
+        public string Img_Icon_Url { get; set; }
+
+        [Required]
+        [StringLength(250)]
+        public string Img_Logo_Url { get; set; }
+
 
 
         public virtual List<GameAchievement> GameAchievements { get; set; }
+
+        public virtual List<PlayerGame> PlayerGames { get; set; }
+
+        [Required]
+        public bool has_community_visible_stats
+        {
+            get; set;
+        }
 
         //IList<IGameAchievement> IGameSchema.GameAchievements
         //{

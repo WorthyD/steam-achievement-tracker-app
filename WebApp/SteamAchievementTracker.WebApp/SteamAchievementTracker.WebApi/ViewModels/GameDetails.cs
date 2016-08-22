@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.WebApi.ViewModels
 {
-    public class GameDetails : IPlayerGame
+    public class GameDetails : IPlayerGame, IGameSchema
     {
 
         public long SteamId { get; set; }
@@ -18,6 +18,7 @@ namespace SteamAchievementTracker.WebApi.ViewModels
         public string Img_Icon_Url { get; set; }
         public string Img_Logo_Url { get; set; }
         public bool has_community_visible_stats { get; set; }
+        public bool has_achievements { get; set; }
         public DateTime LastUpdated { get; set; }
         public DateTime AchievementRefresh { get; set; }
         public bool RefreshAchievements { get; set; }
@@ -33,35 +34,42 @@ namespace SteamAchievementTracker.WebApi.ViewModels
         }
         public int PercentComplete
         {
-            /*
-            get
-            {
-                if (this.TotalAchievements > 0)
-                {
-                    return this.AchievementsEarned / this.TotalAchievements;
-                }
-                return 0;
-            }
-            */
             get; set;
         }
 
         public List<GameAchievement> UnlockedAchievements { get; set; }
         public List<GameAchievement> LockedAchievements { get; set; }
 
+        public long AppId
+        {
+            get;
+            set;
+        }
 
+        public DateTime LastSchemaUpdate
+        {
+            get;
 
+            set;
+        }
 
-        private void ApplyBase(IPlayerGame pg)
+        public bool HasAchievements
+        {
+            get;
+            set;
+        }
+
+        private void ApplyBase(IPlayerGame pg, IGameSchema gs)
         {
             this.SteamId = pg.SteamId;
             this.AppID = pg.AppID;
-            this.Name = pg.Name;
+            //this.Name = pg.Name;
             this.Playtime_Forever = pg.Playtime_Forever;
             this.Playtime_2weeks = pg.Playtime_2weeks;
-            this.Img_Icon_Url = pg.Img_Icon_Url;
-            this.Img_Logo_Url = pg.Img_Logo_Url;
-            this.has_community_visible_stats = pg.has_community_visible_stats;
+            this.Img_Icon_Url = gs.Img_Icon_Url;
+            this.Img_Logo_Url = gs.Img_Logo_Url;
+            this.has_community_visible_stats = gs.has_community_visible_stats;
+            this.has_achievements = gs.HasAchievements;
             this.LastUpdated = pg.LastUpdated;
             this.AchievementRefresh = pg.AchievementRefresh;
             this.RefreshAchievements = pg.RefreshAchievements;
@@ -83,14 +91,14 @@ namespace SteamAchievementTracker.WebApi.ViewModels
         }
 
 
-        public GameDetails(IPlayerGame pg)
+        public GameDetails(IPlayerGame pg, IGameSchema gs)
         {
-            this.ApplyBase(pg);
+            this.ApplyBase(pg, gs);
         }
 
-        public GameDetails(DataAccess.Models.PlayerGame pg, List<DataAccess.Models.GameAchievement> gas, List<DataAccess.Models.PlayerGameAchievement> pgas)
+        public GameDetails(DataAccess.Models.PlayerGame pg, DataAccess.Models.GameSchema gs, List<DataAccess.Models.GameAchievement> gas, List<DataAccess.Models.PlayerGameAchievement> pgas)
         {
-            this.ApplyBase(pg);
+            this.ApplyBase(pg, gs);
             foreach (var ga in gas)
             {
                 var pga = pgas.Where(x => x.ApiName == ga.Name).FirstOrDefault();

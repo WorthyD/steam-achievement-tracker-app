@@ -31,7 +31,7 @@ namespace SteamAchievementTracker.BLL.Providers
             if (profile == null || ExperationService.isProfileExpired(profile.LastUpdate))
             {
 
-          
+
 
                 var profileTask = ProcessProfile(steamId, profile);
                 var recentGameTask = ProcessRecentGames(steamId);
@@ -166,7 +166,11 @@ namespace SteamAchievementTracker.BLL.Providers
         {
             var userGames = db.PlayerGames.Where(x => x.SteamId == steamId).ToList();
 
+            var gameIds = gl.games.Select(x => (long)x.appid).ToList();
+            var gameSchemas = db.GameSchemas.Where(x => gameIds.Contains(x.AppId)).Select(x => x.AppId);
+
             var bulkInsertGames = new List<DataAccess.Models.PlayerGame>();
+            var bulkInsertSchemas = new List<DataAccess.Models.GameSchema>();
             foreach (var g in gl.games)
             {
                 var existingG = userGames.Where(x => x.AppID == g.appid).FirstOrDefault();
@@ -183,6 +187,7 @@ namespace SteamAchievementTracker.BLL.Providers
                     existingG.TotalAchievements = 0;
                     existingG.AchievementsLocked = 0;
                     existingG.AchievementsEarned = 0;
+                    //existingG.has_achievements = g.has_community_visible_stats;
                 }
 
 
@@ -192,11 +197,32 @@ namespace SteamAchievementTracker.BLL.Providers
                 existingG.ConvertService(g, steamId);
 
                 existingG.LastUpdated = DateTime.Now;
+
+
+                //Add Schema if it's not there
+                if (gameSchemas.Contains(g.appid) == false)
+                {
+                    bulkInsertSchemas.Add(new DataAccess.Models.GameSchema()
+                    {
+                        AppId = g.appid,
+                        HasAchievements = g.has_community_visible_stats,
+                        has_community_visible_stats = g.has_community_visible_stats,
+                        Img_Icon_Url = (string.IsNullOrEmpty(g.img_icon_url)) ? "Not Found" : g.img_icon_url,
+                        Img_Logo_Url = (string.IsNullOrEmpty(g.img_logo_url)) ? "Not Found" : g.img_logo_url,
+                        Name = g.name,
+                        LastSchemaUpdate = new DateTime(2000, 1, 1)
+                    });
+                }
             }
             try
             {
+                if (bulkInsertSchemas.Count > 0)
+                {
+                    db.BulkInsert<DataAccess.Models.GameSchema>(bulkInsertSchemas);
+                }
 
-                if (bulkInsertGames.Count > 0) {
+                if (bulkInsertGames.Count > 0)
+                {
                     db.BulkInsert<DataAccess.Models.PlayerGame>(bulkInsertGames);
                 }
 

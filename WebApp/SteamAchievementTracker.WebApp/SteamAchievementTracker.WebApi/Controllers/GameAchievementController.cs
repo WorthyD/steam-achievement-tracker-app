@@ -26,12 +26,13 @@ namespace SteamAchievementTracker.WebApi.Controllers
 
                 var gameAch = GameAchievementProvider.GetGameAchievements(id);
                 var playerAch = PlayerGamceAchievementProvider.GetAppAchievementsForPlayer(steamId, id);
+                //var gameSch = GameAchievementProvider.ge
 
                 await Task.WhenAll(gameAch, playerAch);
                 var gameAchResult = await gameAch;
                 var playerAchResult = await playerAch;
 
-                return new ViewModels.GameDetails(playerAchResult, gameAchResult.GameAchievements.ToList(), playerAchResult.PlayerGameAchievements.ToList());
+                return new ViewModels.GameDetails(playerAchResult, gameAchResult, gameAchResult.GameAchievements.ToList(), playerAchResult.PlayerGameAchievements.ToList());
 
 /*
                 var gameAch = await GameAchievementProvider.GetGameAchievements(id);

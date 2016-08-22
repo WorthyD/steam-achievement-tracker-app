@@ -4,20 +4,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using SteamAchievementTracker.BLL.Converters.ServiceToModel;
 
 namespace SteamAchievementTracker.BLL.Providers
 {
     public class PlayerLibraryProvider : BaseProvider
     {
-        public async Task<List<Contracts.Models.IPlayerGame>> GetPlayerLibrary(long steamId)
+        public class ConvertGame : IFullGameDetails
         {
-            List<DataAccess.Models.PlayerGame> games = new List<DataAccess.Models.PlayerGame>();
+            //DataAccess.Models.PlayerGame 
+            public  IPlayerGame PlayerGame { get; set; }
+
+            public IGameSchema Schema { get; set; }
+        }
+        public async Task<List<Contracts.Models.IFullGameDetails>> GetPlayerLibrary(long steamId)
+        {
+            List<ConvertGame> games = new List<ConvertGame>();
+            List<IFullGameDetails> gameDetails = new List<IFullGameDetails>();
             using (var db = new DataAccess.ModelContext())
             {
-                games = db.PlayerGames.Where(x => x.SteamId == steamId).ToList();
+                //games = db.PlayerGames.Include(x => x.GameSchema).Where(x => x.SteamId == steamId).ToList();
+//                games = db.PlayerGames.Include(x => x.GameSchema).Where(x => x.SteamId == steamId)
+  //                 .ToList();
+                games = db.PlayerGames.Include(x => x.GameSchema).Where(x => x.SteamId == steamId).
+                    Select(x => new ConvertGame() {PlayerGame = x, Schema = x.GameSchema })
+                   .ToList();
+
+
             }
 
-            return games.ToList<IPlayerGame>();
+            /*
+            foreach (var g in games)
+            {
+                gameDetails.Add(
+            }
+            */
+            return games.ToList<IFullGameDetails>();
+
+            //            return games.ToList<IPlayerGame>();
+            return gameDetails;
         }
     }
 }
