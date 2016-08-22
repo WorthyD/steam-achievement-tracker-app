@@ -50,6 +50,11 @@ export class AuthServiceService  {
         */
     }
 
+    logout() {
+        this.cookies.remove(this.cookieName);
+        this.userService.destroy();
+    }
+
     checkCredentials() : boolean{
         if(this.userService.isLoggedIn() == false){
             console.log('going to login');

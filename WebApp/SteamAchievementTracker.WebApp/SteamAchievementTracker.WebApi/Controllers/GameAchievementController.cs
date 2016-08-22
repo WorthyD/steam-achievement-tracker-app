@@ -19,7 +19,7 @@ namespace SteamAchievementTracker.WebApi.Controllers
             PlayerGamceAchievementProvider = new BLL.Providers.PlayerGamceAchievementProvider();
         }
 
-        public async Task<ViewModels.GameDetails> Get(long id, long steamId)
+        public async Task<IHttpActionResult> Get(long id, long steamId)
         {
             try
             {
@@ -32,7 +32,11 @@ namespace SteamAchievementTracker.WebApi.Controllers
                 var gameAchResult = await gameAch;
                 var playerAchResult = await playerAch;
 
-                return new ViewModels.GameDetails(playerAchResult, gameAchResult, gameAchResult.GameAchievements.ToList(), playerAchResult.PlayerGameAchievements.ToList());
+                if (playerAchResult == null) {
+                    return NotFound();
+                }
+
+                return Ok(new ViewModels.GameDetails(playerAchResult, gameAchResult));
 
 /*
                 var gameAch = await GameAchievementProvider.GetGameAchievements(id);
@@ -47,7 +51,7 @@ namespace SteamAchievementTracker.WebApi.Controllers
             catch (Exception e)
             {
 
-                throw e;
+                throw;
             }
 
 

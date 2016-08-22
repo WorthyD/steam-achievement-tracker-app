@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SteamAchievementTracker.WebApi.ViewModels
 {
-    public class GameDetails : IPlayerGame, IGameSchema
+    public class GameDetails
     {
 
         public long SteamId { get; set; }
@@ -40,47 +40,34 @@ namespace SteamAchievementTracker.WebApi.ViewModels
         public List<GameAchievement> UnlockedAchievements { get; set; }
         public List<GameAchievement> LockedAchievements { get; set; }
 
-        public long AppId
-        {
-            get;
-            set;
-        }
-
-        public DateTime LastSchemaUpdate
-        {
-            get;
-
-            set;
-        }
-
-        public bool HasAchievements
-        {
-            get;
-            set;
-        }
-
         private void ApplyBase(IPlayerGame pg, IGameSchema gs)
         {
-            this.SteamId = pg.SteamId;
-            this.AppID = pg.AppID;
-            //this.Name = pg.Name;
-            this.Playtime_Forever = pg.Playtime_Forever;
-            this.Playtime_2weeks = pg.Playtime_2weeks;
+            if (pg != null)
+            {
+                this.SteamId = pg.SteamId;
+                this.AppID = pg.AppID;
+                this.Playtime_Forever = pg.Playtime_Forever;
+                this.Playtime_2weeks = pg.Playtime_2weeks;
+                this.LastUpdated = pg.LastUpdated;
+                this.AchievementRefresh = pg.AchievementRefresh;
+                this.RefreshAchievements = pg.RefreshAchievements;
+                this.AchievementsEarned = pg.AchievementsEarned;
+                this.AchievementsLocked = pg.AchievementsLocked;
+                this.TotalAchievements = pg.TotalAchievements;
+            }
+
+
+            this.Name = gs.Name;
             this.Img_Icon_Url = gs.Img_Icon_Url;
             this.Img_Logo_Url = gs.Img_Logo_Url;
             this.has_community_visible_stats = gs.has_community_visible_stats;
             this.has_achievements = gs.HasAchievements;
-            this.LastUpdated = pg.LastUpdated;
-            this.AchievementRefresh = pg.AchievementRefresh;
-            this.RefreshAchievements = pg.RefreshAchievements;
-            this.AchievementsEarned = pg.AchievementsEarned;
-            this.AchievementsLocked = pg.AchievementsLocked;
-            this.TotalAchievements = pg.TotalAchievements;
-            //this.GameAchievements = new List<GameAchievement>();
+
+
             this.UnlockedAchievements = new List<GameAchievement>();
             this.LockedAchievements = new List<GameAchievement>();
 
-            this.BeenProcessed = this.AchievementRefresh >new DateTime(2000, 1, 1);
+            this.BeenProcessed = this.AchievementRefresh > new DateTime(2000, 1, 1);
             int perc = 0;
             if (this.TotalAchievements > 0)
             {
@@ -96,12 +83,15 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             this.ApplyBase(pg, gs);
         }
 
-        public GameDetails(DataAccess.Models.PlayerGame pg, DataAccess.Models.GameSchema gs, List<DataAccess.Models.GameAchievement> gas, List<DataAccess.Models.PlayerGameAchievement> pgas)
+        public GameDetails(DataAccess.Models.PlayerGame pg, DataAccess.Models.GameSchema gs)
         {
             this.ApplyBase(pg, gs);
-            foreach (var ga in gas)
+
+            var playerAch = (pg != null && pg.PlayerGameAchievements != null) ? pg.PlayerGameAchievements.ToList() : new List<DataAccess.Models.PlayerGameAchievement>();
+
+            foreach (var ga in gs.GameAchievements)
             {
-                var pga = pgas.Where(x => x.ApiName == ga.Name).FirstOrDefault();
+                var pga = playerAch.Where(x => x.ApiName == ga.Name).FirstOrDefault();
 
                 var game = new GameAchievement(pga, ga);
                 if (pga.Achieved == true)

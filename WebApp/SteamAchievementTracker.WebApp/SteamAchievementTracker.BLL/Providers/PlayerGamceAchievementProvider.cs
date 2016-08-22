@@ -18,6 +18,7 @@ namespace SteamAchievementTracker.BLL.Providers
 
             if (pg == null)
             {
+                db.Dispose();
                 return null;
             }
 
@@ -30,9 +31,17 @@ namespace SteamAchievementTracker.BLL.Providers
 
                 var playerAchievementsResponse = await playerAchievementsReq.GetResponse();
 
-                var x = playerAchievementsResponse.PlayerStats.achievements;
+                if (playerAchievementsResponse.Status == SteamApiWrapper.ResponseStatus.ResponseStatusCode.OK)
+                {
 
-                pg = ProcessGameAchievements(db, appId, steamId, pg, x.ToList());
+                    var x = playerAchievementsResponse.PlayerStats.achievements;
+
+                    pg = ProcessGameAchievements(db, appId, steamId, pg, x.ToList());
+                }
+                else
+                {
+                    pg = null;
+                }
 
             }
             db.Dispose();

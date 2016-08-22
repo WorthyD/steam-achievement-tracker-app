@@ -18,7 +18,9 @@ export class ProfileComponent implements OnInit {
 
     getProfile(){
         //this.playerService.getProfile(this.userService.getUserId()0).subscribe(profile:IPlayerProfile => this.profile = profile);
-        this.playerService.getProfile(this.userService.getUserId()).then(profile => this.profile = profile).then(function(){console.log('got profile');});
+        this.playerService.getProfile(this.userService.getUserId())
+            .then(profile => this.profile = profile)
+            .then(function () { console.log('got profile'); });
     }
 
     ngOnInit() {
