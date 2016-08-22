@@ -6,6 +6,7 @@ import { LoginComponent } from '../login/login.component';
 import { UserService} from '../shared/user.service';
 
 
+import {Subject} from 'rxjs/Subject';
 
 
 @Component({
@@ -17,7 +18,18 @@ import { UserService} from '../shared/user.service';
 })
 export class MainComponent implements OnInit {
 
-    constructor(private user: AuthServiceService, private router: Router) { }
+    private logInEventSource = new Subject<boolean>();
+    loginEvent$ = this.logInEventSource.asObservable();
+
+    constructor(private user: AuthServiceService, private router: Router) {
+
+        console.log('subscribing');
+        user.emitter.subscribe((data) => {
+            console.log('============================= logging in via subscribe =====================================');
+
+        });
+
+    }
 
     logOut() {
         console.log('logging out');

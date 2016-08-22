@@ -1,6 +1,6 @@
 
 import {  Http } from '@angular/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit, EventEmitter } from '@angular/core';
 import {  CookieService } from 'angular2-cookie/core';
 
 import 'rxjs/add/operator/toPromise';
@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthServiceService  {
     private cookieName = "SteamId";
+
+    emitter = new EventEmitter<boolean>();
+
 
     constructor(private http: Http, private userService: UserService, private cookies: CookieService, private router: Router) {
         this.activate();
@@ -34,6 +37,7 @@ export class AuthServiceService  {
     manualLogin(userID:string) {
         this.userService.create(userID);
         this.cookies.put(this.cookieName, userID);
+        this.emitter.next(true);
     }
 
 
