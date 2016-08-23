@@ -1418,6 +1418,8 @@
     <TypeScriptCompile Include="src\app\shared\user.service.spec.ts" />
     <TypeScriptCompile Include="src\app\shared\user.service.ts" />
     <TypeScriptCompile Include="src\app\shared\utils\auth.guard.ts" />
+    <TypeScriptCompile Include="src\app\shared\utils\library-refresher.service.spec.ts" />
+    <TypeScriptCompile Include="src\app\shared\utils\library-refresher.service.ts" />
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\system-config.ts" />
     <TypeScriptCompile Include="src\typings.d.ts" />

@@ -26,7 +26,6 @@ export class MainComponent implements OnInit {
         console.log('subscribing');
         user.emitter.subscribe((data) => {
             console.log('============================= logging in via subscribe =====================================');
-
         });
 
     }
