@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {IGame} from '../services/models/game';
+
 import {PlayerLibraryService} from '../services/player-library.service';
 import {GameListComponent} from '../game-list/';
 
@@ -22,9 +23,15 @@ export class LibraryComponent implements OnInit {
 
     loadLibrary() {
         this.libService.getLibrary().subscribe((x: IGame[]) => {
-            console.log(x);
             this.gameLibrary = x;
         });
+    }
+
+    refreshGames() {
+        let games = this.gameLibrary.filter((game) => game.readyForRefresh == true);
+        console.log(games.length);
+        console.log(games);
+
     }
 
 }

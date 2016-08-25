@@ -26,6 +26,7 @@ namespace SteamAchievementTracker.WebApi.ViewModels
         public int AchievementsLocked { get; set; }
         public int TotalAchievements { get; set; }
 
+        public bool ReadyForRefresh { get; set; }
 
 
         public bool BeenProcessed
@@ -54,8 +55,19 @@ namespace SteamAchievementTracker.WebApi.ViewModels
                 this.AchievementsEarned = pg.AchievementsEarned;
                 this.AchievementsLocked = pg.AchievementsLocked;
                 this.TotalAchievements = pg.TotalAchievements;
-            }
+            } else {
+                this.SteamId = 0;
+                this.AppID = gs.AppId;
+                this.Playtime_Forever =0; 
+                this.Playtime_2weeks = 0;
+                this.LastUpdated = DateTime.MinValue; 
+                this.AchievementRefresh = DateTime.MinValue;
+                this.RefreshAchievements = false;
+                this.AchievementsEarned = 0;
+                this.AchievementsLocked = 0;
+                this.TotalAchievements = 0;
 
+            }
 
             this.Name = gs.Name;
             this.Img_Icon_Url = gs.Img_Icon_Url;
@@ -63,11 +75,14 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             this.has_community_visible_stats = gs.has_community_visible_stats;
             this.has_achievements = gs.HasAchievements;
 
-
+            //this.ReadyForRefresh = (!this.BeenProcessed || (this.has_achievements && this.RefreshAchievements));
             this.UnlockedAchievements = new List<GameAchievement>();
             this.LockedAchievements = new List<GameAchievement>();
 
             this.BeenProcessed = this.AchievementRefresh > new DateTime(2000, 1, 1);
+
+            this.ReadyForRefresh = (!this.BeenProcessed || (this.has_achievements && this.RefreshAchievements));
+
             int perc = 0;
             if (this.TotalAchievements > 0)
             {

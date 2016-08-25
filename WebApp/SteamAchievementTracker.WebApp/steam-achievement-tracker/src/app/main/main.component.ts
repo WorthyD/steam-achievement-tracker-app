@@ -5,6 +5,8 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { LoginComponent } from '../login/login.component';
 import { UserService} from '../shared/user.service';
 
+import {LibraryRefresherService} from '../shared/utils/library-refresher.service';
+
 
 import {Subject} from 'rxjs/Subject';
 
@@ -21,11 +23,15 @@ export class MainComponent implements OnInit {
     private logInEventSource = new Subject<boolean>();
     loginEvent$ = this.logInEventSource.asObservable();
 
-    constructor(private user: AuthServiceService, private router: Router) {
+    constructor(private user: AuthServiceService, private router: Router, private refresher: LibraryRefresherService) {
 
         console.log('subscribing');
         user.emitter.subscribe((data) => {
             console.log('============================= logging in via subscribe =====================================');
+
+            this.refresher.init();
+            //this.refresher.startLibraryRefresh();
+
         });
 
     }
