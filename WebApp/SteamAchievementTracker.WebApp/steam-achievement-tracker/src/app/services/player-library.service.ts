@@ -51,16 +51,12 @@ export class PlayerLibraryService {
 
 
     updateGame(game: IGame): void {
-            this.library.forEach((g: IGame, index: number) => {
-                if (g.appID == game.appID) {
-                    this.library[index] = game;
-                }
+        this.library.forEach((g: IGame, index: number) => {
+            if (g.appID == game.appID) {
+                this.library[index] = game;
+            }
 
-            });
-//            observer.next(true);
-//            observer.complete();
-
- //       });
+        });
     }
 
 

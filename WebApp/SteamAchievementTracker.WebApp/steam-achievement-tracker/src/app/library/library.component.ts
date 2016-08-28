@@ -27,11 +27,6 @@ export class LibraryComponent implements OnInit {
         });
     }
 
-    refreshGames() {
-        let games = this.gameLibrary.filter((game) => game.readyForRefresh == true);
-        console.log(games.length);
-        console.log(games);
-
-    }
+   
 
 }

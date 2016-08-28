@@ -23,7 +23,8 @@ export class MainComponent implements OnInit {
     private logInEventSource = new Subject<boolean>();
     loginEvent$ = this.logInEventSource.asObservable();
 
-    constructor(private user: AuthServiceService, private router: Router, private refresher: LibraryRefresherService) {
+    constructor(private user: AuthServiceService, private router: Router,
+        private refresher: LibraryRefresherService) {
 
         console.log('subscribing');
         user.emitter.subscribe((data) => {
