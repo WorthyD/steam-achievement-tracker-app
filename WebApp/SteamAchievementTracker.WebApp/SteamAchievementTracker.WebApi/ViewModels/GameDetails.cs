@@ -28,6 +28,8 @@ namespace SteamAchievementTracker.WebApi.ViewModels
 
         public bool ReadyForRefresh { get; set; }
 
+        public int AverageUnlock { get; set; }
+
 
         public bool BeenProcessed
         {
@@ -76,6 +78,7 @@ namespace SteamAchievementTracker.WebApi.ViewModels
             this.Img_Logo_Url = gs.Img_Logo_Url;
             this.has_community_visible_stats = gs.has_community_visible_stats;
             this.has_achievements = gs.HasAchievements;
+            this.AverageUnlock = gs.AvgUnlock;
 
             //this.ReadyForRefresh = (!this.BeenProcessed || (this.has_achievements && this.RefreshAchievements));
             this.UnlockedAchievements = new List<GameAchievement>();
@@ -83,7 +86,15 @@ namespace SteamAchievementTracker.WebApi.ViewModels
 
             this.BeenProcessed = this.AchievementRefresh > new DateTime(2000, 1, 1);
 
-            this.ReadyForRefresh = (!this.BeenProcessed || (this.has_achievements && this.RefreshAchievements));
+            if (this.has_achievements)
+            {
+                this.ReadyForRefresh = (!this.BeenProcessed || (this.has_achievements && this.RefreshAchievements));
+            }
+            else
+            {
+                //add experation refresh logic here
+                this.ReadyForRefresh = false;
+            }
 
             int perc = 0;
             if (this.TotalAchievements > 0)

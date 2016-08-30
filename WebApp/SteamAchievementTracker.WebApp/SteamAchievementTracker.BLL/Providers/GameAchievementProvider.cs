@@ -51,7 +51,7 @@ namespace SteamAchievementTracker.BLL.Providers
                 game.AppId = appId;
             }
 
-            game.Name = (string.IsNullOrEmpty(gameSchema.gameName)) ? "Name title found" : gameSchema.gameName;
+            //game.Name = (string.IsNullOrEmpty(gameSchema.gameName)) ? "Name title found" : gameSchema.gameName;
 
             if (gameSchema.availableGameStats != null && gameSchema.availableGameStats.achievements != null)
             {
@@ -78,6 +78,7 @@ namespace SteamAchievementTracker.BLL.Providers
                 }
                 game.LastSchemaUpdate = DateTime.Now;
                 game.HasAchievements = true;
+                game.AvgUnlock = (int)(achievementPercentages.Average(x => x.percent));
             }
             else
             {

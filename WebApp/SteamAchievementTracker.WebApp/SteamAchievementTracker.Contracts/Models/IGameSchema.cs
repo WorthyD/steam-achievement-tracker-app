@@ -14,6 +14,7 @@ namespace SteamAchievementTracker.Contracts.Models
         string Img_Logo_Url { get; set; }
         bool has_community_visible_stats { get; set; }
         DateTime LastSchemaUpdate { get; set; }
+        int AvgUnlock { get; set; }
         bool HasAchievements { get; set; }
     }
 }

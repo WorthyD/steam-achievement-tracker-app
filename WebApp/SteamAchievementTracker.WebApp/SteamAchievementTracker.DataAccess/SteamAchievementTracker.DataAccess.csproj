@@ -53,6 +53,10 @@
     <Compile Include="Migrations\201608181741167_Test.Designer.cs">
       <DependentUpon>201608181741167_Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608300203103_Avg.cs" />
+    <Compile Include="Migrations\201608300203103_Avg.Designer.cs">
+      <DependentUpon>201608300203103_Avg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
     <Compile Include="Models\GameAchievement.cs" />
@@ -78,6 +82,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608181741167_Test.resx">
       <DependentUpon>201608181741167_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608300203103_Avg.resx">
+      <DependentUpon>201608300203103_Avg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -44,7 +44,11 @@ namespace SteamAchievementTracker.DataAccess.Models
         public bool has_community_visible_stats
         {
             get; set;
-        }
+        } 
+
+        [Required]
+        public int AvgUnlock { get; set; }
+
 
         //IList<IGameAchievement> IGameSchema.GameAchievements
         //{
