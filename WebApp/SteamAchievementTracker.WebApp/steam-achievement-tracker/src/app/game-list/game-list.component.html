@@ -5,6 +5,7 @@
 <div *ngFor="let game of games;" class="game-card">
     <div (click)="gotoDetail(game)">
         <h5>{{game.name}}</h5>
+        <h6>{{game.appID}}</h6>
         <div>
             Hours: {{game.playtime_Forever}} | {{game.playtime_2weeks}}
         </div>

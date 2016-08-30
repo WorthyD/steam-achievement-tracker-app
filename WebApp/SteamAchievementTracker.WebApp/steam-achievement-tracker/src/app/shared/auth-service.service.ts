@@ -25,11 +25,9 @@ export class AuthServiceService  {
     activate() {
         console.log('Init auth service');
         var userId = this.cookies.get(this.cookieName);
-   
         if (userId) {
-            this.manualLogin(userId); 
+            this.manualLogin(userId);
         }
-
     }
 
 
@@ -45,7 +43,6 @@ export class AuthServiceService  {
         console.log('success');
         this.manualLogin('1234');
 
-        
         /*
         return this.http.get(this.baseUrl + 'api/Account/ExternalLogin?provider=steam')
             .toPromise()

@@ -24,23 +24,39 @@ export class MainComponent implements OnInit {
     loginEvent$ = this.logInEventSource.asObservable();
 
     constructor(private user: AuthServiceService, private router: Router,
-        private refresher: LibraryRefresherService) {
+        private refresher: LibraryRefresherService,
+        private userService: UserService) {
 
-        console.log('subscribing');
-        user.emitter.subscribe((data) => {
-            console.log('============================= logging in via subscribe =====================================');
+        if (this.userService.isLoggedIn() == true) {
+            this.loggedIn();
+        } else {
+            user.emitter.subscribe((data) => {
+                this.loggedIn();
+            });
+        }
 
-            this.refresher.init();
-            //this.refresher.startLibraryRefresh();
+    }
 
+    loggedIn() {
+        console.log('============================= logging in via subscribe =====================================');
+        let base = this;
+        this.refresher.init().then(() => {
+            console.log('callback');
+            base.refresher.startLibraryRefresh();
         });
 
     }
+
+
 
     logOut() {
         console.log('logging out');
         this.user.logout();
         this.router.navigate(['/login']);
+    }
+
+    stopRefresh() {
+        this.refresher.stopRefresh();
     }
 
     ngOnInit() {

@@ -55,12 +55,14 @@ namespace SteamAchievementTracker.WebApi.ViewModels
                 this.AchievementsEarned = pg.AchievementsEarned;
                 this.AchievementsLocked = pg.AchievementsLocked;
                 this.TotalAchievements = pg.TotalAchievements;
-            } else {
+            }
+            else
+            {
                 this.SteamId = 0;
                 this.AppID = gs.AppId;
-                this.Playtime_Forever =0; 
+                this.Playtime_Forever = 0;
                 this.Playtime_2weeks = 0;
-                this.LastUpdated = DateTime.MinValue; 
+                this.LastUpdated = DateTime.MinValue;
                 this.AchievementRefresh = DateTime.MinValue;
                 this.RefreshAchievements = false;
                 this.AchievementsEarned = 0;

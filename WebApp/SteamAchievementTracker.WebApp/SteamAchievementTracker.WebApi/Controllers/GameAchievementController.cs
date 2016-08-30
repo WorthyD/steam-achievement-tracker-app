@@ -32,7 +32,9 @@ namespace SteamAchievementTracker.WebApi.Controllers
                 var gameAchResult = await gameAch;
                 var playerAchResult = await playerAch;
 
-                if (playerAchResult == null) {
+                if (playerAchResult == null && gameAchResult != null) {
+                    return Ok(new ViewModels.GameDetails(null, gameAchResult));
+                } else if (playerAchResult == null && gameAchResult == null) {
                     return NotFound();
                 }
 
