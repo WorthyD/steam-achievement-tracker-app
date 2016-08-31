@@ -14,45 +14,45 @@ export class LibraryRefresherService {
 
     init() {
         var base = this;
-        var p1 = new Promise(function (resolve, reject) {
-            console.log('calling new promise');
-            base.libService.getLibrary().subscribe((x: IGame[]) => {
-                console.log
-                base.gameLibrary = x;
-
-                console.log('calling new promise');
-                resolve();
-            });
+        //       var p1 = new Promise(function (resolve, reject) {
+        //            console.log('calling new promise');
+        /*
+        this.libService.getLibrary().subscribe((x: IGame[]) => {
+            base.gameLibrary = x;
         });
-        return p1;
+        */
+        //       });
+        //      return p1;
     }
 
     startLibraryRefresh() {
-        if (this.gameLibrary) {
-            console.log('Refreshing');
-            this.process = true;
-            this.refresh();
-        } else {
-            console.log('library not found');
-        }
+        console.log('Refreshing');
+        this.process = true;
+        this.refresh();
     }
+
     refresh() {
         console.log('refreshing');
         var base = this;
         console.log(this.gameLibrary);
+
         var p1 = new Promise(function (resolve, reject) {
-            let games = base.gameLibrary.filter((game) => game.readyForRefresh == true);
 
-            if (games.length > 0) {
-                let nextGame = games[0];
-                base.gameService.getAchievementsForGame(nextGame.appID).then(function () {
+            base.libService.getLibPromise().then((x: IGame[]) => {
+                let games = x.filter((game) => game.readyForRefresh == true);
+                console.log(JSON.stringify(games[0]));
+
+                if (games.length > 0) {
+                    let nextGame = games[0];
+                    base.gameService.getAchievementsForGame(nextGame.appID).then(function () {
+                        resolve();
+                    });
+
+                } else {
+                    base.process = false;
                     resolve();
-                });
-
-            } else {
-                base.process = false;
-                resolve();
-            }
+                }
+            });
 
         });
         p1.then(function () {
@@ -67,7 +67,7 @@ export class LibraryRefresherService {
     }
 
     stopRefresh() {
-        this.refresh = false;
+        this.process = false;
 
     }
 

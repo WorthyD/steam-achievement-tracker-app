@@ -40,10 +40,9 @@ export class MainComponent implements OnInit {
     loggedIn() {
         console.log('============================= logging in via subscribe =====================================');
         let base = this;
-        this.refresher.init().then(() => {
-            console.log('callback');
-            base.refresher.startLibraryRefresh();
-        });
+        this.refresher.init();
+        console.log('callback');
+        this.refresher.startLibraryRefresh();
 
     }
 
