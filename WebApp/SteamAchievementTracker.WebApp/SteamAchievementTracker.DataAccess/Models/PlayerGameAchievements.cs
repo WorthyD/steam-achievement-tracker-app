@@ -22,7 +22,7 @@ namespace SteamAchievementTracker.DataAccess.Models
         public long AppID { get; set; }
 
         [Key, Column(Order = 30)]
-        [StringLength(250)]
+        [StringLength(350)]
         public string ApiName { get; set; }
 
         [Required]

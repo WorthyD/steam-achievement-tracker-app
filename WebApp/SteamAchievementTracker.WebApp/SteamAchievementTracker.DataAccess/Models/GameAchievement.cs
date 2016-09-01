@@ -23,7 +23,7 @@ namespace SteamAchievementTracker.DataAccess.Models
         [StringLength(250)]
         public string Name { get; set; }
 
-        [StringLength(250)]
+        [StringLength(350)]
         public string Description { get; set; }
 
 
@@ -40,7 +40,7 @@ namespace SteamAchievementTracker.DataAccess.Models
         [Required]
         [StringLength(250)]
         public string IconGray { get; set; }
-        
+
         public double Percent { get; set; }
 
         public virtual GameSchema GameSchema { get; set; }

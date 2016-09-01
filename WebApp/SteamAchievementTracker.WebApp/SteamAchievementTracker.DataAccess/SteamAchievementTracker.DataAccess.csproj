@@ -57,6 +57,18 @@
     <Compile Include="Migrations\201608300203103_Avg.Designer.cs">
       <DependentUpon>201608300203103_Avg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609011732170_Length.cs" />
+    <Compile Include="Migrations\201609011732170_Length.Designer.cs">
+      <DependentUpon>201609011732170_Length.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609011736555_stuff.cs" />
+    <Compile Include="Migrations\201609011736555_stuff.Designer.cs">
+      <DependentUpon>201609011736555_stuff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609011748298_stuffd.cs" />
+    <Compile Include="Migrations\201609011748298_stuffd.Designer.cs">
+      <DependentUpon>201609011748298_stuffd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelContext.cs" />
     <Compile Include="Models\GameAchievement.cs" />
@@ -85,6 +97,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608300203103_Avg.resx">
       <DependentUpon>201608300203103_Avg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609011732170_Length.resx">
+      <DependentUpon>201609011732170_Length.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609011736555_stuff.resx">
+      <DependentUpon>201609011736555_stuff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609011748298_stuffd.resx">
+      <DependentUpon>201609011748298_stuffd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
