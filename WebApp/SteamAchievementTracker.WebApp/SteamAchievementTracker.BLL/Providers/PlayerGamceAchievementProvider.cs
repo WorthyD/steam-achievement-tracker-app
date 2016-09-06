@@ -36,7 +36,14 @@ namespace SteamAchievementTracker.BLL.Providers
 
                     var x = playerAchievementsResponse.PlayerStats.achievements;
 
-                    pg = ProcessGameAchievements(db, appId, steamId, pg, x.ToList());
+                    if (x != null)
+                    {
+                        pg = ProcessGameAchievements(db, appId, steamId, pg, x.ToList());
+                    }
+                    else
+                    {
+                        pg = null;
+                    }
                 }
                 else
                 {

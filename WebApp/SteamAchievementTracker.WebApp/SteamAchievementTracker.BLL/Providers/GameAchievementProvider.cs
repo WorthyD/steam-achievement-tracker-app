@@ -78,6 +78,7 @@ namespace SteamAchievementTracker.BLL.Providers
                 }
                 game.LastSchemaUpdate = DateTime.Now;
                 game.HasAchievements = true;
+                //TODO: VALIDATE EMPTY DATA
                 game.AvgUnlock = (int)(achievementPercentages.Average(x => x.percent));
             }
             else

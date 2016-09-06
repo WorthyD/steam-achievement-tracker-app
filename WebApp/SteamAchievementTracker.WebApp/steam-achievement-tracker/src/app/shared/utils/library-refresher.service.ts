@@ -40,7 +40,6 @@ export class LibraryRefresherService {
 
             base.libService.getLibPromise().then((x: IGame[]) => {
                 let games = x.filter((game) => game.readyForRefresh == true);
-                console.log(JSON.stringify(games[0]));
 
                 if (games.length > 0) {
                     let nextGame = games[0];

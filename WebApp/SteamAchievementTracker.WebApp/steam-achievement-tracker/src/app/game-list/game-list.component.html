@@ -3,25 +3,35 @@
 </p>
 <h2>{{title}}</h2>
 <div *ngFor="let game of games;" class="game-card">
-    <div (click)="gotoDetail(game)">
-        <h5>{{game.name}}</h5>
-        <h6>{{game.appID}}</h6>
+    <div >
+        <a  (click)="gotoDetail(game)">
+            <img src="http://cdn.akamai.steamstatic.com/steam/apps/{{game.appID}}/capsule_184x69.jpg?t=1471601595"/>
+        </a>
+        <div>{{game.name}}</div>
+        <!--<h6>{{game.appID}}</h6>-->
         <div>
-            Hours: {{game.playtime_Forever}} | {{game.playtime_2weeks}}
+            Play Time: {{game.playtime_Forever}}
         </div>
         <div>
+  {{game.achievementsEarned}} / {{game.totalAchievements}}
+        </div>
+        <div>
+{{game.percentComplete}}% | avg: {{game.averageUnlock}}
+        </div>
+
+        <!--<div>
             Stats: {{game.has_community_visible_stats}}
         </div>
-         <div>
-             Dates: LU:{{game.lastUpdated}}  <br /> AR {{game.achievementRefresh}} <br /> ra {{game.refreshAchievements}}
-         </div>
+        <div>
+            Dates: LU:{{game.lastUpdated}}  <br /> AR {{game.achievementRefresh}} <br /> ra {{game.refreshAchievements}}
+        </div>
         <div>
             Counts: E{{game.achievementsEarned}} | l {{game.achievementsLocked}} | t {{game.totalAchievements}}
         </div>
         <div>
             BeenP: {{game.beenProcessed}} | pec {{game.percentComplete}}
         </div>
-        <strong>R4R</strong>: {{game.readyForRefresh}}
+        <strong>R4R</strong>: {{game.readyForRefresh}}-->
     </div>
 
 </div>

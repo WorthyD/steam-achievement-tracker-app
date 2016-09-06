@@ -15,7 +15,7 @@ namespace SteamAchievementTracker.BLL.Converters.ServiceToModel {
             ia.Icon = a.icon;
             ia.IconGray = a.icongray;
             ia.Name = a.name;
-            ia.Percent = ap.percent;
+                ia.Percent = (ap != null) ? ap.percent : 0;
         }
 
         private static string Substring(string str, int count)
