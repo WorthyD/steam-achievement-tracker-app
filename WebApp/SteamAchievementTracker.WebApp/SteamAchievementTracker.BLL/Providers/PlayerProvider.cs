@@ -34,24 +34,26 @@ namespace SteamAchievementTracker.BLL.Providers
 
 
                 var profileTask = ProcessProfile(steamId, profile);
-                var recentGameTask = ProcessRecentGames(steamId);
-                await Task.WhenAll(profileTask, recentGameTask);
+                //var recentGameTask = ProcessRecentGames(steamId);
+                await Task.WhenAll(profileTask);
 
                 profile = await profileTask;
                 profile.LastUpdate = DateTime.Now;
-                db.SaveChangesAsync();
+                db.SaveChanges();
 
 
             }
 
 
             //////Update Library
+            /*
             if (profile.LibraryLastUpdate < Settings.ProfileExpiration)
             {
                 await UpdateLibrary(steamId);
                 profile.LibraryLastUpdate = DateTime.Now;
                 db.SaveChanges();
             }
+            */
 
             db.Dispose();
             return profile;

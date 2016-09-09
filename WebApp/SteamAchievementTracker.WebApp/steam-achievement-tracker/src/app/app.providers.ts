@@ -4,6 +4,7 @@ import {AuthServiceService} from './shared/auth-service.service';
 import {BaseServiceService} from './services/base-service.service';
 import {PlayerLibraryService} from './services/player-library.service';
 import {GameDetailsService} from './services/game-details.service'
+import {PlayerProfileService} from './services/player-profile.service'
 import {  CookieService } from 'angular2-cookie/core';
 import {AuthGuard} from './shared/utils/auth.guard';
 
@@ -20,6 +21,7 @@ export const APP_PROVIDERS = [
     CookieService,
     BaseServiceService,
     PlayerLibraryService,
+    PlayerProfileService,
     LibraryRefresherService,
     GameDetailsService
 ];

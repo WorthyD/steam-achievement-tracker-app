@@ -14,8 +14,6 @@ export class LoginComponent implements OnInit {
     @Output() loggedIn = new EventEmitter<boolean>();
 
     constructor(private authServiceService: AuthServiceService, private router: Router) {
-        
-
 
     }
 
@@ -23,9 +21,10 @@ export class LoginComponent implements OnInit {
 
 
     login() {
-        this.authServiceService.manualLogin(this.userId);
-        this.loggedIn.emit(true);
-        this.redirect();
+        this.authServiceService.login(this.userId).then(() => {
+            this.loggedIn.emit(true);
+            this.redirect();
+        });
     }
 
     redirect() {

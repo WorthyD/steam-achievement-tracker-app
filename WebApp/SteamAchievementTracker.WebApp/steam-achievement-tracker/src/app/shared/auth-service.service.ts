@@ -6,17 +6,18 @@ import {  CookieService } from 'angular2-cookie/core';
 import 'rxjs/add/operator/toPromise';
 
 import {UserService} from './user.service';
+import {PlayerProfileService} from '../services/player-profile.service';
 
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthServiceService  {
+export class AuthServiceService {
     private cookieName = "SteamId";
 
     emitter = new EventEmitter<boolean>();
 
 
-    constructor(private http: Http, private userService: UserService, private cookies: CookieService, private router: Router) {
+    constructor(private http: Http, private userService: UserService, private cookies: CookieService, private router: Router, private profileService: PlayerProfileService) {
         this.activate();
     }
 
@@ -32,16 +33,29 @@ export class AuthServiceService  {
 
 
 
-    manualLogin(userID:string) {
+    manualLogin(userID: string) {
+
+
         this.userService.create(userID);
         this.cookies.put(this.cookieName, userID);
         this.emitter.next(true);
     }
 
 
-    login() {
-        console.log('success');
-        this.manualLogin('1234');
+
+    login(userID: string) {
+
+        var base = this;
+        var p1 = new Promise(function (resolve, reject) {
+
+
+            base.profileService.getProfile(userID).then(profile => {
+                base.manualLogin('' + profile.steamId);
+                console.log('success');
+                resolve();
+            });
+        });
+        return p1;
 
         /*
         return this.http.get(this.baseUrl + 'api/Account/ExternalLogin?provider=steam')
@@ -56,8 +70,8 @@ export class AuthServiceService  {
         this.userService.destroy();
     }
 
-    checkCredentials() : boolean{
-        if(this.userService.isLoggedIn() == false){
+    checkCredentials(): boolean {
+        if (this.userService.isLoggedIn() == false) {
             console.log('going to login');
             this.router.navigate(['login']);
             return false;

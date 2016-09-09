@@ -43,6 +43,7 @@
     <Compile Include="Models\GameAchievement.cs" />
     <Compile Include="Models\IFullGameDetails.cs" />
     <Compile Include="Models\IGameSchema.cs" />
+    <Compile Include="Models\ILogin.cs" />
     <Compile Include="Models\IPlayerGame.cs" />
     <Compile Include="Models\IPlayerGameAchievement.cs" />
     <Compile Include="Models\IPlayerGameTags.cs" />

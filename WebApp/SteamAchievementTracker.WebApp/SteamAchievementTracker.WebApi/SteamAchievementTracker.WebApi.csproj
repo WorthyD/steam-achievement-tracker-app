@@ -232,6 +232,7 @@
     <Compile Include="StartUp.cs" />
     <Compile Include="ViewModels\GameAchievement.cs" />
     <Compile Include="ViewModels\GameDetails.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PlayerLibrary.cs" />
     <Compile Include="ViewModels\PlayerProfile.cs" />
   </ItemGroup>

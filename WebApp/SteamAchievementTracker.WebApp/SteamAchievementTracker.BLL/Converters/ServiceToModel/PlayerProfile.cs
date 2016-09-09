@@ -15,7 +15,7 @@ namespace SteamAchievementTracker.BLL.Converters.ServiceToModel
             ip.AvatarFull = p.avatarfull;
             ip.PersonaName = p.personaname;
             ip.ProfileUrl = p.profileurl;
-            ip.RealName = p.realname;
+            ip.RealName = !string.IsNullOrEmpty(p.realname) ? p.realname : "Not Found";
             ip.SteamId = long.Parse(p.steamid);
         }
     }
