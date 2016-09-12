@@ -35,6 +35,8 @@ export class AuthServiceService {
 
     manualLogin(userID: string) {
 
+        console.log('manal login');
+        console.log(userID);
 
         this.userService.create(userID);
         this.cookies.put(this.cookieName, userID);
@@ -44,13 +46,14 @@ export class AuthServiceService {
 
 
     login(userID: string) {
+        console.log('userID ' + userID);
 
         var base = this;
         var p1 = new Promise(function (resolve, reject) {
-
-
             base.profileService.getProfile(userID).then(profile => {
-                base.manualLogin('' + profile.steamId);
+                console.log('userID after ' + profile.steamIdStr);
+
+                base.manualLogin(profile.steamIdStr);
                 console.log('success');
                 resolve();
             });

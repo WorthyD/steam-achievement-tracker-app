@@ -45,8 +45,5 @@ namespace SteamAchievementTracker.DataAccess.Models {
         public virtual IList<PlayerGameAchievement> PlayerGameAchievements {get;set;}
 
 
-
-
-
     }
 }

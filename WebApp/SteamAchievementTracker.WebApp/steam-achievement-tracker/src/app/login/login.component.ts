@@ -21,9 +21,12 @@ export class LoginComponent implements OnInit {
 
 
     login() {
+        console.log('loggin in ');
+        console.log(this.userId);
+        var base = this
         this.authServiceService.login(this.userId).then(() => {
-            this.loggedIn.emit(true);
-            this.redirect();
+            base.loggedIn.emit(true);
+            base.redirect();
         });
     }
 
