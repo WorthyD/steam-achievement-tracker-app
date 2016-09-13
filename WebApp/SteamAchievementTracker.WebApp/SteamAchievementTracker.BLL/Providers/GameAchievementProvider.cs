@@ -65,6 +65,7 @@ namespace SteamAchievementTracker.BLL.Providers
                     game.GameAchievements = new List<DataAccess.Models.GameAchievement>();
                 }
 
+                var actualPercentages = new List<GlobalAchievementPercentages.Achievement>();
                 //Update data
                 foreach (var ach in gameSchema.availableGameStats.achievements)
                 {
@@ -74,12 +75,15 @@ namespace SteamAchievementTracker.BLL.Providers
                         gameAch = new DataAccess.Models.GameAchievement();
                         game.GameAchievements.Add(gameAch);
                     }
-                    gameAch.ConvertService(appId, ach, achievementPercentages.Where(x => x.name == ach.name).FirstOrDefault());
+                    var percentage = achievementPercentages.Where(x => x.name == ach.name).FirstOrDefault();
+                    gameAch.ConvertService(appId, ach, percentage);
+                    actualPercentages.Add(percentage);
                 }
                 game.LastSchemaUpdate = DateTime.Now;
                 game.HasAchievements = true;
+
                 //TODO: VALIDATE EMPTY DATA
-                game.AvgUnlock = (int)(achievementPercentages.Average(x => x.percent));
+                game.AvgUnlock = (int)(actualPercentages.Average(x => x.percent));
             }
             else
             {

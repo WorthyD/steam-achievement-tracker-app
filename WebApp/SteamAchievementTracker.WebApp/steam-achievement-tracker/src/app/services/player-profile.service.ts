@@ -18,7 +18,7 @@ export class PlayerProfileService {
 
     /*
         getProfile(steamId: string): Observable<IPlayerProfile> {
-    
+
             var settings: IRequestSettings = {
                 url: '/playerprofile/' + steamId,
                 method: 'get',
@@ -29,15 +29,24 @@ export class PlayerProfileService {
                     this.profile = res.json();
                     return this.profile;
                 }).catch(this.base.handleError);
-    
+
         }
         */
 
     getProfile(steamId: string): Promise<IPlayerProfile> {
-        return this.http.get(this.base.baseUrl + '/playerprofile/' + steamId)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.base.handleError);
+        console.log('Getting Profile');
+        if (!this.profile) {
+            return this.http.get(this.base.baseUrl + '/playerprofile/' + steamId)
+                .toPromise()
+                .then((response) => {
+                   var p =  response.json()
+                   this.profile = p;
+                   return p;
+                })
+                .catch(this.base.handleError);
+        } else {
+            return Promise.resolve(this.profile);
+        }
 
     }
 

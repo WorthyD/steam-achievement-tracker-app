@@ -5,7 +5,7 @@
 <div *ngFor="let game of games;" class="game-card">
     <div >
         <a  (click)="gotoDetail(game)">
-            <img src="http://cdn.akamai.steamstatic.com/steam/apps/{{game.appID}}/capsule_184x69.jpg?t=1471601595"/>
+            <img src="http://cdn.akamai.steamstatic.com/steam/apps/{{game.appID}}/capsule_184x69.jpg"/>
         </a>
         <div>{{game.name}}</div>
         <!--<h6>{{game.appID}}</h6>-->
