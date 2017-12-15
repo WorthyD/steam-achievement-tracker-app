@@ -1,53 +1,28 @@
-import {
-  beforeEach,
-  beforeEachProviders,
-  describe,
-  expect,
-  it,
-  inject,
-} from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
-import { Component } from '@angular/core';
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+
 import { ProfileComponent } from './profile.component';
 
-import { BaseServiceService  } from '../services/base-service.service';
-import { PlayerProfileService } from '../services/player-profile.service';
+describe('ProfileComponent', () => {
+  let component: ProfileComponent;
+  let fixture: ComponentFixture<ProfileComponent>;
 
-import {UserService} from '../shared/user.service';
-
-describe('Component: Profile', () => {
-  let builder: TestComponentBuilder;
-
-  beforeEachProviders(() => [ProfileComponent, UserService, BaseServiceService, PlayerProfileService]);
-  beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
-    builder = tcb;
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ ProfileComponent ]
+    })
+    .compileComponents();
   }));
-/*
-  it('should inject the component', inject([ProfileComponent,BaseServiceService ],
-    (component: ProfileComponent) => {
-      expect(component).toBeTruthy();
-    }));
 
-  it('should create the component', inject([], () => {
-    return builder.createAsync(ProfileComponentTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(ProfileComponent));
-        expect(query).toBeTruthy();
-        expect(query.componentInstance).toBeTruthy();
-      });
-  }));
-  */
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ProfileComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
-
-@Component({
-  selector: 'test',
-  template: `
-    <app-profile></app-profile>
-  `,
-  directives: [ProfileComponent],
-  providers: [BaseServiceService, PlayerProfileService]
-})
-class ProfileComponentTestController {
-}
-

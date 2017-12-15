@@ -1,28 +1,34 @@
 /* tslint:disable:no-unused-variable */
 
-import {
-    beforeEach, beforeEachProviders,
-    describe, xdescribe,
-    expect, it, xit,
-    async, inject
-} from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { AuthServiceService } from './shared/auth-service.service'
-import { HTTP_PROVIDERS } from '@angular/http';
-import { UserService } from './shared/user.service';
-import {  CookieService } from 'angular2-cookie/core'
 
+describe('AppComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent
+      ],
+    });
+    TestBed.compileComponents();
+  });
 
-beforeEachProviders(() => [AppComponent, HTTP_PROVIDERS, AuthServiceService, UserService, CookieService]);
+  it('should create the app', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  }));
 
-describe('App: SteamAchievementTracker', () => {
-    it('should create the app',
-        inject([AppComponent], (app: AppComponent) => {
-            expect(app).toBeTruthy();
-        }));
-      
-    it('should have as title \'steam-achievement-tracker works!\'',
-        inject([AppComponent], (app: AppComponent) => {
-            expect(app.title).toEqual('steam-achievement-tracker works!');
-        }));
+  it(`should have as title 'app works!'`, async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app.title).toEqual('app works!');
+  }));
+
+  it('should render title in a h1 tag', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('app works!');
+  }));
 });
